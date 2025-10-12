@@ -1,10 +1,3 @@
-//
-//  listen_anonymouslyTests.swift
-//  listen-anonymouslyTests
-//
-//  Created by Luisa Castaño on 12.10.25.
-//
-
 import Testing
 @testable import listen_anonymously
 

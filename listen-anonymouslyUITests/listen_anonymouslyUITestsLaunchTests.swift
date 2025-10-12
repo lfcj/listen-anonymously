@@ -1,10 +1,3 @@
-//
-//  listen_anonymouslyUITestsLaunchTests.swift
-//  listen-anonymouslyUITests
-//
-//  Created by Luisa Castaño on 12.10.25.
-//
-
 import XCTest
 
 final class listen_anonymouslyUITestsLaunchTests: XCTestCase {

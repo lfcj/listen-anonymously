@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3CFA3B182E9C337E00D0A378 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CFA3B172E9C337E00D0A378 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3C0BA9A82E9C2F1B0075BE67 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,11 +31,25 @@
 		3C0BA99A2E9C2F190075BE67 /* listen-anonymously.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "listen-anonymously.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0BA9A72E9C2F1B0075BE67 /* listen-anonymouslyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "listen-anonymouslyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0BA9B12E9C2F1B0075BE67 /* listen-anonymouslyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "listen-anonymouslyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CFA3B172E9C337E00D0A378 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3CFA3B1A2E9C33F000D0A378 /* Exceptions for "listen-anonymously" folder in "listen-anonymously" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3C0BA9992E9C2F190075BE67 /* listen-anonymously */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3C0BA99C2E9C2F190075BE67 /* listen-anonymously */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3CFA3B1A2E9C33F000D0A378 /* Exceptions for "listen-anonymously" folder in "listen-anonymously" target */,
+			);
 			path = "listen-anonymously";
 			sourceTree = "<group>";
 		};
@@ -75,6 +93,7 @@
 		3C0BA9912E9C2F190075BE67 = {
 			isa = PBXGroup;
 			children = (
+				3CFA3B172E9C337E00D0A378 /* README.md */,
 				3C0BA99C2E9C2F190075BE67 /* listen-anonymously */,
 				3C0BA9AA2E9C2F1B0075BE67 /* listen-anonymouslyTests */,
 				3C0BA9B42E9C2F1B0075BE67 /* listen-anonymouslyUITests */,
@@ -212,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFA3B182E9C337E00D0A378 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,9 +420,9 @@
 				DEVELOPMENT_TEAM = G7YAMEJH7M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "listen-anonymously/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -432,9 +452,9 @@
 				DEVELOPMENT_TEAM = G7YAMEJH7M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "listen-anonymously/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

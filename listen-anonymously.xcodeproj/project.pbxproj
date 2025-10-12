@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3CFA3B182E9C337E00D0A378 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CFA3B172E9C337E00D0A378 /* README.md */; };
+		3CFA3B222E9C34D900D0A378 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3B212E9C34D900D0A378 /* UniformTypeIdentifiers.framework */; };
+		3CFA3B2E2E9C34D900D0A378 /* liste-anon-action-ext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CFA3B1F2E9C34D900D0A378 /* liste-anon-action-ext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,13 +27,36 @@
 			remoteGlobalIDString = 3C0BA9992E9C2F190075BE67;
 			remoteInfo = "listen-anonymously";
 		};
+		3CFA3B2C2E9C34D900D0A378 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0BA9922E9C2F190075BE67 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CFA3B1E2E9C34D900D0A378;
+			remoteInfo = "liste-anon-action-ext";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3CFA3B332E9C34D900D0A378 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3CFA3B2E2E9C34D900D0A378 /* liste-anon-action-ext.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3C0BA99A2E9C2F190075BE67 /* listen-anonymously.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "listen-anonymously.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0BA9A72E9C2F1B0075BE67 /* listen-anonymouslyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "listen-anonymouslyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C0BA9B12E9C2F1B0075BE67 /* listen-anonymouslyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "listen-anonymouslyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFA3B172E9C337E00D0A378 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3CFA3B1F2E9C34D900D0A378 /* liste-anon-action-ext.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "liste-anon-action-ext.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CFA3B212E9C34D900D0A378 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -41,6 +66,13 @@
 				Info.plist,
 			);
 			target = 3C0BA9992E9C2F190075BE67 /* listen-anonymously */;
+		};
+		3CFA3B322E9C34D900D0A378 /* Exceptions for "liste-anon-action-ext" folder in "liste-anon-action-ext" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3CFA3B1E2E9C34D900D0A378 /* liste-anon-action-ext */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -61,6 +93,14 @@
 		3C0BA9B42E9C2F1B0075BE67 /* listen-anonymouslyUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "listen-anonymouslyUITests";
+			sourceTree = "<group>";
+		};
+		3CFA3B232E9C34D900D0A378 /* liste-anon-action-ext */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3CFA3B322E9C34D900D0A378 /* Exceptions for "liste-anon-action-ext" folder in "liste-anon-action-ext" target */,
+			);
+			path = "liste-anon-action-ext";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -87,6 +127,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3CFA3B1C2E9C34D900D0A378 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CFA3B222E9C34D900D0A378 /* UniformTypeIdentifiers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -97,6 +145,8 @@
 				3C0BA99C2E9C2F190075BE67 /* listen-anonymously */,
 				3C0BA9AA2E9C2F1B0075BE67 /* listen-anonymouslyTests */,
 				3C0BA9B42E9C2F1B0075BE67 /* listen-anonymouslyUITests */,
+				3CFA3B232E9C34D900D0A378 /* liste-anon-action-ext */,
+				3CFA3B202E9C34D900D0A378 /* Frameworks */,
 				3C0BA99B2E9C2F190075BE67 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,8 +157,17 @@
 				3C0BA99A2E9C2F190075BE67 /* listen-anonymously.app */,
 				3C0BA9A72E9C2F1B0075BE67 /* listen-anonymouslyTests.xctest */,
 				3C0BA9B12E9C2F1B0075BE67 /* listen-anonymouslyUITests.xctest */,
+				3CFA3B1F2E9C34D900D0A378 /* liste-anon-action-ext.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3CFA3B202E9C34D900D0A378 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CFA3B212E9C34D900D0A378 /* UniformTypeIdentifiers.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,10 +180,12 @@
 				3C0BA9962E9C2F190075BE67 /* Sources */,
 				3C0BA9972E9C2F190075BE67 /* Frameworks */,
 				3C0BA9982E9C2F190075BE67 /* Resources */,
+				3CFA3B332E9C34D900D0A378 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3CFA3B2D2E9C34D900D0A378 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3C0BA99C2E9C2F190075BE67 /* listen-anonymously */,
@@ -182,6 +243,28 @@
 			productReference = 3C0BA9B12E9C2F1B0075BE67 /* listen-anonymouslyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		3CFA3B1E2E9C34D900D0A378 /* liste-anon-action-ext */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CFA3B2F2E9C34D900D0A378 /* Build configuration list for PBXNativeTarget "liste-anon-action-ext" */;
+			buildPhases = (
+				3CFA3B1B2E9C34D900D0A378 /* Sources */,
+				3CFA3B1C2E9C34D900D0A378 /* Frameworks */,
+				3CFA3B1D2E9C34D900D0A378 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3CFA3B232E9C34D900D0A378 /* liste-anon-action-ext */,
+			);
+			name = "liste-anon-action-ext";
+			packageProductDependencies = (
+			);
+			productName = "liste-anon-action-ext";
+			productReference = 3CFA3B1F2E9C34D900D0A378 /* liste-anon-action-ext.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -203,6 +286,9 @@
 						CreatedOnToolsVersion = 26.0;
 						TestTargetID = 3C0BA9992E9C2F190075BE67;
 					};
+					3CFA3B1E2E9C34D900D0A378 = {
+						CreatedOnToolsVersion = 26.0;
+					};
 				};
 			};
 			buildConfigurationList = 3C0BA9952E9C2F190075BE67 /* Build configuration list for PBXProject "listen-anonymously" */;
@@ -222,6 +308,7 @@
 				3C0BA9992E9C2F190075BE67 /* listen-anonymously */,
 				3C0BA9A62E9C2F1B0075BE67 /* listen-anonymouslyTests */,
 				3C0BA9B02E9C2F1B0075BE67 /* listen-anonymouslyUITests */,
+				3CFA3B1E2E9C34D900D0A378 /* liste-anon-action-ext */,
 			);
 		};
 /* End PBXProject section */
@@ -243,6 +330,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3C0BA9AF2E9C2F1B0075BE67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CFA3B1D2E9C34D900D0A378 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -273,6 +367,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3CFA3B1B2E9C34D900D0A378 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -285,6 +386,11 @@
 			isa = PBXTargetDependency;
 			target = 3C0BA9992E9C2F190075BE67 /* listen-anonymously */;
 			targetProxy = 3C0BA9B22E9C2F1B0075BE67 /* PBXContainerItemProxy */;
+		};
+		3CFA3B2D2E9C34D900D0A378 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CFA3B1E2E9C34D900D0A378 /* liste-anon-action-ext */;
+			targetProxy = 3CFA3B2C2E9C34D900D0A378 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -558,6 +664,62 @@
 			};
 			name = Release;
 		};
+		3CFA3B302E9C34D900D0A378 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G7YAMEJH7M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "liste-anon-action-ext/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "liste-anon-action-ext";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lfcj.listen-anonymously.liste-anon-action-ext";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3CFA3B312E9C34D900D0A378 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G7YAMEJH7M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "liste-anon-action-ext/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "liste-anon-action-ext";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lfcj.listen-anonymously.liste-anon-action-ext";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -593,6 +755,15 @@
 			buildConfigurations = (
 				3C0BA9C22E9C2F1B0075BE67 /* Debug */,
 				3C0BA9C32E9C2F1B0075BE67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3CFA3B2F2E9C34D900D0A378 /* Build configuration list for PBXNativeTarget "liste-anon-action-ext" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CFA3B302E9C34D900D0A378 /* Debug */,
+				3CFA3B312E9C34D900D0A378 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

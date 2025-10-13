@@ -14,7 +14,7 @@ enum FindingAudioError: Error {
 
 extension FindingAudioError {
     var localizedDescription: String {
-        "This is an error" // TODO: Write localized descriptions and test them
+        "This is an error that needs localization" // TODO: Write localized descriptions and test them
     }
 }
 

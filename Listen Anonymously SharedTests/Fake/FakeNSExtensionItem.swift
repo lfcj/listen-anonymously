@@ -6,7 +6,7 @@ class FakeNSExtensionItem: NSExtensionItem {
         return fakeAudioDataItem as NSSecureCoding
     }()
 
-    var _leAttachments: [NSItemProvider] = []
+    private var _leAttachments: [NSItemProvider] = []
 
     override var attachments: [NSItemProvider]? {
         get { _leAttachments}
@@ -61,4 +61,11 @@ class FakeNSExtensionItem: NSExtensionItem {
         return self
     }
 
+}
+
+extension FakeNSExtensionItem {
+    static let validURL: FakeNSExtensionItem = {
+        FakeNSExtensionItem()
+            .withValidURLAndAudioFile()
+    }()
 }

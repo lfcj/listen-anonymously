@@ -24,4 +24,14 @@ struct AudioPlayingManagerTests {
 
     }
 
+    @Test("extensionContext with invalid item shows a FindingAudioError")
+    func invalidItem_triggersFindingAudioError() async throws {
+        let expectedLocalizedErrorMessage = "This is an error that needs localization"
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.invalidItemsContext)
+
+        await manager.findAudio()
+
+        #expect(manager.errorMessage == expectedLocalizedErrorMessage)
+    }
+
 }

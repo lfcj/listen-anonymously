@@ -54,9 +54,7 @@ struct FindingAudioHelpersTests {
 
     @Test("load audio finds audio file information when item is valid")
     func findAudio_findsAudioFileInformationWhenItemIsURL() async throws {
-        let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(
-            in: makeFakeExtensionItemWithValidURL()
-        )
+        let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(in: FakeNSExtensionItem.validURL)
 
         #expect(audioFileInformation.url.absoluteString.hasSuffix("m4a") == true)
     }
@@ -84,11 +82,6 @@ private extension FindingAudioHelpersTests {
     func makeFakeExtensionItemWithFakeAudioItem() -> FakeNSExtensionItem {
         FakeNSExtensionItem()
             .withWhatsappEmptyAudioAttachment()
-    }
-
-    func makeFakeExtensionItemWithValidURL() -> FakeNSExtensionItem {
-        FakeNSExtensionItem()
-            .withValidURLAndAudioFile()
     }
 
     func makeFakeExtensionItemWithValidTelegramURL() -> FakeNSExtensionItem {

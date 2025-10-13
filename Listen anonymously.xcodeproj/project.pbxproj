@@ -25,13 +25,6 @@
 			remoteGlobalIDString = 3CCFCA062D3EFD850090D88D;
 			remoteInfo = "Listen anonymously";
 		};
-		3CCFCA222D3EFD860090D88D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CCFC9FF2D3EFD850090D88D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3CCFCA062D3EFD850090D88D;
-			remoteInfo = "Listen anonymously";
-		};
 		3CCFCA642D3F0FCD0090D88D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CCFC9FF2D3EFD850090D88D /* Project object */;
@@ -104,7 +97,6 @@
 /* Begin PBXFileReference section */
 		3CCFCA072D3EFD850090D88D /* Listen anonymously.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Listen anonymously.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CCFCA172D3EFD860090D88D /* Listen anonymouslyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen anonymouslyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CCFCA212D3EFD860090D88D /* Listen anonymouslyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen anonymouslyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Listen anonymously Ext.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CCFCA592D3F0FCD0090D88D /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		3CCFCB8D2D4198D00090D88D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -172,11 +164,6 @@
 			path = "Listen anonymouslyTests";
 			sourceTree = "<group>";
 		};
-		3CCFCA242D3EFD860090D88D /* Listen anonymouslyUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Listen anonymouslyUITests";
-			sourceTree = "<group>";
-		};
 		3CCFCA5B2D3F0FCD0090D88D /* Listen anonymously Ext */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -217,13 +204,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3CCFCA142D3EFD860090D88D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CCFCA1E2D3EFD860090D88D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,7 +252,6 @@
 				3CCFCB8D2D4198D00090D88D /* README.md */,
 				3CCFCA092D3EFD850090D88D /* Listen anonymously */,
 				3CCFCA1A2D3EFD860090D88D /* Listen anonymouslyTests */,
-				3CCFCA242D3EFD860090D88D /* Listen anonymouslyUITests */,
 				3CCFCA5B2D3F0FCD0090D88D /* Listen anonymously Ext */,
 				3CFA3B9B2E9C3A9B00D0A378 /* Listen anonymously Ext Tests */,
 				3CFA3BD12E9CE38000D0A378 /* Listen Anonymously Shared */,
@@ -287,7 +266,6 @@
 			children = (
 				3CCFCA072D3EFD850090D88D /* Listen anonymously.app */,
 				3CCFCA172D3EFD860090D88D /* Listen anonymouslyTests.xctest */,
-				3CCFCA212D3EFD860090D88D /* Listen anonymouslyUITests.xctest */,
 				3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */,
 				3CFA3B9A2E9C3A9B00D0A378 /* Listen anonymously Ext Tests.xctest */,
 				3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */,
@@ -365,29 +343,6 @@
 			productName = "Listen anonymouslyTests";
 			productReference = 3CCFCA172D3EFD860090D88D /* Listen anonymouslyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		3CCFCA202D3EFD860090D88D /* Listen anonymouslyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3CCFCA312D3EFD860090D88D /* Build configuration list for PBXNativeTarget "Listen anonymouslyUITests" */;
-			buildPhases = (
-				3CCFCA1D2D3EFD860090D88D /* Sources */,
-				3CCFCA1E2D3EFD860090D88D /* Frameworks */,
-				3CCFCA1F2D3EFD860090D88D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3CCFCA232D3EFD860090D88D /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				3CCFCA242D3EFD860090D88D /* Listen anonymouslyUITests */,
-			);
-			name = "Listen anonymouslyUITests";
-			packageProductDependencies = (
-			);
-			productName = "Listen anonymouslyUITests";
-			productReference = 3CCFCA212D3EFD860090D88D /* Listen anonymouslyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		3CCFCA562D3F0FCD0090D88D /* Listen anonymously Ext */ = {
 			isa = PBXNativeTarget;
@@ -500,10 +455,6 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 3CCFCA062D3EFD850090D88D;
 					};
-					3CCFCA202D3EFD860090D88D = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 3CCFCA062D3EFD850090D88D;
-					};
 					3CCFCA562D3F0FCD0090D88D = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -538,7 +489,6 @@
 			targets = (
 				3CCFCA062D3EFD850090D88D /* Listen anonymously */,
 				3CCFCA162D3EFD860090D88D /* Listen anonymouslyTests */,
-				3CCFCA202D3EFD860090D88D /* Listen anonymouslyUITests */,
 				3CCFCA562D3F0FCD0090D88D /* Listen anonymously Ext */,
 				3CFA3B992E9C3A9B00D0A378 /* Listen anonymously Ext Tests */,
 				3CFA3BCF2E9CE38000D0A378 /* Listen Anonymously Shared */,
@@ -557,13 +507,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3CCFCA152D3EFD860090D88D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CCFCA1F2D3EFD860090D88D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -615,13 +558,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CCFCA1D2D3EFD860090D88D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3CCFCA532D3F0FCD0090D88D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -657,11 +593,6 @@
 			isa = PBXTargetDependency;
 			target = 3CCFCA062D3EFD850090D88D /* Listen anonymously */;
 			targetProxy = 3CCFCA182D3EFD860090D88D /* PBXContainerItemProxy */;
-		};
-		3CCFCA232D3EFD860090D88D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3CCFCA062D3EFD850090D88D /* Listen anonymously */;
-			targetProxy = 3CCFCA222D3EFD860090D88D /* PBXContainerItemProxy */;
 		};
 		3CCFCA652D3F0FCD0090D88D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -913,40 +844,6 @@
 			};
 			name = Release;
 		};
-		3CCFCA322D3EFD860090D88D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZTL42R699Z;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mqslimited.Listen-anonymouslyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Listen anonymously";
-			};
-			name = Debug;
-		};
-		3CCFCA332D3EFD860090D88D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZTL42R699Z;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mqslimited.Listen-anonymouslyUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Listen anonymously";
-			};
-			name = Release;
-		};
 		3CCFCA692D3F0FCD0090D88D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1187,15 +1084,6 @@
 			buildConfigurations = (
 				3CCFCA2F2D3EFD860090D88D /* Debug */,
 				3CCFCA302D3EFD860090D88D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3CCFCA312D3EFD860090D88D /* Build configuration list for PBXNativeTarget "Listen anonymouslyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3CCFCA322D3EFD860090D88D /* Debug */,
-				3CCFCA332D3EFD860090D88D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

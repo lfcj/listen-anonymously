@@ -40,8 +40,8 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Listen anonymously.xcodeproj",
-        "identifier" : "3CCFCA202D3EFD860090D88D",
-        "name" : "Listen anonymouslyUITests"
+        "identifier" : "3CCFCA162D3EFD860090D88D",
+        "name" : "Listen anonymouslyTests"
       }
     },
     {

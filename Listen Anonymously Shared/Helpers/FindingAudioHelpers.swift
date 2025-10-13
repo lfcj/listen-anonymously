@@ -14,7 +14,7 @@ enum FindingAudioError: Error {
 
 extension FindingAudioError {
     var localizedDescription: String {
-        "This is an error"
+        "This is an error" // TODO: Write localized descriptions and test them
     }
 }
 
@@ -49,7 +49,7 @@ struct FindingAudioHelpers {
         guard let audioURL = try await audioAttachment.loadItem(forTypeIdentifier: identifier, options: nil) as? URL else {
             throw FindingAudioError.couldNotConvertLoadedItemToURL
         }
-        
+
         if Self.telegramTypeIdentifiers.contains(identifier) {
             return try handleTelegram(audioURL: audioURL)
         } else {
@@ -59,14 +59,15 @@ struct FindingAudioHelpers {
 
     private static func handleTelegram(audioURL: URL) throws -> AudioFileInformation {
         let copyAudioURL = FileManager.createTemporaryFileURL(fileExtension: "ogg")
-        let convertedAudioURL = FileManager.createTemporaryFileURL(fileExtension: "m4a")
+        let _ /*convertedAudioURL*/ = FileManager.createTemporaryFileURL(fileExtension: "m4a")
         do {
             try FileManager.default.copyItem(at: audioURL, to: copyAudioURL)
+            // TODO: Do Telegram conversion
         } catch {
             throw FindingAudioError.telegramConversionNotPossible
         }
         
-        // Need OGG converter
+        // TODO: Need OGG converter
         return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent)
     }
 

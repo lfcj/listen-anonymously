@@ -13,7 +13,7 @@ class FakeNSExtensionItem: NSExtensionItem {
         set {}
     }
 
-    func withWhatsappEmptyAudioAttachment() -> FakeNSExtensionItem {
+    private func withWhatsAppEmptyAudioAttachment() -> FakeNSExtensionItem {
         _leAttachments = [
             NSItemProvider(item: Self.audioItem, typeIdentifier: "com.apple.m4a-audio")
         ]
@@ -27,10 +27,10 @@ class FakeNSExtensionItem: NSExtensionItem {
         return self
     }
 
-    func withValidURLAndAudioFile() -> FakeNSExtensionItem {
+    private func withValidURLAndAudioFile() -> FakeNSExtensionItem {
         // Create a temporary file with a valid URL
         let tempURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent(UUID().uuidString)
+            .appendingPathComponent("AUDIO-2025-05-01-14-27" + UUID().uuidString)
             .appendingPathExtension("m4a")
         
         // Write some fake data to the file
@@ -64,6 +64,11 @@ class FakeNSExtensionItem: NSExtensionItem {
 }
 
 extension FakeNSExtensionItem {
+    static let emptyWhatsappURL: FakeNSExtensionItem = {
+        FakeNSExtensionItem()
+            .withWhatsAppEmptyAudioAttachment()
+    }()
+
     static let validURL: FakeNSExtensionItem = {
         FakeNSExtensionItem()
             .withValidURLAndAudioFile()

@@ -43,7 +43,7 @@ struct FindingAudioHelpersTests {
     func findAudio_findsAudioFileInformationWithSpecificAudioTypeIdentifiers() async throws {
         do {
             let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(
-                in: makeFakeExtensionItemWithFakeAudioItem(),
+                in: FakeNSExtensionItem.emptyWhatsappURL,
                 isSecondAttempt: false
             )
             #expect(audioFileInformation.title == "This should never be executed as we expect a thrown error")
@@ -77,11 +77,6 @@ private extension FindingAudioHelpersTests {
     func makeFakeExtensionItemWithFakeAudioItemAndPublicIdentifier() -> FakeNSExtensionItem {
         FakeNSExtensionItem()
             .withPublicIdentifierAndEmptyAudioAttachment()
-    }
-
-    func makeFakeExtensionItemWithFakeAudioItem() -> FakeNSExtensionItem {
-        FakeNSExtensionItem()
-            .withWhatsappEmptyAudioAttachment()
     }
 
     func makeFakeExtensionItemWithValidTelegramURL() -> FakeNSExtensionItem {

@@ -2,17 +2,20 @@ import Foundation
 
 final class FakeExtensionContext: NSExtensionContext {
 
-    private var _leInputItems: [Any] = []
+    private var _leInputItems: [FakeNSExtensionItem] = []
 
     override var inputItems: [Any] {
         _leInputItems
     }
 
-    func withInvalidExtensionItems() -> FakeExtensionContext {
-        _leInputItems = [
-            FakeNSExtensionItem()
-                .withWhatsappEmptyAudioAttachment()
-        ]
+    private func withInvalidExtensionItems() -> FakeExtensionContext {
+        _leInputItems = [.emptyWhatsappURL]
+
+        return self
+    }
+
+    private func withValidExtensionItems() -> FakeExtensionContext {
+        _leInputItems = [.validURL]
 
         return self
     }
@@ -26,4 +29,10 @@ extension FakeExtensionContext {
         FakeExtensionContext()
             .withInvalidExtensionItems()
     }()
+
+    static let validItemsContext: FakeExtensionContext = {
+        FakeExtensionContext()
+            .withValidExtensionItems()
+    }()
+
 }

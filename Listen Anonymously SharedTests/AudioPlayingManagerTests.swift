@@ -35,4 +35,19 @@ struct AudioPlayingManagerTests {
         #expect(manager.errorMessage == expectedLocalizedErrorMessage)
     }
 
+    @Test("extensionContext with valid item can play and sets title")
+    func validItem_setsAudioURLAndFilename() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.validItemsContext)
+
+        await manager.findAudio()
+
+        // Thu 1st. May 2025 at 14:27"
+        #expect(manager.audioTitle?.contains("Thu") == true)
+        #expect(manager.audioTitle?.contains("1st") == true)
+        #expect(manager.audioTitle?.contains("May") == true)
+        #expect(manager.audioTitle?.contains("2025 at") == true)
+        #expect(manager.audioTitle?.contains(":27") == true)
+        #expect(manager.canPlay == true)
+    }
+
 }

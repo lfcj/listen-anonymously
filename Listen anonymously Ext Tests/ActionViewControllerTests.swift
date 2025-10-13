@@ -1,3 +1,5 @@
+import Combine
+import Listen_Anonymously_Shared
 import Testing
 import UIKit
 import XCTest
@@ -22,4 +24,32 @@ struct ActionViewControllerTests {
         #expect(viewController.modalPresentationStyle == .fullScreen)
     }
 
+    @Test("ActionViewController searches for audio after it loads")
+    @MainActor func actionViewController_searchesForAudio() async throws {
+        let spyManager = SpyAudioPlayingManager(extensionContext: nil)
+        #expect(spyManager.findAudioCalls == 0)
+        let findAudioCallValues = spyManager.$findAudioCalls.values
+
+        let viewController = ActionViewController(playingManager: spyManager)
+        viewController.loadViewIfNeeded()
+
+        for await audioCall in findAudioCallValues {
+            if audioCall > 0 {
+                break
+            }
+        }
+
+        #expect(spyManager.findAudioCalls == 1)
+    }
+
 }
+
+class SpyAudioPlayingManager: AudioPlayingManager {
+    @Published var findAudioCalls: Int = 0
+
+    override func findAudio() async {
+        findAudioCalls += 1
+    }
+}
+
+

@@ -1,7 +1,7 @@
 import AVFoundation
 import Combine
 
-public final class AudioPlayingManager: ObservableObject {
+open class AudioPlayingManager: ObservableObject {
 
     @Published var canPlay: Bool = false
     @Published var isPlaying: Bool = false

@@ -31,6 +31,7 @@ struct AudioPlayingManagerTests {
 
         await manager.findAudio()
 
+        #expect(manager.isLoadingAudio == false)
         #expect(manager.errorMessage == expectedLocalizedErrorMessage)
     }
 

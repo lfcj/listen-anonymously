@@ -126,12 +126,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
-				"Extensions/Color+Extension.swift",
 				Helpers/ObjectWrapper.swift,
 				Helpers/StatefulStateWrapper.swift,
 				Views/ErrorMessageView.swift,
 				Views/PlayerControllerView.swift,
-				Views/PlayingAnimationView.swift,
 				Views/PlayingViewButton.swift,
 			);
 			target = 3CCFCA562D3F0FCD0090D88D /* Listen anonymously Ext */;

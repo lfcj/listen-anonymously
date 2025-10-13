@@ -24,9 +24,9 @@ public struct AudioPlayingView: View {
 //            .blur(radius: playingManager.isPlayerNotUsable ? 2 : 0)
 //            .navigationTitle(playingManager.audioTitle ?? "")
 //
-//            if playingManager.isLoadingAudio {
-//                AudioLoadingView()
-//            } else if let errorMessage = playingManager.errorMessage {
+            if playingManager.isLoadingAudio {
+                AudioLoadingView()
+            }// else if let errorMessage = playingManager.errorMessage {
 //                ErrorMessageView(errorMessage: errorMessage)
 //            }
         }

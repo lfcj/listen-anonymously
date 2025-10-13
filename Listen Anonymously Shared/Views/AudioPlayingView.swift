@@ -33,18 +33,18 @@ public struct AudioPlayingView: View {
     }
 }
 
-//#Preview {
-//    let audioPlayingManager = AudioPlayingManager(
-//        extensionContext: nil,
-//        canPlay: true,
-//        isLoadingAudio: false,
-//        errorMessage: nil,
-//        duration: 19,
-//        url: Bundle.main.url(forResource: "AUDIO-2024-02-23-14-21-50", withExtension: "mp3")!
-//    )
-//
-//    AudioPlayingView().environmentObject(audioPlayingManager)
-//}
+#Preview {
+    let audioPlayingManager = AudioPlayingManager(
+        extensionContext: nil,
+        canPlay: true,
+        isLoadingAudio: false,
+        errorMessage: nil,
+        duration: 19,
+        url: Bundle.main.url(forResource: "AUDIO-2024-02-23-14-21-50", withExtension: "mp3")!
+    )
+
+    AudioPlayingView(playingManager: audioPlayingManager)
+}
 
 #Preview {
     AudioPlayingView(playingManager: AudioPlayingManager(extensionContext: nil))

@@ -10,13 +10,16 @@ final class FakeExtensionContext: NSExtensionContext {
 
     private func withInvalidExtensionItems() -> FakeExtensionContext {
         _leInputItems = [.emptyWhatsappURL]
-
         return self
     }
 
     private func withValidExtensionItems() -> FakeExtensionContext {
         _leInputItems = [.validURL]
+        return self
+    }
 
+    private func withRealExtensionItems() -> FakeExtensionContext {
+        _leInputItems = [.validURLAndRealAudioFile]
         return self
     }
 
@@ -33,6 +36,11 @@ extension FakeExtensionContext {
     static let validItemsContext: FakeExtensionContext = {
         FakeExtensionContext()
             .withValidExtensionItems()
+    }()
+
+    static let realAudioItemsContext: FakeExtensionContext = {
+        FakeExtensionContext()
+            .withRealExtensionItems()
     }()
 
 }

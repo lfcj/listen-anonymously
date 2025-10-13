@@ -1,3 +1,4 @@
+import Combine
 import Testing
 @testable import Listen_Anonymously_Shared
 
@@ -41,13 +42,39 @@ struct AudioPlayingManagerTests {
 
         await manager.findAudio()
 
-        // Thu 1st. May 2025 at 14:27"
         #expect(manager.audioTitle?.contains("Thu") == true)
         #expect(manager.audioTitle?.contains("1st") == true)
         #expect(manager.audioTitle?.contains("May") == true)
         #expect(manager.audioTitle?.contains("2025 at") == true)
         #expect(manager.audioTitle?.contains(":27") == true)
         #expect(manager.canPlay == true)
+    }
+
+    @Test("extensionContext with valid item but dummy audio file shows error")
+    func validItemButDummyAudio_producesErrors() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.validItemsContext)
+
+        await manager.findAudio()
+
+        #expect(manager.errorMessage?.hasPrefix("Could not get duration") == true)
+    }
+
+    @Test("extensionContext with valid item and real audio file shows no error and sets duration")
+    func validItemAndValidAudio_producesNoErrors() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+
+        let durationValues = manager.$duration.values
+
+        await manager.findAudio()
+
+        for await duration in durationValues {
+            if duration > 0 {
+                break
+            }
+        }
+
+        #expect(manager.errorMessage == nil)
+        #expect(Int(manager.duration) == 19)
     }
 
 }

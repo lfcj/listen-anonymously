@@ -27,7 +27,7 @@ class FakeNSExtensionItem: NSExtensionItem {
         return self
     }
 
-    private func withValidURLAndAudioFile() -> FakeNSExtensionItem {
+    private func withValidURLAndDummyAudioFile() -> FakeNSExtensionItem {
         // Create a temporary file with a valid URL
         let tempURL = FileManager.default.temporaryDirectory
             .appendingPathComponent("AUDIO-2025-05-01-14-27" + UUID().uuidString)
@@ -39,6 +39,16 @@ class FakeNSExtensionItem: NSExtensionItem {
 
         _leAttachments = [
             NSItemProvider(item: tempURL as NSURL, typeIdentifier: "com.apple.m4a-audio")
+        ]
+
+        return self
+    }
+
+    private func withValidURLAndRealAudioFile() -> FakeNSExtensionItem {
+        let realURL = Bundle.main.url(forResource: "AUDIO-2024-02-23-14-21-50", withExtension: "mp3")!
+
+        _leAttachments = [
+            NSItemProvider(item: realURL as NSURL, typeIdentifier: "com.apple.m4a-audio")
         ]
 
         return self
@@ -71,6 +81,11 @@ extension FakeNSExtensionItem {
 
     static let validURL: FakeNSExtensionItem = {
         FakeNSExtensionItem()
-            .withValidURLAndAudioFile()
+            .withValidURLAndDummyAudioFile()
+    }()
+
+    static let validURLAndRealAudioFile: FakeNSExtensionItem = {
+        FakeNSExtensionItem()
+            .withValidURLAndRealAudioFile()
     }()
 }

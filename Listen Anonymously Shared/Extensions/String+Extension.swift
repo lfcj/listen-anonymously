@@ -2,48 +2,66 @@ import Foundation
 
 extension String {
 
-    // TODO: Improve to find this regex in any string + add tests
-    func formatAudioFileName() -> String {
-        let fileName = self
-        guard fileName.count >= 22 else {
-            return fileName
+    func formatAudioFileName(locale: Locale =
+        .current) -> String {
+        let dateString = self
+        guard dateString.count >= 22 else {
+            return dateString
         }
-        guard fileName.hasPrefix("AUDIO-") else {
-            return fileName
+        guard dateString.hasPrefix("AUDIO-") else {
+            return dateString
         }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        // Parse the input string
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        // TODO: Use REGEX so other strings that contain dates work
+        guard let date = inputFormatter.date(from: dateString.prefix(22).replacingOccurrences(of: "AUDIO-", with: "")) else {
+            return dateString
+        }
 
-        if let date = dateFormatter.date(from: String(fileName.prefix(22).replacingOccurrences(of: "AUDIO-", with: ""))) {
-            let dayFormatter = DateFormatter()
-            dayFormatter.dateFormat = "d"
-            let day = dayFormatter.string(from: date)
+        // Format the output
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateStyle = .medium
+        outputFormatter.timeStyle = .short
+        outputFormatter.locale = locale
+        // yyyyLLLdjmma -> May 20th, 2025 at 2:27 PM
+        // MMMMdEEEEyyyy -> Tuesday, May 20th, 2025
+        // EEEMMMdyyyyjmma -> Tue, May 20th, 2025 at 2:27 PM
+        outputFormatter.setLocalizedDateFormatFromTemplate("EEEMMMdyyyyjmma")
 
-            let monthFormatter = DateFormatter()
-            monthFormatter.dateFormat = "MMM"
-            let month = monthFormatter.string(from: date)
+        let formattedDate = outputFormatter.string(from: date)
 
-            let hourFormatter = DateFormatter()
-            hourFormatter.dateFormat = "HH:mm"
-            let time = hourFormatter.string(from: date)
+        // Add ordinal suffix for day (English only)
+        if locale.language.languageCode?.identifier.contains("en") == true {
+            let calendar = Calendar.current
+            let day = calendar.component(.day, from: date)
+            let ordinalSuffix = ordinalSuffix(for: day)
 
-            // Add "st," "nd," "rd," or "th" to the day
-            var dayWithSuffix = day
-            let dayInt = Int(day) ?? 0
-            switch dayInt {
-            case 1, 21, 31:
-                dayWithSuffix += "st" // TODO: test in spanish
-            case 2, 22:
-                dayWithSuffix += "nd"
-            case 3, 23:
-                dayWithSuffix += "rd"
-            default:
-                dayWithSuffix += "th"
+            // Replace the day number with day + ordinal
+            let dayString = "\(day)"
+            if let range = formattedDate.range(of: dayString) {
+                let withOrdinal = formattedDate.replacingCharacters(in: range, with: "\(day)\(ordinalSuffix)")
+                return withOrdinal
             }
-
-            return "\(month) \(dayWithSuffix) \(time)"
         }
 
-        return fileName
+        return formattedDate.localizedCapitalized
     }
+
+    private func ordinalSuffix(for day: Int) -> String {
+        switch day {
+        case 11, 12, 13:
+            return "th"
+        default:
+            switch day % 10 {
+            case 1: return "st"
+            case 2: return "nd"
+            case 3: return "rd"
+            default: return "th"
+            }
+        }
+    }
+
 }

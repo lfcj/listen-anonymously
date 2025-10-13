@@ -12,7 +12,7 @@ public struct AudioPlayingView: View {
         ZStack {
             VStack {
                 Spacer()
-//                PlayingAnimationView(isPlaying: $playingManager.isPlaying)
+                PlayingAnimationView(isPlaying: $playingManager.isPlaying)
                 Spacer()
 //                PlayerControllerView()
 //                    .padding(.bottom)

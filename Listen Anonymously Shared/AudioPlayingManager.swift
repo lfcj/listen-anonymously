@@ -109,7 +109,6 @@ open class AudioPlayingManager: ObservableObject {
 
     private func setAudioDuration(url: URL) async {
         do {
-            
             let _duration = try await AVAsset(url: url).load(.duration).seconds
             await MainActor.run {
                 duration = _duration

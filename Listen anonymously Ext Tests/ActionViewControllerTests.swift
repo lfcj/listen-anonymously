@@ -3,7 +3,7 @@ import UIKit
 import XCTest
 @testable import Listen_anonymously
 
-struct Listen_anonymously_Ext_Tests {
+struct ActionViewControllerTests {
 
     @Test("Storyboard ActionViewController has full screen presentation style")
     func actionViewController_hasFullScreenPresentationStyle_whenInstatiatedFromStoryboard() async throws {

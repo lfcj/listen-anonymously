@@ -1,0 +1,57 @@
+{
+  "configurations" : [
+    {
+      "id" : "EDF4D9F1-16EA-4C22-ADCE-51CA05A99C92",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:Listen anonymously.xcodeproj",
+          "identifier" : "3CCFCA062D3EFD850090D88D",
+          "name" : "Listen anonymously"
+        },
+        {
+          "containerPath" : "container:Listen anonymously.xcodeproj",
+          "identifier" : "3CCFCA562D3F0FCD0090D88D",
+          "name" : "Listen anonymously Ext"
+        },
+        {
+          "containerPath" : "container:Listen anonymously.xcodeproj",
+          "identifier" : "3CFA3BCF2E9CE38000D0A378",
+          "name" : "Listen Anonymously Shared"
+        }
+      ]
+    },
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Listen anonymously.xcodeproj",
+      "identifier" : "3CCFCA062D3EFD850090D88D",
+      "name" : "Listen anonymously"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Listen anonymously.xcodeproj",
+        "identifier" : "3CCFCA202D3EFD860090D88D",
+        "name" : "Listen anonymouslyUITests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Listen anonymously.xcodeproj",
+        "identifier" : "3CFA3BD92E9CE38000D0A378",
+        "name" : "Listen Anonymously SharedTests"
+      }
+    }
+  ],
+  "version" : 1
+}

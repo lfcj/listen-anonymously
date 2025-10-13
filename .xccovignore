@@ -1,0 +1,12 @@
+# .xccovignore
+# Exclude all Swift Package Manager dependencies
+.build/*
+*/checkouts/*
+*/SourcePackages/*
+
+# Exclude specific packages
+*/ViewInspector/*
+*/SnapshotTesting/*
+
+# Exclude derived data
+DerivedData/*

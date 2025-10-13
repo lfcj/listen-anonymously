@@ -1,7 +1,7 @@
 import AVFoundation
 import Combine
 
-final class AudioPlayingManager {
+public final class AudioPlayingManager: ObservableObject {
 
     @Published var canPlay: Bool = false
     @Published var isPlaying: Bool = false
@@ -17,8 +17,8 @@ final class AudioPlayingManager {
     private let extensionContext: NSExtensionContext?
     private var audioURL: URL?
     private var audioPlayer: AVAudioPlayer?
-
-    init(
+//
+    public init(
         extensionContext: NSExtensionContext?,
         canPlay: Bool = false,
         isPlaying: Bool = false,

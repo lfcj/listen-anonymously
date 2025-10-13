@@ -1,22 +1,26 @@
 import AVFAudio
 import SwiftUI
 
-//struct AudioPlayingView: View {
-//    @EnvironmentObject var playingManager: AudioPlayingManager
-//
-//    public var body: some View {
-//        ZStack {
-//            VStack {
-//                Spacer()
+public struct AudioPlayingView: View {
+    @ObservedObject var playingManager: AudioPlayingManager
+
+    public init(playingManager: AudioPlayingManager) {
+        self.playingManager = playingManager
+    }
+
+    public var body: some View {
+        ZStack {
+            VStack {
+                Spacer()
 //                PlayingAnimationView(isPlaying: $playingManager.isPlaying)
-//                Spacer()
+                Spacer()
 //                PlayerControllerView()
 //                    .padding(.bottom)
 //                    .padding(.leading)
 //                    .padding(.trailing)
 //                    .disabled(!playingManager.canPlay)
-//                    
-//            }
+                    
+            }
 //            .blur(radius: playingManager.isPlayerNotUsable ? 2 : 0)
 //            .navigationTitle(playingManager.audioTitle ?? "")
 //
@@ -25,10 +29,10 @@ import SwiftUI
 //            } else if let errorMessage = playingManager.errorMessage {
 //                ErrorMessageView(errorMessage: errorMessage)
 //            }
-//        }
-//    }
-//}
-//
+        }
+    }
+}
+
 //#Preview {
 //    let audioPlayingManager = AudioPlayingManager(
 //        extensionContext: nil,
@@ -41,3 +45,7 @@ import SwiftUI
 //
 //    AudioPlayingView().environmentObject(audioPlayingManager)
 //}
+
+#Preview {
+    AudioPlayingView(playingManager: AudioPlayingManager(extensionContext: nil))
+}

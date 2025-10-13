@@ -5,11 +5,19 @@ import XCTest
 
 struct Listen_anonymously_Ext_Tests {
 
-    @Test("Action View Controller has full screen presentation style")
-    func actionViewController_hasFullScreenPresentationStyle() async throws {
+    @Test("Storyboard ActionViewController has full screen presentation style")
+    func actionViewController_hasFullScreenPresentationStyle_whenInstatiatedFromStoryboard() async throws {
         let storyboard = await UIStoryboard(name: "MainInterface", bundle: Bundle(for: ActionViewController.self))
         let optionalViewController = await storyboard.instantiateInitialViewController() as? ActionViewController
         let viewController = try XCTUnwrap(optionalViewController)
+        
+
+        #expect(viewController.modalPresentationStyle == .fullScreen)
+    }
+
+    @Test("Programatic ActionViewController has full screen presentation style")
+    func actionViewController_hasFullScreenPresentationStyle_whenInstatiatedFromProgrammatically() async throws {
+        let viewController = await ActionViewController(nibName: nil, bundle: nil)
 
         #expect(viewController.modalPresentationStyle == .fullScreen)
     }

@@ -53,7 +53,7 @@ open class AudioPlayingManager: ObservableObject {
         audioPlayer?.currentTime = currentTime
     }
 
-    func findAudio() async {
+    open func findAudio() async {
         isLoadingAudio = true
         guard let inputItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             isLoadingAudio = false
@@ -75,7 +75,6 @@ open class AudioPlayingManager: ObservableObject {
                 return
             } catch let error {
                 findingAudioErrorMessage = (error as? FindingAudioError)?.localizedDescription
-                print(error)
             }
         }
         if let findingAudioErrorMessage = findingAudioErrorMessage {

@@ -17,7 +17,7 @@ open class AudioPlayingManager: ObservableObject {
     private let extensionContext: NSExtensionContext?
     private var audioURL: URL?
     private var audioPlayer: AVAudioPlayer?
-//
+
     public init(
         extensionContext: NSExtensionContext?,
         canPlay: Bool = false,
@@ -36,12 +36,12 @@ open class AudioPlayingManager: ObservableObject {
         self.audioURL = url
     }
 
-    func play() {
+    open func play(audioSession: AudioSessionProtocol = AVAudioSession.sharedInstance()) {
         if audioPlayer == nil, let audioURL = self.audioURL {
-            setAudioPlayer(url: audioURL)
+            setAudioPlayer(url: audioURL, audioSession: audioSession)
         }
         audioPlayer?.play()
-        isPlaying = true
+        isPlaying = audioPlayer != nil
     }
 
     func pause() {
@@ -83,26 +83,14 @@ open class AudioPlayingManager: ObservableObject {
         }
     }
 
-    private func setAudioPlayer(url: URL) {
+    private func setAudioPlayer(url: URL, audioSession: AudioSessionProtocol) {
         do {
-            try AVAudioSession.sharedInstance().setActive(false)
-        } catch let error {
-            errorMessage = "Could not deactivate instance. \((error as NSError).debugDescription)"
-        }
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-        } catch let error {
-            errorMessage = "Could not set category \((error as NSError).debugDescription)"
-        }
-        do {
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch let error {
-            errorMessage = "Could not setActive. \((error as NSError).debugDescription)"
-        }
-        do {
+            try audioSession.setActive(false, options: [])
+            try audioSession.setCategory(.playback, mode: .default, options: [])
+            try audioSession.setActive(true, options: [])
             audioPlayer = try AVAudioPlayer(contentsOf: url)
         } catch let error {
-            errorMessage = "Could not create player with URL. \((error as NSError).debugDescription)"
+            errorMessage = "Could create audio player. \((error as NSError).debugDescription)"
         }
     }
 

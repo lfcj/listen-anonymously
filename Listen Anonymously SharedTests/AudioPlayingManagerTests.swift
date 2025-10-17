@@ -77,4 +77,56 @@ struct AudioPlayingManagerTests {
         #expect(Int(manager.duration) == 19)
     }
 
+    @Test("Playing deactivates the audio session")
+    func playing_deactivatesAudioSession() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+        
+        await manager.findAudio()
+        let avSessionSpy = AVAudioSessionSpy()
+        manager.play(audioSession: avSessionSpy)
+        
+        #expect(avSessionSpy.setActiveToFalseCalls == 1)
+        #expect(avSessionSpy.setActiveToTrueCalls == 1)
+        #expect(avSessionSpy.setCategoryCalls == 1)
+        #expect(manager.isPlaying == true)
+    }
+
+    @Test("Error is shown when player could not be created")
+    func player_isNotCratedWhenSessionSetupFails() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+        
+        await manager.findAudio()
+        let avSessionSpy = AVAudioSessionSpy()
+        avSessionSpy.setActiveError = NSError(domain: "player_isNotCratedWhenSessionSetupFails error", code: 400)
+        manager.play(audioSession: avSessionSpy)
+        
+        #expect(manager.errorMessage != nil)
+        #expect(manager.errorMessage?.contains("Could create audio player") == true)
+        #expect(manager.isPlaying == false)
+    }
+
+}
+
+final class AVAudioSessionSpy: AudioSessionProtocol, @unchecked Sendable {
+
+    
+    var setActiveError: Error?
+    private(set) var setActiveToFalseCalls: Int = 0
+    private(set) var setActiveToTrueCalls: Int = 0
+    private(set) var setCategoryCalls: Int = 0
+
+    func setActive(_ active: Bool, options: AVAudioSession.SetActiveOptions = []) throws {
+        if let setActiveError {
+            throw setActiveError
+        }
+        if active {
+            setActiveToTrueCalls += 1
+        } else {
+            setActiveToFalseCalls += 1
+        }
+    }
+
+    func setCategory(_ category: AVAudioSession.Category, mode: AVAudioSession.Mode, options: AVAudioSession.CategoryOptions) throws {
+        setCategoryCalls += 1
+    }
 }

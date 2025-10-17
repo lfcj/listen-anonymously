@@ -1,3 +1,4 @@
+import AVFoundation
 import Combine
 import Testing
 @testable import Listen_Anonymously_Shared
@@ -105,6 +106,40 @@ struct AudioPlayingManagerTests {
         #expect(manager.isPlaying == false)
     }
 
+    @Test("Player is not usable when it is loading")
+    func player_isNotUsableWhenItIsLoading() throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext, canPlay: true, isLoadingAudio: true)
+
+        #expect(manager.isPlayerNotUsable == true)
+    }
+
+    @Test("Player is not usable when there is an error")
+    func player_isNotUsableWhenThereIsAnError() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.invalidItemsContext, canPlay: true, isLoadingAudio: true)
+
+        await manager.findAudio()
+
+        #expect(manager.isPlayerNotUsable == true)
+    }
+
+    @Test("Player is not usable when it cannot play")
+    func player_isNotUsableWhenCanNotPlayDueToLackOfAudioData() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.invalidItemsContext)
+
+        await manager.findAudio()
+
+        #expect(manager.canPlay == false)
+        #expect(manager.isPlayerNotUsable == true)
+    }
+
+    @Test("Player is usable when a valid audio URL is loaded")
+    func player_isUsableWhenPlayerIsReady() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+
+        await manager.findAudio()
+
+        #expect(manager.isPlayerNotUsable == false)
+    }
 }
 
 final class AVAudioSessionSpy: AudioSessionProtocol, @unchecked Sendable {

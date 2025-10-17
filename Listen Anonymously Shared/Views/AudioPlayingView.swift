@@ -14,21 +14,21 @@ public struct AudioPlayingView: View {
                 Spacer()
                 PlayingAnimationView(isPlaying: $playingManager.isPlaying)
                 Spacer()
-//                PlayerControllerView()
-//                    .padding(.bottom)
-//                    .padding(.leading)
-//                    .padding(.trailing)
-//                    .disabled(!playingManager.canPlay)
+                PlayerControllerView()
+                    .padding(.bottom)
+                    .padding(.leading)
+                    .padding(.trailing)
+                    .disabled(!playingManager.canPlay)
                     
             }
-//            .blur(radius: playingManager.isPlayerNotUsable ? 2 : 0)
-//            .navigationTitle(playingManager.audioTitle ?? "")
-//
+            .blur(radius: playingManager.isPlayerNotUsable ? 2 : 0)
+            .navigationTitle(playingManager.audioTitle ?? "")
+
             if playingManager.isLoadingAudio {
                 AudioLoadingView()
-            }// else if let errorMessage = playingManager.errorMessage {
-//                ErrorMessageView(errorMessage: errorMessage)
-//            }
+            } else if let errorMessage = playingManager.errorMessage {
+                ErrorMessageView(errorMessage: errorMessage)
+            }
         }
     }
 }

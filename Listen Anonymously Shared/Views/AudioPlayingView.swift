@@ -14,7 +14,7 @@ public struct AudioPlayingView: View {
                 Spacer()
                 PlayingAnimationView(isPlaying: $playingManager.isPlaying)
                 Spacer()
-                PlayerControllerView()
+                PlayerControllerView(playingManager: playingManager)
                     .padding(.bottom)
                     .padding(.leading)
                     .padding(.trailing)

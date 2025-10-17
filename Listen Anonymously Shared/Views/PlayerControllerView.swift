@@ -60,14 +60,17 @@ struct PlayerControllerView: View {
                     action: {}
                 )
                 
-                PlayingViewButton(imageName: playingManager.isPlaying ? "pause.fill" : "play.fill", size: (100, 80), action: {
-                    if !playingManager.isPlaying {
-                        startTimer()
-                        startPlaying()
-                    } else {
-                        stopTimer()
-                        stopPlaying()
-                    }
+                PlayingViewButton(
+                    imageName: playingManager.isPlaying ? "pause.fill" : "play.fill",
+                    size: (100, 80),
+                    action: {
+                        if !playingManager.isPlaying {
+                            startTimer()
+                            startPlaying()
+                        } else {
+                            stopTimer()
+                            stopPlaying()
+                        }
                 })
                 
                 PlayingViewButton(imageName: forwardImageName, size: (40, 40), action: {})
@@ -77,7 +80,7 @@ struct PlayerControllerView: View {
         }
     }
 }
-//
+
 private extension PlayerControllerView {
 
     func startTimer() {
@@ -85,7 +88,6 @@ private extension PlayerControllerView {
         timerCancellable = timer.sink { _ in
             self.currentTime += 1
             checkIfCurrentTimeIsOver()
-            
         }
     }
 

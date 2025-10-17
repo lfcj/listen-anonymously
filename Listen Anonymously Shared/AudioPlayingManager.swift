@@ -1,6 +1,20 @@
 import AVFoundation
 import Combine
 
+public protocol AudioSessionProtocol {
+    func setActive(
+        _ active: Bool,
+        options: AVAudioSession.SetActiveOptions
+    ) throws
+    func setCategory(
+        _ category: AVAudioSession.Category,
+        mode: AVAudioSession.Mode,
+        options: AVAudioSession.CategoryOptions
+    ) throws
+}
+
+extension AVAudioSession: AudioSessionProtocol {}
+
 open class AudioPlayingManager: ObservableObject {
 
     @Published var canPlay: Bool = false

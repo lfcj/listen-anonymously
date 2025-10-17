@@ -140,6 +140,24 @@ struct AudioPlayingManagerTests {
 
         #expect(manager.isPlayerNotUsable == false)
     }
+
+    @Test("Pause sets isPlaying to false")
+    func player_setsIsPlayingToFalseWhenPaused() {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+        manager.isPlaying = true
+
+        manager.pause()
+
+        #expect(manager.isPlaying == false)
+    }
+
+    @Test("Setting player position does not crash")
+    func setting_playerPosition_doesNotCrash() {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+        manager.play()
+        manager.setPlayerPosition(200)
+    }
+
 }
 
 final class AVAudioSessionSpy: AudioSessionProtocol, @unchecked Sendable {

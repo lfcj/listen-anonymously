@@ -2,33 +2,27 @@ import SwiftUI
 
 struct PostLaunchScreenView: View {
     @State private var isAnimating = false
-    @State private var isScaling = false
     @State private var showHeadphones = false
     @State private var isAnimatingHeadphones = false
     var body: some View {
         ZStack {
-            Color(UIColor.secondarySystemBackground).ignoresSafeArea()
+            Color.launchScreenBackground.ignoresSafeArea()
 
             GeometryReader { geometry in
                 Image("launchscreenSVG")
                     .resizable()
                     .frame(maxWidth: geometry.size.width / 3, maxHeight: geometry.size.width / 3)
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                    .scaleEffect(isScaling ? 1.5 : 1.0) // Pulsing scale
                     .rotationEffect(.degrees(isAnimating ? 360 : 0)) // Full rotation
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                     .animation(
-                        Animation
-                            .easeInOut(duration: 2.0),
+                        Animation.bouncy,
                         value: isAnimating
                     )
                     .onAppear {
                         isAnimating = true
-                        isScaling = true
 
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            isAnimating = false
-                            isScaling = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                             showHeadphones = true
                         }
                     }
@@ -37,15 +31,13 @@ struct PostLaunchScreenView: View {
                     Image("headphones")
                         .resizable()
                         .frame(maxWidth: geometry.size.width / 1.5, maxHeight: geometry.size.width / 2)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2 - 20)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2 - 30)
                         .transition(.move(edge: .top).combined(with: .opacity))
-                        .animation(.spring(response: 1.5, dampingFraction: 0.7), value: isAnimatingHeadphones)
+                        .animation(.spring(response: 0.7, dampingFraction: 0.4), value: isAnimatingHeadphones)
                         .offset(y: isAnimatingHeadphones ? 0 : -geometry.size.height * 0.6)
                         .opacity(isAnimatingHeadphones ? 1 : 0)
                         .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                isAnimatingHeadphones = true
-                            }
+                            isAnimatingHeadphones = true
                         }
                 }
             }
@@ -53,6 +45,11 @@ struct PostLaunchScreenView: View {
     }
 }
 
+private extension Color {
+    static var launchScreenBackground: Color { Color("LaunchscreenBackgroundColor") }
+}
+
 #Preview {
     PostLaunchScreenView()
+        .preferredColorScheme(.dark)
 }

@@ -10,7 +10,7 @@ struct ContentView: View {
             if !appState.hasCompletedInitialSetup {
                 PostLaunchScreenView()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak appState] in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [weak appState] in
                             appState?.handlePostLaunch()
                         }
                     }

@@ -4,10 +4,7 @@ import SwiftUI
 
 struct PlayerControllerView: View {
     
-    @ObservedObject var playingManager: AudioPlayingManager
-
-    @State private var currentTime: Double = 0
-    @State private var timerCancellable: Cancellable?
+    @ObservedObject var viewModel: PlayerControllerViewModel
 
     @State private var sliderColor = Color.la_teal
 
@@ -28,29 +25,23 @@ struct PlayerControllerView: View {
         }
     }
     
-    func formatSecond(_ seconds: Int) -> String {
-        let minutes = seconds / 60
-        let remainingSeconds = seconds % 60
-        return String(format: "%02d:%02d", minutes, remainingSeconds)
-    }
-    
     var body: some View {
         VStack {
             Slider(
-                value: $currentTime,
-                in: 0...playingManager.duration,
+                value: $viewModel.currentTime,
+                in: 0...viewModel.duration,
                 onEditingChanged: { isEditing in
                     sliderColor = isEditing ? .la_magenta : .la_teal
-                    playingManager.setPlayerPosition(currentTime)
+                    viewModel.setPlayerPosition()
                 }
             )
             .tint(sliderColor)
             HStack {
-                Text(formatSecond(Int(currentTime)))
+                Text(viewModel.currentTimeString)
                     .font(.title)
                 
                 Spacer()
-                Text(formatSecond(Int(playingManager.duration - currentTime)))
+                Text(viewModel.remainingTimeString)
                     .font(.title)
             }
             HStack(spacing: 10) {
@@ -61,59 +52,17 @@ struct PlayerControllerView: View {
                 )
                 
                 PlayingViewButton(
-                    imageName: playingManager.isPlaying ? "pause.fill" : "play.fill",
+                    imageName: viewModel.isPlaying ? "pause.fill" : "play.fill",
                     size: CGSize(width: 100, height: 80),
                     action: {
-                        if !playingManager.isPlaying {
-                            startTimer()
-                            startPlaying()
-                        } else {
-                            stopTimer()
-                            stopPlaying()
-                        }
+                        viewModel.playOrPause()
                 })
                 
                 PlayingViewButton(imageName: forwardImageName, size: CGSize(width: 40, height: 40), action: {})
             }
         }.onDisappear {
-            playingManager.pause()
+            viewModel.pause()
         }
-    }
-}
-
-private extension PlayerControllerView {
-
-    func startTimer() {
-        // Reset the timer and start receiving updates
-        timerCancellable = timer.sink { _ in
-            self.currentTime += 1
-            checkIfCurrentTimeIsOver()
-        }
-    }
-
-    func checkIfCurrentTimeIsOver() {
-        guard currentTime >= playingManager.duration else {
-            return
-        }
-        stopTimer()
-        stopPlaying()
-    }
-
-    func stopTimer() {
-        timerCancellable?.cancel()
-        timerCancellable = nil
-    }
-
-    func startPlaying() {
-        if currentTime == playingManager.duration {
-            currentTime = 0
-            playingManager.setPlayerPosition(currentTime)
-        }
-        playingManager.play()
-    }
-
-    func stopPlaying() {
-        playingManager.pause()
     }
 }
 
@@ -124,5 +73,5 @@ private extension PlayerControllerView {
         url: Bundle.main.url(forResource: "AUDIO-2024-02-23-14-21-50", withExtension: "mp3")!
     )
 
-    PlayerControllerView(playingManager: audioPlayingManager)
+    PlayerControllerView(viewModel: PlayerControllerViewModel(playingManager: audioPlayingManager))
 }

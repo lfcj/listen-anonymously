@@ -9,7 +9,7 @@ struct PlayerControllerViewTests {
     @Test func initialButtonIsPlayIcon() throws {
         let manager = AudioPlayingManager(extensionContext: nil)
 
-        let view = PlayerControllerView(playingManager: manager)
+        let view = PlayerControllerView(viewModel: PlayerControllerViewModel(playingManager: manager))
         let inspectedButtonImageName = try view.inspect().vStack()
             .hStack(2)
             .view(PlayingViewButton.self, 1)

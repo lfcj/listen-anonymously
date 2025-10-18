@@ -2,6 +2,9 @@ import Combine
 import Foundation
 
 open class PlayerControllerViewModel: ObservableObject {
+
+    // MARK: - Properties
+
     @Published var currentTime: Double = 0
 
     var duration: Double {
@@ -20,14 +23,20 @@ open class PlayerControllerViewModel: ObservableObject {
         playingManager.isPlaying
     }
 
+    // MARK: - Private Properties
+
     private let playingManager: AudioPlayingManager
     private(set) var timerCancellable: Cancellable?
 
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
+    // MARK: - Init
+
     init(playingManager: AudioPlayingManager) {
         self.playingManager = playingManager
     }
+
+    // MARK: - Accessible Methods
 
     func setPlayerPosition() {
         playingManager.setPlayerPosition(currentTime)
@@ -46,6 +55,8 @@ open class PlayerControllerViewModel: ObservableObject {
     func pause() {
         playingManager.pause()
     }
+
+    // MARK: - Private Methods
 
     private func startTimer() {
         // Reset the timer and start receiving updates

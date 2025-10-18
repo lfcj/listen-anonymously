@@ -11,7 +11,7 @@ struct BorderedOrGlass: ViewModifier {
 }
 
 extension View {
-    func adaptiveButtonStyle() -> some View {
+    func borderedOrGlassButtonStyle() -> some View {
         self.modifier(BorderedOrGlass())
     }
 }

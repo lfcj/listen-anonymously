@@ -13,7 +13,7 @@ struct ErrorMessageView: View {
                 Text("Button to try again") // TODO: Localize
                     .font(.headline)
             }
-            .buttonStyle(.glassProminent)
+            .borderedOrGlassButtonStyle()
             
         }
         .foregroundStyle(.white)

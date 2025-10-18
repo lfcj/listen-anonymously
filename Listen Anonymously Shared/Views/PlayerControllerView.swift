@@ -8,8 +8,6 @@ struct PlayerControllerView: View {
 
     @State private var sliderColor = Color.la_teal
 
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
     var backImageName: String {
         if #available(iOS 18, *) {
             "10.arrow.trianglehead.counterclockwise"

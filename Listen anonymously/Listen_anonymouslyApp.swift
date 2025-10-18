@@ -6,7 +6,7 @@ struct Listen_anonymouslyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LATabView()
                 .environmentObject(appState)
         }
     }

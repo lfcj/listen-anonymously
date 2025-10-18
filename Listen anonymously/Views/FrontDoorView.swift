@@ -3,6 +3,7 @@ import SwiftUI
 struct FrontDoorView: View {
     // Localize
     var body: some View {
+        
         VStack {
             Text("Listen to your audio messages without leaving a trail.")
             HStack(spacing: -8) {
@@ -28,5 +29,6 @@ struct FrontDoorView: View {
 
             // Offer default speed as in Settings.
         }
+        .padding()
     }
 }

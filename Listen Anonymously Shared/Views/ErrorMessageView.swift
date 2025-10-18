@@ -7,8 +7,14 @@ struct ErrorMessageView: View {
             Text("Error reading audio file") // TODO: Localize
                 .font(.title)
             Text(errorMessage)
-            Text("Button to try again") // TODO: Localize
-                .font(.headline)
+            Button {
+                print("TO-DO")
+            } label: {
+                Text("Button to try again") // TODO: Localize
+                    .font(.headline)
+            }
+            .buttonStyle(.glassProminent)
+            
         }
         .foregroundStyle(.white)
         .padding(.all, 15)
@@ -20,3 +26,4 @@ struct ErrorMessageView: View {
 #Preview {
     ErrorMessageView(errorMessage: "This is an error")
 }
+

@@ -99,6 +99,43 @@ struct PlayerControllerViewModelTests {
         #expect(spyManager.pauseCalls == 1)
     }
 
+    @Test func testStartTimerIncrementsCurrentTime() {
+        let timerSubject = PassthroughSubject<Date, Never>()
+        let mockManager = SpyAudioPlayingManager(extensionContext: nil, duration: 10)
+        let viewModel = PlayerControllerViewModel(
+            playingManager: mockManager,
+            timerPublisher: timerSubject.eraseToAnyPublisher()
+        )
+
+        viewModel.playOrPause()
+        timerSubject.send(Date())
+        timerSubject.send(Date())
+        timerSubject.send(Date())
+        
+        #expect(viewModel.currentTime == 3)
+    }
+
+    @Test func testCheckIfCurrentTimeIsOverStopsWhenTimeIsOver() {
+        // Given
+        let timerSubject = PassthroughSubject<Date, Never>()
+        let mockManager = SpyAudioPlayingManager(extensionContext: nil, duration: 3)
+        let viewModel = PlayerControllerViewModel(
+            playingManager: mockManager,
+            timerPublisher: timerSubject.eraseToAnyPublisher()
+        )
+
+        viewModel.playOrPause()
+        #expect(viewModel.timerCancellable != nil)
+
+        // Simulate 3 ticks
+        timerSubject.send(Date())
+        timerSubject.send(Date())
+        timerSubject.send(Date())
+
+        // Then
+        #expect(viewModel.timerCancellable == nil)
+    }
+
 }
 
 class SpyAudioPlayingManager: AudioPlayingManager {
@@ -120,4 +157,5 @@ class SpyAudioPlayingManager: AudioPlayingManager {
     override func pause() {
         pauseCalls += 1
     }
+
 }

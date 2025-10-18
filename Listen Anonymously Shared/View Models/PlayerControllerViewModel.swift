@@ -28,12 +28,16 @@ open class PlayerControllerViewModel: ObservableObject {
     private let playingManager: AudioPlayingManager
     private(set) var timerCancellable: Cancellable?
 
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let timer: AnyPublisher<Date, Never>
 
     // MARK: - Init
 
-    init(playingManager: AudioPlayingManager) {
+    init(
+        playingManager: AudioPlayingManager,
+        timerPublisher: AnyPublisher<Date, Never> = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher()
+    ) {
         self.playingManager = playingManager
+        self.timer = timerPublisher
     }
 
     // MARK: - Accessible Methods

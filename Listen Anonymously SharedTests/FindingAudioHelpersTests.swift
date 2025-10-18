@@ -18,7 +18,7 @@ struct FindingAudioHelpersTests {
     func findAudio_doesNotUsePublicIdentifiersAtFirst() async throws {
         do {
             let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(
-                in: makeFakeExtensionItemWithFakeAudioItemAndPublicIdentifier()
+                in: FakeNSExtensionItem.publicIdentifier
             )
             #expect(audioFileInformation.title == "This should never be executed as we expect a thrown error")
         } catch let error as FindingAudioError {
@@ -30,7 +30,7 @@ struct FindingAudioHelpersTests {
     func findAudio_usesPublicIdentifiersAtSecondAttempt() async throws {
         do {
             let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(
-                in: makeFakeExtensionItemWithFakeAudioItemAndPublicIdentifier(),
+                in: FakeNSExtensionItem.publicIdentifier,
                 isSecondAttempt: true
             )
             #expect(audioFileInformation.title == "This should never be executed as we expect a thrown error")
@@ -73,11 +73,6 @@ struct FindingAudioHelpersTests {
 // MARK: - Helpers
 
 private extension FindingAudioHelpersTests {
-
-    func makeFakeExtensionItemWithFakeAudioItemAndPublicIdentifier() -> FakeNSExtensionItem {
-        FakeNSExtensionItem()
-            .withPublicIdentifierAndEmptyAudioAttachment()
-    }
 
     func makeFakeExtensionItemWithValidTelegramURL() -> FakeNSExtensionItem {
         FakeNSExtensionItem()

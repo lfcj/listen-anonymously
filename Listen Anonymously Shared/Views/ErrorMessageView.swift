@@ -1,20 +1,21 @@
 import SwiftUI
 
 struct ErrorMessageView: View {
-    @State var errorMessage: String
+    let errorMessage: String
+    let onRetry: () -> Void
     var body: some View {
         VStack {
             Text("Error reading audio file") // TODO: Localize
                 .font(.title)
             Text(errorMessage)
             Button {
-                print("TO-DO")
+                onRetry()
             } label: {
                 Text("Button to try again") // TODO: Localize
                     .font(.headline)
             }
             .borderedOrGlassButtonStyle()
-            
+            .padding()
         }
         .foregroundStyle(.white)
         .padding(.all, 15)
@@ -24,6 +25,9 @@ struct ErrorMessageView: View {
 }
 
 #Preview {
-    ErrorMessageView(errorMessage: "This is an error")
+    ErrorMessageView(
+        errorMessage: "This is an error",
+        onRetry: {}
+    )
 }
 

@@ -63,7 +63,7 @@ class ActionViewController: UIViewController {
 
     private func findAudio() {
         Task {
-            await playingManager.findAudio()
+            await playingManager.findAudio(isSecondAttempt: false)
         }
     }
 }

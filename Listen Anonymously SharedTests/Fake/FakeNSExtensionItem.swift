@@ -20,7 +20,7 @@ class FakeNSExtensionItem: NSExtensionItem {
         return self
     }
 
-    func withPublicIdentifierAndEmptyAudioAttachment() -> FakeNSExtensionItem {
+    private func withPublicIdentifierAndEmptyAudioAttachment() -> FakeNSExtensionItem {
         _leAttachments = [
             NSItemProvider(item: Self.audioItem, typeIdentifier: "public.file-url")
         ]
@@ -87,5 +87,10 @@ extension FakeNSExtensionItem {
     static let validURLAndRealAudioFile: FakeNSExtensionItem = {
         FakeNSExtensionItem()
             .withValidURLAndRealAudioFile()
+    }()
+
+    static let publicIdentifier: FakeNSExtensionItem = {
+        FakeNSExtensionItem()
+            .withPublicIdentifierAndEmptyAudioAttachment()
     }()
 }

@@ -27,7 +27,11 @@ public struct AudioPlayingView: View {
             if playingManager.isLoadingAudio {
                 AudioLoadingView()
             } else if let errorMessage = playingManager.errorMessage {
-                ErrorMessageView(errorMessage: errorMessage)
+                ErrorMessageView(errorMessage: errorMessage, onRetry: { [weak playingManager] in
+                    Task {
+                        await playingManager?.findAudio(isSecondAttempt: true)
+                    }
+                })
             }
         }
     }

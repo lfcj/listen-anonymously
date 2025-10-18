@@ -67,8 +67,9 @@ open class AudioPlayingManager: ObservableObject {
         audioPlayer?.currentTime = currentTime
     }
 
-    open func findAudio() async {
+    open func findAudio(isSecondAttempt: Bool = false) async {
         isLoadingAudio = true
+        errorMessage = nil
         guard let inputItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             isLoadingAudio = false
             errorMessage = "No audio file could be find. Please check you selected only one file." // TODO: Localize
@@ -78,7 +79,7 @@ open class AudioPlayingManager: ObservableObject {
         var findingAudioErrorMessage: String?
         for item in inputItems {
             do {
-                let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(in: item, isSecondAttempt: false)
+                let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(in: item, isSecondAttempt: isSecondAttempt)
                 await MainActor.run {
                     isLoadingAudio = false
                     audioURL = audioFileInformation.url

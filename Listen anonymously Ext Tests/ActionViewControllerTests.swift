@@ -47,9 +47,10 @@ struct ActionViewControllerTests {
 class SpyAudioPlayingManager: AudioPlayingManager {
     @Published var findAudioCalls: Int = 0
 
-    override func findAudio() async {
+    override func findAudio(isSecondAttempt: Bool) async {
         findAudioCalls += 1
     }
+
 }
 
 

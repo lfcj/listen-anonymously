@@ -23,6 +23,11 @@ final class FakeExtensionContext: NSExtensionContext {
         return self
     }
 
+    private func withPublicIdentifierItems() -> FakeExtensionContext {
+        _leInputItems = [.publicIdentifier]
+        return self
+    }
+
 }
 
 // MARK: - Helpers
@@ -43,4 +48,8 @@ extension FakeExtensionContext {
             .withRealExtensionItems()
     }()
 
+    static let publicIdentifierContext: FakeExtensionContext = {
+        FakeExtensionContext()
+            .withPublicIdentifierItems()
+    }()
 }

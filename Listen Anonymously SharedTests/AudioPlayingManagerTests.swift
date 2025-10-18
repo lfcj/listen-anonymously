@@ -158,6 +158,17 @@ struct AudioPlayingManagerTests {
         manager.setPlayerPosition(200)
     }
 
+    @Test("Trying a second time resets the error message")
+    func player_resetsErrorMessageOnSecondAttempt() async throws {
+        let manager = AudioPlayingManager(extensionContext: nil)
+        
+        await manager.findAudio()
+
+        #expect(manager.errorMessage != nil)
+
+        await manager.findAudio()
+    }
+
 }
 
 final class AVAudioSessionSpy: AudioSessionProtocol, @unchecked Sendable {

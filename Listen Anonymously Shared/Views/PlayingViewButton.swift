@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PlayingViewButton: View {
     let imageName: String
-    let size: (width: CGFloat, height: CGFloat)
+    let size: CGSize
     let action: () -> Void
     var body: some View {
         Button(

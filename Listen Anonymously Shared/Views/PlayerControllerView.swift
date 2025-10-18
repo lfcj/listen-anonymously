@@ -56,13 +56,13 @@ struct PlayerControllerView: View {
             HStack(spacing: 10) {
                 PlayingViewButton(
                     imageName: backImageName,
-                    size: (40, 40),
+                    size: CGSize(width: 40, height: 40),
                     action: {}
                 )
                 
                 PlayingViewButton(
                     imageName: playingManager.isPlaying ? "pause.fill" : "play.fill",
-                    size: (100, 80),
+                    size: CGSize(width: 100, height: 80),
                     action: {
                         if !playingManager.isPlaying {
                             startTimer()
@@ -73,7 +73,7 @@ struct PlayerControllerView: View {
                         }
                 })
                 
-                PlayingViewButton(imageName: forwardImageName, size: (40, 40), action: {})
+                PlayingViewButton(imageName: forwardImageName, size: CGSize(width: 40, height: 40), action: {})
             }
         }.onDisappear {
             playingManager.pause()

@@ -114,13 +114,6 @@
 			);
 			target = 3CCFCA562D3F0FCD0090D88D /* Listen anonymously Ext */;
 		};
-		3CCFCA702D3FA9030090D88D /* Exceptions for "Listen anonymously" folder in "Listen anonymously Ext" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Assets.xcassets,
-			);
-			target = 3CCFCA562D3F0FCD0090D88D /* Listen anonymously Ext */;
-		};
 		3CD5B09C2EA41C0900C7F07E /* Exceptions for "Listen anonymously" folder in "Listen anonymously" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -157,7 +150,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				3CD5B09C2EA41C0900C7F07E /* Exceptions for "Listen anonymously" folder in "Listen anonymously" target */,
-				3CCFCA702D3FA9030090D88D /* Exceptions for "Listen anonymously" folder in "Listen anonymously Ext" target */,
 			);
 			path = "Listen anonymously";
 			sourceTree = "<group>";

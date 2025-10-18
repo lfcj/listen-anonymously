@@ -5,6 +5,8 @@ import Testing
 
 struct PlayerControllerViewModelTests {
 
+    var cancellables = Set<AnyCancellable>()
+
     @Test func initialCurrentTime_isZero() {
         let viewModel = PlayerControllerViewModel(
             playingManager: AudioPlayingManager(extensionContext: nil)

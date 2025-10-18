@@ -60,6 +60,32 @@ open class PlayerControllerViewModel: ObservableObject {
         playingManager.pause()
     }
 
+    func forward10Seconds() {
+        let newTime = currentTime + 10.0
+
+        // Ensure the new time does not exceed the audio duration
+        if newTime < duration {
+            currentTime = newTime
+            setPlayerPosition()
+        } else {
+            stopTimer()
+            stopPlaying()
+            currentTime = duration
+        }
+    }
+
+    func rewind10Seconds() {
+        let newTime = currentTime - 10.0
+
+        // Ensure the new time does not exceed the audio duration
+        if newTime >= 0 {
+            currentTime = newTime
+            setPlayerPosition()
+        } else {
+            currentTime = 0
+        }
+    }
+
     // MARK: - Private Methods
 
     private func startTimer() {

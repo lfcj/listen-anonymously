@@ -46,17 +46,20 @@ struct PlayerControllerView: View {
                 PlayingViewButton(
                     imageName: backImageName,
                     size: CGSize(width: 40, height: 40),
-                    action: {/*TODO*/}
+                    action: viewModel.rewind10Seconds
                 )
                 
                 PlayingViewButton(
                     imageName: viewModel.isPlaying ? "pause.fill" : "play.fill",
                     size: CGSize(width: 100, height: 80),
-                    action: {
-                        viewModel.playOrPause()
-                })
+                    action: viewModel.playOrPause
+                )
                 
-                PlayingViewButton(imageName: forwardImageName, size: CGSize(width: 40, height: 40), action: { /*TODO*/})
+                PlayingViewButton(
+                    imageName: forwardImageName,
+                    size: CGSize(width: 40, height: 40),
+                    action: viewModel.forward10Seconds
+                )
             }
         }.onDisappear {
             viewModel.pause()

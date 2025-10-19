@@ -15,8 +15,6 @@ struct FrontDoorTitleView: View {
                 .padding(.top, 6)
         }
         .foregroundColor(.white)
-        .padding(.horizontal, 24)
-        .padding(.top, 36)
     }
 }
 

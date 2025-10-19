@@ -28,7 +28,6 @@ public struct ShadowTranslucentCard: View {
                 .opacity(0.95)
         }
         .modifier(TranslucentCardStyle())
-        .padding(.horizontal, 18)
     }
 
 }

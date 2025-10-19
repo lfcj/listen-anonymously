@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct FrostedCardStyle: ViewModifier {
+public struct TranslucentCardStyle: ViewModifier {
 
     public init() {}
 
@@ -19,7 +19,7 @@ public struct FrostedCardStyle: ViewModifier {
         Text("hi")
         Text("there")
     }
-    .modifier(FrostedCardStyle())
+    .modifier(TranslucentCardStyle())
 }
 
 #Preview {
@@ -27,6 +27,6 @@ public struct FrostedCardStyle: ViewModifier {
         Text("hi")
         Text("there")
     }
-    .modifier(FrostedCardStyle())
+    .modifier(TranslucentCardStyle())
     .preferredColorScheme(.dark)
 }

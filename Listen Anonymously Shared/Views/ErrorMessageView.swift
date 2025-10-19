@@ -19,7 +19,7 @@ struct ErrorMessageView: View {
         }
         .foregroundStyle(.white)
         .padding(.all, 15)
-        .background(Color.la_purple)
+        .background(.laPurple)
         .cornerRadius(20)
     }
 }

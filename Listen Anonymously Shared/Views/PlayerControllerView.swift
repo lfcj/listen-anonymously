@@ -6,7 +6,7 @@ struct PlayerControllerView: View {
     
     @ObservedObject var viewModel: PlayerControllerViewModel
 
-    @State private var sliderColor = Color.la_teal
+    @State private var sliderColor = Color.laTeal
 
     var backImageName: String {
         if #available(iOS 18, *) {
@@ -29,7 +29,7 @@ struct PlayerControllerView: View {
                 value: $viewModel.currentTime,
                 in: 0...viewModel.duration,
                 onEditingChanged: { isEditing in
-                    sliderColor = isEditing ? .la_magenta : .la_teal
+                    sliderColor = isEditing ? .laMagenta : .laTeal
                     viewModel.setPlayerPosition()
                 }
             )

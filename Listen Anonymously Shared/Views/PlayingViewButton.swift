@@ -13,7 +13,7 @@ struct PlayingViewButton: View {
                     .tint(.white)
             }
         )
-        .background(RoundedRectangle(cornerRadius: 8).fill(Color.la_magenta))
+        .background(RoundedRectangle(cornerRadius: 8).fill(.laMagenta))
     }
 }
 

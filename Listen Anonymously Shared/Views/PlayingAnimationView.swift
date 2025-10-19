@@ -3,7 +3,7 @@ import SwiftUI
 public struct PlayingAnimationView: View {
     @Binding var isPlaying: Bool
     @State private var scale: CGFloat = 2.5
-    @State private var color = Color.la_purple
+    @State private var color = Color.laPurple
 
     public var body: some View {
         ZStack {
@@ -11,7 +11,7 @@ public struct PlayingAnimationView: View {
                 .fill(
                     LinearGradient(
                         gradient: Gradient(
-                            colors: [.la_magenta, .la_purple]),
+                            colors: [.laMagenta, .laPurple]),
                             startPoint: .top,
                             endPoint: .bottom
                     )
@@ -38,14 +38,14 @@ public struct PlayingAnimationView: View {
     private func startBouncing() {
         withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
             scale = 3.5
-            color = .la_purple
+            color = .laPurple
         }
     }
 
     private func stopBouncing() {
         withAnimation(.easeInOut(duration: 0.5)) {
             scale = 2.5
-            color = Color.la_magenta
+            color = .laMagenta
         }
     }
 

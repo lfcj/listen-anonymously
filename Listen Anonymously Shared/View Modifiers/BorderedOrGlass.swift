@@ -10,7 +10,7 @@ struct BorderedOrGlass: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func borderedOrGlassButtonStyle() -> some View {
         self.modifier(BorderedOrGlass())
     }

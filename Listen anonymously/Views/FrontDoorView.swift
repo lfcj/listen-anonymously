@@ -8,16 +8,46 @@ struct FrontDoorView: View {
                 .lavenderToPastelBlue
                 .ignoresSafeArea()
             
+            VStack(spacing: 28) {
+                FrontDoorTitleView()
+                    .padding(.horizontal, 24)
+                    .padding(.top, 36)
 
-            Text("Give a small tip")
-                .font(.title)
-            Text("Give a big tip")
-                .font(.title)
-            Text("Give a super kind tip")
-                .font(.title)
-
-            // Offer default speed as in Settings.
+                ShadowTranslucentCard(
+                    title: "No blue ticks. No pressure.",
+                    subtitle: "Total freedom.",
+                    systemName: "checkmark.circle.fill"
+                )
+                .padding(.horizontal, 18)
+                
+                // CTA button
+                Button(action: {
+                    // action
+                }) {
+                    Text("See how it works")
+                }
+                .buttonStyle(GradientButtonStyle())
+                .padding(.horizontal, 44)
+                
+                Spacer()
+                
+                DonationButtonsView()
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 36)
+            }
         }
-        .padding()
+    }
+}
+
+// MARK: - Preview
+
+struct FrontDoorView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            FrontDoorView()
+
+            FrontDoorView()
+                .preferredColorScheme(.dark)
+        }
     }
 }

@@ -11,7 +11,7 @@ public struct GradientButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [.violetLavender, .pastelBlue]),
+                    gradient: Gradient(colors: [.buttonStart, .buttonEnd]),
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -19,7 +19,7 @@ public struct GradientButtonStyle: ButtonStyle {
             .cornerRadius(24)
             .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
             .shadow(
-                color: .pastelBlue.opacity(configuration.isPressed ? 0.18 : 0.28),
+                color: .buttonShadow.opacity(configuration.isPressed ? 0.18 : 0.28),
                 radius: configuration.isPressed ? 6 : 18, x: 0, y: 8
             )
             .foregroundColor(.white)

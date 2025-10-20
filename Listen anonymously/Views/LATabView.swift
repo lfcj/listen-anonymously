@@ -22,6 +22,7 @@ struct LATabView: View {
                             InstructionsView()
                         }
                     }
+                    .tint(.indigo)
                 } else {
                     TabView {
                         FrontDoorView()
@@ -34,6 +35,7 @@ struct LATabView: View {
                                 Label("How to use", systemImage: "questionmark.app")
                             }
                     }
+                    .tint(.indigo)
                 }
             }
         }
@@ -43,4 +45,5 @@ struct LATabView: View {
 #Preview {
     LATabView()
         .environmentObject(AppState())
+        .preferredColorScheme(.dark)
 }

@@ -25,7 +25,6 @@ public struct TranslucentIconLabelButton: View {
             .padding(.vertical, 10)
             .foregroundStyle(.white)
             .background(backgroundView)
-            .overlay { overlayStroke }
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .shadow(color: shadowColor, radius: 10, y: 2)
         }
@@ -36,61 +35,19 @@ public struct TranslucentIconLabelButton: View {
     // MARK: - Subviews
 
     private var backgroundView: some View {
-        Group {
-            if colorScheme == .dark {
-                LinearGradient(
-                    colors: [
-                        Color(hex: 0xE11075).opacity(0.7),
-                        Color(hex: 0x3700A4).opacity(0.7)
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .blur(radius: 8)
-                .background(.ultraThinMaterial)
-            } else {
-                LinearGradient(
-                    colors: [
-                        .white.opacity(0.4),
-                        .white.opacity(0.2)
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .background(.ultraThinMaterial)
-            }
-        }
-    }
-
-    private var overlayStroke: some View {
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .stroke(
-                colorScheme == .dark ?
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.35),
-                            Color(hex: 0xE11075).opacity(0.4)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    :
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.8),
-                            Color.white.opacity(0.2)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                lineWidth: 1.2
-            )
+        LinearGradient(
+            colors: [
+                .white.opacity(0.4),
+                .white.opacity(0.2)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .background(.ultraThinMaterial)
     }
 
     private var shadowColor: Color {
-        colorScheme == .dark ?
-            Color(hex: 0xE11075).opacity(0.5) :
-            Color.black.opacity(0.1)
+        Color.black.opacity(0.1)
     }
 
 }

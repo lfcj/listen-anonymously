@@ -3,8 +3,6 @@ import SwiftUI
 public extension LinearGradient {
 
     static var lavenderToPastelBlue: LinearGradient {
-
-        
         LinearGradient(
             colors: [
                 .lavender,

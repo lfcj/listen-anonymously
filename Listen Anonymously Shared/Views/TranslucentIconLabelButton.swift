@@ -23,13 +23,17 @@ public struct TranslucentIconLabelButton: View {
             }
             .padding(.horizontal, 18)
             .padding(.vertical, 10)
-            .foregroundStyle(.white)
+            .foregroundStyle(foregroundColor)
             .background(backgroundView)
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .shadow(color: shadowColor, radius: 10, y: 2)
         }
         .buttonStyle(.plain)
         .animation(.easeInOut(duration: 0.25), value: colorScheme)
+    }
+
+    private var foregroundColor: Color {
+        colorScheme == .dark ? .white : .laPurple
     }
 
     // MARK: - Subviews
@@ -64,7 +68,9 @@ public struct TranslucentIconLabelButton: View {
         LinearGradient.lavenderToPastelBlue
     )
     .preferredColorScheme(.light)
-    
+}
+
+#Preview {
     VStack(spacing: 20) {
         TranslucentIconLabelButton(title: "Buy us a coffee", icon: "cup.and.saucer.fill") {}
         TranslucentIconLabelButton(title: "Send a tip", icon: "heart.fill") {}

@@ -2,6 +2,7 @@ import AVFAudio
 import SwiftUI
 
 public struct AudioPlayingView: View {
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var playingManager: AudioPlayingManager
 
     public init(playingManager: AudioPlayingManager) {
@@ -17,6 +18,7 @@ public struct AudioPlayingView: View {
                 Text("No one will know you hit play 😉")
                     .font(.title3)
                     .bold()
+                    .foregroundStyle(messageForegroundColor)
                     .modifier(TranslucentCardStyle())
                     .padding()
                 PlayerControllerView(
@@ -41,7 +43,15 @@ public struct AudioPlayingView: View {
                 })
             }
         }
-        .background(LinearGradient.lavenderToPastelBlue)
+        .background(LinearGradient.lavenderToPastelBlue.opacity(backgroundOpacity))
+    }
+
+    private var messageForegroundColor: Color {
+        colorScheme == .dark ? .white : .laPurple
+    }
+
+    private var backgroundOpacity: CGFloat {
+        colorScheme == .dark ? 0.9 : 0.6
     }
 }
 

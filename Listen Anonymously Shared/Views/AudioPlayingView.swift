@@ -41,6 +41,7 @@ public struct AudioPlayingView: View {
                 })
             }
         }
+        .background(LinearGradient.lavenderToPastelBlue)
     }
 }
 
@@ -55,8 +56,19 @@ public struct AudioPlayingView: View {
     )
 
     AudioPlayingView(playingManager: audioPlayingManager)
+        .preferredColorScheme(.light)
 }
 
 #Preview {
-    AudioPlayingView(playingManager: AudioPlayingManager(extensionContext: nil))
+    let audioPlayingManager = AudioPlayingManager(
+        extensionContext: nil,
+        canPlay: true,
+        isLoadingAudio: false,
+        errorMessage: nil,
+        duration: 19,
+        url: Bundle.main.url(forResource: "AUDIO-2024-02-23-14-21-50", withExtension: "mp3")!
+    )
+
+    AudioPlayingView(playingManager: audioPlayingManager)
+        .preferredColorScheme(.dark)
 }

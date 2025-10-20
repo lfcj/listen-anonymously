@@ -18,6 +18,7 @@ struct FrontDoorView: View {
                     subtitle: "Total freedom.",
                     systemName: "checkmark.circle.fill"
                 )
+                .foregroundStyle(.white)
                 .padding(.horizontal, 18)
                 
                 // CTA button

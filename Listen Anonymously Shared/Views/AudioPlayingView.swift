@@ -14,6 +14,11 @@ public struct AudioPlayingView: View {
                 Spacer()
                 PlayingAnimationView(isPlaying: $playingManager.isPlaying)
                 Spacer()
+                Text("No one will know you hit play 😉")
+                    .font(.title3)
+                    .bold()
+                    .modifier(TranslucentCardStyle())
+                    .padding()
                 PlayerControllerView(
                     viewModel: PlayerControllerViewModel(playingManager: playingManager)
                 )

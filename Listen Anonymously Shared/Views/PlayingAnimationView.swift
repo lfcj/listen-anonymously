@@ -10,10 +10,9 @@ public struct PlayingAnimationView: View {
             Circle()
                 .fill(
                     LinearGradient(
-                        gradient: Gradient(
-                            colors: [.laMagenta, .laPurple]),
-                            startPoint: .top,
-                            endPoint: .bottom
+                        gradient: Gradient(colors: [.laMagenta, .laPurple]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
                     )
                 )
                 .frame(width: 80, height: 80)

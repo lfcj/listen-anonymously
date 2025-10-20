@@ -11,41 +11,42 @@ struct DonationButtonsView: View {
             Text("How much do you love being invisible?")
                 .font(.subheadline)
                 .foregroundColor(.white.opacity(0.9))
-            
+
             HStack(spacing: 12) {
-                Button {
-                    // tip small
-                } label: {
-                    Label("Buy us a coffee", systemImage: "cup.and.saucer.fill")
-                        .padding(.vertical, 12)
-                }
-                .buttonStyle(FrostyRoundedButtonStyle())
-                
-                Button {
-                    // tip medium
-                } label: {
-                    Label("Send good vibes", systemImage: "heart.fill")
-                        .padding(.vertical, 12)
-                }
-                .buttonStyle(FrostyRoundedButtonStyle())
+                TranslucentIconLabelButton(
+                    title: "Buy us a coffee",
+                    icon: "cup.and.saucer.fill",
+                    action: { /* TO-DO */}
+                )
+
+                TranslucentIconLabelButton(
+                    title: "Send good vibes",
+                    icon: "heart.fill",
+                    action: { /* TO-DO */}
+                )
             }
-            
-            Button {
-                // super kind tip
-            } label: {
-                Label("Go ghost mode hero (super kind tip)", systemImage: "ghost.fill")
-                    .padding(.vertical, 12)
-            }
-            .buttonStyle(FrostyRoundedButtonStyle(fullWidth: true))
-            .padding(.top, 6)
+
+            TranslucentIconLabelButton(
+                title: "Go ghost mode hero (super kind tip)",
+                icon: "sparkles",
+                action: { /* TO-DO */}
+            )
         }
     }
 }
 
 #Preview {
-    ZStack {
-        LinearGradient.lavenderToPastelBlue.ignoresSafeArea()
+    VStack {
         DonationButtonsView()
+            .background(LinearGradient.lavenderToPastelBlue)
     }
     .preferredColorScheme(.dark)
+}
+
+#Preview {
+    VStack {
+        DonationButtonsView()
+            .background(LinearGradient.lavenderToPastelBlue)
+    }
+    .preferredColorScheme(.light)
 }

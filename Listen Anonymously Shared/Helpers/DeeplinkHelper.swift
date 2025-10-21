@@ -2,17 +2,9 @@ import UIKit
 
 public struct DeeplinkHelper {
 
-    public static var hasWhatsApp: Bool {
-        hasApp(for: SupportedApps.whatsApp.deeplinkString)
-    }
-
-    public static var hasTelegram: Bool {
-        hasApp(for: SupportedApps.telegram.deeplinkString)
-    }
-
     /// Returns `true` if user has app that can handle `urlString` as a URL
-    static func hasApp(for urlString: String) -> Bool {
-        if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+    public static func hasApp(_ app: SupportedApps) -> Bool {
+        if let url = URL(string: app.deeplinkString), UIApplication.shared.canOpenURL(url) {
             return true
         }
         return false

@@ -6,7 +6,6 @@ import ViewInspector
 @MainActor
 struct PlayingViewButtonTests {
 
-
     @Test func usesGivenImageName() throws {
         let expectedImageName = "xmark"
         let view = PlayingViewButton(imageName: expectedImageName, size: .zero, action: {})

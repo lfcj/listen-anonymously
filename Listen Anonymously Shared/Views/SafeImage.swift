@@ -32,40 +32,19 @@ struct SafeImage: View {
     }
 }
 
-struct SafeImage_Previews: PreviewProvider {
-    static let symbols = ["film", "music.note", "airplane", "🍌", "moon", "👰🏻"]
-    static var previews: some View {
-        VStack(spacing: 16) {
-            ForEach(Self.symbols, id: \.self) { symbol in
-                HStack(spacing: 12) {
-                    SafeImage(name: symbol)
-                        .frame(width: 40, height: 40)
-                    Spacer()
-                    SafeLabel(title: symbol, icon: symbol)
-                }
-                .padding()
-                .background(Color.purple)
-                .cornerRadius(12)
+#Preview {
+    let symbols = ["film", "music.note", "airplane", "🍌", "moon", "👰🏻"]
+    VStack(spacing: 16) {
+        ForEach(symbols, id: \.self) { symbol in
+            HStack(spacing: 12) {
+                SafeImage(name: symbol)
+                    .frame(width: 40, height: 40)
+                Spacer()
+                SafeLabel(title: symbol, icon: symbol)
             }
+            .padding()
+            .background(Color.purple)
+            .cornerRadius(12)
         }
     }
-}
-
-struct SafeLabel: View {
-
-    let title: String
-    let icon: String
-
-    var body: some View {
-        Label {
-            Text(title)
-        } icon: {
-            if UIImage(systemName: icon) != nil {
-                Image(systemName: icon)
-            } else {
-                Text(icon)
-            }
-        }
-    }
-
 }

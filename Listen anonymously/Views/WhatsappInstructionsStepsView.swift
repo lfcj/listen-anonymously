@@ -1,23 +1,23 @@
 import Listen_Anonymously_Shared
 import SwiftUI
 
-struct InstructionsStepsView: View {
+struct WhatsAppInstructionsStepsView: View {
     var body: some View {
         VStack {
             TextAndIconLabel(
-                title: "1. Select your message",
+                title: "1. Select your voice note on WhatsApp",
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
 
             TextAndIconLabel(
                 title: "2. Tap on 'Forward'",
-                systemNameOrEmoji: "arrowshape.turn.up.forward.fill"
+                systemNameOrEmoji: "arrowshape.turn.up.forward"
             )
             .fontWeight(.medium)
 
             TextAndIconLabel(
-                title: "3. Tap on 'Share'",
+                title: "3. Tap on 'Share' at the bottom right",
                 systemNameOrEmoji: "square.and.arrow.up"
             )
             .fontWeight(.medium)
@@ -34,3 +34,10 @@ struct InstructionsStepsView: View {
         }
     }
 }
+
+#Preview {
+    WhatsAppInstructionsStepsView()
+        .padding()
+        .background(LinearGradient.lavenderToPastelBlue)
+}
+

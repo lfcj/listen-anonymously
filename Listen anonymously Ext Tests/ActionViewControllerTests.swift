@@ -1,8 +1,9 @@
 import Combine
-import Listen_Anonymously_Shared
+import SwiftUI
 import Testing
 import UIKit
 import XCTest
+@testable import Listen_Anonymously_Shared
 @testable import Listen_anonymously
 
 struct ActionViewControllerTests {
@@ -78,6 +79,37 @@ struct ActionViewControllerTests {
         _ = doneButton?.target?.perform(doneButton?.action)
 
         #expect(spyExtensionContext.completeRequestCalls == 0)
+    }
+
+    @Test("iOS <26.0 uses .done as bar button style")
+    @MainActor func doneIsUsedAsBarButtonStyleForiOSLessThan26() {
+        let manager = AudioPlayingManager(extensionContext: nil)
+        let viewController = ActionViewController(
+            playingManager: manager,
+            isIOS26Available: false
+        )
+        viewController.loadViewIfNeeded()
+
+        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
+
+        let doneButton = navController.topViewController?.navigationItem.rightBarButtonItem
+
+        if #available(iOS 26, *) {
+            #expect(doneButton?.style == .prominent)
+        } else {
+            #expect(doneButton?.style == .done)
+        }
+    }
+
+    @Test("default playingManager is used to initialized AudioPlayingView")
+    @MainActor func audioPlayingView_isInitializedWithDefaultAudioPlayingManager() {
+        let viewController = ActionViewController(nibName: nil, bundle: nil)
+        viewController.loadViewIfNeeded()
+
+        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
+        let hostingViewController = navController.topViewController as! UIHostingController<AudioPlayingView>
+
+        #expect(hostingViewController.rootView.playingManager === viewController.playingManager)
     }
 
 }

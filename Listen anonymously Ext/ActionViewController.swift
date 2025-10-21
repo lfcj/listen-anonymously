@@ -4,18 +4,29 @@ import UIKit
 
 class ActionViewController: UIViewController {
 
-    private lazy var playingManager = AudioPlayingManager(extensionContext: self.extensionContext)
+    private(set) lazy var playingManager = AudioPlayingManager(extensionContext: self.extensionContext)
 
     private var injectedExtensionContext: NSExtensionContext?
+    private var isIOS26Available = false
 
     private var usableExtensionContext: NSExtensionContext? {
         injectedExtensionContext ?? self.extensionContext
     }
 
-    init(playingManager: AudioPlayingManager, extensionContext: NSExtensionContext? = nil) {
+    init(
+        playingManager: AudioPlayingManager,
+        extensionContext: NSExtensionContext? = nil,
+        isIOS26Available: Bool? = nil
+    ) {
         super.init(nibName: nil, bundle: nil)
         self.playingManager = playingManager
         self.injectedExtensionContext = extensionContext
+        if #available(iOS 26, *) {
+            self.isIOS26Available = true
+        }
+        if let isIOS26Available {
+            self.isIOS26Available = isIOS26Available
+        }
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -47,7 +58,7 @@ class ActionViewController: UIViewController {
 
     private func makeDoneButton() -> UIBarButtonItem {
         let style: UIBarButtonItem.Style
-        if #available(iOS 26, *) {
+        if isIOS26Available, #available(iOS 26, *) {
             style = .prominent
         } else {
             style = .done

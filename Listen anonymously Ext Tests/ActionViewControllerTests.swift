@@ -44,6 +44,42 @@ struct ActionViewControllerTests {
         #expect(spyManager.findAudioCalls == 1)
     }
 
+    @Test("Tapping on Done calls completeRequest")
+    @MainActor func actionViewController_callsCompleteRequestWhenDoneIsTapped() throws {
+        let spyExtensionContext = SpyExtensionContext()
+        let manager = AudioPlayingManager(extensionContext: spyExtensionContext)
+        let viewController = ActionViewController(
+            playingManager: manager,
+            extensionContext: spyExtensionContext
+        )
+        viewController.loadViewIfNeeded()
+
+        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
+
+        let doneButton = navController.topViewController?.navigationItem.rightBarButtonItem
+        _ = doneButton?.target?.perform(doneButton?.action)
+
+        #expect(spyExtensionContext.completeRequestCalls == 1)
+    }
+
+    @Test("Tapping on Done does not call completeRequest when extensionContext is nil")
+    @MainActor func actionViewController_doesNotCallCompleteRequestWhenExtensionContextIsNil() throws {
+        let spyExtensionContext = SpyExtensionContext()
+        let manager = AudioPlayingManager(extensionContext: spyExtensionContext)
+        let viewController = ActionViewController(
+            playingManager: manager,
+            extensionContext: nil
+        )
+        viewController.loadViewIfNeeded()
+
+        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
+
+        let doneButton = navController.topViewController?.navigationItem.rightBarButtonItem
+        _ = doneButton?.target?.perform(doneButton?.action)
+
+        #expect(spyExtensionContext.completeRequestCalls == 0)
+    }
+
 }
 
 class SpyAudioPlayingManager: AudioPlayingManager {
@@ -51,6 +87,16 @@ class SpyAudioPlayingManager: AudioPlayingManager {
 
     override func findAudio(isSecondAttempt: Bool) async {
         findAudioCalls += 1
+    }
+
+}
+
+class SpyExtensionContext: NSExtensionContext {
+
+    private(set) var completeRequestCalls = 0
+
+    override func completeRequest(returningItems items: [Any]?, completionHandler: ((Bool) -> Void)? = nil) {
+        completeRequestCalls += 1
     }
 
 }

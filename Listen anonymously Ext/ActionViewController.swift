@@ -6,9 +6,16 @@ class ActionViewController: UIViewController {
 
     private lazy var playingManager = AudioPlayingManager(extensionContext: self.extensionContext)
 
-    init(playingManager: AudioPlayingManager) {
+    private var injectedExtensionContext: NSExtensionContext?
+
+    private var usableExtensionContext: NSExtensionContext? {
+        injectedExtensionContext ?? self.extensionContext
+    }
+
+    init(playingManager: AudioPlayingManager, extensionContext: NSExtensionContext? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.playingManager = playingManager
+        self.injectedExtensionContext = extensionContext
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -55,7 +62,7 @@ class ActionViewController: UIViewController {
     }
 
     @objc private func completeRequest() {
-        guard let extensionContext = self.extensionContext else {
+        guard let extensionContext = self.usableExtensionContext else {
             return
         }
         extensionContext.completeRequest(returningItems: extensionContext.inputItems, completionHandler: nil)

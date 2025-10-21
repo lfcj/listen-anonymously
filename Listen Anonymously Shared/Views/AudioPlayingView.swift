@@ -18,7 +18,7 @@ public struct AudioPlayingView: View {
                 Text("No one will know you hit play 😉")
                     .font(.title3)
                     .bold()
-                    .foregroundStyle(messageForegroundColor)
+                    .foregroundStyle(colorScheme == .dark ? .white : .laPurple)
                     .modifier(TranslucentCardStyle())
                     .padding()
                 PlayerControllerView(
@@ -43,16 +43,13 @@ public struct AudioPlayingView: View {
                 })
             }
         }
-        .background(LinearGradient.lavenderToPastelBlue.opacity(backgroundOpacity))
+        .background(
+            LinearGradient
+                .lavenderToPastelBlue
+                .opacity(colorScheme == .dark ? 0.9 : 0.6)
+        )
     }
 
-    private var messageForegroundColor: Color {
-        colorScheme == .dark ? .white : .laPurple
-    }
-
-    private var backgroundOpacity: CGFloat {
-        colorScheme == .dark ? 0.9 : 0.6
-    }
 }
 
 #Preview {

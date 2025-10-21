@@ -4,18 +4,25 @@ struct SafeImage: View {
     let name: String
     let fontSize: CGFloat
     let size: CGSize
+    let foregroundColor: Color
 
-    init(name: String, fontSize: CGFloat = 48, size: CGSize = CGSize(width: 48, height: 48)) {
+    init(
+        name: String,
+        fontSize: CGFloat = 48,
+        size: CGSize = CGSize(width: 48, height: 48),
+        foregroundColor: Color = .white.opacity(0.6)
+    ) {
         self.name = name
         self.fontSize = fontSize
         self.size = size
+        self.foregroundColor = foregroundColor
     }
 
     var body: some View {
         if UIImage(systemName: name) != nil {
             Image(systemName: name)
                 .font(.system(size: fontSize))
-                .foregroundStyle(.white.opacity(0.6))
+                .foregroundStyle(foregroundColor)
                 .frame(width: size.width, height: size.height)
         } else {
             Text(name)

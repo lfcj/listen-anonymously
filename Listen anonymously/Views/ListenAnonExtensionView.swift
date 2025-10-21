@@ -12,12 +12,25 @@ struct ListenAnonExtensionView: View {
                 .frame(width: 32, height: 32)
         }
         .frame(maxWidth: .infinity)
-        .foregroundStyle(.white)
+        .foregroundStyle(.primary)
         .padding([.trailing, .leading], 12)
         .padding([.top, .bottom], 8)
         .background(
             RoundedRectangle(cornerSize: CGSize(width: 24, height: 24))
-                .fill(.black.opacity(0.4))
+                .fill(systemGroupedBackground.opacity(0.6))
         )
     }
+
+    var systemGroupedBackground: Color {
+        Color(UIColor.systemGroupedBackground)
+    }
 }
+
+
+#Preview {
+    ListenAnonExtensionView()
+        .padding()
+        .background(LinearGradient.lavenderToPastelBlue)
+        .preferredColorScheme(.light)
+}
+

@@ -7,7 +7,7 @@ public struct DeeplinkHelper {
     }
 
     public static var hasTelegram: Bool {
-        hasApp(for: "https://t.me/username")
+        hasApp(for: SupportedApps.telegram.deeplinkString)
     }
 
     /// Returns `true` if user has app that can handle `urlString` as a URL

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C5A000B2EA7E92A0061CF61 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5A000A2EA7E92A0061CF61 /* ViewInspector */; };
 		3CCFCA5A2D3F0FCD0090D88D /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCFCA592D3F0FCD0090D88D /* UniformTypeIdentifiers.framework */; };
 		3CCFCA662D3F0FCD0090D88D /* Listen anonymously Ext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CCFCB8E2D4198D00090D88D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CCFCB8D2D4198D00090D88D /* README.md */; };
@@ -194,6 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5A000B2EA7E92A0061CF61 /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +338,7 @@
 			);
 			name = "Listen anonymouslyTests";
 			packageProductDependencies = (
+				3C5A000A2EA7E92A0061CF61 /* ViewInspector */,
 			);
 			productName = "Listen anonymouslyTests";
 			productReference = 3CCFCA172D3EFD860090D88D /* Listen anonymouslyTests.xctest */;
@@ -1179,6 +1182,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3C5A000A2EA7E92A0061CF61 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CFA3C7C2E9D21A600D0A378 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
 		3CFA3C7D2E9D21A600D0A378 /* ViewInspector */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3CFA3C7C2E9D21A600D0A378 /* XCRemoteSwiftPackageReference "ViewInspector" */;

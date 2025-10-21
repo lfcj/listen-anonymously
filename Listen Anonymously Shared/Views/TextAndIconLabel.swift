@@ -27,6 +27,7 @@ public struct TextAndIconLabel: View {
 
             Spacer()
         }
+        .padding([.bottom])
     }
 
 }

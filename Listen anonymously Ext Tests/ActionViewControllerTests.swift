@@ -7,10 +7,11 @@ import XCTest
 
 struct ActionViewControllerTests {
 
+    @MainActor
     @Test("Storyboard ActionViewController has full screen presentation style")
     func actionViewController_hasFullScreenPresentationStyle_whenInstatiatedFromStoryboard() async throws {
-        let storyboard = await UIStoryboard(name: "MainInterface", bundle: Bundle(for: ActionViewController.self))
-        let optionalViewController = await storyboard.instantiateInitialViewController() as? ActionViewController
+        let storyboard = UIStoryboard(name: "MainInterface", bundle: Bundle(for: ActionViewController.self))
+        let optionalViewController = storyboard.instantiateInitialViewController() as? ActionViewController
         let viewController = try XCTUnwrap(optionalViewController)
         
 

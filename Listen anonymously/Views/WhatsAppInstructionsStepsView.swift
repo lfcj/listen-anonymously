@@ -5,7 +5,7 @@ struct WhatsAppInstructionsStepsView: View {
     var body: some View {
         VStack {
             TextAndIconLabel(
-                title: "1. Select your voice note on WhatsApp",
+                title: "1. Long tap on your voice note on WhatsApp",
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
@@ -17,7 +17,7 @@ struct WhatsAppInstructionsStepsView: View {
             .fontWeight(.medium)
 
             TextAndIconLabel(
-                title: "3. Tap on 'Share' at the bottom right",
+                title: "3. Tap on the 'Share' icon at the bottom right",
                 systemNameOrEmoji: "square.and.arrow.up"
             )
             .fontWeight(.medium)

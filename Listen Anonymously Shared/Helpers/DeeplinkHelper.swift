@@ -1,10 +1,15 @@
 import UIKit
 
+public protocol DeeplinkVerifying {
+    nonisolated func canOpenURL(_ url: URL) -> Bool
+}
+extension UIApplication: DeeplinkVerifying {}
+
 public struct DeeplinkHelper {
 
     /// Returns `true` if user has app that can handle `urlString` as a URL
-    public static func hasApp(_ app: SupportedApps) -> Bool {
-        if let url = URL(string: app.deeplinkString), UIApplication.shared.canOpenURL(url) {
+    public static func hasApp(_ app: SupportedApps, application: DeeplinkVerifying = UIApplication.shared) -> Bool {
+        if let url = URL(string: app.deeplinkString), application.canOpenURL(url) {
             return true
         }
         return false

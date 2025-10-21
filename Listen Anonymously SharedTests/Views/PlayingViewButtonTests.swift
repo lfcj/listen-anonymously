@@ -10,6 +10,7 @@ struct PlayingViewButtonTests {
     @Test func usesGivenImageName() throws {
         let expectedImageName = "xmark"
         let view = PlayingViewButton(imageName: expectedImageName, size: .zero, action: {})
+            .environment(\.colorScheme, .light)
 
         let inspectedImageName = try view.inspect().button(0).labelView().image(0).actualImage().name()
 
@@ -25,6 +26,7 @@ struct PlayingViewButtonTests {
                 callCount += 1
             }
         )
+        .environment(\.colorScheme, .light)
 
         let inspectedButton = try view.inspect().button(0)
         try inspectedButton.tap()

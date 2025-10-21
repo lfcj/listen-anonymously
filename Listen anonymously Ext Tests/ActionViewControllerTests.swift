@@ -18,9 +18,10 @@ struct ActionViewControllerTests {
         #expect(viewController.modalPresentationStyle == .fullScreen)
     }
 
+    @MainActor
     @Test("Programatic ActionViewController has full screen presentation style")
     func actionViewController_hasFullScreenPresentationStyle_whenInstatiatedFromProgrammatically() async throws {
-        let viewController = await ActionViewController(nibName: nil, bundle: nil)
+        let viewController = ActionViewController(nibName: nil, bundle: nil)
 
         #expect(viewController.modalPresentationStyle == .fullScreen)
     }

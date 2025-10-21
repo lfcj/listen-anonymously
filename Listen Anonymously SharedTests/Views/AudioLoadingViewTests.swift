@@ -8,6 +8,7 @@ struct AudioLoadingViewTests {
     
     @Test func containsLoadingText() throws {
         let view = AudioLoadingView()
+            .environment(\.colorScheme, .light)
         let text = try view.inspect().vStack().text(0)
         let textValue = try text.string()
         
@@ -16,6 +17,7 @@ struct AudioLoadingViewTests {
     
     @Test func containsProgressView() throws {
         let view = AudioLoadingView()
+            .environment(\.colorScheme, .light)
         let progressView = try view.inspect().vStack().progressView(1)
         
         #expect(progressView.isHidden() == false)
@@ -23,6 +25,7 @@ struct AudioLoadingViewTests {
     
     @Test func hasCorrectFrameModifiers() throws {
         let view = AudioLoadingView()
+            .environment(\.colorScheme, .light)
         let inspectedView = try view.inspect()
         
         #expect(try inspectedView.vStack().fixedFrame().height == 100)

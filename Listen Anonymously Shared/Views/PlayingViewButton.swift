@@ -31,7 +31,7 @@ struct PlayingViewButton: View {
             .blur(radius: colorScheme == .dark ? 8 : 0)
             .background(.ultraThinMaterial)
     }
-    
+
     private var tintGradient: LinearGradient {
         let colors: [Color]
         if colorScheme == .dark {

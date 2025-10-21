@@ -138,6 +138,52 @@ struct PlayerControllerViewModelTests {
         #expect(viewModel.timerCancellable == nil)
     }
 
+    @Test func forwarding10Seconds_stopsPlayingWhenDurationIsReached() {
+        let manager = AudioPlayingManager(extensionContext: nil)
+        manager.duration = 3
+        let viewModel = PlayerControllerViewModel(playingManager: manager)
+
+        viewModel.forward10Seconds()
+
+        #expect(viewModel.currentTime == 3)
+    }
+
+    @Test func forwarding10Seconds_updatesTimeSuccessfullyWhenDurationIsNotReached() {
+        let spyManager = SpyAudioPlayingManager(extensionContext: nil)
+        spyManager.duration = 15
+        let viewModel = PlayerControllerViewModel(playingManager: spyManager)
+
+        viewModel.forward10Seconds()
+
+        #expect(viewModel.currentTime == 10)
+        #expect(spyManager.setPlayerPositionCalls == 1)
+        #expect(spyManager.spiedPlayerCurrentTime == 10)
+    }
+
+    @Test func rewinding10Seconds_resetsPlayerWhenCurrentTimeIsLessThan10() {
+        let spyManager = SpyAudioPlayingManager(extensionContext: nil)
+        let viewModel = PlayerControllerViewModel(playingManager: spyManager)
+        viewModel.currentTime = 3
+
+        viewModel.rewind10Seconds()
+
+        #expect(viewModel.currentTime == 0)
+        #expect(spyManager.setPlayerPositionCalls == 1)
+        #expect(spyManager.spiedPlayerCurrentTime == 0)
+    }
+
+    @Test func rewinding10Seconds_updatesTimeSuccessfullyWhenCurrentTimeIsHigherThan10() {
+        let spyManager = SpyAudioPlayingManager(extensionContext: nil)
+        let viewModel = PlayerControllerViewModel(playingManager: spyManager)
+        viewModel.currentTime = 11
+
+        viewModel.rewind10Seconds()
+
+        #expect(viewModel.currentTime == 1)
+        #expect(spyManager.setPlayerPositionCalls == 1)
+        #expect(spyManager.spiedPlayerCurrentTime == 1)
+    }
+
 }
 
 class SpyAudioPlayingManager: AudioPlayingManager {

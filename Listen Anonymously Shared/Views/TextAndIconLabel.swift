@@ -16,14 +16,16 @@ public struct TextAndIconLabel: View {
                 .padding([.trailing])
                 .foregroundStyle(.white)
 
-            SafeImage(
-                name: systemNameOrEmoji,
-                fontSize: 20,
-                size: CGSize(width: 20, height: 20),
-                foregroundColor: .white
-            )
-            .modifier(TranslucentCardStyle())
-            .clipShape(Circle())
+            if !systemNameOrEmoji.isEmpty {
+                SafeImage(
+                    name: systemNameOrEmoji,
+                    fontSize: 20,
+                    size: CGSize(width: 20, height: 20),
+                    foregroundColor: .white
+                )
+                .modifier(TranslucentCardStyle())
+                .clipShape(Circle())
+            }
 
             Spacer()
         }

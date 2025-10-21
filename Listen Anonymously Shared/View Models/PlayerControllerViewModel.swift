@@ -83,6 +83,7 @@ open class PlayerControllerViewModel: ObservableObject {
             setPlayerPosition()
         } else {
             currentTime = 0
+            setPlayerPosition()
         }
     }
 

@@ -14,7 +14,7 @@ struct PlayerControllerView: View {
     var forwardImageName: String {
         "10.arrow.trianglehead.clockwise"
     }
-    
+
     var body: some View {
         VStack {
             Slider(

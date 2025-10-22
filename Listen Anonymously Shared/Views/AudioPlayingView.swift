@@ -4,9 +4,13 @@ import SwiftUI
 public struct AudioPlayingView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var playingManager: AudioPlayingManager
+    @StateObject private var playerControllerViewModel: PlayerControllerViewModel
 
     public init(playingManager: AudioPlayingManager) {
         self.playingManager = playingManager
+        self._playerControllerViewModel = StateObject(
+            wrappedValue: PlayerControllerViewModel(playingManager: playingManager)
+        )
     }
 
     public var body: some View {
@@ -21,9 +25,7 @@ public struct AudioPlayingView: View {
                     .foregroundStyle(colorScheme == .dark ? .white : .laPurple)
                     .modifier(TranslucentCardStyle())
                     .padding()
-                PlayerControllerView(
-                    viewModel: PlayerControllerViewModel(playingManager: playingManager)
-                )
+                PlayerControllerView(viewModel: playerControllerViewModel)
                     .padding(.bottom)
                     .padding(.leading)
                     .padding(.trailing)

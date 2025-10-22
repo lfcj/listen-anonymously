@@ -6,6 +6,7 @@ open class PlayerControllerViewModel: ObservableObject {
     // MARK: - Properties
 
     @Published var currentTime: Double = 0
+    @Published var isPlaying: Bool = false
 
     var duration: Double {
         playingManager.duration
@@ -19,16 +20,14 @@ open class PlayerControllerViewModel: ObservableObject {
         formatSecond(Int(duration - currentTime))
     }
 
-    var isPlaying: Bool {
-        playingManager.isPlaying
-    }
-
     // MARK: - Private Properties
 
     private let playingManager: AudioPlayingManager
     private(set) var timerCancellable: Cancellable?
 
     private let timer: AnyPublisher<Date, Never>
+
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Init
 
@@ -38,6 +37,10 @@ open class PlayerControllerViewModel: ObservableObject {
     ) {
         self.playingManager = playingManager
         self.timer = timerPublisher
+
+        playingManager.$isPlaying
+            .assign(to: \.isPlaying, on: self)
+            .store(in: &cancellables)
     }
 
     // MARK: - Accessible Methods

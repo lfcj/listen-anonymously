@@ -9,18 +9,10 @@ struct PlayerControllerView: View {
     @State private var sliderColor = Color.laTeal
 
     var backImageName: String {
-        if #available(iOS 18, *) {
-            "10.arrow.trianglehead.counterclockwise"
-        } else {
-            "gobackward.10"
-        }
+        "10.arrow.trianglehead.counterclockwise"
     }
     var forwardImageName: String {
-        if #available(iOS 18, *) {
-            "10.arrow.trianglehead.clockwise"
-        } else {
-            "goforward.10"
-        }
+        "10.arrow.trianglehead.clockwise"
     }
     
     var body: some View {

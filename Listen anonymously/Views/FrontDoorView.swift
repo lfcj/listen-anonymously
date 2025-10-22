@@ -2,6 +2,10 @@ import SwiftUI
 import Listen_Anonymously_Shared
 
 struct FrontDoorView: View {
+
+    @EnvironmentObject var appState: AppState
+    @StateObject private var viewModel = FrontDoorViewModel()
+
     var body: some View {
         ZStack {
             LinearGradient
@@ -21,9 +25,8 @@ struct FrontDoorView: View {
                 .foregroundStyle(.white)
                 .padding(.horizontal, 18)
                 
-                // CTA button
                 Button(action: {
-                    // action
+                    appState.selectedTab = .howToUse
                 }) {
                     Text("See how it works")
                 }
@@ -33,9 +36,9 @@ struct FrontDoorView: View {
                 Spacer()
                 
                 DonationButtonsView(
-                    buyUsCoffee: {},
-                    sendGoodVibes: {},
-                    superKindTip: {}
+                    buyUsCoffee: viewModel.buyUsCoffee,
+                    sendGoodVibes: viewModel.sendGoodVibes,
+                    superKindTip: viewModel.giveSuperKindTip
                 )
                 .padding(.horizontal, 20)
                 .padding(.bottom, 36)

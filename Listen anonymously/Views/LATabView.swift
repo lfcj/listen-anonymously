@@ -1,5 +1,10 @@
 import SwiftUI
 
+enum TabSelection: String, Hashable {
+    case home
+    case howToUse
+}
+
 struct LATabView: View {
     @EnvironmentObject var appState: AppState
     var body: some View {
@@ -12,16 +17,17 @@ struct LATabView: View {
                         }
                     }
             } else {
-                TabView {
-                    Tab("Home", systemImage: "house") {
+                TabView(selection: $appState.selectedTab) {
+                    Tab("Home", systemImage: "house", value: TabSelection.home) {
                         FrontDoorView()
                     }
-
-                    Tab("How to use", systemImage: "questionmark.app") {
+                    
+                    Tab("How to use", systemImage: "questionmark.app", value: TabSelection.howToUse) {
                         InstructionsView()
                     }
                 }
                 .tint(.indigo)
+                .environmentObject(appState)
             }
         }
     }

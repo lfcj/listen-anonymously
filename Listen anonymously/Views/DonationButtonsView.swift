@@ -2,6 +2,10 @@ import SwiftUI
 import Listen_Anonymously_Shared
 
 struct DonationButtonsView: View {
+    let buyUsCoffee: () -> Void
+    let sendGoodVibes: () -> Void
+    let superKindTip: () -> Void
+
     var body: some View {
         VStack(spacing: 12) {
             Text("Vibe check 💬")
@@ -16,20 +20,20 @@ struct DonationButtonsView: View {
                 TranslucentIconLabelButton(
                     title: "Buy us a coffee",
                     icon: "cup.and.saucer.fill",
-                    action: { /* TO-DO */}
+                    action: buyUsCoffee
                 )
 
                 TranslucentIconLabelButton(
                     title: "Send good vibes",
                     icon: "heart.fill",
-                    action: { /* TO-DO */}
+                    action: sendGoodVibes
                 )
             }
 
             TranslucentIconLabelButton(
                 title: "Go ghost mode hero (super kind tip)",
                 icon: "sparkles",
-                action: { /* TO-DO */}
+                action: superKindTip
             )
         }
     }
@@ -37,16 +41,24 @@ struct DonationButtonsView: View {
 
 #Preview {
     VStack {
-        DonationButtonsView()
-            .background(LinearGradient.lavenderToPastelBlue)
+        DonationButtonsView(
+            buyUsCoffee: {},
+            sendGoodVibes: {},
+            superKindTip: {}
+        )
+        .background(LinearGradient.lavenderToPastelBlue)
     }
     .preferredColorScheme(.dark)
 }
 
 #Preview {
     VStack {
-        DonationButtonsView()
-            .background(LinearGradient.lavenderToPastelBlue)
+        DonationButtonsView(
+            buyUsCoffee: {},
+            sendGoodVibes: {},
+            superKindTip: {}
+        )
+        .background(LinearGradient.lavenderToPastelBlue)
     }
     .preferredColorScheme(.light)
 }

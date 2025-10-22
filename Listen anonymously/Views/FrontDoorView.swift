@@ -32,9 +32,13 @@ struct FrontDoorView: View {
                 
                 Spacer()
                 
-                DonationButtonsView()
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 36)
+                DonationButtonsView(
+                    buyUsCoffee: {},
+                    sendGoodVibes: {},
+                    superKindTip: {}
+                )
+                .padding(.horizontal, 20)
+                .padding(.bottom, 36)
             }
         }
     }

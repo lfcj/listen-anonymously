@@ -28,21 +28,17 @@ public struct GradientButtonStyle: ButtonStyle {
 
 }
 
-struct GradientButtonStyleLight_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Button("Hello, World!") {}
-                .buttonStyle(GradientButtonStyle())
-        }.preferredColorScheme(.light)
-    }
+#Preview("Light") {
+    VStack {
+        Button("Hello, World!") {}
+            .buttonStyle(GradientButtonStyle())
+    }.preferredColorScheme(.light)
 }
 
-struct GradientButtonStyleDark_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Button("Hello, World!") {}
-                .buttonStyle(GradientButtonStyle())
-        }
-        .preferredColorScheme(.dark)
+#Preview("Dark") {
+    VStack {
+        Button("Hello, World!") {}
+            .buttonStyle(GradientButtonStyle())
     }
+    .preferredColorScheme(.dark)
 }

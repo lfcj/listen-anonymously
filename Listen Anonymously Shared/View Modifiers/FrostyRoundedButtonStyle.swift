@@ -28,25 +28,21 @@ public struct FrostyRoundedButtonStyle: ButtonStyle {
 
 }
 
-struct FrostyRoundedButtonStyleLight_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.laPurple.ignoresSafeArea()
-            Button("Hello, World!") {}
-                .frame(minHeight: 50)
-                .buttonStyle(FrostyRoundedButtonStyle())
-        }.preferredColorScheme(.light)
-    }
+#Preview("Light") {
+    ZStack {
+        Color.laPurple.ignoresSafeArea()
+        Button("Hello, World!") {}
+            .frame(minHeight: 50)
+            .buttonStyle(FrostyRoundedButtonStyle())
+    }.preferredColorScheme(.light)
 }
 
-struct FrostyRoundedButtonStyleDark_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Color.laPurple.ignoresSafeArea()
-            Button("Hello, World!") {}
-                .frame(minHeight: 50)
-                .buttonStyle(FrostyRoundedButtonStyle())
-        }
-        .preferredColorScheme(.dark)
+#Preview("Dark") {
+    ZStack {
+        Color.laPurple.ignoresSafeArea()
+        Button("Hello, World!") {}
+            .frame(minHeight: 50)
+            .buttonStyle(FrostyRoundedButtonStyle())
     }
+    .preferredColorScheme(.dark)
 }

@@ -42,13 +42,11 @@ struct FrontDoorView: View {
 
 // MARK: - Preview
 
-struct FrontDoorView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            FrontDoorView()
+#Preview {
+    Group {
+        FrontDoorView()
 
-            FrontDoorView()
-                .preferredColorScheme(.dark)
-        }
+        FrontDoorView()
+            .preferredColorScheme(.dark)
     }
 }

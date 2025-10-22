@@ -1,4 +1,4 @@
-import SwiftUI
+import Foundation
 import Testing
 import ViewInspector
 @testable import Listen_Anonymously_Shared

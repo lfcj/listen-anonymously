@@ -12,31 +12,16 @@ struct LATabView: View {
                         }
                     }
             } else {
-                if #available(iOS 18.0, *) {
-                    TabView {
-                        Tab("Home", systemImage: "house") {
-                            FrontDoorView()
-                        }
-
-                        Tab("How to use", systemImage: "questionmark.app") {
-                            InstructionsView()
-                        }
-                    }
-                    .tint(.indigo)
-                } else {
-                    TabView {
+                TabView {
+                    Tab("Home", systemImage: "house") {
                         FrontDoorView()
-                            .tabItem {
-                                Label("Home", systemImage: "house")
-                            }
-                        
-                        InstructionsView()
-                            .tabItem {
-                                Label("How to use", systemImage: "questionmark.app")
-                            }
                     }
-                    .tint(.indigo)
+
+                    Tab("How to use", systemImage: "questionmark.app") {
+                        InstructionsView()
+                    }
                 }
+                .tint(.indigo)
             }
         }
     }

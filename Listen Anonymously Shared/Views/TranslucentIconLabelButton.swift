@@ -23,17 +23,11 @@ public struct TranslucentIconLabelButton: View {
             }
             .padding(.horizontal, 18)
             .padding(.vertical, 10)
-            .foregroundStyle(foregroundColor)
-            .background(backgroundView)
+            .foregroundStyle(colorScheme == .dark ? .white : .laPurple)
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .shadow(color: shadowColor, radius: 10, y: 2)
         }
-        .buttonStyle(.plain)
-        .animation(.easeInOut(duration: 0.25), value: colorScheme)
-    }
-
-    private var foregroundColor: Color {
-        colorScheme == .dark ? .white : .laPurple
+        .borderedOrGlassButtonStyle()
     }
 
     // MARK: - Subviews

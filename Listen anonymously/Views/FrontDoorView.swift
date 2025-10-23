@@ -52,8 +52,10 @@ struct FrontDoorView: View {
 #Preview {
     Group {
         FrontDoorView()
-
-        FrontDoorView()
-            .preferredColorScheme(.dark)
     }
+}
+
+#Preview {
+    FrontDoorView()
+        .preferredColorScheme(.dark)
 }

@@ -1,6 +1,5 @@
 import Foundation
 import Testing
-import UIKit
 @testable import Listen_Anonymously_Shared
 
 struct DeeplinkHelperTests {

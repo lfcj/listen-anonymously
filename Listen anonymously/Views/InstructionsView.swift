@@ -1,6 +1,5 @@
 import Listen_Anonymously_Shared
 import SwiftUI
-import UIKit
 
 class InstructionsViewModel: ObservableObject {
     @Published var supportedApps: [SupportedApps] = []

@@ -36,7 +36,11 @@ public struct TextAndIconLabel: View {
 
 #Preview {
     ZStack {
-        LinearGradient.deepNightBlueToMidnight.ignoresSafeArea()
+        LinearGradient(
+            colors: [Color(hex: 0x0B004B), Color(hex: 0x1B0079)],
+            startPoint: .top,
+            endPoint: .bottom
+        ).ignoresSafeArea()
 
         TextAndIconLabel(title: "This is a test", systemNameOrEmoji: "house.fill")
     }

@@ -14,14 +14,6 @@ public extension LinearGradient {
         )
     }
 
-    static var deepNightBlueToMidnight: LinearGradient {
-        LinearGradient(
-            colors: [Color(hex: 0x0B004B), Color(hex: 0x1B0079)],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-    }
-
 }
 
 #Preview {

@@ -6,10 +6,10 @@ public struct AudioPlayingView: View {
     @ObservedObject var playingManager: AudioPlayingManager
     @StateObject private var playerControllerViewModel: PlayerControllerViewModel
 
-    public init(playingManager: AudioPlayingManager) {
+    public init(playingManager: AudioPlayingManager, playerControllerViewModel: PlayerControllerViewModel? = nil) {
         self.playingManager = playingManager
         self._playerControllerViewModel = StateObject(
-            wrappedValue: PlayerControllerViewModel(playingManager: playingManager)
+            wrappedValue: playerControllerViewModel ?? PlayerControllerViewModel(playingManager: playingManager)
         )
     }
 
@@ -30,7 +30,6 @@ public struct AudioPlayingView: View {
                     .padding(.leading)
                     .padding(.trailing)
                     .disabled(!playingManager.canPlay)
-                    
             }
             .blur(radius: playingManager.isPlayerNotUsable ? 2 : 0)
             .navigationTitle(playingManager.audioTitle ?? "")

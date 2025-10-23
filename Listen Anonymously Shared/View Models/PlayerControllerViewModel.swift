@@ -31,12 +31,14 @@ open class PlayerControllerViewModel: ObservableObject {
 
     // MARK: - Init
 
-    init(
+    public init(
         playingManager: AudioPlayingManager,
-        timerPublisher: AnyPublisher<Date, Never> = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher()
+        timerPublisher: AnyPublisher<Date, Never> = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher(),
+        currentTime: TimeInterval = 0
     ) {
         self.playingManager = playingManager
         self.timer = timerPublisher
+        self.currentTime = currentTime
 
         playingManager.$isPlaying
             .assign(to: \.isPlaying, on: self)

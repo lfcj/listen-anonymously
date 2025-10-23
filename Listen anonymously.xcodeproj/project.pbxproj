@@ -19,6 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3C36B8F32EAA049900FFE573 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CCFC9FF2D3EFD850090D88D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CCFCA062D3EFD850090D88D;
+			remoteInfo = "Listen anonymously";
+		};
 		3CCFCA182D3EFD860090D88D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3CCFC9FF2D3EFD850090D88D /* Project object */;
@@ -96,6 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C36B8EF2EAA049900FFE573 /* Listen anonymously Snapshot Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen anonymously Snapshot Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CC8939F2EA6AA7400A2F4A0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3CC893A02EA6B11900A2F4A0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		3CCFCA072D3EFD850090D88D /* Listen anonymously.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Listen anonymously.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +150,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		3C36B8F02EAA049900FFE573 /* Listen anonymously Snapshot Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Listen anonymously Snapshot Tests";
+			sourceTree = "<group>";
+		};
 		3CCFCA092D3EFD850090D88D /* Listen anonymously */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Listen anonymously";
@@ -183,6 +196,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C36B8EC2EAA049900FFE573 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CCFCA042D3EFD850090D88D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,6 +275,7 @@
 				3CFA3B9B2E9C3A9B00D0A378 /* Listen anonymously Ext Tests */,
 				3CFA3BD12E9CE38000D0A378 /* Listen Anonymously Shared */,
 				3CFA3BE02E9CE38000D0A378 /* Listen Anonymously SharedTests */,
+				3C36B8F02EAA049900FFE573 /* Listen anonymously Snapshot Tests */,
 				3CCFCA582D3F0FCD0090D88D /* Frameworks */,
 				3CCFCA082D3EFD850090D88D /* Products */,
 			);
@@ -269,6 +290,7 @@
 				3CFA3B9A2E9C3A9B00D0A378 /* Listen anonymously Ext Tests.xctest */,
 				3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */,
 				3CFA3BDA2E9CE38000D0A378 /* Listen Anonymously SharedTests.xctest */,
+				3C36B8EF2EAA049900FFE573 /* Listen anonymously Snapshot Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,6 +316,29 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3C36B8EE2EAA049900FFE573 /* Listen anonymously Snapshot Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C36B8F52EAA049900FFE573 /* Build configuration list for PBXNativeTarget "Listen anonymously Snapshot Tests" */;
+			buildPhases = (
+				3C36B8EB2EAA049900FFE573 /* Sources */,
+				3C36B8EC2EAA049900FFE573 /* Frameworks */,
+				3C36B8ED2EAA049900FFE573 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C36B8F42EAA049900FFE573 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3C36B8F02EAA049900FFE573 /* Listen anonymously Snapshot Tests */,
+			);
+			name = "Listen anonymously Snapshot Tests";
+			packageProductDependencies = (
+			);
+			productName = "Listen anonymously Snapshot Tests";
+			productReference = 3C36B8EF2EAA049900FFE573 /* Listen anonymously Snapshot Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3CCFCA062D3EFD850090D88D /* Listen anonymously */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CCFCA2B2D3EFD860090D88D /* Build configuration list for PBXNativeTarget "Listen anonymously" */;
@@ -448,6 +493,10 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					3C36B8EE2EAA049900FFE573 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 3CCFCA062D3EFD850090D88D;
+					};
 					3CCFCA062D3EFD850090D88D = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -493,11 +542,19 @@
 				3CFA3B992E9C3A9B00D0A378 /* Listen anonymously Ext Tests */,
 				3CFA3BCF2E9CE38000D0A378 /* Listen Anonymously Shared */,
 				3CFA3BD92E9CE38000D0A378 /* Listen Anonymously SharedTests */,
+				3C36B8EE2EAA049900FFE573 /* Listen anonymously Snapshot Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3C36B8ED2EAA049900FFE573 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CCFCA052D3EFD850090D88D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,6 +601,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3C36B8EB2EAA049900FFE573 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CCFCA032D3EFD850090D88D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -589,6 +653,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3C36B8F42EAA049900FFE573 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CCFCA062D3EFD850090D88D /* Listen anonymously */;
+			targetProxy = 3C36B8F32EAA049900FFE573 /* PBXContainerItemProxy */;
+		};
 		3CCFCA192D3EFD860090D88D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3CCFCA062D3EFD850090D88D /* Listen anonymously */;
@@ -627,6 +696,50 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		3C36B8F62EAA049900FFE573 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G7YAMEJH7M;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lfcj.Listen-anonymously-Snapshot-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Listen anonymously.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Listen anonymously";
+			};
+			name = Debug;
+		};
+		3C36B8F72EAA049900FFE573 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G7YAMEJH7M;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lfcj.Listen-anonymously-Snapshot-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Listen anonymously.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Listen anonymously";
+			};
+			name = Release;
+		};
 		3CCFCA292D3EFD860090D88D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3CC8939F2EA6AA7400A2F4A0 /* Debug.xcconfig */;
@@ -1105,6 +1218,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C36B8F52EAA049900FFE573 /* Build configuration list for PBXNativeTarget "Listen anonymously Snapshot Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C36B8F62EAA049900FFE573 /* Debug */,
+				3C36B8F72EAA049900FFE573 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3CCFCA022D3EFD850090D88D /* Build configuration list for PBXProject "Listen anonymously" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

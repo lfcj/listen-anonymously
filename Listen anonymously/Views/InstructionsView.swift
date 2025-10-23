@@ -5,11 +5,11 @@ import UIKit
 class InstructionsViewModel: ObservableObject {
     @Published var supportedApps: [SupportedApps] = []
     @Published var selectedApp: SupportedApps?
-    
+
     var needsPicker: Bool {
         supportedApps.count > 1
     }
-    
+
     init() {
         self.supportedApps = SupportedApps.allCases.filter({ DeeplinkHelper.hasApp($0) })
         self.selectedApp = supportedApps.first

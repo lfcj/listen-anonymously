@@ -20,6 +20,7 @@ public struct TranslucentIconLabelButton: View {
                     .font(.system(size: 16, weight: .medium))
                 Text(title)
                     .font(.system(size: 16, weight: .semibold))
+                    .lineLimit(3)
             }
             .padding(.horizontal, 18)
             .padding(.vertical, 10)

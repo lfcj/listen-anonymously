@@ -23,8 +23,6 @@ struct DonationButtonsView: View {
                     action: buyUsCoffee
                 )
 
-                Spacer()
-
                 TranslucentIconLabelButton(
                     title: "Send good vibes",
                     icon: "heart.fill",

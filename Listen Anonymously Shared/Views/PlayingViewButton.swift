@@ -12,7 +12,11 @@ struct PlayingViewButton: View {
                 buttonLabel
             }
         )
-        .background(backgroundStack)
+        .background(
+            backgroundGradient
+                .blur(radius: colorScheme == .dark ? 8 : 0)
+                .background(.ultraThinMaterial)
+        )
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(color: .lavender.opacity(0.1), radius: 20)
     }
@@ -25,50 +29,17 @@ struct PlayingViewButton: View {
             .foregroundStyle(tintGradient)
     }
 
-    @ViewBuilder
-    private var backgroundStack: some View {
-        backgroundGradient
-            .blur(radius: colorScheme == .dark ? 8 : 0)
-            .background(.ultraThinMaterial)
-    }
-
     private var tintGradient: LinearGradient {
-        let colors: [Color]
-        if colorScheme == .dark {
-            colors = [
-                Color.white.opacity(0.9),
-                Color.white.opacity(0.7)
-            ]
-        } else {
-            colors = [
-                Color(hex: 0xE11075).opacity(0.7),
-                Color(hex: 0x3700A4).opacity(0.7)
-            ]
-        }
-
-        return LinearGradient(
-            colors: colors,
+       LinearGradient(
+            colors: [.iconButtonForegroundStart, .iconButtonForegroundEnd],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
     }
 
     private var backgroundGradient: LinearGradient {
-        let colors: [Color]
-        if colorScheme == .dark {
-            colors = [
-                Color(hex: 0xE11075).opacity(0.7),
-                Color(hex: 0x3700A4).opacity(0.7)
-            ]
-        } else {
-            colors = [
-                .white.opacity(0.4),
-                .white.opacity(0.2)
-            ]
-        }
-
-        return LinearGradient(
-            colors: colors,
+        LinearGradient(
+            colors: [.iconButtonBackgroundStart, .iconButtonBackgroundEnd],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )

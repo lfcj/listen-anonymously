@@ -30,6 +30,7 @@ struct FindingAudioHelpers {
             throw FindingAudioError.noAttachmentFound
         }
 
+        try Task.checkCancellation()
         return try await loadAudioItemType(identifier: audioTypeIdentifier, from: audioAttachment)
     }
  
@@ -46,6 +47,7 @@ struct FindingAudioHelpers {
     }
 
     private static func loadAudioItemType(identifier: String, from audioAttachment: NSItemProvider) async throws -> AudioFileInformation {
+        try Task.checkCancellation()
         guard let audioURL = try await audioAttachment.loadItem(forTypeIdentifier: identifier, options: nil) as? URL else {
             throw FindingAudioError.couldNotConvertLoadedItemToURL
         }

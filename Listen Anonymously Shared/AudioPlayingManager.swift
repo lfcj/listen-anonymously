@@ -79,6 +79,7 @@ open class AudioPlayingManager: ObservableObject {
         var findingAudioErrorMessage: String?
         for item in inputItems {
             do {
+                try Task.checkCancellation()
                 let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(in: item, isSecondAttempt: isSecondAttempt)
                 await MainActor.run {
                     isLoadingAudio = false
@@ -89,11 +90,11 @@ open class AudioPlayingManager: ObservableObject {
                 await setAudioDuration(url: audioFileInformation.url)
                 return
             } catch let error {
+                isLoadingAudio = false
                 findingAudioErrorMessage = (error as? FindingAudioError)?.localizedDescription
             }
         }
         if let findingAudioErrorMessage = findingAudioErrorMessage {
-            isLoadingAudio = false
             errorMessage = findingAudioErrorMessage
         }
     }

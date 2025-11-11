@@ -169,6 +169,21 @@ struct AudioPlayingManagerTests {
         await manager.findAudio()
     }
 
+    @Test("Task stops and does not set an error message when cancelled")
+    func player_stopsAndDoesNotSetAnErrorMessageWhenTaskIsCancelled() async throws {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+
+        let task = Task {
+            await manager.findAudio()
+        }
+        
+        _ = await task.value
+        task.cancel()
+
+        #expect(manager.isLoadingAudio == false)
+        #expect(manager.errorMessage == nil)
+    }
+
 }
 
 final class AVAudioSessionSpy: AudioSessionProtocol, @unchecked Sendable {

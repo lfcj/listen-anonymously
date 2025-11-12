@@ -158,6 +158,13 @@ struct AudioPlayingManagerTests {
         manager.setPlayerPosition(200)
     }
 
+    @Test("Setting player rate does not crash")
+    func setting_playerRate_doesNotCrash() {
+        let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
+        manager.play()
+        manager.setRate(.fast)
+    }
+
     @Test("Trying a second time resets the error message")
     func player_resetsErrorMessageOnSecondAttempt() async throws {
         let manager = AudioPlayingManager(extensionContext: nil)

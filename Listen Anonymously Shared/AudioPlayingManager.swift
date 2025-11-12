@@ -67,6 +67,10 @@ open class AudioPlayingManager: ObservableObject {
         audioPlayer?.currentTime = currentTime
     }
 
+    func setRate(_ rate: PlayingRate) {
+        audioPlayer?.rate = rate.rawValue
+    }
+
     open func findAudio(isSecondAttempt: Bool = false) async {
         isLoadingAudio = true
         errorMessage = nil

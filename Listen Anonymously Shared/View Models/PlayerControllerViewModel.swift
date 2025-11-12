@@ -8,6 +8,8 @@ open class PlayerControllerViewModel: ObservableObject {
     @Published var currentTime: Double = 0
     @Published var isPlaying: Bool = false
 
+    private var currentRate: PlayingRate = .normal
+
     var duration: Double {
         playingManager.duration
     }
@@ -53,6 +55,7 @@ open class PlayerControllerViewModel: ObservableObject {
 
     func playOrPause() {
         if !isPlaying {
+            setRate()
             startTimer()
             startPlaying()
         } else {
@@ -90,6 +93,12 @@ open class PlayerControllerViewModel: ObservableObject {
             currentTime = 0
             setPlayerPosition()
         }
+    }
+
+    func chooseNextRate() {
+        currentRate = currentRate.next
+
+        setRate()
     }
 
     // MARK: - Private Methods
@@ -131,6 +140,10 @@ open class PlayerControllerViewModel: ObservableObject {
         let minutes = seconds / 60
         let remainingSeconds = seconds % 60
         return String(format: "%02d:%02d", minutes, remainingSeconds)
+    }
+
+    private func setRate() {
+        playingManager.setRate(currentRate)
     }
 
 }

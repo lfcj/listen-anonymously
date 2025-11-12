@@ -1,5 +1,5 @@
 enum PlayingRate: Float, CaseIterable {
-    case slow = 0.5
+    case slow = 0.75
     case normal = 1.0
     case fast = 1.5
     case superFast = 2.0

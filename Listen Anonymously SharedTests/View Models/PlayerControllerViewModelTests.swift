@@ -184,17 +184,35 @@ struct PlayerControllerViewModelTests {
         #expect(spyManager.spiedPlayerCurrentTime == 1)
     }
 
+    @Test func settingRate_updatesPlayerRate() {
+        let spyManager = SpyAudioPlayingManager(extensionContext: nil)
+        let viewModel = PlayerControllerViewModel(playingManager: spyManager)
+
+        viewModel.chooseNextRate()
+
+        #expect(spyManager.setPlayingRate == .fast)
+
+        viewModel.chooseNextRate()
+
+        #expect(spyManager.setPlayingRate == .superFast)
+    }
+
 }
 
 class SpyAudioPlayingManager: AudioPlayingManager {
     private(set) var setPlayerPositionCalls: Int = 0
     private(set) var spiedPlayerCurrentTime: Double = 0
+    private(set) var setPlayingRate: PlayingRate = .normal
     private(set) var playCalls: Int = 0
     private(set) var pauseCalls: Int = 0
 
     override func setPlayerPosition(_ currentTime: Double) {
         setPlayerPositionCalls += 1
         spiedPlayerCurrentTime = currentTime
+    }
+
+    override func setRate(_ rate: PlayingRate) {
+        setPlayingRate = rate
     }
 
     override func play(audioSession: any AudioSessionProtocol = AVAudioSession.sharedInstance()) {

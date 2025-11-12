@@ -19,4 +19,27 @@ struct PlayingRateTests {
         #expect(PlayingRate.superFast.next == .slow)
     }
 
+    @Test func prevForSlowIsSuperFastRate() {
+        #expect(PlayingRate.slow.prev == .superFast)
+    }
+
+    @Test func prevForNormalIsSlowRate() {
+        #expect(PlayingRate.normal.prev == .slow)
+    }
+
+    @Test func prevForFastIsNormalRate() {
+        #expect(PlayingRate.fast.prev == .normal)
+    }
+
+    @Test func prevForSuperFastIsFastRate() {
+        #expect(PlayingRate.superFast.prev == .fast)
+    }
+
+    @Test func stringHasXAsSuffix() {
+        #expect(PlayingRate.slow.string == "0.75x")
+        #expect(PlayingRate.normal.string == "1x")
+        #expect(PlayingRate.fast.string == "1.5x")
+        #expect(PlayingRate.superFast.string == "2x")
+    }
+
 }

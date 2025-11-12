@@ -184,7 +184,7 @@ struct PlayerControllerViewModelTests {
         #expect(spyManager.spiedPlayerCurrentTime == 1)
     }
 
-    @Test func settingRate_updatesPlayerRate() {
+    @Test func settingNextRate_updatesPlayerRate() {
         let spyManager = SpyAudioPlayingManager(extensionContext: nil)
         let viewModel = PlayerControllerViewModel(playingManager: spyManager)
 
@@ -193,6 +193,19 @@ struct PlayerControllerViewModelTests {
         #expect(spyManager.setPlayingRate == .fast)
 
         viewModel.chooseNextRate()
+
+        #expect(spyManager.setPlayingRate == .superFast)
+    }
+
+    @Test func settingPrevRate_updatesPlayerRate() {
+        let spyManager = SpyAudioPlayingManager(extensionContext: nil)
+        let viewModel = PlayerControllerViewModel(playingManager: spyManager)
+
+        viewModel.choosePrevRate()
+
+        #expect(spyManager.setPlayingRate == .slow)
+
+        viewModel.choosePrevRate()
 
         #expect(spyManager.setPlayingRate == .superFast)
     }

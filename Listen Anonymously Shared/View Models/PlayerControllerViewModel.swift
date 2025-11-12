@@ -7,7 +7,9 @@ open class PlayerControllerViewModel: ObservableObject {
 
     @Published var currentTime: Double = 0
     @Published var isPlaying: Bool = false
-
+    @Published var previousRate: PlayingRate = .normal
+    @Published var nextRate: PlayingRate = .normal
+    
     private var currentRate: PlayingRate = .normal
 
     var duration: Double {
@@ -41,6 +43,10 @@ open class PlayerControllerViewModel: ObservableObject {
         self.playingManager = playingManager
         self.timer = timerPublisher
         self.currentTime = currentTime
+        self.currentRate = .normal
+        self.previousRate = PlayingRate.normal.prev
+        self.nextRate = PlayingRate.normal.next
+
 
         playingManager.$isPlaying
             .assign(to: \.isPlaying, on: self)
@@ -96,7 +102,17 @@ open class PlayerControllerViewModel: ObservableObject {
     }
 
     func chooseNextRate() {
-        currentRate = currentRate.next
+        previousRate = currentRate
+        currentRate = nextRate
+        nextRate = currentRate.next
+
+        setRate()
+    }
+
+    func choosePrevRate() {
+        nextRate = currentRate
+        currentRate = previousRate
+        previousRate = currentRate.prev
 
         setRate()
     }

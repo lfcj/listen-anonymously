@@ -1,0 +1,88 @@
+name: Code Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+
+jobs:
+  test-and-coverage:
+    runs-on: macos-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        test-plan:
+          - name: "All Tests: Main App, Shared & Extension"
+            scheme: "Listen anonymously Ext"
+
+    name: Test Plan - ${{ matrix.test-plan.name }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          sudo xcode-select -s $DEVELOPER_DIR
+          xcodebuild -version
+
+      - name: Cache SPM
+        uses: actions/cache@v3
+        with:
+          path: |
+            .build
+            ~/Library/Developer/Xcode/DerivedData/**/SourcePackages
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+
+      - name: Run Tests with Test Plan
+        run: |
+          set -o pipefail
+          
+          xcodebuild test \
+            -workspace "Listen anonymously.xcodeproj/project.xcworkspace/" \
+            -scheme "${{ matrix.test-plan.scheme }}" \
+            -testPlan "${{ matrix.test-plan.name }}" \
+            -destination 'platform=iOS Simulator,OS=18.0,name=iPhone 15' \
+            -enableCodeCoverage YES \
+            -resultBundlePath "TestResults/${{ matrix.test-plan.name }}.xcresult" \
+            -derivedDataPath DerivedData \
+            -parallel-testing-enabled YES \
+            -maximum-concurrent-test-simulator-destinations 2 \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty --color --report junit --output "TestResults/${{ matrix.test-plan.name }}-junit.xml"
+
+      - name: Process Coverage
+        run: |
+          # Extract coverage data
+          xcrun xccov view \
+            --report \
+            --json \
+            "TestResults/${{ matrix.test-plan.name }}.xcresult" > "coverage-${{ matrix.test-plan.name }}.json"
+          
+          # Convert to Cobertura
+          brew install a7ex/homebrew-formulae/xcresultparser
+          xcresultparser \
+            --output-format cobertura \
+            "TestResults/${{ matrix.test-plan.name }}.xcresult" > "coverage-${{ matrix.test-plan.name }}-cobertura.xml"
+
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage-${{ matrix.test-plan.name }}-cobertura.xml
+          flags: ${{ matrix.test-plan.name }}
+          name: ${{ matrix.test-plan.name }}-coverage
+
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.test-plan.name }}
+          path: |
+            TestResults/${{ matrix.test-plan.name }}.xcresult
+            coverage-${{ matrix.test-plan.name }}*.json
+            coverage-${{ matrix.test-plan.name }}*.xml

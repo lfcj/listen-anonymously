@@ -24,6 +24,10 @@ open class AudioPlayingManager: ObservableObject {
     @Published var errorMessage: String?
     @Published var duration: Double = 0
 
+    var currentTime: TimeInterval? {
+        audioPlayer?.currentTime
+    }
+
     var isPlayerNotUsable: Bool {
         isLoadingAudio || errorMessage != nil || !canPlay
     }
@@ -109,6 +113,8 @@ open class AudioPlayingManager: ObservableObject {
             try audioSession.setCategory(.playback, mode: .default, options: [])
             try audioSession.setActive(true, options: [])
             audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.enableRate = true
+            audioPlayer?.prepareToPlay()
         } catch let error {
             errorMessage = "Could create audio player. \((error as NSError).debugDescription)"
         }

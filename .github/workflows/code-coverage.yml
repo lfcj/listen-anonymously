@@ -1,4 +1,4 @@
-name: Code Coverage
+name: Code Coverage Main App, Shared & Extension
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         test-plan:
-          - name: "All Tests: Main App, Shared & Extension"
+          - name: "Listen anonymously Ext"
             scheme: "Listen anonymously Ext"
 
     name: Test Plan - ${{ matrix.test-plan.name }}

@@ -61,6 +61,7 @@ open class PlayerControllerViewModel: ObservableObject {
 
     func playOrPause() {
         if !isPlaying {
+            resetCurrentTimeIfNeeded()
             setRate()
             startTimer()
             startPlaying()
@@ -122,7 +123,11 @@ open class PlayerControllerViewModel: ObservableObject {
     private func startTimer() {
         // Reset the timer and start receiving updates
         timerCancellable = timer.sink { [weak self] _ in
-            self?.currentTime += 1
+            if let playingManagerCurrentTime = self?.playingManager.currentTime, playingManagerCurrentTime > 0 {
+                self?.currentTime = playingManagerCurrentTime
+            } else {
+                self?.currentTime += 1
+            }
             self?.checkIfCurrentTimeIsOver()
         }
     }
@@ -141,7 +146,7 @@ open class PlayerControllerViewModel: ObservableObject {
     }
 
     private func startPlaying() {
-        if currentTime == playingManager.duration {
+        if currentTime == duration {
             currentTime = 0
             playingManager.setPlayerPosition(currentTime)
         }

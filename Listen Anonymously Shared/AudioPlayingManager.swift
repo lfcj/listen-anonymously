@@ -36,6 +36,9 @@ open class AudioPlayingManager: ObservableObject {
     private var audioURL: URL?
     private var audioPlayer: AVAudioPlayer?
 
+    // Use when user uses UI to set a different time and play has not been tapped, hence audioPlayer is nil.
+    private var stashedCurrentTime: TimeInterval?
+
     public init(
         extensionContext: NSExtensionContext?,
         canPlay: Bool = false,
@@ -58,6 +61,10 @@ open class AudioPlayingManager: ObservableObject {
         if audioPlayer == nil, let audioURL = self.audioURL {
             setAudioPlayer(url: audioURL, audioSession: audioSession)
         }
+        if let stashedCurrentTime {
+            self.stashedCurrentTime = nil
+            audioPlayer?.currentTime = stashedCurrentTime
+        }
         audioPlayer?.play()
         isPlaying = audioPlayer != nil
     }
@@ -68,6 +75,9 @@ open class AudioPlayingManager: ObservableObject {
     }
     
     func setPlayerPosition(_ currentTime: Double) {
+        if audioPlayer == nil {
+            stashedCurrentTime = currentTime
+        }
         audioPlayer?.currentTime = currentTime
     }
 

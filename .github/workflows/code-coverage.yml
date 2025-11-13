@@ -45,6 +45,8 @@ jobs:
             -scheme "${{ matrix.test-plan.scheme }}" \
             -testPlan "${{ matrix.test-plan.name }}" \
             -destination 'platform=iOS Simulator,OS=26.0.1,name=iPhone 17' \
+            -configuration Debug \
+            -xcconfig ../Configuration/Debug.xcconfig \
             -enableCodeCoverage YES \
             -resultBundlePath "TestResults/${{ matrix.test-plan.name }}.xcresult" \
             -derivedDataPath DerivedData \

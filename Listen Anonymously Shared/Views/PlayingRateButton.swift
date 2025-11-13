@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RateButton: View {
+struct PlayingRateButton: View {
     let action: () -> Void
     let title: String
 

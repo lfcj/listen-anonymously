@@ -10,7 +10,7 @@ open class PlayerControllerViewModel: ObservableObject {
     @Published var previousRate: PlayingRate = .normal
     @Published var nextRate: PlayingRate = .normal
     
-    private var currentRate: PlayingRate = .normal
+    @Published var currentRate: PlayingRate = .normal
 
     var duration: Double {
         playingManager.duration
@@ -61,8 +61,6 @@ open class PlayerControllerViewModel: ObservableObject {
 
     func playOrPause() {
         if !isPlaying {
-            resetCurrentTimeIfNeeded()
-            setRate()
             startTimer()
             startPlaying()
         } else {
@@ -106,14 +104,6 @@ open class PlayerControllerViewModel: ObservableObject {
         previousRate = currentRate
         currentRate = nextRate
         nextRate = currentRate.next
-
-        setRate()
-    }
-
-    func choosePrevRate() {
-        nextRate = currentRate
-        currentRate = previousRate
-        previousRate = currentRate.prev
 
         setRate()
     }

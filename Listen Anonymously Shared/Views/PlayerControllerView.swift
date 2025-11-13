@@ -30,7 +30,16 @@ struct PlayerControllerView: View {
                 Text(viewModel.currentTimeString)
                     .font(.title)
                 
-                Spacer()
+                if viewModel.isPlaying {
+                    Spacer()
+                    PlayingRateButton(
+                        action: viewModel.chooseNextRate,
+                        title: viewModel.currentRate.string
+                    )
+                    Spacer()
+                } else {
+                    Spacer()
+                }
                 Text(viewModel.remainingTimeString)
                     .font(.title)
             }
@@ -40,7 +49,7 @@ struct PlayerControllerView: View {
                     size: CGSize(width: 50, height: 50),
                     action: viewModel.rewind10Seconds
                 )
-                
+
                 PlayingViewButton(
                     imageName: viewModel.isPlaying ? "pause.fill" : "play.fill",
                     size: CGSize(width: 120, height: 100),

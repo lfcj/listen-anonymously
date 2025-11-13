@@ -49,34 +49,12 @@ struct FindingAudioHelpersTests {
 
     @Test("load audio does not continue when Task is cancelled")
     func findAudio_stopsWhenTaskIsCancelled() async throws {
-        actor CancellationCoordinator {
-            private var continuation: CheckedContinuation<Void, Never>?
-            
-            func waitForTaskStart() async {
-                await withCheckedContinuation { continuation in
-                    self.continuation = continuation
-                }
-            }
-
-            func signalTaskStarted() {
-                continuation?.resume()
-                continuation = nil
-            }
-        }
-
-        let coordinator = CancellationCoordinator()
-
         let task = Task {
-            await coordinator.signalTaskStarted()
-            
             return try await FindingAudioHelpers.loadAudioURL(in: FakeNSExtensionItem.validURL)
         }
 
-        await coordinator.waitForTaskStart()
-
-        task.cancel()
-
         await #expect(throws: CancellationError.self) {
+            task.cancel()
             _ = try await task.value
         }
     }

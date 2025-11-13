@@ -54,6 +54,7 @@ struct InstructionsView: View {
                 }
             }
             .padding()
+            .frame(maxWidth: 600)
         }
     }
 

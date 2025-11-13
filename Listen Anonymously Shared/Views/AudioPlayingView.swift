@@ -15,6 +15,11 @@ public struct AudioPlayingView: View {
 
     public var body: some View {
         ZStack {
+            LinearGradient
+                .lavenderToPastelBlue
+                .opacity(colorScheme == .dark ? 0.9 : 0.6)
+                .ignoresSafeArea()
+
             VStack {
                 Spacer()
                 PlayingAnimationView(isPlaying: $playingManager.isPlaying)
@@ -33,6 +38,7 @@ public struct AudioPlayingView: View {
             }
             .blur(radius: playingManager.isPlayerNotUsable ? 2 : 0)
             .navigationTitle(playingManager.audioTitle ?? "")
+            .frame(maxWidth: 600)
 
             if playingManager.isLoadingAudio {
                 AudioLoadingView()
@@ -44,11 +50,6 @@ public struct AudioPlayingView: View {
                 })
             }
         }
-        .background(
-            LinearGradient
-                .lavenderToPastelBlue
-                .opacity(colorScheme == .dark ? 0.9 : 0.6)
-        )
     }
 
 }

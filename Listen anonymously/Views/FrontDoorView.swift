@@ -43,6 +43,7 @@ struct FrontDoorView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 36)
             }
+            .frame(maxWidth: 600)
         }
     }
 }

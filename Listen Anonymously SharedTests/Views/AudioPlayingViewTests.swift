@@ -10,7 +10,7 @@ struct AudioPlayingViewTests {
         let manager = AudioPlayingManager(extensionContext: nil, isLoadingAudio: true)
         let view = AudioPlayingView(playingManager: manager)
         #expect(manager.isLoadingAudio == true)
-        let loadingView = try view.inspect().zStack(0).view(AudioLoadingView.self, 1)
+        let loadingView = try view.inspect().zStack(0).view(AudioLoadingView.self, 2)
         
         #expect(loadingView.isHidden() == false)
     }
@@ -18,7 +18,7 @@ struct AudioPlayingViewTests {
     @Test func containsPlayingAnimationView() throws {
         let manager = AudioPlayingManager(extensionContext: nil)
         let view = AudioPlayingView(playingManager: manager)
-        let playingAnimationView = try view.inspect().zStack(0).vStack(0).view(PlayingAnimationView.self, 1)
+        let playingAnimationView = try view.inspect().zStack(0).vStack(1).view(PlayingAnimationView.self, 1)
 
         #expect(playingAnimationView.isHidden() == false)
     }
@@ -37,13 +37,13 @@ struct AudioPlayingViewTests {
         manager.errorMessage = "Expected error message"
         let view = AudioPlayingView(playingManager: manager)
             .environment(\.colorScheme, .light)
-        let errorMessageView = try view.inspect().zStack(0).view(ErrorMessageView.self, 1)
+        let errorMessageView = try view.inspect().zStack(0).view(ErrorMessageView.self, 2)
         #expect(errorMessageView.isHidden() == false)
 
         manager.errorMessage = nil
 
         do {
-            let _ = try view.inspect().zStack(0).view(ErrorMessageView.self, 1)
+            let _ = try view.inspect().zStack(0).view(ErrorMessageView.self, 2)
             #expect(manager.errorMessage == "this should never be called")
         } catch let error {
             // "View for Optional<_ConditionalContent<AudioLoadingView, ErrorMessageView>> is absent"

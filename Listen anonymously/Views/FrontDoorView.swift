@@ -40,8 +40,9 @@ struct FrontDoorView: View {
                     sendGoodVibes: viewModel.sendGoodVibes,
                     superKindTip: viewModel.giveSuperKindTip
                 )
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 16)
                 .padding(.bottom, 36)
+                .frame(minHeight: 280) // It does not allow 2 lines on iPhone 14, so setting a min height to force it.
             }
             .frame(maxWidth: 600)
         }

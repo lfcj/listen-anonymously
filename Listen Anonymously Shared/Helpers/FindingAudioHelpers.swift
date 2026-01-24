@@ -6,7 +6,7 @@ struct AudioFileInformation {
 }
 
 enum FindingAudioError: Error {
-    case noAttachmentFound
+    case noAttachmentFound(typeIdentifier: String)
     case couldNotConvertLoadedItemToURL
     case telegramConversionNotPossible
     case noAudioFoundInAttachment
@@ -27,7 +27,9 @@ struct FindingAudioHelpers {
 
     static func loadAudioURL(in item: NSExtensionItem, isSecondAttempt: Bool = false) async throws -> AudioFileInformation {
         guard let (audioAttachment, audioTypeIdentifier) = findAudioAttachment(in: item.attachments, isSecondAttempt: isSecondAttempt) else {
-            throw FindingAudioError.noAttachmentFound
+            throw FindingAudioError.noAttachmentFound(
+                typeIdentifier: item.attachments?.flatMap { $0.registeredTypeIdentifiers }.joined(separator: ",") ?? ""
+            )
         }
 
         try Task.checkCancellation()

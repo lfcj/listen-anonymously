@@ -5,11 +5,26 @@ struct AudioFileInformation {
     let title: String
 }
 
-enum FindingAudioError: Error {
+enum FindingAudioError: Error, Equatable {
     case noAudioFoundInAttachment(typeIdentifier: String)
     case couldNotLoadItem(error: Error)
     case couldNotConvertLoadedItemToURL
     case telegramConversionNotPossible
+
+    static func == (lhs: FindingAudioError, rhs: FindingAudioError) -> Bool {
+        switch (lhs, rhs) {
+        case (.noAudioFoundInAttachment(let lhsTypeID), .noAudioFoundInAttachment(let rhsTypeID)):
+            return lhsTypeID == rhsTypeID
+        case (.couldNotLoadItem(let lhsError), .couldNotLoadItem(let rhsError)):
+            return lhsError.localizedDescription == rhsError.localizedDescription
+        case (.couldNotConvertLoadedItemToURL, .couldNotConvertLoadedItemToURL):
+            return true
+        case (.telegramConversionNotPossible, .telegramConversionNotPossible):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 extension FindingAudioError {

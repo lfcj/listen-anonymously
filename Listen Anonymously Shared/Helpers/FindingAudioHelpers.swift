@@ -6,15 +6,24 @@ struct AudioFileInformation {
 }
 
 enum FindingAudioError: Error {
-    case noAttachmentFound(typeIdentifier: String)
+    case noAudioFoundInAttachment(typeIdentifier: String)
+    case couldNotLoadItem(error: Error)
     case couldNotConvertLoadedItemToURL
     case telegramConversionNotPossible
-    case noAudioFoundInAttachment
 }
 
 extension FindingAudioError {
     var localizedDescription: String {
-        "This is an error that needs localization" // TODO: Write localized descriptions and test them
+        switch self {
+        case .noAudioFoundInAttachment(let typeIdentifier):
+            let fileType = String(typeIdentifier.split(separator: ".").last ?? "").nilIfEmpty
+            return "\(My.LocalizedString("NOT_FOUND_ATTACHMENT_ERROR")). \(My.LocalizedString("FOUND_TYPEIDENTIFIER")): \(fileType ?? typeIdentifier)"
+        case .couldNotConvertLoadedItemToURL:
+            return "Shared item could not be read. Try with another one or ping us so we can research."
+        default:
+            return "This is an error that needs localization"
+        }
+//        "This is an error that needs localization" // TODO: Write localized descriptions and test them
     }
 }
 
@@ -27,7 +36,7 @@ struct FindingAudioHelpers {
 
     static func loadAudioURL(in item: NSExtensionItem, isSecondAttempt: Bool = false) async throws -> AudioFileInformation {
         guard let (audioAttachment, audioTypeIdentifier) = findAudioAttachment(in: item.attachments, isSecondAttempt: isSecondAttempt) else {
-            throw FindingAudioError.noAttachmentFound(
+            throw FindingAudioError.noAudioFoundInAttachment(
                 typeIdentifier: item.attachments?.flatMap { $0.registeredTypeIdentifiers }.joined(separator: ",") ?? ""
             )
         }
@@ -50,14 +59,24 @@ struct FindingAudioHelpers {
 
     private static func loadAudioItemType(identifier: String, from audioAttachment: NSItemProvider) async throws -> AudioFileInformation {
         try Task.checkCancellation()
-        guard let audioURL = try await audioAttachment.loadItem(forTypeIdentifier: identifier, options: nil) as? URL else {
-            throw FindingAudioError.couldNotConvertLoadedItemToURL
-        }
+        do {
+            let loadedItem = try await audioAttachment.loadItem(forTypeIdentifier: identifier, options: nil)
+            guard let audioURL = loadedItem as? URL else {
+                // Log error showing loadedItem to see why it cannot be turned into URL
+                throw FindingAudioError.couldNotConvertLoadedItemToURL
+            }
 
-        if Self.telegramTypeIdentifiers.contains(identifier) {
-            return try handleTelegram(audioURL: audioURL)
-        } else {
-            return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent.formatAudioFileName())
+            if Self.telegramTypeIdentifiers.contains(identifier) {
+                return try handleTelegram(audioURL: audioURL)
+            } else {
+                return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent.formatAudioFileName())
+            }
+        } catch let error {
+            if error is FindingAudioError {
+                throw error
+            } else {
+                throw FindingAudioError.couldNotLoadItem(error: error)
+            }
         }
     }
 
@@ -75,4 +94,10 @@ struct FindingAudioHelpers {
         return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent)
     }
 
+}
+
+extension String {
+    var nilIfEmpty: String? {
+        return isEmpty ? nil : self
+    }
 }

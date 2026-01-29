@@ -109,7 +109,7 @@ open class AudioPlayingManager: ObservableObject {
                 return
             } catch let error {
                 isLoadingAudio = false
-                findingAudioErrorMessage = (error as? FindingAudioError)?.localizedDescription
+                findingAudioErrorMessage = error.localizedDescription
             }
         }
         if let findingAudioErrorMessage = findingAudioErrorMessage {

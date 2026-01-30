@@ -25,7 +25,7 @@ public struct SnapshotView<Content: View>: View {
     public var contentSizeCategory: ContentSizeCategory {
         ContentSizeCategory(configuration.traitCollection.preferredContentSizeCategory) ?? .accessibilityExtraExtraExtraLarge
     }
-    
+
     public var colorScheme: ColorScheme {
         switch configuration.traitCollection.userInterfaceStyle {
         case .light:

@@ -14,7 +14,6 @@ struct ActionViewControllerTests {
         let storyboard = UIStoryboard(name: "MainInterface", bundle: Bundle(for: ActionViewController.self))
         let optionalViewController = storyboard.instantiateInitialViewController() as? ActionViewController
         let viewController = try XCTUnwrap(optionalViewController)
-        
 
         #expect(viewController.modalPresentationStyle == .fullScreen)
     }

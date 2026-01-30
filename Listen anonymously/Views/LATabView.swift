@@ -22,7 +22,7 @@ struct LATabView: View {
                     Tab("Home", systemImage: "house", value: TabSelection.home) {
                         FrontDoorView()
                     }
-                    
+
                     Tab("How to use", systemImage: "questionmark.app", value: TabSelection.howToUse) {
                         InstructionsView()
                     }

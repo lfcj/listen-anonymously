@@ -4,7 +4,7 @@ import ViewInspector
 
 @MainActor
 struct ErrorMessageViewTests {
-    
+
     @Test func displaysGivenErrorMessage() throws {
         let expectedMessage = "Test error"
         let view = ErrorMessageView(errorMessage: expectedMessage, onRetry: {})

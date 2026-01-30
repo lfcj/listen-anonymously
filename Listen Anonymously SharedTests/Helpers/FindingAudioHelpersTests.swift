@@ -3,7 +3,7 @@ import Testing
 @testable import Listen_Anonymously_Shared
 
 struct FindingAudioHelpersTests {
-    
+
     @Test("Loading audio URL from empty extension providers returns nil")
     func findAudio_inEmptyExtensionProvider() async throws {
         await #expect(throws: FindingAudioError.noAudioFoundInAttachment(typeIdentifier: "").self) {

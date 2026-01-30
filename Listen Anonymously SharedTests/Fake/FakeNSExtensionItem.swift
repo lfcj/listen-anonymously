@@ -32,7 +32,7 @@ class FakeNSExtensionItem: NSExtensionItem {
         let tempURL = FileManager.default.temporaryDirectory
             .appendingPathComponent("AUDIO-2025-05-01-14-27" + UUID().uuidString)
             .appendingPathExtension("m4a")
-        
+
         // Write some fake data to the file
         let fakeData = Data([0x00, 0x01, 0x02, 0x03])
         try? fakeData.write(to: tempURL)

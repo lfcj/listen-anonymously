@@ -20,7 +20,7 @@ open class AudioPlayingManager: ObservableObject {
     @Published var canPlay: Bool = false
     @Published var isPlaying: Bool = false
     @Published var isLoadingAudio = false
-    @Published var audioTitle: String? = nil
+    @Published var audioTitle: String?
     @Published var errorMessage: String?
     @Published var duration: Double = 0
 
@@ -73,7 +73,7 @@ open class AudioPlayingManager: ObservableObject {
         audioPlayer?.pause()
         isPlaying = false
     }
-    
+
     func setPlayerPosition(_ currentTime: Double) {
         if audioPlayer == nil {
             stashedCurrentTime = currentTime

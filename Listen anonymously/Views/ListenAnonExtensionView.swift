@@ -26,11 +26,9 @@ struct ListenAnonExtensionView: View {
     }
 }
 
-
 #Preview {
     ListenAnonExtensionView()
         .padding()
         .background(LinearGradient.lavenderToPastelBlue)
         .preferredColorScheme(.light)
 }
-

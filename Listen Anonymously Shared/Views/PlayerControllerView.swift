@@ -3,7 +3,7 @@ import Combine
 import SwiftUI
 
 struct PlayerControllerView: View {
-    
+
     @ObservedObject var viewModel: PlayerControllerViewModel
 
     @State private var sliderColor = Color.laTeal
@@ -29,7 +29,7 @@ struct PlayerControllerView: View {
             HStack {
                 Text(viewModel.currentTimeString)
                     .font(.title)
-                
+
                 if viewModel.isPlaying {
                     Spacer()
                     PlayingRateButton(
@@ -55,7 +55,7 @@ struct PlayerControllerView: View {
                     size: CGSize(width: 120, height: 100),
                     action: viewModel.playOrPause
                 )
-                
+
                 PlayingViewButton(
                     imageName: forwardImageName,
                     size: CGSize(width: 50, height: 50),

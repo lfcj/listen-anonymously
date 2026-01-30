@@ -17,7 +17,7 @@ public extension XCTestCase {
     ) {
         let snapshotData = makeSnapshotData(snapshot: snapshot, file: file, line: line)
         let snapshotURL = makeSnapshotURL(name: name, file: file)
-        
+
         do {
             try FileManager.default.createDirectory(
                 at: snapshotURL.deletingLastPathComponent(),
@@ -44,7 +44,7 @@ public extension XCTestCase {
             XCTFail("Failed to get PNG image from \(name).", file: file, line: line)
             return nil
         }
-        
+
         return snapshotData
     }
 

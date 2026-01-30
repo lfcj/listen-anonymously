@@ -59,9 +59,9 @@ struct FindingAudioHelpers {
         try Task.checkCancellation()
         return try await loadAudioItemType(identifier: audioTypeIdentifier, from: audioAttachment)
     }
- 
+
     private static func findAudioAttachment(in attachments: [NSItemProvider]?, isSecondAttempt: Bool = false) -> (NSItemProvider, String)? {
-        var result: (NSItemProvider, String)? = nil
+        var result: (NSItemProvider, String)?
         let identifiers = isSecondAttempt ? publicFileURLIdentifier : typeIdentifiers
         attachments?.forEach { attachment in
             if let matchingAudioIdentifier = identifiers.first(where: { attachment.hasItemConformingToTypeIdentifier($0) }) {
@@ -97,14 +97,14 @@ struct FindingAudioHelpers {
 
     private static func handleTelegram(audioURL: URL) throws -> AudioFileInformation {
         let copyAudioURL = FileManager.createTemporaryFileURL(fileExtension: "ogg")
-        let _ /*convertedAudioURL*/ = FileManager.createTemporaryFileURL(fileExtension: "m4a")
+        _ /*convertedAudioURL*/ = FileManager.createTemporaryFileURL(fileExtension: "m4a")
         do {
             try FileManager.default.copyItem(at: audioURL, to: copyAudioURL)
             // TODO: Do Telegram conversion
         } catch {
             throw FindingAudioError.telegramConversionNotPossible
         }
-        
+
         // TODO: Need OGG converter
         return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent)
     }

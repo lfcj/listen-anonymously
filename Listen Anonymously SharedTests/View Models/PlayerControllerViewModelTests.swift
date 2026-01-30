@@ -51,7 +51,7 @@ struct PlayerControllerViewModelTests {
     @Test func isPlaying_reflectsAudioPlayingManagerIsPlaying() {
         let manager = AudioPlayingManager(extensionContext: nil)
         let viewModel = PlayerControllerViewModel(playingManager: manager)
-        
+
         #expect(!viewModel.isPlaying)
 
         manager.isPlaying = true
@@ -66,7 +66,7 @@ struct PlayerControllerViewModelTests {
         let expectedSetCurrentTime: Double = 25
         viewModel.currentTime = expectedSetCurrentTime
         viewModel.setPlayerPosition()
-        
+
         #expect(spyManager.setPlayerPositionCalls == 1)
         #expect(spyManager.spiedPlayerCurrentTime == expectedSetCurrentTime)
     }
@@ -95,7 +95,7 @@ struct PlayerControllerViewModelTests {
     @Test func callingPause_callsAudioPlayingManagerPause() {
         let spyManager = SpyAudioPlayingManager(extensionContext: nil)
         let viewModel = PlayerControllerViewModel(playingManager: spyManager)
-        
+
         viewModel.pause()
 
         #expect(spyManager.pauseCalls == 1)
@@ -113,7 +113,7 @@ struct PlayerControllerViewModelTests {
         timerSubject.send(Date())
         timerSubject.send(Date())
         timerSubject.send(Date())
-        
+
         #expect(viewModel.currentTime == 3)
     }
 

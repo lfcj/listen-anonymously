@@ -9,7 +9,7 @@ open class PlayerControllerViewModel: ObservableObject {
     @Published var isPlaying: Bool = false
     @Published var previousRate: PlayingRate = .normal
     @Published var nextRate: PlayingRate = .normal
-    
+
     @Published var currentRate: PlayingRate = .normal
 
     var duration: Double {
@@ -46,7 +46,6 @@ open class PlayerControllerViewModel: ObservableObject {
         self.currentRate = .normal
         self.previousRate = PlayingRate.normal.prev
         self.nextRate = PlayingRate.normal.next
-
 
         playingManager.$isPlaying
             .assign(to: \.isPlaying, on: self)

@@ -40,4 +40,3 @@ struct WhatsAppInstructionsStepsView: View {
         .padding()
         .background(LinearGradient.lavenderToPastelBlue)
 }
-

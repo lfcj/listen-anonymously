@@ -5,7 +5,7 @@ import Testing
 struct StringExtensionTests {
 
     @Test("Audio filename is not formatted when input string is less than 22 characters long")
-    func shortName_doesNotHaveExpectedAudioFilename () {
+    func shortName_doesNotHaveExpectedAudioFilename() {
         let inputName = "AUDIO-"
 
         #expect(inputName == inputName.formatAudioFileName())
@@ -99,4 +99,3 @@ struct StringExtensionTests {
     }
 
 }
-

@@ -11,7 +11,7 @@ struct FrontDoorView: View {
             LinearGradient
                 .lavenderToPastelBlue
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 28) {
                 FrontDoorTitleView()
                     .padding(.horizontal, 24)
@@ -24,7 +24,7 @@ struct FrontDoorView: View {
                 )
                 .foregroundStyle(.white)
                 .padding(.horizontal, 18)
-                
+
                 Button(action: {
                     appState.selectedTab = .howToUse
                 }) {
@@ -32,9 +32,9 @@ struct FrontDoorView: View {
                 }
                 .buttonStyle(GradientButtonStyle())
                 .padding(.horizontal, 44)
-                
+
                 Spacer()
-                
+
                 DonationButtonsView(
                     buyUsCoffee: viewModel.buyUsCoffee,
                     sendGoodVibes: viewModel.sendGoodVibes,

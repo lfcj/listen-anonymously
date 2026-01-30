@@ -15,9 +15,22 @@
 
 default_platform(:ios)
 
+lane :tests do
+  run_tests(
+    scheme: "Listen anonymously Ext"
+  )
+end
+
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  desc "Run tests"
+  lane :all_tests do
+    run_tests(
+      scheme: "Listen anonymously Ext",
+      device: "iPhone 17",
+      clean: true,
+      code_coverage: true,
+      result_bundle: true,
+      output_directory: "./fastlane/test_output"
+    )
   end
 end

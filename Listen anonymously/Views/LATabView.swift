@@ -7,6 +7,7 @@ enum TabSelection: String, Hashable {
 
 struct LATabView: View {
     @EnvironmentObject var appState: AppState
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         ZStack {
             if !appState.hasCompletedInitialSetup {
@@ -21,12 +22,12 @@ struct LATabView: View {
                     Tab("Home", systemImage: "house", value: TabSelection.home) {
                         FrontDoorView()
                     }
-                    
+
                     Tab("How to use", systemImage: "questionmark.app", value: TabSelection.howToUse) {
                         InstructionsView()
                     }
                 }
-                .tint(.indigo)
+                .tint(colorScheme == .light ? .indigo : .white)
                 .environmentObject(appState)
             }
         }

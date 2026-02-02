@@ -14,7 +14,6 @@ struct ActionViewControllerTests {
         let storyboard = UIStoryboard(name: "MainInterface", bundle: Bundle(for: ActionViewController.self))
         let optionalViewController = storyboard.instantiateInitialViewController() as? ActionViewController
         let viewController = try XCTUnwrap(optionalViewController)
-        
 
         #expect(viewController.modalPresentationStyle == .fullScreen)
     }
@@ -36,10 +35,8 @@ struct ActionViewControllerTests {
         let viewController = ActionViewController(playingManager: spyManager)
         viewController.loadViewIfNeeded()
 
-        for await audioCall in findAudioCallValues {
-            if audioCall > 0 {
-                break
-            }
+        for await audioCall in findAudioCallValues where audioCall > 0 {
+            break
         }
 
         #expect(spyManager.findAudioCalls == 1)
@@ -55,7 +52,7 @@ struct ActionViewControllerTests {
         )
         viewController.loadViewIfNeeded()
 
-        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
+        let navController = try XCTUnwrap(viewController.children.first(where: { $0 is UINavigationController }) as? UINavigationController)
 
         let doneButton = navController.topViewController?.navigationItem.rightBarButtonItem
         _ = doneButton?.target?.perform(doneButton?.action)
@@ -73,7 +70,7 @@ struct ActionViewControllerTests {
         )
         viewController.loadViewIfNeeded()
 
-        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
+        let navController = try XCTUnwrap(viewController.children.first(where: { $0 is UINavigationController }) as? UINavigationController)
 
         let doneButton = navController.topViewController?.navigationItem.rightBarButtonItem
         _ = doneButton?.target?.perform(doneButton?.action)
@@ -82,7 +79,7 @@ struct ActionViewControllerTests {
     }
 
     @Test("iOS <26.0 uses .done as bar button style")
-    @MainActor func doneIsUsedAsBarButtonStyleForiOSLessThan26() {
+    @MainActor func doneIsUsedAsBarButtonStyleForiOSLessThan26() throws {
         let manager = AudioPlayingManager(extensionContext: nil)
         let viewController = ActionViewController(
             playingManager: manager,
@@ -90,7 +87,7 @@ struct ActionViewControllerTests {
         )
         viewController.loadViewIfNeeded()
 
-        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
+        let navController = try XCTUnwrap(viewController.children.first(where: { $0 is UINavigationController }) as? UINavigationController)
 
         let doneButton = navController.topViewController?.navigationItem.rightBarButtonItem
 
@@ -102,12 +99,12 @@ struct ActionViewControllerTests {
     }
 
     @Test("default playingManager is used to initialized AudioPlayingView")
-    @MainActor func audioPlayingView_isInitializedWithDefaultAudioPlayingManager() {
+    @MainActor func audioPlayingView_isInitializedWithDefaultAudioPlayingManager() throws {
         let viewController = ActionViewController(nibName: nil, bundle: nil)
         viewController.loadViewIfNeeded()
 
-        let navController = viewController.children.first(where: { $0 is UINavigationController }) as! UINavigationController
-        let hostingViewController = navController.topViewController as! UIHostingController<AudioPlayingView>
+        let navController = try XCTUnwrap(viewController.children.first(where: { $0 is UINavigationController }) as? UINavigationController)
+        let hostingViewController = try XCTUnwrap(navController.topViewController as? UIHostingController<AudioPlayingView>)
 
         #expect(hostingViewController.rootView.playingManager === viewController.playingManager)
     }

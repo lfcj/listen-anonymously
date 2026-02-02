@@ -4,8 +4,10 @@ public final class SnapshotWindow: UIWindow {
 
     private var configuration: SnapshotConfiguration = .iPad10(style: .light)
 
-    public convenience init(configuration: SnapshotConfiguration, root: UIViewController) {
-        let windowScene = UIApplication.shared.connectedScenes.first! as! UIWindowScene
+    public convenience init?(configuration: SnapshotConfiguration, root: UIViewController) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return nil
+        }
         self.init(windowScene: windowScene)
         self.configuration = configuration
         self.layoutMargins = configuration.layoutMargins

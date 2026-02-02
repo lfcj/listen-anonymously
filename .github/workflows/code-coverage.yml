@@ -12,77 +12,61 @@ env:
 jobs:
   test-and-coverage:
     runs-on: macos-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        test-plan:
-          - name: "Listen anonymously Ext"
-            scheme: "Listen anonymously Ext"
-
-    name: Test Plan - ${{ matrix.test-plan.name }}
+    name: Tests & Coverage
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Select Xcode
         run: |
-          sudo xcode-select -s $DEVELOPER_DIR
+          sudo xcode-select -s "$DEVELOPER_DIR"
           xcodebuild -version
+
       - name: Cache SPM
         uses: actions/cache@v4
         with:
-          path: ~/Library/Developer/Xcode/DerivedData/AppName*/SourcePackages/
-          key: ${{ runner.os }}-spm-${{ hashFiles('AppName.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-          restore-keys: ${{ runner.os }}-spm-
+          path: |
+            ~/Library/Developer/Xcode/DerivedData/**/SourcePackages
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
 
-      - name: Run Tests with Test Plan
+      - name: Install Bundler & Dependencies
         run: |
-          set -o pipefail
-          
-          xcodebuild test \
-            -workspace "Listen anonymously.xcodeproj/project.xcworkspace/" \
-            -scheme "${{ matrix.test-plan.scheme }}" \
-            -testPlan "${{ matrix.test-plan.name }}" \
-            -destination 'platform=iOS Simulator,OS=26.0.1,name=iPhone 17' \
-            -configuration Debug \
-            -xcconfig ../Configuration/Debug.xcconfig \
-            -enableCodeCoverage YES \
-            -resultBundlePath "TestResults/${{ matrix.test-plan.name }}.xcresult" \
-            -derivedDataPath DerivedData \
-            -parallel-testing-enabled YES \
-            -maximum-concurrent-test-simulator-destinations 2 \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            | xcpretty --color --report junit --output "TestResults/${{ matrix.test-plan.name }}-junit.xml"
+          gem install bundler
+          bundle install
 
-      - name: Process Coverage
+      - name: Run Tests via Fastlane (with Coverage)
         run: |
-          # Extract coverage data
-          xcrun xccov view \
-            --report \
-            --json \
-            "TestResults/${{ matrix.test-plan.name }}.xcresult" > "coverage-${{ matrix.test-plan.name }}.json"
-          
-          # Convert to Cobertura
+          bundle exec fastlane all_tests
+
+      # ---- Coverage processing (fast + readable) ----
+      - name: Generate Coverage (Cobertura)
+        run: |
           brew install a7ex/homebrew-formulae/xcresultparser
+
+          # Adjust path if Fastlane outputs elsewhere
+          XCRESULT=$(find . -name "*.xcresult" | head -n 1)
+
+          echo "Using xcresult: $XCRESULT"
+
           xcresultparser \
             --output-format cobertura \
-            "TestResults/${{ matrix.test-plan.name }}.xcresult" > "coverage-${{ matrix.test-plan.name }}-cobertura.xml"
+            "$XCRESULT" > coverage.xml
 
-      - name: Upload Coverage
+      - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          file: ./coverage-${{ matrix.test-plan.name }}-cobertura.xml
-          flags: ${{ matrix.test-plan.name }}
-          name: ${{ matrix.test-plan.name }}-coverage
+          files: coverage.xml
+          flags: ios
+          name: ios-fastlane-coverage
 
-      - name: Upload Artifacts
+      # ---- Super quick inspection ----
+      - name: Upload Test Results (.xcresult)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ matrix.test-plan.name }}
+          name: xcresult
           path: |
-            TestResults/${{ matrix.test-plan.name }}.xcresult
-            coverage-${{ matrix.test-plan.name }}*.json
-            coverage-${{ matrix.test-plan.name }}*.xml
+            **/*.xcresult

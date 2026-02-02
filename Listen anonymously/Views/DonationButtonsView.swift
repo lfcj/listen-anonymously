@@ -11,7 +11,7 @@ struct DonationButtonsView: View {
             Text("Vibe check 💬")
                 .font(.title2.weight(.semibold))
                 .foregroundColor(.white)
-            
+
             Text("How much do you love being invisible?")
                 .font(.subheadline)
                 .foregroundColor(.white.opacity(0.9))

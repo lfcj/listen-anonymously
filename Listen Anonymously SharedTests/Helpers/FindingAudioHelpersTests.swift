@@ -3,17 +3,17 @@ import Testing
 @testable import Listen_Anonymously_Shared
 
 struct FindingAudioHelpersTests {
-    
+
     @Test("Loading audio URL from empty extension providers returns nil")
     func findAudio_inEmptyExtensionProvider() async throws {
-        await #expect(throws: FindingAudioError.noAttachmentFound.self) {
+        await #expect(throws: FindingAudioError.noAudioFoundInAttachment(typeIdentifier: "").self) {
             _ = try await FindingAudioHelpers.loadAudioURL(in: NSExtensionItem())
         }
     }
 
     @Test("load audio does not search for public identifiers on first attempt")
     func findAudio_doesNotUsePublicIdentifiersAtFirst() async throws {
-        await #expect(throws: FindingAudioError.noAttachmentFound.self) {
+        await #expect(throws: FindingAudioError.noAudioFoundInAttachment(typeIdentifier: "public.file-url").self) {
             _ = try await FindingAudioHelpers.loadAudioURL(
                 in: FakeNSExtensionItem.publicIdentifier
             )

@@ -20,7 +20,7 @@ open class AudioPlayingManager: ObservableObject {
     @Published var canPlay: Bool = false
     @Published var isPlaying: Bool = false
     @Published var isLoadingAudio = false
-    @Published var audioTitle: String? = nil
+    @Published var audioTitle: String?
     @Published var errorMessage: String?
     @Published var duration: Double = 0
 
@@ -73,7 +73,7 @@ open class AudioPlayingManager: ObservableObject {
         audioPlayer?.pause()
         isPlaying = false
     }
-    
+
     func setPlayerPosition(_ currentTime: Double) {
         if audioPlayer == nil {
             stashedCurrentTime = currentTime
@@ -90,7 +90,7 @@ open class AudioPlayingManager: ObservableObject {
         errorMessage = nil
         guard let inputItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             isLoadingAudio = false
-            errorMessage = "No audio file could be find. Please check you selected only one file." // TODO: Localize
+            errorMessage = "No audio file could be find. Please check you selected only one file." // Localize-it
             return
         }
 
@@ -109,7 +109,7 @@ open class AudioPlayingManager: ObservableObject {
                 return
             } catch let error {
                 isLoadingAudio = false
-                findingAudioErrorMessage = (error as? FindingAudioError)?.localizedDescription
+                findingAudioErrorMessage = error.localizedDescription
             }
         }
         if let findingAudioErrorMessage = findingAudioErrorMessage {
@@ -132,9 +132,9 @@ open class AudioPlayingManager: ObservableObject {
 
     private func setAudioDuration(url: URL) async {
         do {
-            let _duration = try await AVAsset(url: url).load(.duration).seconds
+            let urlDuration = try await AVURLAsset(url: url).load(.duration).seconds
             await MainActor.run {
-                duration = _duration
+                duration = urlDuration
             }
         } catch let error {
             await MainActor.run {

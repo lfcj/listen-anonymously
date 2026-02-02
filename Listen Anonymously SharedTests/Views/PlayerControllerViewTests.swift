@@ -20,6 +20,5 @@ struct PlayerControllerViewTests {
 
         #expect(inspectedButtonImageName == "play.fill")
     }
- 
-}
 
+}

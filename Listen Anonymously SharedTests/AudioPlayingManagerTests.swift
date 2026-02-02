@@ -19,7 +19,7 @@ struct AudioPlayingManagerTests {
     @Test("Empty extensionContext stops audio search and shows error message")
     func emptyExtensionContext_stopsAudioSearchAndShowsErrorMessage() async throws {
         let manager = AudioPlayingManager(extensionContext: nil)
-        
+
         await manager.findAudio()
 
         #expect(manager.errorMessage == "No audio file could be find. Please check you selected only one file.")
@@ -28,7 +28,7 @@ struct AudioPlayingManagerTests {
 
     @Test("extensionContext with invalid item shows a FindingAudioError")
     func invalidItem_triggersFindingAudioError() async throws {
-        let expectedLocalizedErrorMessage = "This is an error that needs localization"
+        let expectedLocalizedErrorMessage = FindingAudioError.couldNotConvertLoadedItemToURL.localizedDescription
         let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.invalidItemsContext)
 
         await manager.findAudio()
@@ -68,10 +68,8 @@ struct AudioPlayingManagerTests {
 
         await manager.findAudio()
 
-        for await duration in durationValues {
-            if duration > 0 {
-                break
-            }
+        for await duration in durationValues where duration > 0 {
+            break
         }
 
         #expect(manager.errorMessage == nil)
@@ -81,11 +79,11 @@ struct AudioPlayingManagerTests {
     @Test("Playing deactivates the audio session")
     func playing_deactivatesAudioSession() async throws {
         let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
-        
+
         await manager.findAudio()
         let avSessionSpy = AVAudioSessionSpy()
         manager.play(audioSession: avSessionSpy)
-        
+
         #expect(avSessionSpy.setActiveToFalseCalls == 1)
         #expect(avSessionSpy.setActiveToTrueCalls == 1)
         #expect(avSessionSpy.setCategoryCalls == 1)
@@ -95,12 +93,12 @@ struct AudioPlayingManagerTests {
     @Test("Error is shown when player could not be created")
     func player_isNotCratedWhenSessionSetupFails() async throws {
         let manager = AudioPlayingManager(extensionContext: FakeExtensionContext.realAudioItemsContext)
-        
+
         await manager.findAudio()
         let avSessionSpy = AVAudioSessionSpy()
         avSessionSpy.setActiveError = NSError(domain: "player_isNotCratedWhenSessionSetupFails error", code: 400)
         manager.play(audioSession: avSessionSpy)
-        
+
         #expect(manager.errorMessage != nil)
         #expect(manager.errorMessage?.contains("Could create audio player") == true)
         #expect(manager.isPlaying == false)
@@ -168,7 +166,7 @@ struct AudioPlayingManagerTests {
     @Test("Trying a second time resets the error message")
     func player_resetsErrorMessageOnSecondAttempt() async throws {
         let manager = AudioPlayingManager(extensionContext: nil)
-        
+
         await manager.findAudio()
 
         #expect(manager.errorMessage != nil)
@@ -183,7 +181,7 @@ struct AudioPlayingManagerTests {
         let task = Task {
             await manager.findAudio()
         }
-        
+
         _ = await task.value
         task.cancel()
 
@@ -195,7 +193,6 @@ struct AudioPlayingManagerTests {
 
 final class AVAudioSessionSpy: AudioSessionProtocol, @unchecked Sendable {
 
-    
     var setActiveError: Error?
     private(set) var setActiveToFalseCalls: Int = 0
     private(set) var setActiveToTrueCalls: Int = 0

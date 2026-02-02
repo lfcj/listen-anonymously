@@ -33,7 +33,24 @@ The app does not notice that the recording was listened to and does not show the
 🚧 Goal is to be able to create screenshots for all localizations via command line, as well as frame them with iPhone/iPad bezels.
     
 ## `fastlane`
-- There is a swiftlint lane to double check swiftlint on git changes.
+
+### Running fastfile locally
+
+This repo is using `rbenv` to avoid installing dependencies globally, so first run `bundle install`.
+
+To run all tests, do:
+
+```
+bundle exec fastlane ios all_tests
+```
+
+or execute 
+```
+bundle exec fastlane lanes
+```
+
+to see all available lanes.
+
 🚧 Goal is to be able to submit an app for review via command line.
 
 ## Design system

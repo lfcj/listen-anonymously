@@ -33,7 +33,7 @@ public struct PlayingAnimationView: View {
             }
         }
     }
-    
+
     private func startBouncing() {
         withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
             scale = 3.5
@@ -54,7 +54,7 @@ public struct PlayingAnimationView: View {
     VStack {
         Spacer()
         PlayingAnimationView(isPlaying: $isPlaying)
-            
+
         Spacer()
         Button(isPlaying ? "Stop" : "Play") {
             isPlaying.toggle()
@@ -62,7 +62,6 @@ public struct PlayingAnimationView: View {
         .padding()
     }
 
-        
 }
 
 struct Twirl: Transition {

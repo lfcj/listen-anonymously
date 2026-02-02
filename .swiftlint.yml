@@ -1,0 +1,14 @@
+included:
+  - "Listen Anonymously Shared"
+  - "Listen Anonymously SharedTests"
+  - "Listen anonymously"
+  - "Listen anonymously Ext"
+  - "Listen anonymously Ext Tests"
+  - "Listen anonymously Snapshot Tests"
+  - "Listen anonymouslyTests"
+
+line_length:
+  warning: 160
+  error: 160
+  ignores_comments: true
+  ignores_function_declarations: false

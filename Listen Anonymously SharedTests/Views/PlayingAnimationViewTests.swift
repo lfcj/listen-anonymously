@@ -57,7 +57,7 @@ private extension PlayingAnimationViewTests {
             get: { isPlaying },
             set: { isPlaying = $0 }
         )
-  
+
         return PlayingAnimationView(isPlaying: binding)
     }
 

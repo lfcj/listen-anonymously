@@ -13,7 +13,7 @@ struct DonationButtonsViewTests {
             sendGoodVibes: {},
             superKindTip: {}
         )
-        
+
         let buyUsCoffeeButton = try view
             .inspect()
             .vStack(0)
@@ -33,7 +33,7 @@ struct DonationButtonsViewTests {
             sendGoodVibes: { sendGoodVibesCalled = true },
             superKindTip: {}
         )
-        
+
         let sendGoodVibesButton = try view
             .inspect()
             .vStack(0)
@@ -53,7 +53,7 @@ struct DonationButtonsViewTests {
             sendGoodVibes: {},
             superKindTip: { sendSuperKindTip = true },
         )
-        
+
         let sendSuperKindTipButton = try view
             .inspect()
             .vStack(0)

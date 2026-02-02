@@ -5,16 +5,41 @@ struct AudioFileInformation {
     let title: String
 }
 
-enum FindingAudioError: Error {
-    case noAttachmentFound
+enum FindingAudioError: Error, Equatable {
+    case noAudioFoundInAttachment(typeIdentifier: String)
+    case couldNotLoadItem(error: Error)
     case couldNotConvertLoadedItemToURL
     case telegramConversionNotPossible
-    case noAudioFoundInAttachment
+
+    static func == (lhs: FindingAudioError, rhs: FindingAudioError) -> Bool {
+        switch (lhs, rhs) {
+        case (.noAudioFoundInAttachment(let lhsTypeID), .noAudioFoundInAttachment(let rhsTypeID)):
+            return lhsTypeID == rhsTypeID
+        case (.couldNotLoadItem(let lhsError), .couldNotLoadItem(let rhsError)):
+            return lhsError.localizedDescription == rhsError.localizedDescription
+        case (.couldNotConvertLoadedItemToURL, .couldNotConvertLoadedItemToURL):
+            return true
+        case (.telegramConversionNotPossible, .telegramConversionNotPossible):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
-extension FindingAudioError {
-    var localizedDescription: String {
-        "This is an error that needs localization" // TODO: Write localized descriptions and test them
+extension FindingAudioError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .noAudioFoundInAttachment(let typeIdentifier):
+            let fileType = String(typeIdentifier.split(separator: ".").last ?? "").nilIfEmpty
+            return "\(My.localizedString("NOT_FOUND_ATTACHMENT_ERROR")). \(My.localizedString("FOUND_TYPEIDENTIFIER")): \(fileType ?? typeIdentifier)"
+        case .couldNotConvertLoadedItemToURL:
+            return "Shared item could not be read. Try with another one or ping us so we can research." // Localize-it
+        case .couldNotLoadItem(let error):
+            return "Unknown error: \(error.localizedDescription)" // Localize-it
+        case .telegramConversionNotPossible:
+            return "Could not convert Telegram audio to a format we can use. Try with another one or ping us so we can research." // Localize-it
+        }
     }
 }
 
@@ -27,15 +52,17 @@ struct FindingAudioHelpers {
 
     static func loadAudioURL(in item: NSExtensionItem, isSecondAttempt: Bool = false) async throws -> AudioFileInformation {
         guard let (audioAttachment, audioTypeIdentifier) = findAudioAttachment(in: item.attachments, isSecondAttempt: isSecondAttempt) else {
-            throw FindingAudioError.noAttachmentFound
+            throw FindingAudioError.noAudioFoundInAttachment(
+                typeIdentifier: item.attachments?.flatMap { $0.registeredTypeIdentifiers }.joined(separator: ",") ?? ""
+            )
         }
 
         try Task.checkCancellation()
         return try await loadAudioItemType(identifier: audioTypeIdentifier, from: audioAttachment)
     }
- 
+
     private static func findAudioAttachment(in attachments: [NSItemProvider]?, isSecondAttempt: Bool = false) -> (NSItemProvider, String)? {
-        var result: (NSItemProvider, String)? = nil
+        var result: (NSItemProvider, String)?
         let identifiers = isSecondAttempt ? publicFileURLIdentifier : typeIdentifiers
         attachments?.forEach { attachment in
             if let matchingAudioIdentifier = identifiers.first(where: { attachment.hasItemConformingToTypeIdentifier($0) }) {
@@ -48,29 +75,49 @@ struct FindingAudioHelpers {
 
     private static func loadAudioItemType(identifier: String, from audioAttachment: NSItemProvider) async throws -> AudioFileInformation {
         try Task.checkCancellation()
-        guard let audioURL = try await audioAttachment.loadItem(forTypeIdentifier: identifier, options: nil) as? URL else {
-            throw FindingAudioError.couldNotConvertLoadedItemToURL
-        }
+        do {
+            let loadedItem = try await audioAttachment.loadItem(forTypeIdentifier: identifier, options: nil)
+            guard let audioURL = loadedItem as? URL else {
+                // Log error showing loadedItem to see why it cannot be turned into URL
+                throw FindingAudioError.couldNotConvertLoadedItemToURL
+            }
 
-        if Self.telegramTypeIdentifiers.contains(identifier) {
-            return try handleTelegram(audioURL: audioURL)
-        } else {
-            return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent.formatAudioFileName())
+            if Self.telegramTypeIdentifiers.contains(identifier) {
+                return try handleTelegram(audioURL: audioURL)
+            } else {
+                return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent.formatAudioFileName())
+            }
+        } catch let error {
+            if error is FindingAudioError {
+                throw error
+            } else {
+                throw FindingAudioError.couldNotLoadItem(error: error)
+            }
         }
     }
 
     private static func handleTelegram(audioURL: URL) throws -> AudioFileInformation {
         let copyAudioURL = FileManager.createTemporaryFileURL(fileExtension: "ogg")
-        let _ /*convertedAudioURL*/ = FileManager.createTemporaryFileURL(fileExtension: "m4a")
+        _ /*convertedAudioURL*/ = FileManager.createTemporaryFileURL(fileExtension: "m4a")
         do {
             try FileManager.default.copyItem(at: audioURL, to: copyAudioURL)
+            // swiftlint:disable todo
             // TODO: Do Telegram conversion
+            // swiftlint:enable todo
         } catch {
             throw FindingAudioError.telegramConversionNotPossible
         }
-        
+
+        // swiftlint:disable todo
         // TODO: Need OGG converter
+        // swiftlint:enable todo
         return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent)
     }
 
+}
+
+extension String {
+    var nilIfEmpty: String? {
+        return isEmpty ? nil : self
+    }
 }

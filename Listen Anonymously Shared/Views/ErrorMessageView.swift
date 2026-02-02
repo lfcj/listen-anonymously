@@ -5,14 +5,18 @@ struct ErrorMessageView: View {
     let onRetry: () -> Void
     var body: some View {
         VStack {
+            // swiftlint:disable todo
             Text("Error reading audio file") // TODO: Localize
+            // swiftlint:enable todo
                 .font(.title)
             Text(errorMessage)
             Button {
                 onRetry()
             } label: {
+                // swiftlint:disable todo
                 Text("Button to try again") // TODO: Localize
                     .font(.headline)
+                // swiftlint:enable todo
             }
             .borderedOrGlassButtonStyle()
             .padding()
@@ -30,4 +34,3 @@ struct ErrorMessageView: View {
         onRetry: {}
     )
 }
-

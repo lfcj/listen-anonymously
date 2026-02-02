@@ -15,7 +15,7 @@ struct SafeImageTests {
 
     @Test func safeImageDisplaysSystemImage_whenNameMatchesSystemCatalog() throws {
         let imageView = SafeImage(name: "xmark")
-        
+
         let inspectedImageName = try imageView.inspect().image(0).actualImage().name()
 
         #expect(inspectedImageName == "xmark")

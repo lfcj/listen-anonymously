@@ -22,14 +22,10 @@ struct DeeplinkHelperTests {
     }
 
 }
-    
+
 struct FakeApplication: DeeplinkVerifying {
 
     let acceptedURLs: [URL]
-
-    init(acceptedURLs: [URL]) {
-        self.acceptedURLs = acceptedURLs
-    }
     nonisolated func canOpenURL(_ url: URL) -> Bool {
         acceptedURLs.contains(url)
     }

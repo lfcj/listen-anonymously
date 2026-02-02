@@ -40,4 +40,3 @@ struct TelegramInstructionsStepsView: View {
         .padding()
         .background(LinearGradient.lavenderToPastelBlue)
 }
-

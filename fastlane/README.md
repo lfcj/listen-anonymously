@@ -16,29 +16,16 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 ### tests
 
 ```sh
-[bundle exec] fastlane tests
+[bundle exec] fastlane ios all_tests
 ```
-
-
 
 ### lint
 
 ```sh
 [bundle exec] fastlane lint
 ```
-----
 
-
-## iOS
-
-### ios all_tests
-
-```sh
-[bundle exec] fastlane ios all_tests
-```
-
-Run tests
-
+### Snapshots
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

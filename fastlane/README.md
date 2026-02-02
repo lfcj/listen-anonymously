@@ -21,6 +21,11 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
+### lint
+
+```sh
+[bundle exec] fastlane lint
+```
 ----
 
 

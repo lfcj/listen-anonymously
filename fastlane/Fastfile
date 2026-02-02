@@ -34,3 +34,10 @@ platform :ios do
     )
   end
 end
+
+
+lane :lint do
+  Dir.chdir("..") do
+    sh "swiftlint lint --strict"
+  end
+end

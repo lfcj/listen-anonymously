@@ -33,13 +33,23 @@ This makes that the app does not consider the file has been opened/listened to a
 🚧 Goal is to be able to create screenshots for all localizations via command line, as well as frame them with iPhone/iPad bezels.
     
 ## `fastlane`
+
 ### Running fastfile locally
-Run `bundle install` and then any lane you'd like to see.
+
+This repo is using `rbenv` to avoid installing dependencies globally, so first run `bundle install`.
+
 To run all tests, do:
-```
-bundle exec fastlane ios all_tests
 
 ```
+bundle exec fastlane ios all_tests
+```
+
+or execute 
+```
+bundle exec fastlane lanes
+```
+
+to see all available lanes.
 
 🚧 Goal is to be able to submit an app for review via command line.
 

@@ -1,7 +1,7 @@
 #  Listen anonymously
 
-This is an app that allows selecting any file in apps that allow sharing them, such as Whatsapp, Telegram or iMessage, and plays it.
-This makes that the app does not consider the file has been opened/listened to and does not show the checkmarks.
+This is an app that allows listening anonymously to voice recordings in Whatsapp, Telegram or iMessage.
+The app does not notice that the recording was listened to and does not show the checkmarks.
 
 ## Technology
 
@@ -33,6 +33,7 @@ This makes that the app does not consider the file has been opened/listened to a
 🚧 Goal is to be able to create screenshots for all localizations via command line, as well as frame them with iPhone/iPad bezels.
     
 ## `fastlane`
+- There is a swiftlint lane to double check swiftlint on git changes.
 🚧 Goal is to be able to submit an app for review via command line.
 
 ## Design system

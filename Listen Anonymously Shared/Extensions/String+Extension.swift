@@ -16,7 +16,9 @@ extension String {
         inputFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
 
+        // swiftlint:disable todo
         // TODO: Use REGEX so other strings that contain dates work
+        // swiftlint:enable todo
         guard let date = inputFormatter.date(from: dateString.prefix(22).replacingOccurrences(of: "AUDIO-", with: "")) else {
             return dateString
         }

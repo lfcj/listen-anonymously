@@ -90,7 +90,7 @@ open class AudioPlayingManager: ObservableObject {
         errorMessage = nil
         guard let inputItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             isLoadingAudio = false
-            errorMessage = "No audio file could be find. Please check you selected only one file." // TODO: Localize
+            errorMessage = "No audio file could be find. Please check you selected only one file." // Localize-it
             return
         }
 
@@ -132,9 +132,9 @@ open class AudioPlayingManager: ObservableObject {
 
     private func setAudioDuration(url: URL) async {
         do {
-            let _duration = try await AVAsset(url: url).load(.duration).seconds
+            let urlDuration = try await AVURLAsset(url: url).load(.duration).seconds
             await MainActor.run {
-                duration = _duration
+                duration = urlDuration
             }
         } catch let error {
             await MainActor.run {

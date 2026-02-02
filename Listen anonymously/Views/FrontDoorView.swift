@@ -25,9 +25,7 @@ struct FrontDoorView: View {
                 .foregroundStyle(.white)
                 .padding(.horizontal, 18)
 
-                Button(action: {
-                    appState.selectedTab = .howToUse
-                }) {
+                Button(action: selectHowToUseTab) {
                     Text("See how it works")
                 }
                 .buttonStyle(GradientButtonStyle())
@@ -47,6 +45,11 @@ struct FrontDoorView: View {
             .frame(maxWidth: 600)
         }
     }
+
+    func selectHowToUseTab() {
+        appState.selectedTab = .howToUse
+    }
+
 }
 
 // MARK: - Preview

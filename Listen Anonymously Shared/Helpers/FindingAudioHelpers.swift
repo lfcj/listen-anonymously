@@ -27,18 +27,19 @@ enum FindingAudioError: Error, Equatable {
     }
 }
 
-extension FindingAudioError {
-    var localizedDescription: String {
+extension FindingAudioError: LocalizedError {
+    var errorDescription: String? {
         switch self {
         case .noAudioFoundInAttachment(let typeIdentifier):
             let fileType = String(typeIdentifier.split(separator: ".").last ?? "").nilIfEmpty
-            return "\(My.LocalizedString("NOT_FOUND_ATTACHMENT_ERROR")). \(My.LocalizedString("FOUND_TYPEIDENTIFIER")): \(fileType ?? typeIdentifier)"
+            return "\(My.localizedString("NOT_FOUND_ATTACHMENT_ERROR")). \(My.localizedString("FOUND_TYPEIDENTIFIER")): \(fileType ?? typeIdentifier)"
         case .couldNotConvertLoadedItemToURL:
-            return "Shared item could not be read. Try with another one or ping us so we can research."
-        default:
-            return "This is an error that needs localization"
+            return "Shared item could not be read. Try with another one or ping us so we can research." // Localize-it
+        case .couldNotLoadItem(let error):
+            return "Unknown error: \(error.localizedDescription)" // Localize-it
+        case .telegramConversionNotPossible:
+            return "Could not convert Telegram audio to a format we can use. Try with another one or ping us so we can research." // Localize-it
         }
-//        "This is an error that needs localization" // TODO: Write localized descriptions and test them
     }
 }
 
@@ -100,12 +101,16 @@ struct FindingAudioHelpers {
         _ /*convertedAudioURL*/ = FileManager.createTemporaryFileURL(fileExtension: "m4a")
         do {
             try FileManager.default.copyItem(at: audioURL, to: copyAudioURL)
+            // swiftlint:disable todo
             // TODO: Do Telegram conversion
+            // swiftlint:enable todo
         } catch {
             throw FindingAudioError.telegramConversionNotPossible
         }
 
+        // swiftlint:disable todo
         // TODO: Need OGG converter
+        // swiftlint:enable todo
         return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent)
     }
 

@@ -4,7 +4,9 @@ import SwiftUI
 import XCTest
 
 @MainActor
+// swiftlint:disable type_name
 final class Listen_anonymously_Snapshot_Tests: XCTestCase {
+// swiftlint:enable type_name
 
     func test_frontDoor() {
         let frontDoor = FrontDoorView()

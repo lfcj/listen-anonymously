@@ -42,6 +42,7 @@ public struct SnapshotView<Content: View>: View {
 }
 
 public extension ContentSizeCategory {
+    // swiftlint:disable cyclomatic_complexity
     init(uiKitContentSizeCategory: UIContentSizeCategory) {
         switch uiKitContentSizeCategory {
         case .accessibilityExtraExtraExtraLarge:
@@ -74,6 +75,7 @@ public extension ContentSizeCategory {
             fatalError("Unknown case \(uiKitContentSizeCategory) ")
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }
 
 public extension ColorScheme {

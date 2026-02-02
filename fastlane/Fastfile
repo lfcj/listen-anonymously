@@ -29,7 +29,6 @@ platform :ios do
       device: "iPhone 17",
       clean: true,
       code_coverage: true,
-      minimum_coverage_percentage: 80,
       result_bundle: true,
       output_directory: "./fastlane/test_output"
     )

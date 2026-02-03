@@ -22,7 +22,6 @@ jobs:
         run: |
           sudo xcode-select -s "$DEVELOPER_DIR"
           xcodebuild -version
-
       - name: Cache SPM
         uses: actions/cache@v4
         with:
@@ -38,9 +37,8 @@ jobs:
           bundle install
 
       - name: Run Tests via Fastlane (with Coverage)
-        env:
-          DEV_TEAM_SECRET: $${{ secrets.DEVELOPMENT_TEAM }}
         run: |
+          echo "DEV_TEAM_SECRET=${{ secrets.DEV_TEAM_SECRET }}" > Configuration/Secrets.xcconfig
           bundle exec fastlane all_tests
 
       # ---- Coverage processing (fast + readable) ----

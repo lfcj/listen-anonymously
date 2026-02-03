@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C15A7AD2F3229E800EDD660 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 3C15A7AC2F3229E800EDD660 /* PostHog */; };
 		3C5A000B2EA7E92A0061CF61 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 3C5A000A2EA7E92A0061CF61 /* ViewInspector */; };
 		3CCE0A352F3DF9EF001D8DBC /* Listen_Anonymously_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */; };
 		3CCE0A362F3DF9EF001D8DBC /* Listen_Anonymously_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -281,6 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C15A7AD2F3229E800EDD660 /* PostHog in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +525,7 @@
 			);
 			name = "Listen Anonymously Shared";
 			packageProductDependencies = (
+				3C15A7AC2F3229E800EDD660 /* PostHog */,
 			);
 			productName = "Listen Anonymously Shared";
 			productReference = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */;
@@ -1476,6 +1479,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3C15A7AC2F3229E800EDD660 /* PostHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C15A6132F32266600EDD660 /* XCRemoteSwiftPackageReference "posthog-ios" */;
+			productName = PostHog;
+		};
 		3C5A000A2EA7E92A0061CF61 /* ViewInspector */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3CFA3C7C2E9D21A600D0A378 /* XCRemoteSwiftPackageReference "ViewInspector" */;

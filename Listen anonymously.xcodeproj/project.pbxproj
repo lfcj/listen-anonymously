@@ -611,6 +611,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3CFA3C7C2E9D21A600D0A378 /* XCRemoteSwiftPackageReference "ViewInspector" */,
+				3C15A6132F32266600EDD660 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3CCFCA082D3EFD850090D88D /* Products */;
@@ -1456,6 +1457,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3C15A6132F32266600EDD660 /* XCRemoteSwiftPackageReference "posthog-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PostHog/posthog-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.39.0;
+			};
+		};
 		3CFA3C7C2E9D21A600D0A378 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nalexn/ViewInspector";

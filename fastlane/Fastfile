@@ -26,7 +26,6 @@ platform :ios do
   lane :all_tests do
     run_tests(
       scheme: "Listen anonymously Ext",
-      device: "iPhone 17",
       clean: true,
       code_coverage: true,
       result_bundle: true,

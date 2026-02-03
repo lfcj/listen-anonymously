@@ -103,7 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C15A6112F320FE600EDD660 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		3C15A6122F3215BB00EDD660 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		3C36B8EF2EAA049900FFE573 /* Listen anonymously Snapshot Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen anonymously Snapshot Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CC8939F2EA6AA7400A2F4A0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3CC893A02EA6B11900A2F4A0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 			children = (
 				3CC893A02EA6B11900A2F4A0 /* Release.xcconfig */,
 				3CC8939F2EA6AA7400A2F4A0 /* Debug.xcconfig */,
-				3C15A6112F320FE600EDD660 /* Secrets.xcconfig */,
+				3C15A6122F3215BB00EDD660 /* Secrets.xcconfig */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";

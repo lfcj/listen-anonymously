@@ -1,5 +1,8 @@
 #  Listen anonymously
 
+[![All tests](https://github.com/lfcj/listen-anonymously/actions/workflows/code-coverage.yml/badge.svg)](https://github.com/lfcj/listen-anonymously/actions/workflows/code-coverage.yml)
+[![Coverage](https://codecov.io/gh/lfcj/listen-anonymously/branch/main/graph/badge.svg)](https://codecov.io/gh/lfcj/listen-anonymously)
+
 This is an app that allows listening anonymously to voice recordings in Whatsapp, Telegram or iMessage.
 The app does not notice that the recording was listened to and does not show the checkmarks.
 
@@ -18,8 +21,13 @@ The app does not notice that the recording was listened to and does not show the
 
 
 ### Test coverage
+
+[![Coverage](https://codecov.io/gh/lfcj/listen-anonymously/branch/main/graph/badge.svg)](
+https://codecov.io/gh/lfcj/listen-anonymously
+)
+
 - App has >90% test coverage ✅
-- SwiftUI views are heavily tested using [`ViewInspector`](https://github.com/nalexn/ViewInspector)). The goal was to have all the logic in view models, modify them, and inspect the view to make sure it displays the modified data accordingly.
+- SwiftUI views are heavily tested using [`ViewInspector`](https://github.com/nalexn/ViewInspector). The goal was to have all the logic in view models, modify them, and inspect the view to make sure it displays the modified data accordingly.
 
 ## Build based on xcconfig
 
@@ -28,7 +36,10 @@ The app does not notice that the recording was listened to and does not show the
 - `Secrets.xcconfig` is a local file that is git-ignored. It includes the development team information. In the CI, the workflow reads a Github Action Secret with the same data and creates the `xcconfig` file with it.
 
 ## CI
-🚧 Goal is to trigger tests builds in GitHub Actions on every push and add status badges to see health of tests + code coverage %.
+Github Actions is used to make sure all tests pass and the code coverage remains high.
+[code-coverage.yml](https://github.com/lfcj/listen-anonymously/blob/main/.github/workflows/code-coverage.yml) forces usage of Xcode-26, runs tests and uploads code coverage results to CODECOV.
+
+🚧 Trigger upload to ASC
 
 ## ASC Screenshots + automatic framing 
 🚧 Goal is to be able to create screenshots for all localizations via command line, as well as frame them with iPhone/iPad bezels.

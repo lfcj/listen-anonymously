@@ -6,7 +6,7 @@ struct PostLaunchScreenView: View {
     @State private var isAnimatingHeadphones = false
     var body: some View {
         ZStack {
-            Color.launchscreenBackground.ignoresSafeArea()
+            Color.postLaunchBackground.ignoresSafeArea()
 
             GeometryReader { geometry in
                 Image("launchscreenSVG")
@@ -43,6 +43,10 @@ struct PostLaunchScreenView: View {
             }
         }
     }
+}
+
+private extension Color {
+    static var postLaunchBackground: Color { Color("LaunchscreenBackgroundColor") }
 }
 
 #Preview {

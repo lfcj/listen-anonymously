@@ -1,6 +1,8 @@
 // Configuration settings file format documentation can be found at:
 // https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
 
+#include "Secrets.xcconfig"
+
 // Build settings reference: https://help.apple.com/xcode/mac/11.4/#/itcaec37c2a6
 CODE_SIGN_STYLE = Manual
 DEVELOPMENT_TEAM = $(DEV_TEAM_SECRET)

@@ -38,6 +38,8 @@ jobs:
           bundle install
 
       - name: Run Tests via Fastlane (with Coverage)
+        env:
+          DEV_TEAM_SECRET: $${{ secrets.DEVELOPMENT_TEAM }}
         run: |
           bundle exec fastlane all_tests
 

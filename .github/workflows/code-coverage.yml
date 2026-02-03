@@ -11,7 +11,7 @@ env:
 
 jobs:
   test-and-coverage:
-    runs-on: macos-15
+    runs-on: macos-26
     name: Tests & Coverage
 
     steps:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Select Xcode
         run: |
-          sudo xcode-select -s /Applications/Xcode_26.1.app
+          sudo xcode-select -s /Applications/Xcode_26.2.app
           xcodebuild -version
       - name: Cache SPM
         uses: actions/cache@v4

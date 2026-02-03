@@ -25,6 +25,7 @@ The app does not notice that the recording was listened to and does not show the
 
 - Hiding sensitive data such as the `DEVELOPMENT_TEAM` was done using `.xcconfig` files that are local. Manual sign-in was also implemented by using provisioning files.
 - Deployment target is also managed in `xcconfig` file in order to avoid having to manually modify the Build Settings of all targets.
+- `Secrets.xcconfig` is a local file that is git-ignored. It includes the development team information. In the CI, the workflow reads a Github Action Secret with the same data and creates the `xcconfig` file with it.
 
 ## CI
 🚧 Goal is to trigger tests builds in GitHub Actions on every push and add status badges to see health of tests + code coverage %.

@@ -6,6 +6,14 @@
 This is an app that allows listening anonymously to voice recordings in Whatsapp, Telegram or iMessage.
 The app does not notice that the recording was listened to and does not show the checkmarks.
 
+## Quick snapshot
+
+Here is what the app does and how it looks:
+
+[![Listen anonymously](https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D9Dk3CZHV0aM)](https://www.youtube.com/watch?v=9Dk3CZHV0aM)
+
+
+
 ## Technology
 
 - This app uses SwiftUI ✅

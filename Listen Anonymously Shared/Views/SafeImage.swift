@@ -1,12 +1,24 @@
 import SwiftUI
 
-struct SafeImage: View {
+public enum SafeImageContent: Sendable, Equatable {
+    case systemImage(String)
+    case text(String)
+
+    public static func resolve(
+        name: String,
+        systemImageExists: (String) -> Bool = { UIImage(systemName: $0) != nil }
+    ) -> SafeImageContent {
+        systemImageExists(name) ? .systemImage(name) : .text(name)
+    }
+}
+
+public struct SafeImage: View {
     let name: String
     let fontSize: CGFloat
     let size: CGSize
     let foregroundColor: Color
 
-    init(
+    public init(
         name: String,
         fontSize: CGFloat = 48,
         size: CGSize = CGSize(width: 48, height: 48),
@@ -18,13 +30,14 @@ struct SafeImage: View {
         self.foregroundColor = foregroundColor
     }
 
-    var body: some View {
-        if UIImage(systemName: name) != nil {
+    public var body: some View {
+        switch SafeImageContent.resolve(name: name) {
+        case .systemImage(let name):
             Image(systemName: name)
                 .font(.system(size: fontSize))
                 .foregroundStyle(foregroundColor)
                 .frame(width: size.width, height: size.height)
-        } else {
+        case .text(let name):
             Text(name)
                 .font(.system(size: fontSize - 2))
                 .frame(width: size.width, height: size.height)

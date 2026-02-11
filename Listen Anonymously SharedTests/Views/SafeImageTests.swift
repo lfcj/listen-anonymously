@@ -1,5 +1,6 @@
 import Listen_Anonymously_Shared
 import Testing
+@testable import Listen_Anonymously_Shared
 
 struct SafeImageTests {
 

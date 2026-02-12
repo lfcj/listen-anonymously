@@ -36,6 +36,26 @@ final class Listen_anonymouslyUITests: XCTestCase {
             segmentedControlExists,
             "tapping on instructions button should show view with segmented control"
         )
+
+        XCTAssertEqual(
+            app.staticTexts[AccessibilityIdentifier.Instructions.whatsAppStep4].label,
+            "4. Scroll down and tap on:"
+        )
+
+        segmentedControl.buttons["Telegram"].tap()
+
+        let telegramStep2 = app.staticTexts[AccessibilityIdentifier.Instructions.telegramStep2]
+        let secondTelegramStepExists = telegramStep2.waitForExistence(timeout: 3)
+        XCTAssertTrue(
+            secondTelegramStepExists,
+            "tapping on Telegram button should show second step for Telegram"
+        )
+
+        XCTAssertEqual(
+            app.staticTexts[AccessibilityIdentifier.Instructions.telegramStep2].label,
+            "2. Tap on 'Select'"
+        )
+        
     }
 
 }

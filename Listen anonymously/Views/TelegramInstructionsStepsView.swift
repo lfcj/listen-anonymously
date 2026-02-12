@@ -9,13 +9,13 @@ struct TelegramInstructionsStepsView: View {
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
-            .accessibilityIdentifier(AccessibilityIdentifier.Instructions.Telegram.step1)
 
             TextAndIconLabel(
                 title: "2. Tap on 'Select'",
                 systemNameOrEmoji: "checkmark.circle"
             )
             .fontWeight(.medium)
+            .accessibilityIdentifier(AccessibilityIdentifier.Instructions.telegramStep2)
 
             TextAndIconLabel(
                 title: "3. Tap on the 'Share' icon in the middle bottom",
@@ -28,7 +28,6 @@ struct TelegramInstructionsStepsView: View {
                 systemNameOrEmoji: ""
             )
             .fontWeight(.medium)
-            .accessibilityIdentifier(AccessibilityIdentifier.Instructions.Telegram.step4)
 
             ListenAnonExtensionView()
 

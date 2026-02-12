@@ -35,7 +35,9 @@ struct InstructionsView: View {
                     VStack {
                         Picker("Supported App", selection: $viewModel.selectedApp) {
                             ForEach(viewModel.supportedApps) { app in
-                                Text(app.rawValue).tag(app)
+                                Text(app.rawValue)
+                                    .tag(app)
+                                    .accessibilityIdentifier(app.rawValue)
                             }
                         }
                         .accessibilityIdentifier(AccessibilityIdentifier.Instructions.picker)

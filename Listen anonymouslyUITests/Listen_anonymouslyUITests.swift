@@ -3,13 +3,6 @@ import XCTest
 
 final class Listen_anonymouslyUITests: XCTestCase {
 
-    /*
-     On FrontDoor View, tap 3 buttons to give tip.
-     Close views and then tap on instructions button
-     Make sure that picker is shown when there are more supported apps
-     Tap on picker
-     Make sure that Whatsapp shows 4 points, as well as Telegram
-     */
     @MainActor
     func testFrontDoor() throws {
         let app = XCUIApplication()
@@ -55,7 +48,6 @@ final class Listen_anonymouslyUITests: XCTestCase {
             app.staticTexts[AccessibilityIdentifier.Instructions.telegramStep2].label,
             "2. Tap on 'Select'"
         )
-        
     }
 
 }

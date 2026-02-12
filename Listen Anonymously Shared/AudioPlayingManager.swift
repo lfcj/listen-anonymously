@@ -85,6 +85,7 @@ open class AudioPlayingManager: ObservableObject {
         audioPlayer?.rate = rate.rawValue
     }
 
+    @MainActor
     open func findAudio(isSecondAttempt: Bool = false) async {
         isLoadingAudio = true
         errorMessage = nil
@@ -94,26 +95,44 @@ open class AudioPlayingManager: ObservableObject {
             return
         }
 
-        var findingAudioErrorMessage: String?
-        for item in inputItems {
-            do {
-                try Task.checkCancellation()
-                let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(in: item, isSecondAttempt: isSecondAttempt)
-                await MainActor.run {
-                    isLoadingAudio = false
-                    audioURL = audioFileInformation.url
-                    audioTitle = audioFileInformation.title
-                    canPlay = true
+        typealias Result = (audio: AudioFileInformation?, error: String?)
+        let result: Result = await withTaskGroup(of: Result.self) { group in
+            for item in inputItems {
+                group.addTask {
+                    do {
+                        let fileInformation = try await FindingAudioHelpers.loadAudioURL(in: item, isSecondAttempt: isSecondAttempt)
+                        return (audio: fileInformation, error: nil)
+                    } catch {
+                        return (audio: nil, error: error.localizedDescription)
+                    }
+
+                    // swiftlint:disable todo
+                    // TODO: Send error to PostHot
+                    // swiftlint:enable todo
                 }
-                await setAudioDuration(url: audioFileInformation.url)
-                return
-            } catch let error {
-                isLoadingAudio = false
-                findingAudioErrorMessage = error.localizedDescription
             }
+
+            var lastError: String?
+            for await (audioInfo, localizedError) in group {
+                if let audioInfo {
+                    group.cancelAll()
+                    return (audioInfo, nil)
+                   }
+                lastError = localizedError
+            }
+
+            return (nil, lastError)
         }
-        if let findingAudioErrorMessage = findingAudioErrorMessage {
-            errorMessage = findingAudioErrorMessage
+
+        isLoadingAudio = false
+        if let fileInformation = result.audio {
+            audioURL = fileInformation.url
+            audioTitle = fileInformation.title
+            canPlay = true
+            await setAudioDuration(url: fileInformation.url)
+            return
+        } else {
+            errorMessage = result.error ?? "Could not find audio file information"
         }
     }
 
@@ -130,16 +149,13 @@ open class AudioPlayingManager: ObservableObject {
         }
     }
 
+    @MainActor
     private func setAudioDuration(url: URL) async {
         do {
             let urlDuration = try await AVURLAsset(url: url).load(.duration).seconds
-            await MainActor.run {
-                duration = urlDuration
-            }
+            duration = urlDuration
         } catch let error {
-            await MainActor.run {
-                errorMessage = "Could not get duration. \((error as NSError).debugDescription)"
-            }
+            errorMessage = "Could not get duration. \((error as NSError).debugDescription)"
         }
     }
 

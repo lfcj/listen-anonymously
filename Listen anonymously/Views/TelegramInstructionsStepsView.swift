@@ -9,6 +9,7 @@ struct TelegramInstructionsStepsView: View {
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
+            .accessibilityIdentifier(AccessibilityIdentifier.Instructions.Telegram.step1)
 
             TextAndIconLabel(
                 title: "2. Tap on 'Select'",
@@ -27,6 +28,7 @@ struct TelegramInstructionsStepsView: View {
                 systemNameOrEmoji: ""
             )
             .fontWeight(.medium)
+            .accessibilityIdentifier(AccessibilityIdentifier.Instructions.Telegram.step4)
 
             ListenAnonExtensionView()
 

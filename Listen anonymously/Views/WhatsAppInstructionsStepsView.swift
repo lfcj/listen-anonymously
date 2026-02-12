@@ -9,6 +9,7 @@ struct WhatsAppInstructionsStepsView: View {
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
+            .accessibilityIdentifier(AccessibilityIdentifier.Instructions.WhatsApp.step1)
 
             TextAndIconLabel(
                 title: "2. Tap on 'Forward'",
@@ -27,6 +28,7 @@ struct WhatsAppInstructionsStepsView: View {
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
+            .accessibilityIdentifier(AccessibilityIdentifier.Instructions.WhatsApp.step1)
 
             ListenAnonExtensionView()
 

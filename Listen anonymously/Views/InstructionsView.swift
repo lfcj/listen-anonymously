@@ -38,6 +38,7 @@ struct InstructionsView: View {
                                 Text(app.rawValue).tag(app)
                             }
                         }
+                        .accessibilityIdentifier(AccessibilityIdentifier.Instructions.picker)
                     }
                     .pickerStyle(.segmented)
                 }

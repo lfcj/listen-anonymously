@@ -30,6 +30,7 @@ struct FrontDoorView: View {
                 }
                 .buttonStyle(GradientButtonStyle())
                 .padding(.horizontal, 44)
+                .accessibilityIdentifier(AccessibilityIdentifier.FrontDoor.seeInstructions)
 
                 Spacer()
 

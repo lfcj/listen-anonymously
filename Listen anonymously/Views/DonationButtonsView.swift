@@ -22,12 +22,14 @@ struct DonationButtonsView: View {
                     icon: "cup.and.saucer.fill",
                     action: buyUsCoffee
                 )
+                .accessibilityIdentifier(AccessibilityIdentifier.Donations.buyUsCoffeeButton)
 
                 TranslucentIconLabelButton(
                     title: "Send good vibes",
                     icon: "heart.fill",
                     action: sendGoodVibes
                 )
+                .accessibilityIdentifier(AccessibilityIdentifier.Donations.sendGoodVibesButton)
             }
 
             TranslucentIconLabelButton(
@@ -35,6 +37,7 @@ struct DonationButtonsView: View {
                 icon: "sparkles",
                 action: superKindTip
             )
+            .accessibilityIdentifier(AccessibilityIdentifier.Donations.sendSuperKindTip)
         }
     }
 }

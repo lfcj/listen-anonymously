@@ -30,6 +30,11 @@
           "containerPath" : "container:Listen anonymously.xcodeproj",
           "identifier" : "3CFA3B992E9C3A9B00D0A378",
           "name" : "Listen anonymously Ext Tests"
+        },
+        {
+          "containerPath" : "container:Listen anonymously.xcodeproj",
+          "identifier" : "3CCE0A262F3DEBF3001D8DBC",
+          "name" : "Listen anonymouslyUITests"
         }
       ]
     },
@@ -53,16 +58,23 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Listen anonymously.xcodeproj",
-        "identifier" : "3CFA3B992E9C3A9B00D0A378",
-        "name" : "Listen anonymously Ext Tests"
+        "identifier" : "3CFA3BD92E9CE38000D0A378",
+        "name" : "Listen Anonymously SharedTests"
       }
     },
     {
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Listen anonymously.xcodeproj",
-        "identifier" : "3CFA3BD92E9CE38000D0A378",
-        "name" : "Listen Anonymously SharedTests"
+        "identifier" : "3CFA3B992E9C3A9B00D0A378",
+        "name" : "Listen anonymously Ext Tests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Listen anonymously.xcodeproj",
+        "identifier" : "3CCE0A262F3DEBF3001D8DBC",
+        "name" : "Listen anonymouslyUITests"
       }
     }
   ],

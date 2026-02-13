@@ -35,6 +35,7 @@ jobs:
         run: |
           xcrun simctl shutdown all
           xcrun simctl erase all
+          xcrun simctl list runtimes
       - name: Recreate simulator
         run: |
           xcrun simctl shutdown all

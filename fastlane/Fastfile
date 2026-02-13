@@ -24,10 +24,10 @@ end
 platform :ios do
   desc "Run tests"
   lane :all_tests do
-    run_tests(
+    scan(
       scheme: "Listen anonymously Ext",
-      clean: true,
       testplan: "Listen anonymously Test Plan",
+      parallel_testing: "YES",
       code_coverage: true,
       result_bundle: true,
       output_directory: "./fastlane/test_output"

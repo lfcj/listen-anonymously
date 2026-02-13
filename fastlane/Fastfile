@@ -34,6 +34,19 @@ platform :ios do
   end
 end
 
+platform :ios do
+  desc "Run tests"
+  lane :all_coverage do
+    run_tests(
+      scheme: "Listen anonymously",
+      testplan: "Listen anonymously Test Plan",
+      clean: true,
+      code_coverage: true,
+      result_bundle: true,
+      output_directory: "./fastlane/test_output"
+    )
+  end
+end
 
 lane :lint do
   Dir.chdir("..") do

@@ -39,6 +39,7 @@
       ]
     },
     "performanceAntipatternCheckerEnabled" : true,
+    "preferredScreenCaptureFormat" : "screenshot",
     "targetForVariableExpansion" : {
       "containerPath" : "container:Listen anonymously.xcodeproj",
       "identifier" : "3CCFCA062D3EFD850090D88D",
@@ -47,7 +48,21 @@
   },
   "testTargets" : [
     {
+      "target" : {
+        "containerPath" : "container:Listen anonymously.xcodeproj",
+        "identifier" : "3C36B8EE2EAA049900FFE573",
+        "name" : "Listen anonymously Snapshot Tests"
+      }
+    },
+    {
       "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Listen anonymously.xcodeproj",
+        "identifier" : "3CCE0A262F3DEBF3001D8DBC",
+        "name" : "Listen anonymouslyUITests"
+      }
+    },
+    {
       "target" : {
         "containerPath" : "container:Listen anonymously.xcodeproj",
         "identifier" : "3CCFCA162D3EFD860090D88D",
@@ -55,7 +70,6 @@
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Listen anonymously.xcodeproj",
         "identifier" : "3CFA3BD92E9CE38000D0A378",
@@ -63,18 +77,10 @@
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Listen anonymously.xcodeproj",
         "identifier" : "3CFA3B992E9C3A9B00D0A378",
         "name" : "Listen anonymously Ext Tests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Listen anonymously.xcodeproj",
-        "identifier" : "3CCE0A262F3DEBF3001D8DBC",
-        "name" : "Listen anonymouslyUITests"
       }
     }
   ],

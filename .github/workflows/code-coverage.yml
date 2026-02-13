@@ -39,7 +39,7 @@ jobs:
       - name: Run Tests via Fastlane (with Coverage)
         run: |
           echo "DEV_TEAM_SECRET=${{ secrets.DEV_TEAM_SECRET }}" > Configuration/Secrets.xcconfig
-          bundle exec fastlane all_tests
+          bundle exec fastlane all_coverage
 
       # ---- Coverage processing (fast + readable) ----
       - name: Generate Coverage (Cobertura)

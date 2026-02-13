@@ -25,9 +25,10 @@ platform :ios do
   desc "Run tests"
   lane :all_tests do
     scan(
-      scheme: "Listen anonymously Ext",
+      workspace: "Listen anonymously.xcworkspace",
+      scheme: "Listen anonymously Ext Tests",
       testplan: "Listen anonymously Test Plan",
-      parallel_testing: "YES",
+      parallel_testing: true,
       code_coverage: true,
       result_bundle: true,
       output_directory: "./fastlane/test_output"

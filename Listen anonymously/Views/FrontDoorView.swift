@@ -1,5 +1,5 @@
-import SwiftUI
 import Listen_Anonymously_Shared
+import SwiftUI
 
 struct FrontDoorView: View {
 
@@ -48,6 +48,7 @@ struct FrontDoorView: View {
     }
 
     func selectHowToUseTab() {
+        LAPostHog().capture("tapped-how-to-use")
         appState.selectedTab = .howToUse
     }
 

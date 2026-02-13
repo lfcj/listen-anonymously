@@ -31,6 +31,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
 
+      - name: Reset simulators
+        run: |
+          xcrun simctl shutdown all
+          xcrun simctl erase all
       - name: Install Bundler & Dependencies
         run: |
           gem install bundler

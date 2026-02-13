@@ -41,8 +41,8 @@
     "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {
       "containerPath" : "container:Listen anonymously.xcodeproj",
-      "identifier" : "3CFA3B992E9C3A9B00D0A378",
-      "name" : "Listen anonymously Ext Tests"
+      "identifier" : "3CCFCA062D3EFD850090D88D",
+      "name" : "Listen anonymously"
     }
   },
   "testTargets" : [

@@ -11,12 +11,7 @@ video.*
 *.DS_Store
 ## User settings
 xcuserdata/
-
-# Keep shared schemes & test plans
-!**/xcshareddata/
-!**/xcshareddata/xcschemes/
-!**/*.xcscheme
-!**/*.xctestplan
+xcshareddata/
 
 ## Obj-C/Swift specific
 *.hmap

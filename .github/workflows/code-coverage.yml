@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
 
 jobs:
   test-and-coverage:
@@ -31,35 +31,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
 
-      - name: Reset simulators
-        run: |
-          xcrun simctl shutdown all
-          xcrun simctl erase all
-          xcrun simctl list runtimes
-      - name: Recreate simulator
-        run: |
-          xcrun simctl shutdown all
-          xcrun simctl delete unavailable
-
-          RUNTIME=$(xcrun simctl list runtimes | grep "iOS 26.2" | awk '{print $NF}')
-          echo "Runtime: $RUNTIME"
-          DEVICE_ID=$(xcrun simctl create "CI-iPhone" "iPhone 17" "$RUNTIME")
-
-          echo "Created simulator $DEVICE_ID"
-
       - name: Install Bundler & Dependencies
         run: |
           gem install bundler
           bundle install
-
-      - name: List Xcode versions
-        run: ls /Applications | grep Xcode
-
-      - name: Show available destinations
-        run: |
-          xcodebuild -showdestinations \
-            -workspace "Listen anonymously.xcodeproj/project.xcworkspace" \
-            -scheme "Listen anonymously Ext Tests" | grep "CI-iPhone"
 
       - name: Run Tests via Fastlane (with Coverage)
         run: |

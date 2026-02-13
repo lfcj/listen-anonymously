@@ -15,12 +15,6 @@
 
 default_platform(:ios)
 
-lane :tests do
-  run_tests(
-    scheme: "Listen anonymously Ext"
-  )
-end
-
 platform :ios do
   desc "Run tests"
   lane :all_tests do

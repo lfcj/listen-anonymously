@@ -22,7 +22,7 @@ platform :ios do
       workspace: "Listen anonymously.xcodeproj/project.xcworkspace",
       scheme: "Listen anonymously Ext Tests",
       testplan: "Listen anonymously Test Plan",
-      destination: "platform=iOS Simulator,name=iPhone 17,OS=26.2",
+      destination: platform=iOS Simulator,name=CI-iPhone",
       parallel_testing: true,
       code_coverage: true,
       clean: true,

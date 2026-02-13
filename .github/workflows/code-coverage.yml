@@ -35,6 +35,15 @@ jobs:
         run: |
           xcrun simctl shutdown all
           xcrun simctl erase all
+      - name: Recreate simulator
+        run: |
+          xcrun simctl shutdown all
+          xcrun simctl delete unavailable
+
+          RUNTIME=$(xcrun simctl list runtimes | grep "iOS 26.2" | head -n1 | awk -F '[()]' '{print $2}')
+          DEVICE_ID=$(xcrun simctl create "CI-iPhone" "iPhone 17" "$RUNTIME")
+
+    echo "Created simulator $DEVICE_ID"
       - name: Install Bundler & Dependencies
         run: |
           gem install bundler

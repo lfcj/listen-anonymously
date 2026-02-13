@@ -27,6 +27,7 @@ platform :ios do
     scan(
       workspace: "Listen anonymously.xcodeproj/project.xcworkspace",
       scheme: "Listen anonymously Ext Tests",
+      destination: "platform=iOS Simulator,name=iPhone 17",
       testplan: "Listen anonymously Test Plan",
       parallel_testing: true,
       code_coverage: true,

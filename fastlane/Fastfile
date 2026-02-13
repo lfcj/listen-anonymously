@@ -19,11 +19,8 @@ platform :ios do
   desc "Run tests"
   lane :all_tests do
     scan(
-      workspace: "Listen anonymously.xcodeproj/project.xcworkspace",
       scheme: "Listen anonymously Ext Tests",
       testplan: "Listen anonymously Test Plan",
-      destination: "platform=iOS Simulator,name=CI-iPhone",
-      parallel_testing: true,
       code_coverage: true,
       clean: true,
       result_bundle: true,

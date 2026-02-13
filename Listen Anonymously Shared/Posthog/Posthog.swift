@@ -6,14 +6,11 @@ public protocol LaPostHogging {
 }
 
 public class LAPostHog: LaPostHogging {
-    public init() {
+    public init(key: String) {
         // swiftlint:disable identifier_name
-        guard let POSTHOG_API_KEY = Bundle.main.postHogAPIKey else {
-            return
-        }
         let POSTHOG_HOST = "https://eu.i.posthog.com"
 
-        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+        let config = PostHogConfig(apiKey: key, host: POSTHOG_HOST)
         PostHogSDK.shared.setup(config)
         // swiftlint:enable identifier_name
     }

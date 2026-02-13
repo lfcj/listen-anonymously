@@ -143,7 +143,7 @@
 		3CFA3B9A2E9C3A9B00D0A378 /* Listen anonymously Ext Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen anonymously Ext Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Listen_Anonymously_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFA3BDA2E9CE38000D0A378 /* Listen Anonymously SharedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen Anonymously SharedTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CFA3C7F2E9D280B00D0A378 /* Listen anonymously Ext.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Listen anonymously Ext.xctestplan"; sourceTree = "<group>"; };
+		3CFA3C7F2E9D280B00D0A378 /* Listen anonymously Test Plan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Listen anonymously Test Plan.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -310,7 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				3CC8939E2EA6AA4F00A2F4A0 /* Configuration */,
-				3CFA3C7F2E9D280B00D0A378 /* Listen anonymously Ext.xctestplan */,
+				3CFA3C7F2E9D280B00D0A378 /* Listen anonymously Test Plan.xctestplan */,
 				3CCFCB8D2D4198D00090D88D /* README.md */,
 				3CCFCA092D3EFD850090D88D /* Listen anonymously */,
 				3CCFCA1A2D3EFD860090D88D /* Listen anonymouslyTests */,

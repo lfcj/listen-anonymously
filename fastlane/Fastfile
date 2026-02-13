@@ -27,6 +27,7 @@ platform :ios do
     run_tests(
       scheme: "Listen anonymously Ext",
       clean: true,
+      testplan: "Listen anonymously Test Plan",
       code_coverage: true,
       result_bundle: true,
       output_directory: "./fastlane/test_output"

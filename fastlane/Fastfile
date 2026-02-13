@@ -30,7 +30,7 @@ platform :ios do
       testplan: "Listen anonymously Test Plan",
       parallel_testing: true,
       code_coverage: true,
-      devices: ["iPhone 17"]
+      devices: ["iPhone 17"],
       clean: true,
       result_bundle: true,
       output_directory: "./fastlane/test_output"

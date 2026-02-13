@@ -59,7 +59,7 @@ jobs:
         run: |
           xcodebuild -showdestinations \
             -workspace "Listen anonymously.xcodeproj/project.xcworkspace" \
-            -scheme "Listen anonymously Ext Tests"
+            -scheme "Listen anonymously Ext Tests" | grep "CI-iPhone"
 
       - name: Run Tests via Fastlane (with Coverage)
         run: |

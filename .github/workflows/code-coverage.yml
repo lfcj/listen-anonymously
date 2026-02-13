@@ -43,7 +43,8 @@ jobs:
         run: |
           xcodebuild -showdestinations \
             -workspace "Listen anonymously.xcodeproj/project.xcworkspace" \
-      -scheme "Listen anonymously Ext Tests"
+            -scheme "Listen anonymously Ext Tests"
+
       - name: Run Tests via Fastlane (with Coverage)
         run: |
           echo "DEV_TEAM_SECRET=${{ secrets.DEV_TEAM_SECRET }}" > Configuration/Secrets.xcconfig

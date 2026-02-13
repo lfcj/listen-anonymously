@@ -25,16 +25,6 @@
           "containerPath" : "container:Listen anonymously.xcodeproj",
           "identifier" : "3CFA3BCF2E9CE38000D0A378",
           "name" : "Listen Anonymously Shared"
-        },
-        {
-          "containerPath" : "container:Listen anonymously.xcodeproj",
-          "identifier" : "3CFA3B992E9C3A9B00D0A378",
-          "name" : "Listen anonymously Ext Tests"
-        },
-        {
-          "containerPath" : "container:Listen anonymously.xcodeproj",
-          "identifier" : "3CCE0A262F3DEBF3001D8DBC",
-          "name" : "Listen anonymouslyUITests"
         }
       ]
     },

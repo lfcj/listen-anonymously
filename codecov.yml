@@ -1,0 +1,3 @@
+ignore:
+  - ".*Tests/.*"        # Ignores any folder ending in Tests
+  - "**/*Tests.swift"   # Ignores any file ending in Tests.swift

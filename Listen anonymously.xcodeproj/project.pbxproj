@@ -1152,7 +1152,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G7YAMEJH7M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Listen anonymously Ext/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "Listen anonymously Ext";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = "$(DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1185,7 +1185,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = G7YAMEJH7M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Listen anonymously Ext/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = "Listen anonymously Ext";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = "$(DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (

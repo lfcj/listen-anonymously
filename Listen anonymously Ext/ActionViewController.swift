@@ -31,12 +31,23 @@ class ActionViewController: UIViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.modalPresentationStyle = .fullScreen
+        commonInit()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
         self.modalPresentationStyle = .fullScreen
+        guard let posthogKey = Bundle.main.postHogAPIKey else {
+            // swiftlint:disable todo
+            // TODO: Log error.
+            // swiftlint:enable todo
+            return
+        }
+        InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
     }
 
     override func viewDidLoad() {

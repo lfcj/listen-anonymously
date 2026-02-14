@@ -1,11 +1,17 @@
 import Foundation
 internal import PostHog
 
-public protocol LaPostHogging {
-    func capture(_ event: String, properties: [String: Any]?)
+public class SuperPosthog: Injectable {
+    init() {
+        fatalError("This is an abstract class to allow injection, never initialize")
+    }
+
+    public func capture(_ event: String, properties: [String: Any]? = nil) {
+        PostHogSDK.shared.capture(event, properties: properties)
+    }
 }
 
-public class LAPostHog: LaPostHogging {
+public final class LAPostHog: SuperPosthog {
     public init(key: String) {
         // swiftlint:disable identifier_name
         let POSTHOG_HOST = "https://eu.i.posthog.com"
@@ -13,9 +19,5 @@ public class LAPostHog: LaPostHogging {
         let config = PostHogConfig(apiKey: key, host: POSTHOG_HOST)
         PostHogSDK.shared.setup(config)
         // swiftlint:enable identifier_name
-    }
-
-    public func capture(_ event: String, properties: [String: Any]? = nil) {
-        PostHogSDK.shared.capture(event, properties: properties)
     }
 }

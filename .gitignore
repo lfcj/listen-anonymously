@@ -18,6 +18,9 @@ xcuserdata/
 !**/*.xcscheme
 !**/*.xctestplan
 
+## SwiftPM
+xcshareddata/swiftpm
+
 ## Obj-C/Swift specific
 *.hmap
 

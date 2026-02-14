@@ -39,7 +39,7 @@ struct ColorExtensionTests {
         #expect(abs(comps[0] - 0.6) < tolerance)
         #expect(abs(comps[1] - 0.6) < tolerance)
         #expect(abs(comps[2] - 0.6) < tolerance)
-        #expect(comps[3] == 0.3)
+        #expect(abs(comps[3] - 0.3) < tolerance)
     }
 
 }

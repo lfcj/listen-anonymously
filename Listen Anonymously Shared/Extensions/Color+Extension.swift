@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - Color helpers
 
-extension Color {
+public extension Color {
 
     /// Convenience init for hex like 0xRRGGBB
     init(hex: Int, opacity: Double = 1) {

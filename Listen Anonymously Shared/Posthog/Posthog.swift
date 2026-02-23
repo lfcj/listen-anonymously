@@ -1,11 +1,11 @@
 import Foundation
 internal import PostHog
 
-public class SuperPosthog: Injectable {
+open class SuperPosthog: Injectable {
     /// This is an abstract class to allow injection, never initialize it directly
-    init() {}
+    public init() {}
 
-    public func capture(_ event: String, properties: [String: any Equatable]? = nil) {
+    open func capture(_ event: String, properties: [String: any Equatable]? = nil) {
         PostHogSDK.shared.capture(event, properties: properties)
     }
 }

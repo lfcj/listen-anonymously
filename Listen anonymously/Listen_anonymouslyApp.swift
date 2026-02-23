@@ -17,7 +17,6 @@ struct Listen_anonymouslyApp: App {
         Task { @MainActor in
             await InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
         }
-        
     }
 
     var body: some Scene {

@@ -6,20 +6,20 @@ final class PostHogTests: XCTestCase {
     private let postHogSpy = PostHogSpy()
     private var originalPostHog: SuperPosthog?
 
-    override func setUp() {
-        originalPostHog = InjectionResolver.shared.resolve()
-        InjectionResolver.shared.add(postHogSpy, for: SuperPosthog.self)
-        super.setUp()
+    override func setUp() async throws {
+        originalPostHog = await InjectionResolver.shared.resolve()
+        await InjectionResolver.shared.add(postHogSpy, for: SuperPosthog.self)
+        try await super.setUp()
     }
 
-    override func tearDown() {
-        InjectionResolver.shared.add(originalPostHog ?? LAPostHog(key: "testing"), for: SuperPosthog.self)
-        super.tearDown()
+    override func tearDown() async throws {
+        await InjectionResolver.shared.add(originalPostHog ?? LAPostHog(key: "testing"), for: SuperPosthog.self)
+        try await super.tearDown()
     }
 
     // MARK: - Tests
 
-    func test_postHogEventsAreEmptyOnIntialization() {
+    func test_postHogEventsAreEmptyOnInitialization() {
         @Inject var postHog: SuperPosthog
         XCTAssertTrue(postHogSpy.capturedEvents.isEmpty)
     }

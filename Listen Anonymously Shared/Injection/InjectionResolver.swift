@@ -5,13 +5,12 @@ public protocol Injectable {}
 @propertyWrapper
 public struct Inject<T: Injectable> {
     public let wrappedValue: T
-
-    public init() {
-        self.wrappedValue = InjectionResolver.shared.resolve()
+    public init() async {
+        self.wrappedValue = await InjectionResolver.shared.resolve()
     }
 }
 
-public class InjectionResolver {
+public actor InjectionResolver {
 
     public static let shared = InjectionResolver()
 

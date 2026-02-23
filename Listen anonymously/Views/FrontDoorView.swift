@@ -48,9 +48,15 @@ struct FrontDoorView: View {
     }
 
     func selectHowToUseTab() {
-        @Inject var posthog: LAPostHog
         appState.selectedTab = .howToUse
-        posthog.capture("tapped-how-to-use")
+        log(event: "tapped-how-to-use")
+    }
+
+    func log(event: String) {
+        Task.detached {
+            @Inject var posthog: LAPostHog
+            posthog.capture(event)
+        }
     }
 
 }

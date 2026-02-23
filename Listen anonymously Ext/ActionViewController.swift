@@ -19,6 +19,7 @@ class ActionViewController: UIViewController {
         isIOS26Available: Bool? = nil
     ) {
         super.init(nibName: nil, bundle: nil)
+
         self.playingManager = playingManager
         self.injectedExtensionContext = extensionContext
         if #available(iOS 26, *) {
@@ -27,6 +28,7 @@ class ActionViewController: UIViewController {
         if let isIOS26Available {
             self.isIOS26Available = isIOS26Available
         }
+        commonInit()
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

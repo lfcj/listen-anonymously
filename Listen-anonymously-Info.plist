@@ -4,6 +4,8 @@
 <dict>
 	<key>PostHogAPIKey</key>
 	<string>$(POSTHOG_API_KEY)</string>
+	<key>RevenueCatAPIKey</key>
+	<string>$(REVENUE_CAT_KEY)</string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>

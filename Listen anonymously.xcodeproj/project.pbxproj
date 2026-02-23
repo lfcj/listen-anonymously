@@ -14,10 +14,7 @@
 		3CCFCA5A2D3F0FCD0090D88D /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCFCA592D3F0FCD0090D88D /* UniformTypeIdentifiers.framework */; };
 		3CCFCA662D3F0FCD0090D88D /* Listen anonymously Ext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CCFCB8E2D4198D00090D88D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CCFCB8D2D4198D00090D88D /* README.md */; };
-		3CDF61592F412EF30050739D /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 3CDF61582F412EF30050739D /* ReceiptParser */; };
 		3CDF615B2F412EF30050739D /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 3CDF615A2F412EF30050739D /* RevenueCat */; };
-		3CDF615D2F412EF30050739D /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3CDF615C2F412EF30050739D /* RevenueCatUI */; };
-		3CDF615F2F412EF30050739D /* RevenueCat_CustomEntitlementComputation in Frameworks */ = {isa = PBXBuildFile; productRef = 3CDF615E2F412EF30050739D /* RevenueCat_CustomEntitlementComputation */; };
 		3CFA3BDB2E9CE38000D0A378 /* Listen_Anonymously_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */; };
 		3CFA3BE52E9CE38000D0A378 /* Listen_Anonymously_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */; };
 		3CFA3BE62E9CE38100D0A378 /* Listen_Anonymously_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -254,9 +251,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CDF615D2F412EF30050739D /* RevenueCatUI in Frameworks */,
-				3CDF615F2F412EF30050739D /* RevenueCat_CustomEntitlementComputation in Frameworks */,
-				3CDF61592F412EF30050739D /* ReceiptParser in Frameworks */,
 				3CFA3BE52E9CE38000D0A378 /* Listen_Anonymously_Shared.framework in Frameworks */,
 				3CDF615B2F412EF30050739D /* RevenueCat in Frameworks */,
 			);
@@ -440,10 +434,7 @@
 			);
 			name = "Listen anonymously";
 			packageProductDependencies = (
-				3CDF61582F412EF30050739D /* ReceiptParser */,
 				3CDF615A2F412EF30050739D /* RevenueCat */,
-				3CDF615C2F412EF30050739D /* RevenueCatUI */,
-				3CDF615E2F412EF30050739D /* RevenueCat_CustomEntitlementComputation */,
 			);
 			productName = "Listen anonymously";
 			productReference = 3CCFCA072D3EFD850090D88D /* Listen anonymously.app */;
@@ -1514,25 +1505,10 @@
 			package = 3CFA3C7C2E9D21A600D0A378 /* XCRemoteSwiftPackageReference "ViewInspector" */;
 			productName = ViewInspector;
 		};
-		3CDF61582F412EF30050739D /* ReceiptParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3CDF61572F412EF30050739D /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
-			productName = ReceiptParser;
-		};
 		3CDF615A2F412EF30050739D /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3CDF61572F412EF30050739D /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
 			productName = RevenueCat;
-		};
-		3CDF615C2F412EF30050739D /* RevenueCatUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3CDF61572F412EF30050739D /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
-			productName = RevenueCatUI;
-		};
-		3CDF615E2F412EF30050739D /* RevenueCat_CustomEntitlementComputation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3CDF61572F412EF30050739D /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
-			productName = RevenueCat_CustomEntitlementComputation;
 		};
 		3CFA3C7D2E9D21A600D0A378 /* ViewInspector */ = {
 			isa = XCSwiftPackageProductDependency;

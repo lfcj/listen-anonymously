@@ -14,7 +14,10 @@ struct Listen_anonymouslyApp: App {
             // swiftlint:enable todo
             return
         }
-        InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
+        Task { @MainActor in
+            await InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
+        }
+        
     }
 
     var body: some Scene {

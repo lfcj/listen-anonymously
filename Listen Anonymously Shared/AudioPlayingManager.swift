@@ -24,8 +24,6 @@ open class AudioPlayingManager: ObservableObject {
     @Published var errorMessage: String?
     @Published var duration: Double = 0
 
-    @Inject private var postHog: SuperPosthog
-
     var currentTime: TimeInterval? {
         audioPlayer?.currentTime
     }
@@ -97,7 +95,7 @@ open class AudioPlayingManager: ObservableObject {
         guard let inputItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             isLoadingAudio = false
             errorMessage = "No audio file could be find. Please check you selected only one file." // Localize-it
-            postHog.capture(#function, properties: ["message": errorMessage])
+            log(event: #function, properties: ["message": errorMessage])
             return
         }
 
@@ -139,7 +137,7 @@ open class AudioPlayingManager: ObservableObject {
             return
         } else {
             errorMessage = result.error ?? "Could not find audio file information"
-            postHog.capture(#function, properties: ["message": errorMessage])
+            log(event: #function, properties: ["message": errorMessage])
         }
     }
 
@@ -153,7 +151,7 @@ open class AudioPlayingManager: ObservableObject {
             audioPlayer?.prepareToPlay()
         } catch let error {
             errorMessage = "Could create audio player. \((error as NSError).debugDescription)"
-            postHog.capture(#function, properties: ["message": errorMessage])
+            log(event: #function, properties: ["message": errorMessage])
         }
     }
 
@@ -162,17 +160,21 @@ open class AudioPlayingManager: ObservableObject {
         do {
             let urlDuration = try await AVURLAsset(url: url).load(.duration).seconds
             duration = urlDuration
-            postHog.capture(#function, properties: ["duration": urlDuration])
+            log(event: #function, properties: ["duration": urlDuration])
         } catch let error {
             errorMessage = "Could not get duration. \((error as NSError).debugDescription)"
-            postHog.capture(#function, properties: ["message": errorMessage])
+            log(event: #function, properties: ["message": errorMessage])
         }
     }
 
     private func logAudioWasPlayed() {
-        let localPostHogCopy = postHog
+        log(event: #function)
+    }
+
+    private func log(event: String, properties: [String: any Equatable]? = nil) {
         Task.detached {
-            localPostHogCopy.capture(#function)
+            @Inject var postHog: SuperPosthog
+            postHog.capture(event, properties: properties)
         }
     }
 

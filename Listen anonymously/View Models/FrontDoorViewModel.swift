@@ -19,14 +19,14 @@ public struct ProductPurchaseResult {
     let userCancelled: Bool
 }
 
-protocol PurchasesClient {
+protocol PurchasesClient: Sendable {
     var isConfigured: Bool { get }
     func configure(withAPIKey key: String)
     func getProducts(_ productIDs: [String], completion: @escaping ([StoreProductProtocol]) -> Void)
     func purchase(product: StoreProduct) async throws -> ProductPurchaseResult
 }
 
-struct RevenueCatPurchasesClient: PurchasesClient {
+struct RevenueCatPurchasesClient: PurchasesClient, @unchecked Sendable {
     var isConfigured: Bool { Purchases.isConfigured }
     func configure(withAPIKey key: String) { Purchases.configure(withAPIKey: key) }
     func getProducts(_ productIDs: [String], completion: @escaping ([StoreProductProtocol]) -> Void) {
@@ -42,7 +42,7 @@ struct RevenueCatPurchasesClient: PurchasesClient {
     }
 }
 
-final class FrontDoorViewModel: ObservableObject {
+final class FrontDoorViewModel: ObservableObject, Sendable {
 
     // MARK: - Nested Types
 
@@ -65,27 +65,31 @@ final class FrontDoorViewModel: ObservableObject {
 
     // MARK: - Public API
 
+    @MainActor
     func buyUsCoffee() {
-        Task(priority: .userInitiated) {
-            await purchase(product: .coffee)
+        Task(priority: .userInitiated) { [purchase] in
+            await purchase(.coffee)
         }
     }
 
+    @MainActor
     func sendGoodVibes() {
-        Task(priority: .userInitiated) {
-            await purchase(product: .goodVibes)
+        Task.detached { [purchase] in
+            await purchase(.goodVibes)
         }
     }
 
+    @MainActor
     func giveSuperKindTip() {
-        Task(priority: .userInitiated) {
-            await purchase(product: .superKindTip)
+        Task.detached { [purchase] in
+            await purchase(.superKindTip)
         }
     }
 
     // MARK: - Private helpers
 
     private func configureRevenueCatIfNeeded() {
+        let purchases = self.purchases
         // Avoid re-configuring if already configured
         if purchases.isConfigured { return }
 
@@ -113,9 +117,7 @@ final class FrontDoorViewModel: ObservableObject {
             }
 
             // Success
-            log("donation_success", properties: [
-                "product_id": productID
-            ])
+            log("donation_success", properties: ["product_id": productID])
         } catch {
             log("donation_failed", properties: [
                 "product_id": productID,
@@ -125,6 +127,7 @@ final class FrontDoorViewModel: ObservableObject {
     }
 
     private func loadProduct(with productID: String) async throws -> StoreProduct {
+        let purchases = self.purchases
         return try await withCheckedThrowingContinuation { continuation in
             purchases.getProducts([productID]) { products in
                 if let product = products.first as? StoreProduct {
@@ -143,8 +146,8 @@ final class FrontDoorViewModel: ObservableObject {
         }
     }
 
-    private func log(_ event: String, properties: [String: any Equatable]?) {
-        Task.detached {
+    private func log(_ event: String, properties: sending [String: any Equatable]?) {
+        Task.detached(priority: nil) {
             @Inject var posthog: SuperPosthog
             posthog.capture(event, properties: properties)
         }

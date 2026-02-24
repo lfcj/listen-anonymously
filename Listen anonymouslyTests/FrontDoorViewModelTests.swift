@@ -50,6 +50,9 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { [weak self] events in
+            guard events.contains("donation_failed") else {
+                return
+            }
             XCTAssertTrue(events.contains("donation_failed"))
             let lastProperty: [String: any Equatable]? = self?.postHogSpy.capturedProperties.last
             XCTAssertEqual(lastProperty?["reason"] as? String, "missing_api_key")
@@ -80,6 +83,10 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            guard events.contains("donation_success") else {
+                return
+            }
+
             XCTAssertTrue(events.contains("donation_attempt"))
             XCTAssertTrue(events.contains("donation_success"))
 
@@ -106,6 +113,10 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            guard events.contains("donation_cancelled") else {
+                return
+            }
+
             XCTAssertTrue(events.contains("donation_attempt"))
             XCTAssertTrue(events.contains("donation_cancelled"))
 

@@ -54,7 +54,7 @@ struct FrontDoorView: View {
 
     func log(event: String) {
         Task.detached {
-            @Inject var posthog: LAPostHog
+            @Inject var posthog: SuperPosthog
             posthog.capture(event)
         }
     }

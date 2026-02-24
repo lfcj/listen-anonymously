@@ -22,7 +22,7 @@
 				<integer>1</integer>
 				<key>NSExtensionActivationSupportsFileAttachments</key>
 				<dict>
-					<key>file-url</key>
+					<key>public.jpeg</key>
 					<false/>
 					<key>com.apple.audio</key>
 					<true/>

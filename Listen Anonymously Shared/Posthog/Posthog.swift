@@ -1,7 +1,7 @@
 import Foundation
 internal import PostHog
 
-open class SuperPosthog: Injectable {
+open class SuperPosthog: Injectable, @unchecked Sendable {
     /// This is an abstract class to allow injection, never initialize it directly
     public init() {}
 
@@ -10,7 +10,7 @@ open class SuperPosthog: Injectable {
     }
 }
 
-public final class LAPostHog: SuperPosthog {
+public final class LAPostHog: SuperPosthog, @unchecked Sendable {
     public init(key: String) {
         // swiftlint:disable identifier_name
         let POSTHOG_HOST = "https://eu.i.posthog.com"

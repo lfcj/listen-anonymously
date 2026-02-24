@@ -7,6 +7,7 @@ extension UIApplication: DeeplinkVerifying {}
 
 public struct DeeplinkHelper {
 
+    @MainActor
     /// Returns `true` if user has app that can handle `urlString` as a URL
     public static func hasApp(_ app: SupportedApps, application: DeeplinkVerifying = UIApplication.shared) -> Bool {
         if let url = URL(string: app.deeplinkString), application.canOpenURL(url) {

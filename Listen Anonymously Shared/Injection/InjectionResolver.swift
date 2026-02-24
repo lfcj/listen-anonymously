@@ -3,7 +3,7 @@ import Foundation
 public protocol Injectable {}
 
 @propertyWrapper
-public struct Inject<T: Injectable> {
+public struct Inject<T: Injectable & Sendable> {
     public let wrappedValue: T
     public init() async {
         self.wrappedValue = await InjectionResolver.shared.resolve()

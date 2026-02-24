@@ -15,6 +15,9 @@ public protocol AudioSessionProtocol {
 
 extension AVAudioSession: AudioSessionProtocol {}
 
+// At this point we are only reading and `NSExtensionItem` will not change.
+extension NSExtensionItem: @retroactive @unchecked Sendable {}
+
 open class AudioPlayingManager: ObservableObject {
 
     @Published var canPlay: Bool = false
@@ -100,18 +103,17 @@ open class AudioPlayingManager: ObservableObject {
         }
 
         typealias Result = (audio: AudioFileInformation?, error: String?)
-        let result: Result = await withTaskGroup(of: Result.self) { group in
+        let result: Result = await withTaskGroup(of: Result.self, returning: Result.self) { group in
             for item in inputItems {
-                group.addTask {
+                group.addTask { @Sendable in
                     do {
                         let fileInformation = try await FindingAudioHelpers.loadAudioURL(in: item, isSecondAttempt: isSecondAttempt)
                         return (audio: fileInformation, error: nil)
                     } catch {
                         return (audio: nil, error: error.localizedDescription)
                     }
-
                     // swiftlint:disable todo
-                    // TODO: Send error to PostHot
+                    // TODO: Send error to PostHog
                     // swiftlint:enable todo
                 }
             }
@@ -121,7 +123,7 @@ open class AudioPlayingManager: ObservableObject {
                 if let audioInfo {
                     group.cancelAll()
                     return (audioInfo, nil)
-                   }
+                }
                 lastError = localizedError
             }
 
@@ -171,7 +173,7 @@ open class AudioPlayingManager: ObservableObject {
         log(event: #function)
     }
 
-    private func log(event: String, properties: [String: any Equatable]? = nil) {
+    private func log(event: sending String, properties: sending [String: any Equatable]? = nil) {
         Task.detached {
             @Inject var postHog: SuperPosthog
             postHog.capture(event, properties: properties)

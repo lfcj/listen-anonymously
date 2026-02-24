@@ -98,9 +98,10 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
         }
     }
 
+    @discardableResult
     @MainActor
-    func giveSuperKindTip() {
-        Task.detached { [purchase] in
+    func giveSuperKindTip() -> Task<Void, Error> {
+        Task(priority: .userInitiated) { [purchase] in
             await purchase(.superKindTip)
         }
     }

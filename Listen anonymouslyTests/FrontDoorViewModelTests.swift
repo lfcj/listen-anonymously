@@ -1,11 +1,11 @@
-import RevenueCat
+import Combine
 @testable import Listen_anonymously
 import Listen_Anonymously_Shared
 import XCTest
 
 final class FrontDoorViewModelTests: XCTestCase {
 
-    private final class MockPurchasesClient: PurchasesClient {
+    private final class MockPurchasesClient: PurchasesClient, @unchecked Sendable {
         var isConfigured: Bool = false
         var configuredWithKey: String?
 
@@ -71,7 +71,7 @@ final class FrontDoorViewModelTests: XCTestCase {
         let viewModel = FrontDoorViewModel(purchases: mockPurchases)
 
         // Provide product and a success purchase result
-        let productID = "donation.coffee"
+        let productID = FrontDoorViewModel.DonationType.coffee.rawValue
         mockPurchases.productsByID[productID] = DummyStoreProduct(productIdentifier: productID)
         mockPurchases.purchaseResult = ProductPurchaseResult(transaction: nil, customerInfo: DummyCustomerInfo(), userCancelled: false)
 
@@ -116,6 +116,9 @@ final class FrontDoorViewModelTests: XCTestCase {
     }
 
     func test_superKindTip_failure_logsFailed() async throws {
+        let expectation = expectation(description: "User cancelling sending good vibes donation is logged")
+        var cancellables: Set<AnyCancellable> = []
+
         // Given
         let mockPurchases = MockPurchasesClient()
         let viewModel = FrontDoorViewModel(purchases: mockPurchases)
@@ -126,31 +129,32 @@ final class FrontDoorViewModelTests: XCTestCase {
         mockPurchases.purchaseError = TestError()
 
         // When
-        viewModel.giveSuperKindTip()
-        await Task.yield()
+        try await viewModel.giveSuperKindTip().value
 
         // Then
-        XCTAssertTrue(postHogSpy.capturedEvents.contains("donation_attempt"))
-        XCTAssertTrue(postHogSpy.capturedEvents.contains("donation_failed"))
+        postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            XCTAssertTrue(events.contains("donation_attempt"))
+            XCTAssertTrue(events.contains("donation_failed"))
+
+            expectation.fulfill()
+        }).store(in: &cancellables)
+
+        await fulfillment(of: [expectation], timeout: 2.0)
     }
 }
 
-// Reuse PostHogSpy from existing tests
-final class PostHogSpy: SuperPosthog {
-    private(set) var capturedEvents: [String] = []
-    private(set) var capturedProperties: [[String: any Equatable]] = []
-
-    init(capturedEvents: [String] = [], capturedProperties: [[String: any Equatable]] = []) {
-        self.capturedEvents = capturedEvents
-        self.capturedProperties = capturedProperties
-        super.init()
-    }
+final class PostHogSpy: SuperPosthog, @unchecked Sendable {
+    @Published private(set) var capturedEvents: [String] = []
+    @Published private(set) var capturedProperties: [[String: any Equatable]] = []
+    private let lock = NSLock()
 
     override func capture(_ event: String, properties: [String: any Equatable]? = nil) {
+        lock.lock()
         capturedEvents.append(event)
         if let properties {
             capturedProperties.append(properties)
         }
+        lock.unlock()
     }
 }
 
@@ -159,3 +163,9 @@ private struct DummyStoreProduct: StoreProductProtocol {
     var productIdentifier: String
 }
 private struct DummyStoreTransaction: StoreTransactionProtocol {}
+
+private struct MockRevenueCatConfig: RevenueCatConfigProviding {
+    let apiKey: String
+
+    static let empty: MockRevenueCatConfig = MockRevenueCatConfig(apiKey: "")
+}

@@ -3,23 +3,11 @@ import Combine
 import Listen_Anonymously_Shared
 import RevenueCat
 
-protocol CustomerInfoProtocol {}
-protocol StoreProductProtocol: Sendable {
-    var productIdentifier: String { get }
-}
-protocol StoreTransactionProtocol: Sendable {}
-
-extension CustomerInfo: CustomerInfoProtocol {}
-extension StoreProduct: StoreProductProtocol {}
-extension StoreTransaction: StoreTransactionProtocol {}
-
 public struct ProductPurchaseResult {
     let transaction: StoreTransactionProtocol?
     let customerInfo: CustomerInfoProtocol
     let userCancelled: Bool
 }
-
-struct EmptyCustomerInfo: CustomerInfoProtocol {}
 
 protocol PurchasesClient: Sendable {
     var isConfigured: Bool { get }
@@ -28,6 +16,7 @@ protocol PurchasesClient: Sendable {
     func purchase(product: StoreProductProtocol) async throws -> ProductPurchaseResult
 }
 
+/// Lives on top of the actual 3rd-party RevenueCat and implements `PurchasesClient` so it can be replaceable in the Test Suite
 struct RevenueCatPurchasesClient: PurchasesClient, @unchecked Sendable {
     var isConfigured: Bool { Purchases.isConfigured }
     func configure(withAPIKey key: String) { Purchases.configure(withAPIKey: key) }
@@ -44,16 +33,6 @@ struct RevenueCatPurchasesClient: PurchasesClient, @unchecked Sendable {
             customerInfo: purchaseData.customerInfo,
             userCancelled: purchaseData.userCancelled
         )
-    }
-}
-
-protocol RevenueCatConfigProviding: Sendable {
-    var apiKey: String { get }
-}
-
-struct RevenueCatConfig: RevenueCatConfigProviding, Sendable {
-    var apiKey: String {
-        Bundle.main.revenueCatAPIKey ?? ""
     }
 }
 
@@ -172,3 +151,17 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
         }
     }
 }
+
+// MARK: - RevenueCat Sendable + Liskov + DI Support
+
+protocol CustomerInfoProtocol {}
+protocol StoreProductProtocol: Sendable {
+    var productIdentifier: String { get }
+}
+protocol StoreTransactionProtocol: Sendable {}
+
+extension CustomerInfo: CustomerInfoProtocol {}
+extension StoreProduct: StoreProductProtocol {}
+extension StoreTransaction: StoreTransactionProtocol {}
+
+struct EmptyCustomerInfo: CustomerInfoProtocol {}

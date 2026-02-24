@@ -35,15 +35,26 @@ struct FrontDoorView: View {
                 Spacer()
 
                 DonationButtonsView(
-                    buyUsCoffee: { viewModel.buyUsCoffee() },
-                    sendGoodVibes: { viewModel.sendGoodVibes() },
-                    superKindTip: { viewModel.giveSuperKindTip() }
+                    buyUsCoffee: { purchase(.coffee) },
+                    sendGoodVibes: { purchase(.coffee) },
+                    superKindTip: { purchase(.superKindTip) }
                 )
                 .padding(.horizontal, 16)
                 .padding(.bottom, 36)
                 .frame(minHeight: 280) // It does not allow 2 lines on iPhone 14, so setting a min height to force it.
             }
             .frame(maxWidth: 600)
+        }
+    }
+
+    func purchase(_ donationType: FrontDoorViewModel.DonationType) {
+        switch donationType {
+        case .coffee:
+            viewModel.buyUsCoffee()
+        case .goodVibes:
+            viewModel.sendGoodVibes()
+        case .superKindTip:
+            viewModel.giveSuperKindTip()
         }
     }
 

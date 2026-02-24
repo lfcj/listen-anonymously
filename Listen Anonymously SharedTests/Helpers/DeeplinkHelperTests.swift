@@ -2,6 +2,7 @@ import Foundation
 import Testing
 @testable import Listen_Anonymously_Shared
 
+@MainActor
 struct DeeplinkHelperTests {
 
     @Test func hasAppReturnsFalse_whenUIApplicationCannotOpenLink() {

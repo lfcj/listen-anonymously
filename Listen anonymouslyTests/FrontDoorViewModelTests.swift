@@ -57,14 +57,17 @@ final class FrontDoorViewModelTests: XCTestCase {
 
             expectation.fulfill()
         }).store(in: &cancellables)
-        
+
         await fulfillment(of: [expectation], timeout: 2.0)
     }
 
     func test_buyUsCoffee_success_logsAttemptAndSuccess() async throws {
+        let expectation = expectation(description: "coffee donation logs attempt and success")
+        var cancellables: Set<AnyCancellable> = []
+
         // Given
         let mockPurchases = MockPurchasesClient()
-        // Simulate Info.plist key via direct configure call in mock — set isConfigured false but we won't assert configure path here
+
         let viewModel = FrontDoorViewModel(purchases: mockPurchases)
 
         // Provide product and a success purchase result
@@ -73,13 +76,17 @@ final class FrontDoorViewModelTests: XCTestCase {
         mockPurchases.purchaseResult = ProductPurchaseResult(transaction: nil, customerInfo: DummyCustomerInfo(), userCancelled: false)
 
         // When
-        viewModel.buyUsCoffee()
-        // Give time for async Task to run
-        await Task.yield()
+        _ = try await viewModel.buyUsCoffee().value
 
         // Then
-        XCTAssertTrue(postHogSpy.capturedEvents.contains("donation_attempt"))
-        XCTAssertTrue(postHogSpy.capturedEvents.contains("donation_success"))
+        postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            XCTAssertTrue(events.contains("donation_attempt"))
+            XCTAssertTrue(events.contains("donation_success"))
+
+            expectation.fulfill()
+        }).store(in: &cancellables)
+
+        await fulfillment(of: [expectation], timeout: 2.0)
     }
 
     func test_sendGoodVibes_userCancelled_logsCancelled() async throws {

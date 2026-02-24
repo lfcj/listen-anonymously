@@ -4,10 +4,10 @@ import Listen_Anonymously_Shared
 import RevenueCat
 
 protocol CustomerInfoProtocol {}
-protocol StoreProductProtocol {
+protocol StoreProductProtocol: Sendable {
     var productIdentifier: String { get }
 }
-protocol StoreTransactionProtocol {}
+protocol StoreTransactionProtocol: Sendable {}
 
 extension CustomerInfo: CustomerInfoProtocol {}
 extension StoreProduct: StoreProductProtocol {}
@@ -82,8 +82,9 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
 
     // MARK: - Public API
 
+    @discardableResult
     @MainActor
-    func buyUsCoffee() {
+    func buyUsCoffee() -> Task<Void, Error> {
         Task(priority: .userInitiated) { [purchase] in
             await purchase(.coffee)
         }
@@ -142,11 +143,11 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
         }
     }
 
-    private func loadProduct(with productID: String) async throws -> StoreProduct {
+    private func loadProduct(with productID: String) async throws -> StoreProductProtocol {
         let purchases = self.purchases
         return try await withCheckedThrowingContinuation { continuation in
             purchases.getProducts([productID]) { products in
-                if let product = products.first as? StoreProduct {
+                if let product = products.first {
                     continuation.resume(returning: product)
                 } else {
                     continuation

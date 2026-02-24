@@ -4,7 +4,8 @@ import SwiftUI
 struct FrontDoorView: View {
 
     @EnvironmentObject var appState: AppState
-    @StateObject private var viewModel = FrontDoorViewModel()
+    @StateObject private var viewModel = FrontDoorViewModel(revenueCatService: RevenueCatService())
+    @State var isPurchasing = false
 
     var body: some View {
         ZStack {

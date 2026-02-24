@@ -3,7 +3,7 @@ import Combine
 import Listen_Anonymously_Shared
 import XCTest
 
-final class FrontDoorViewModelTests: XCTestCase {
+final class RevenueCatServiceTests: XCTestCase {
 
     private final class MockPurchasesClient: PurchasesClient, @unchecked Sendable {
         var isConfigured: Bool = false
@@ -44,7 +44,10 @@ final class FrontDoorViewModelTests: XCTestCase {
         let mockPurchases = MockPurchasesClient()
 
         // When
-        _ = FrontDoorViewModel(purchases: mockPurchases, revenueCatConfig: MockRevenueCatConfig.empty)
+        _ = RevenueCatService(
+            purchases: mockPurchases,
+            revenueCatConfig: MockRevenueCatConfig.empty
+        )
 
         try await Task.sleep(for: .milliseconds(500))
 
@@ -70,11 +73,14 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Given
         let mockPurchases = MockPurchasesClient()
-
-        let viewModel = FrontDoorViewModel(purchases: mockPurchases)
+        let revenueCatService = RevenueCatService(
+            purchases: mockPurchases,
+            revenueCatConfig: MockRevenueCatConfig.empty
+        )
+        let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService)
 
         // Provide product and a success purchase result
-        let productID = FrontDoorViewModel.DonationType.coffee.rawValue
+        let productID = DonationType.coffee.rawValue
         mockPurchases.productsByID[productID] = DummyStoreProduct(productIdentifier: productID)
         mockPurchases.purchaseResult = ProductPurchaseResult(transaction: nil, customerInfo: DummyCustomerInfo(), userCancelled: false)
 
@@ -102,9 +108,13 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Given
         let mockPurchases = MockPurchasesClient()
-        let viewModel = FrontDoorViewModel(purchases: mockPurchases)
+        let revenueCatService = RevenueCatService(
+            purchases: mockPurchases,
+            revenueCatConfig: MockRevenueCatConfig.empty
+        )
+        let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService)
 
-        let productID = FrontDoorViewModel.DonationType.goodVibes.rawValue
+        let productID = DonationType.goodVibes.rawValue
         mockPurchases.productsByID[productID] = DummyStoreProduct(productIdentifier: productID)
         mockPurchases.purchaseResult = ProductPurchaseResult(transaction: nil, customerInfo: DummyCustomerInfo(), userCancelled: true)
 
@@ -132,7 +142,11 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Given
         let mockPurchases = MockPurchasesClient()
-        let viewModel = FrontDoorViewModel(purchases: mockPurchases)
+        let revenueCatService = RevenueCatService(
+            purchases: mockPurchases,
+            revenueCatConfig: MockRevenueCatConfig.empty
+        )
+        let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService)
 
         let productID = "donation.superkind"
         mockPurchases.productsByID[productID] = DummyStoreProduct(productIdentifier: productID)

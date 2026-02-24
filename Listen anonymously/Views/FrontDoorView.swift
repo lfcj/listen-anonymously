@@ -47,7 +47,8 @@ struct FrontDoorView: View {
         }
     }
 
-    func purchase(_ donationType: FrontDoorViewModel.DonationType) {
+    func purchase(_ donationType: DonationType) {
+        isPurchasing = true
         switch donationType {
         case .coffee:
             viewModel.buyUsCoffee()

@@ -38,14 +38,6 @@ struct RevenueCatPurchasesClient: PurchasesClient, @unchecked Sendable {
 
 final class FrontDoorViewModel: ObservableObject, Sendable {
 
-    // MARK: - Nested Types
-
-    enum DonationType: String {
-        case coffee = "donation.coffee"
-        case goodVibes = "donation.goodvibes"
-        case superKindTip = "donation.superkind"
-    }
-
     // MARK: - Dependencies
 
     private let purchases: PurchasesClient

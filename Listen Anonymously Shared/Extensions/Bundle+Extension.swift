@@ -5,4 +5,9 @@ public extension Bundle {
     var postHogAPIKey: String? {
         return object(forInfoDictionaryKey: "PostHogAPIKey") as? String
     }
+
+    /// Use with Bundle.main.revenueCatAPIKey
+    var revenueCatAPIKey: String? {
+        return object(forInfoDictionaryKey: "RevenueCatAPIKey") as? String
+    }
 }

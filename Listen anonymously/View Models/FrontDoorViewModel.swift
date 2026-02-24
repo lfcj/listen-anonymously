@@ -19,11 +19,13 @@ public struct ProductPurchaseResult {
     let userCancelled: Bool
 }
 
+struct EmptyCustomerInfo: CustomerInfoProtocol {}
+
 protocol PurchasesClient: Sendable {
     var isConfigured: Bool { get }
     func configure(withAPIKey key: String)
     func getProducts(_ productIDs: [String], completion: @escaping ([StoreProductProtocol]) -> Void)
-    func purchase(product: StoreProduct) async throws -> ProductPurchaseResult
+    func purchase(product: StoreProductProtocol) async throws -> ProductPurchaseResult
 }
 
 struct RevenueCatPurchasesClient: PurchasesClient, @unchecked Sendable {
@@ -32,13 +34,26 @@ struct RevenueCatPurchasesClient: PurchasesClient, @unchecked Sendable {
     func getProducts(_ productIDs: [String], completion: @escaping ([StoreProductProtocol]) -> Void) {
         Purchases.shared.getProducts(productIDs, completion: completion)
     }
-    func purchase(product: StoreProduct) async throws -> ProductPurchaseResult {
+    func purchase(product: StoreProductProtocol) async throws -> ProductPurchaseResult {
+        guard let product = product as? StoreProduct else {
+            return ProductPurchaseResult(transaction: nil, customerInfo: EmptyCustomerInfo(), userCancelled: false)
+        }
         let purchaseData = try await Purchases.shared.purchase(product: product)
         return ProductPurchaseResult(
             transaction: purchaseData.transaction,
             customerInfo: purchaseData.customerInfo,
             userCancelled: purchaseData.userCancelled
         )
+    }
+}
+
+protocol RevenueCatConfigProviding: Sendable {
+    var apiKey: String { get }
+}
+
+struct RevenueCatConfig: RevenueCatConfigProviding, Sendable {
+    var apiKey: String {
+        Bundle.main.revenueCatAPIKey ?? ""
     }
 }
 
@@ -55,11 +70,13 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
     // MARK: - Dependencies
 
     private let purchases: PurchasesClient
+    private let revenueCatConfig: RevenueCatConfigProviding
 
     // MARK: - Init
 
-    init(purchases: PurchasesClient = RevenueCatPurchasesClient()) {
+    init(purchases: PurchasesClient = RevenueCatPurchasesClient(), revenueCatConfig: RevenueCatConfigProviding = RevenueCatConfig()) {
         self.purchases = purchases
+        self.revenueCatConfig = revenueCatConfig
         configureRevenueCatIfNeeded()
     }
 
@@ -93,15 +110,14 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
         // Avoid re-configuring if already configured
         if purchases.isConfigured { return }
 
-        let key = Bundle.main.object(forInfoDictionaryKey: "RevenueCatAPIKey") as? String
-
-        guard let apiKey = key, apiKey.isEmpty == false else {
+        guard !revenueCatConfig.apiKey.isEmpty else {
             log("donation_failed", properties: [
                 "reason": "missing_api_key"
             ])
             return
         }
-        purchases.configure(withAPIKey: apiKey)
+
+        purchases.configure(withAPIKey: revenueCatConfig.apiKey)
     }
 
     private func purchase(product type: DonationType) async {

@@ -23,7 +23,7 @@ final class FrontDoorViewModelTests: XCTestCase {
             completion(products)
         }
 
-        func purchase(product: StoreProduct) async throws -> ProductPurchaseResult {
+        func purchase(product: StoreProductProtocol) async throws -> ProductPurchaseResult {
             if let error = purchaseError { throw error }
             return purchaseResult ?? ProductPurchaseResult(transaction: nil, customerInfo: DummyCustomerInfo(), userCancelled: false)
         }
@@ -36,18 +36,29 @@ final class FrontDoorViewModelTests: XCTestCase {
         await InjectionResolver.shared.add(postHogSpy, for: SuperPosthog.self)
     }
 
-    func test_configureRevenueCat_missingAPIKey_logsFailure() {
+    func test_configureRevenueCat_missingAPIKey_logsFailure() async throws {
+        let expectation = expectation(description: "No api key error is logged")
+        var cancellables: Set<AnyCancellable> = []
+
         // Given: No RevenueCatAPIKey in Info.plist
         let mockPurchases = MockPurchasesClient()
 
         // When
-        _ = FrontDoorViewModel(purchases: mockPurchases)
+        _ = FrontDoorViewModel(purchases: mockPurchases, revenueCatConfig: MockRevenueCatConfig.empty)
 
-        // Then: Should have captured a failure due to missing_api_key
-        XCTAssertTrue(postHogSpy.capturedEvents.contains("donation_failed"))
-        let lastProperty: [String: any Equatable]? = postHogSpy.capturedProperties.last
-        XCTAssertEqual(lastProperty?["reason"] as? String, "missing_api_key")
-        XCTAssertFalse(mockPurchases.isConfigured)
+        try await Task.sleep(for: .milliseconds(500))
+
+        // Then
+        postHogSpy.$capturedEvents.sink(receiveValue: { [weak self] events in
+            XCTAssertTrue(events.contains("donation_failed"))
+            let lastProperty: [String: any Equatable]? = self?.postHogSpy.capturedProperties.last
+            XCTAssertEqual(lastProperty?["reason"] as? String, "missing_api_key")
+            XCTAssertFalse(mockPurchases.isConfigured)
+
+            expectation.fulfill()
+        }).store(in: &cancellables)
+        
+        await fulfillment(of: [expectation], timeout: 2.0)
     }
 
     func test_buyUsCoffee_success_logsAttemptAndSuccess() async throws {

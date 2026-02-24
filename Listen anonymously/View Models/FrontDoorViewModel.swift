@@ -8,11 +8,18 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
 
     let tippingJar: TippingJar = TippingJar()
     let revenueCarService: RevenueCatService
+    let events: AsyncStream<PurchaseEvent>
+    private let eventContinuation: AsyncStream<PurchaseEvent>.Continuation?
 
     // MARK: - Init
 
     init(revenueCatService: RevenueCatService) {
         self.revenueCarService = revenueCatService
+        var cont: AsyncStream<PurchaseEvent>.Continuation?
+        self.events = AsyncStream { continuation in
+            cont = continuation
+        }
+        self.eventContinuation = cont
     }
 
     // MARK: - Public API
@@ -20,28 +27,39 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
     @discardableResult
     @MainActor
     func buyUsCoffee() -> Task<Void, Error> {
-        Task(priority: .userInitiated) { [purchase] in
+        emit(.purchasing)
+        return Task(priority: .userInitiated) { [purchase] in
             await purchase(.coffee)
+            emit(.finished)
         }
     }
 
     @discardableResult
     @MainActor
     func sendGoodVibes() -> Task<Void, Error> {
-        Task(priority: .userInitiated) { [purchase] in
+        emit(.purchasing)
+        return Task(priority: .userInitiated) { [purchase] in
             await purchase(.goodVibes)
+            emit(.finished)
         }
     }
 
     @discardableResult
     @MainActor
     func giveSuperKindTip() -> Task<Void, Error> {
-        Task(priority: .userInitiated) { [purchase] in
+        emit(.purchasing)
+        return Task(priority: .userInitiated) { [purchase] in
             await purchase(.superKindTip)
+            emit(.finished)
         }
     }
 
     // MARK: - Private helpers
+
+    @MainActor
+    private func emit(_ kind: PurchaseEvent.Kind) {
+        eventContinuation?.yield(PurchaseEvent(kind: kind))
+    }
 
     private func purchase(product type: DonationType) async {
         await revenueCarService.purchase(product: type)

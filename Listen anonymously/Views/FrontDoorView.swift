@@ -45,6 +45,22 @@ struct FrontDoorView: View {
                 .frame(minHeight: 280) // It does not allow 2 lines on iPhone 14, so setting a min height to force it.
             }
             .frame(maxWidth: 600)
+            if isPurchasing {
+                ProgressView()
+                    .tint(.white)
+                    .progressViewStyle(.circular)
+                    .frame(width: 80, height: 80)
+            }
+        }
+        .task {
+            for await event in viewModel.events {
+                switch event.kind {
+                case .purchasing:
+                    isPurchasing = true
+                default:
+                    isPurchasing = false
+                }
+            }
         }
     }
 

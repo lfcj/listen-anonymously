@@ -35,9 +35,9 @@ struct FrontDoorView: View {
                 Spacer()
 
                 DonationButtonsView(
-                    buyUsCoffee: viewModel.buyUsCoffee,
-                    sendGoodVibes: viewModel.sendGoodVibes,
-                    superKindTip: viewModel.giveSuperKindTip
+                    buyUsCoffee: { viewModel.buyUsCoffee() },
+                    sendGoodVibes: { viewModel.sendGoodVibes() },
+                    superKindTip: { viewModel.giveSuperKindTip() }
                 )
                 .padding(.horizontal, 16)
                 .padding(.bottom, 36)

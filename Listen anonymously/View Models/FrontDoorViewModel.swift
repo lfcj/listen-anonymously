@@ -90,9 +90,10 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
         }
     }
 
+    @discardableResult
     @MainActor
-    func sendGoodVibes() {
-        Task.detached { [purchase] in
+    func sendGoodVibes() -> Task<Void, Error> {
+        Task(priority: .userInitiated) { [purchase] in
             await purchase(.goodVibes)
         }
     }

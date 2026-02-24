@@ -90,21 +90,29 @@ final class FrontDoorViewModelTests: XCTestCase {
     }
 
     func test_sendGoodVibes_userCancelled_logsCancelled() async throws {
+        let expectation = expectation(description: "User cancelling sending good vibes donation is logged")
+        var cancellables: Set<AnyCancellable> = []
+
         // Given
         let mockPurchases = MockPurchasesClient()
         let viewModel = FrontDoorViewModel(purchases: mockPurchases)
 
-        let productID = "donation.goodvibes"
+        let productID = FrontDoorViewModel.DonationType.goodVibes.rawValue
         mockPurchases.productsByID[productID] = DummyStoreProduct(productIdentifier: productID)
         mockPurchases.purchaseResult = ProductPurchaseResult(transaction: nil, customerInfo: DummyCustomerInfo(), userCancelled: true)
 
         // When
-        await viewModel.sendGoodVibes()
-        await Task.yield()
+        try await viewModel.sendGoodVibes().value
 
         // Then
-        XCTAssertTrue(postHogSpy.capturedEvents.contains("donation_attempt"))
-        XCTAssertTrue(postHogSpy.capturedEvents.contains("donation_cancelled"))
+        postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            XCTAssertTrue(events.contains("donation_attempt"))
+            XCTAssertTrue(events.contains("donation_cancelled"))
+
+            expectation.fulfill()
+        }).store(in: &cancellables)
+
+        await fulfillment(of: [expectation], timeout: 2.0)
     }
 
     func test_superKindTip_failure_logsFailed() async throws {

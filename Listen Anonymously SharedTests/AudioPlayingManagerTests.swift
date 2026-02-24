@@ -3,6 +3,7 @@ import Combine
 import Testing
 @testable import Listen_Anonymously_Shared
 
+@MainActor
 struct AudioPlayingManagerTests {
 
     @Test("Empty extensionContext stops audio search and shows error message")

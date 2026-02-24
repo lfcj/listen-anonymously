@@ -1,9 +1,9 @@
 import Foundation
 
-class FakeNSExtensionItem: NSExtensionItem {
-    private static let audioItem: NSSecureCoding = {
+class FakeNSExtensionItem: NSExtensionItem, @unchecked Sendable {
+    private static let audioData: Data = {
         let fakeAudioDataItem = Data([0x00, 0x01, 0x02, 0x03])
-        return fakeAudioDataItem as NSSecureCoding
+        return fakeAudioDataItem
     }()
 
     private var _leAttachments: [NSItemProvider] = []
@@ -15,14 +15,14 @@ class FakeNSExtensionItem: NSExtensionItem {
 
     private func withWhatsAppEmptyAudioAttachment() -> FakeNSExtensionItem {
         _leAttachments = [
-            NSItemProvider(item: Self.audioItem, typeIdentifier: "com.apple.m4a-audio")
+            NSItemProvider(item: Self.audioData as NSSecureCoding, typeIdentifier: "com.apple.m4a-audio")
         ]
         return self
     }
 
     private func withPublicIdentifierAndEmptyAudioAttachment() -> FakeNSExtensionItem {
         _leAttachments = [
-            NSItemProvider(item: Self.audioItem, typeIdentifier: "public.file-url")
+            NSItemProvider(item: Self.audioData as NSSecureCoding, typeIdentifier: "public.file-url")
         ]
         return self
     }

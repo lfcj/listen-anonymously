@@ -1,6 +1,6 @@
 import Foundation
 
-final class FakeExtensionContext: NSExtensionContext {
+final class FakeExtensionContext: NSExtensionContext, @unchecked Sendable {
 
     private var _leInputItems: [FakeNSExtensionItem] = []
 

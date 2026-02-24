@@ -83,7 +83,7 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { events in
-            guard events.contains("donation_success") else {
+            guard events.contains("donation_success"), events.contains("donation_attempt") else {
                 return
             }
 
@@ -144,6 +144,10 @@ final class FrontDoorViewModelTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            guard events.contains("donation_failed"), events.contains("donation_attempt") else {
+                return
+            }
+
             XCTAssertTrue(events.contains("donation_attempt"))
             XCTAssertTrue(events.contains("donation_failed"))
 

@@ -1,0 +1,8 @@
+[tools]
+tuist = "latest"
+
+# Optional: Pin to specific version if needed
+# tuist = "4.31.0"
+
+[settings]
+experimental = true

@@ -1,0 +1,65 @@
+name: All tests with Tuist
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: macos-15
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_16.0.app
+    
+    - name: Install Tuist
+      run: curl -Ls https://install.tuist.io | bash
+      
+    - name: Add Tuist to PATH
+      run: echo "$HOME/.tuist/bin" >> $GITHUB_PATH
+    
+    - name: Create Secrets.xcconfig
+      run: |
+        cat > Secrets.xcconfig << EOF
+        DEV_TEAM_SECRET = ${{ secrets.DEVELOPMENT_TEAM }}
+        POSTHOG_API_KEY = ${{ secrets.POSTHOG_API_KEY }}
+        REVENUE_CAT_KEY = ${{ secrets.REVENUE_CAT_KEY }}
+        EOF
+    
+    - name: Install SPM Dependencies
+      run: tuist install
+    
+    - name: Generate Xcode Project
+      run: tuist generate
+    
+    - name: Run Tests
+      run: |
+        xcodebuild test \
+          -workspace "Listen anonymously.xcworkspace" \
+          -scheme "Listen anonymously" \
+          -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+          -enableCodeCoverage YES \
+          -derivedDataPath DerivedData
+    
+    - name: Generate Code Coverage Report
+      run: |
+        xcrun llvm-cov export \
+          -format="lcov" \
+          -instr-profile DerivedData/Build/ProfileData/*/Coverage.profdata \
+          DerivedData/Build/Products/Debug-iphonesimulator/Listen\ anonymously.app/Listen\ anonymously \
+          > coverage.lcov
+    
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./coverage.lcov
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true
+        token: ${{ secrets.CODECOV_TOKEN }}

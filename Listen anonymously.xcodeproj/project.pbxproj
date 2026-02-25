@@ -14,6 +14,17 @@
 		3CCFCA5A2D3F0FCD0090D88D /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCFCA592D3F0FCD0090D88D /* UniformTypeIdentifiers.framework */; };
 		3CCFCA662D3F0FCD0090D88D /* Listen anonymously Ext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CCFCB8E2D4198D00090D88D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CCFCB8D2D4198D00090D88D /* README.md */; };
+		3CDB84AB2F4F552C0006E21D /* PROJECT_STRUCTURE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84AA2F4F552C0006E21D /* PROJECT_STRUCTURE.md */; };
+		3CDB84AD2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84AC2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md */; };
+		3CDB84AF2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84AE2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md */; };
+		3CDB84B12F4F560B0006E21D /* ARCHITECTURE_DIAGRAMS.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84B02F4F560B0006E21D /* ARCHITECTURE_DIAGRAMS.md */; };
+		3CDB84B32F4F56440006E21D /* TUIST_QUICK_REFERENCE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84B22F4F56440006E21D /* TUIST_QUICK_REFERENCE.md */; };
+		3CDB84B52F4F571F0006E21D /* setup-tuist.fish in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84B42F4F571F0006E21D /* setup-tuist.fish */; };
+		3CDB84B72F4F57220006E21D /* .mise.toml in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84B62F4F57220006E21D /* .mise.toml */; };
+		3CDB84B92F4F57560006E21D /* FISH_SHELL_GUIDE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84B82F4F57560006E21D /* FISH_SHELL_GUIDE.md */; };
+		3CDB84BB2F4F57680006E21D /* .github-workflows-tuist-tests.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84BA2F4F57680006E21D /* .github-workflows-tuist-tests.yml */; };
+		3CDB84BD2F4F57C10006E21D /* FISH_MISE_SUMMARY.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84BC2F4F57C10006E21D /* FISH_MISE_SUMMARY.md */; };
+		3CDB84BF2F4F57F40006E21D /* PROJECT_STRUCTURE_CORRECT_VS_INCORRECT.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84BE2F4F57F40006E21D /* PROJECT_STRUCTURE_CORRECT_VS_INCORRECT.md */; };
 		3CDF615B2F412EF30050739D /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 3CDF615A2F412EF30050739D /* RevenueCat */; };
 		3CFA3BDB2E9CE38000D0A378 /* Listen_Anonymously_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */; };
 		3CFA3BE52E9CE38000D0A378 /* Listen_Anonymously_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */; };
@@ -142,6 +153,17 @@
 		3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Listen anonymously Ext.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CCFCA592D3F0FCD0090D88D /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		3CCFCB8D2D4198D00090D88D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3CDB84AA2F4F552C0006E21D /* PROJECT_STRUCTURE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PROJECT_STRUCTURE.md; sourceTree = "<group>"; };
+		3CDB84AC2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TUIST_INTEGRATION_SUMMARY.md; sourceTree = "<group>"; };
+		3CDB84AE2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = BEFORE_AFTER_COMPARISON.md; sourceTree = "<group>"; };
+		3CDB84B02F4F560B0006E21D /* ARCHITECTURE_DIAGRAMS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ARCHITECTURE_DIAGRAMS.md; sourceTree = "<group>"; };
+		3CDB84B22F4F56440006E21D /* TUIST_QUICK_REFERENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TUIST_QUICK_REFERENCE.md; sourceTree = "<group>"; };
+		3CDB84B42F4F571F0006E21D /* setup-tuist.fish */ = {isa = PBXFileReference; lastKnownFileType = text; path = "setup-tuist.fish"; sourceTree = "<group>"; };
+		3CDB84B62F4F57220006E21D /* .mise.toml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .mise.toml; sourceTree = "<group>"; };
+		3CDB84B82F4F57560006E21D /* FISH_SHELL_GUIDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = FISH_SHELL_GUIDE.md; sourceTree = "<group>"; };
+		3CDB84BA2F4F57680006E21D /* .github-workflows-tuist-tests.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = ".github-workflows-tuist-tests.yml"; sourceTree = "<group>"; };
+		3CDB84BC2F4F57C10006E21D /* FISH_MISE_SUMMARY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = FISH_MISE_SUMMARY.md; sourceTree = "<group>"; };
+		3CDB84BE2F4F57F40006E21D /* PROJECT_STRUCTURE_CORRECT_VS_INCORRECT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PROJECT_STRUCTURE_CORRECT_VS_INCORRECT.md; sourceTree = "<group>"; };
 		3CFA3B9A2E9C3A9B00D0A378 /* Listen anonymously Ext Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen anonymously Ext Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFA3BD02E9CE38000D0A378 /* Listen_Anonymously_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Listen_Anonymously_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFA3BDA2E9CE38000D0A378 /* Listen Anonymously SharedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Listen Anonymously SharedTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -326,6 +348,17 @@
 				3CCE0A282F3DEBF3001D8DBC /* Listen anonymouslyUITests */,
 				3CCFCA582D3F0FCD0090D88D /* Frameworks */,
 				3CCFCA082D3EFD850090D88D /* Products */,
+				3CDB84AA2F4F552C0006E21D /* PROJECT_STRUCTURE.md */,
+				3CDB84AC2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md */,
+				3CDB84AE2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md */,
+				3CDB84B02F4F560B0006E21D /* ARCHITECTURE_DIAGRAMS.md */,
+				3CDB84B22F4F56440006E21D /* TUIST_QUICK_REFERENCE.md */,
+				3CDB84B42F4F571F0006E21D /* setup-tuist.fish */,
+				3CDB84B62F4F57220006E21D /* .mise.toml */,
+				3CDB84B82F4F57560006E21D /* FISH_SHELL_GUIDE.md */,
+				3CDB84BA2F4F57680006E21D /* .github-workflows-tuist-tests.yml */,
+				3CDB84BC2F4F57C10006E21D /* FISH_MISE_SUMMARY.md */,
+				3CDB84BE2F4F57F40006E21D /* PROJECT_STRUCTURE_CORRECT_VS_INCORRECT.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -656,7 +689,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CDB84BF2F4F57F40006E21D /* PROJECT_STRUCTURE_CORRECT_VS_INCORRECT.md in Resources */,
+				3CDB84B52F4F571F0006E21D /* setup-tuist.fish in Resources */,
+				3CDB84BD2F4F57C10006E21D /* FISH_MISE_SUMMARY.md in Resources */,
+				3CDB84AB2F4F552C0006E21D /* PROJECT_STRUCTURE.md in Resources */,
+				3CDB84B72F4F57220006E21D /* .mise.toml in Resources */,
+				3CDB84AD2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md in Resources */,
+				3CDB84B32F4F56440006E21D /* TUIST_QUICK_REFERENCE.md in Resources */,
+				3CDB84B12F4F560B0006E21D /* ARCHITECTURE_DIAGRAMS.md in Resources */,
 				3CCFCB8E2D4198D00090D88D /* README.md in Resources */,
+				3CDB84B92F4F57560006E21D /* FISH_SHELL_GUIDE.md in Resources */,
+				3CDB84AF2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md in Resources */,
+				3CDB84BB2F4F57680006E21D /* .github-workflows-tuist-tests.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

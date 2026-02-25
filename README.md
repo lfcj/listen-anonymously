@@ -37,11 +37,42 @@ https://codecov.io/gh/lfcj/listen-anonymously
 - App has >90% test coverage ✅
 - SwiftUI views are heavily tested using [`ViewInspector`](https://github.com/nalexn/ViewInspector). The goal was to have all the logic in view models, modify them, and inspect the view to make sure it displays the modified data accordingly.
 
-## Build based on xcconfig
+## Project Setup with Tuist
 
-- Hiding sensitive data such as the `DEVELOPMENT_TEAM` was done using `.xcconfig` files that are local. Manual sign-in was also implemented by using provisioning files.
+This project uses **Tuist** for project generation, removing the need to commit `.pbxproj` files and making project configuration more maintainable.
+
+### Quick Start
+
+#### Using Bash
+
+```bash
+chmod +x setup-tuist.sh
+./setup-tuist.sh
+```
+
+#### Using Fish Shell + mise (Recommended)
+
+```fish
+chmod +x setup-tuist.fish
+./setup-tuist.fish
+```
+
+Then open the workspace:
+
+```bash
+open "Listen anonymously.xcworkspace"
+```
+
+For detailed setup instructions:
+- **General setup**: See [TUIST_SETUP.md](TUIST_SETUP.md)
+- **Fish shell + mise**: See [FISH_SHELL_GUIDE.md](FISH_SHELL_GUIDE.md)
+
+### Build Configuration via xcconfig
+
+- Hiding sensitive data such as the `DEVELOPMENT_TEAM` is done using `.xcconfig` files that are local. Manual sign-in was also implemented by using provisioning files.
 - Deployment target is also managed in `xcconfig` file in order to avoid having to manually modify the Build Settings of all targets.
 - `Secrets.xcconfig` is a local file that is git-ignored. It includes the development team information. In the CI, the workflow reads a Github Action Secret with the same data and creates the `xcconfig` file with it.
+- Project structure is defined in `Project.swift` using Tuist's declarative API.
 
 ## CI
 Github Actions is used to make sure all tests pass and the code coverage remains high.

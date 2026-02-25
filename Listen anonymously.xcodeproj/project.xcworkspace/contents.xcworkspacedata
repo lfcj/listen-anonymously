@@ -4,28 +4,4 @@
    <FileRef
       location = "self:">
    </FileRef>
-   <FileRef
-      location = "group:Project.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Package.swift">
-   </FileRef>
-   <FileRef
-      location = "group:TuistConfig.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Config.swift">
-   </FileRef>
-   <FileRef
-      location = "group:TUIST_SETUP.md">
-   </FileRef>
-   <FileRef
-      location = "group:Secrets.xcconfig.example">
-   </FileRef>
-   <FileRef
-      location = "group:TUIST_MIGRATION_CHECKLIST.md">
-   </FileRef>
-   <FileRef
-      location = "group:setup-tuist.sh">
-   </FileRef>
 </Workspace>

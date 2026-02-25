@@ -14,6 +14,11 @@
 		3CCFCA5A2D3F0FCD0090D88D /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CCFCA592D3F0FCD0090D88D /* UniformTypeIdentifiers.framework */; };
 		3CCFCA662D3F0FCD0090D88D /* Listen anonymously Ext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3CCFCB8E2D4198D00090D88D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CCFCB8D2D4198D00090D88D /* README.md */; };
+		3CD0670C2F4F5CCF005CFC98 /* RESTRUCTURING_GUIDE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CD0670B2F4F5CCF005CFC98 /* RESTRUCTURING_GUIDE.md */; };
+		3CD0670E2F4F5D03005CFC98 /* DIRECTORY_STRUCTURE_BEFORE_AFTER.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CD0670D2F4F5D03005CFC98 /* DIRECTORY_STRUCTURE_BEFORE_AFTER.md */; };
+		3CD067102F4F5D3C005CFC98 /* QUICK_RESTRUCTURE_CHECKLIST.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CD0670F2F4F5D3C005CFC98 /* QUICK_RESTRUCTURE_CHECKLIST.md */; };
+		3CD067122F4F5D68005CFC98 /* FILE_ORGANIZATION_SUMMARY.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CD067112F4F5D68005CFC98 /* FILE_ORGANIZATION_SUMMARY.md */; };
+		3CD067142F4F5DA3005CFC98 /* VISUAL_MIGRATION_GUIDE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CD067132F4F5DA3005CFC98 /* VISUAL_MIGRATION_GUIDE.md */; };
 		3CDB84AB2F4F552C0006E21D /* PROJECT_STRUCTURE.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84AA2F4F552C0006E21D /* PROJECT_STRUCTURE.md */; };
 		3CDB84AD2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84AC2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md */; };
 		3CDB84AF2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md in Resources */ = {isa = PBXBuildFile; fileRef = 3CDB84AE2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md */; };
@@ -153,6 +158,11 @@
 		3CCFCA572D3F0FCD0090D88D /* Listen anonymously Ext.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Listen anonymously Ext.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CCFCA592D3F0FCD0090D88D /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		3CCFCB8D2D4198D00090D88D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3CD0670B2F4F5CCF005CFC98 /* RESTRUCTURING_GUIDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = RESTRUCTURING_GUIDE.md; sourceTree = "<group>"; };
+		3CD0670D2F4F5D03005CFC98 /* DIRECTORY_STRUCTURE_BEFORE_AFTER.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DIRECTORY_STRUCTURE_BEFORE_AFTER.md; sourceTree = "<group>"; };
+		3CD0670F2F4F5D3C005CFC98 /* QUICK_RESTRUCTURE_CHECKLIST.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = QUICK_RESTRUCTURE_CHECKLIST.md; sourceTree = "<group>"; };
+		3CD067112F4F5D68005CFC98 /* FILE_ORGANIZATION_SUMMARY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = FILE_ORGANIZATION_SUMMARY.md; sourceTree = "<group>"; };
+		3CD067132F4F5DA3005CFC98 /* VISUAL_MIGRATION_GUIDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = VISUAL_MIGRATION_GUIDE.md; sourceTree = "<group>"; };
 		3CDB84AA2F4F552C0006E21D /* PROJECT_STRUCTURE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PROJECT_STRUCTURE.md; sourceTree = "<group>"; };
 		3CDB84AC2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TUIST_INTEGRATION_SUMMARY.md; sourceTree = "<group>"; };
 		3CDB84AE2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = BEFORE_AFTER_COMPARISON.md; sourceTree = "<group>"; };
@@ -174,29 +184,29 @@
 		3CCFCA672D3F0FCD0090D88D /* Exceptions for "Listen anonymously Ext" folder in "Listen anonymously Ext" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 3CCFCA562D3F0FCD0090D88D /* Listen anonymously Ext */;
 		};
 		3CFA3BA42E9C3B7700D0A378 /* Exceptions for "Listen anonymously Ext" folder in "Listen anonymously Ext Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"/Localized: MainInterface.storyboard",
-				ActionViewController.swift,
+				"/Localized: Resources/MainInterface.storyboard",
+				Sources/ActionViewController.swift,
 			);
 			target = 3CFA3B992E9C3A9B00D0A378 /* Listen anonymously Ext Tests */;
 		};
 		3CFA3BF22E9CE6EF00D0A378 /* Exceptions for "Listen Anonymously Shared" folder in "Listen anonymously" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"TestResources/AUDIO-2024-02-23-14-21-50.mp3",
+				"Resources/TestResources/AUDIO-2024-02-23-14-21-50.mp3",
 			);
 			target = 3CCFCA062D3EFD850090D88D /* Listen anonymously */;
 		};
 		3CFA3BF42E9CE6EF00D0A378 /* Exceptions for "Listen Anonymously Shared" folder in "Listen Anonymously Shared" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"TestResources/AUDIO-2024-02-23-14-21-50.mp3",
+				"Resources/TestResources/AUDIO-2024-02-23-14-21-50.mp3",
 			);
 			target = 3CFA3BCF2E9CE38000D0A378 /* Listen Anonymously Shared */;
 		};
@@ -359,6 +369,11 @@
 				3CDB84BA2F4F57680006E21D /* .github-workflows-tuist-tests.yml */,
 				3CDB84BC2F4F57C10006E21D /* FISH_MISE_SUMMARY.md */,
 				3CDB84BE2F4F57F40006E21D /* PROJECT_STRUCTURE_CORRECT_VS_INCORRECT.md */,
+				3CD0670B2F4F5CCF005CFC98 /* RESTRUCTURING_GUIDE.md */,
+				3CD0670D2F4F5D03005CFC98 /* DIRECTORY_STRUCTURE_BEFORE_AFTER.md */,
+				3CD0670F2F4F5D3C005CFC98 /* QUICK_RESTRUCTURE_CHECKLIST.md */,
+				3CD067112F4F5D68005CFC98 /* FILE_ORGANIZATION_SUMMARY.md */,
+				3CD067132F4F5DA3005CFC98 /* VISUAL_MIGRATION_GUIDE.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -695,12 +710,17 @@
 				3CDB84AB2F4F552C0006E21D /* PROJECT_STRUCTURE.md in Resources */,
 				3CDB84B72F4F57220006E21D /* .mise.toml in Resources */,
 				3CDB84AD2F4F55670006E21D /* TUIST_INTEGRATION_SUMMARY.md in Resources */,
+				3CD0670E2F4F5D03005CFC98 /* DIRECTORY_STRUCTURE_BEFORE_AFTER.md in Resources */,
 				3CDB84B32F4F56440006E21D /* TUIST_QUICK_REFERENCE.md in Resources */,
+				3CD067122F4F5D68005CFC98 /* FILE_ORGANIZATION_SUMMARY.md in Resources */,
 				3CDB84B12F4F560B0006E21D /* ARCHITECTURE_DIAGRAMS.md in Resources */,
 				3CCFCB8E2D4198D00090D88D /* README.md in Resources */,
 				3CDB84B92F4F57560006E21D /* FISH_SHELL_GUIDE.md in Resources */,
+				3CD067102F4F5D3C005CFC98 /* QUICK_RESTRUCTURE_CHECKLIST.md in Resources */,
 				3CDB84AF2F4F55B80006E21D /* BEFORE_AFTER_COMPARISON.md in Resources */,
+				3CD067142F4F5DA3005CFC98 /* VISUAL_MIGRATION_GUIDE.md in Resources */,
 				3CDB84BB2F4F57680006E21D /* .github-workflows-tuist-tests.yml in Resources */,
+				3CD0670C2F4F5CCF005CFC98 /* RESTRUCTURING_GUIDE.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

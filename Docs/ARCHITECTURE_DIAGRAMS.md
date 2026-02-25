@@ -336,6 +336,10 @@ Legend:
 
 ## File Organization
 
+⚠️ **Important:** Your target directories must have `Sources/` and `Resources/` subdirectories!
+
+See **RESTRUCTURING_GUIDE.md** and **DIRECTORY_STRUCTURE_BEFORE_AFTER.md** for detailed migration steps.
+
 ```
 listen-anonymously/
 │
@@ -343,7 +347,9 @@ listen-anonymously/
 │   ├── Project.swift              ✅ Commit - Project manifest
 │   ├── Package.swift              ✅ Commit - SPM dependencies
 │   ├── Config.swift               ✅ Commit - Tuist config
-│   └── setup-tuist.sh             ✅ Commit - Setup automation
+│   ├── .mise.toml                 ✅ Commit - Tool versions
+│   ├── setup-tuist.fish           ✅ Commit - Fish setup
+│   └── setup-tuist.sh             ✅ Commit - Bash setup
 │
 ├── 🔧 Build Configuration
 │   ├── Debug.xcconfig             ✅ Commit - Debug settings
@@ -351,22 +357,39 @@ listen-anonymously/
 │   ├── Secrets.xcconfig           🔒 IGNORE - Actual secrets
 │   └── Secrets.xcconfig.example   ✅ Commit - Template
 │
-├── 📱 App Target
+├── 📱 App Target (MUST have Sources/ and Resources/)
 │   └── Listen anonymously/
-│       ├── Sources/               ✅ Commit - Swift files
-│       └── Resources/             ✅ Commit - Assets, etc.
+│       ├── Sources/               ✅ Commit - ALL Swift files go here
+│       │   ├── App/
+│       │   ├── Views/
+│       │   ├── ViewModels/
+│       │   └── *.swift
+│       └── Resources/             ✅ Commit - ALL resources go here
+│           ├── Assets.xcassets
+│           ├── Info.plist
+│           └── *.storyboard
 │
-├── 🧩 Extension Target
+├── 🧩 Extension Target (MUST have Sources/ and Resources/)
 │   └── Listen anonymously Ext/
-│       ├── Sources/               ✅ Commit - Swift files
-│       └── Resources/             ✅ Commit - Storyboards, etc.
+│       ├── Sources/               ✅ Commit - ALL Swift files
+│       │   └── *.swift
+│       └── Resources/             ✅ Commit - ALL resources
+│           ├── Assets.xcassets
+│           ├── Info.plist
+│           └── MainInterface.storyboard
 │
-├── 📦 Shared Framework
+├── 📦 Shared Framework (MUST have Sources/ and Resources/)
 │   └── Listen Anonymously Shared/
-│       ├── Sources/               ✅ Commit - Shared code
-│       └── Resources/             ✅ Commit - Shared assets
+│       ├── Sources/               ✅ Commit - ALL Swift files
+│       │   ├── Models/
+│       │   ├── Services/
+│       │   ├── Views/
+│       │   ├── Extensions/
+│       │   └── *.swift
+│       └── Resources/             ✅ Commit - ALL resources
+│           └── Assets.xcassets
 │
-├── 🧪 Test Targets
+├── 🧪 Test Targets (can be flat or organized)
 │   ├── Listen anonymously Tests/          ✅ Commit - Tests
 │   ├── Listen Anonymously Shared Tests/   ✅ Commit - Tests
 │   └── Listen anonymously Ext Tests/      ✅ Commit - Tests
@@ -374,6 +397,9 @@ listen-anonymously/
 ├── 📚 Documentation
 │   ├── README.md                          ✅ Commit
 │   ├── TUIST_SETUP.md                     ✅ Commit
+│   ├── FISH_SHELL_GUIDE.md                ✅ Commit
+│   ├── RESTRUCTURING_GUIDE.md             ✅ Commit ⭐ READ THIS!
+│   ├── DIRECTORY_STRUCTURE_BEFORE_AFTER.md ✅ Commit ⭐ READ THIS!
 │   ├── TUIST_MIGRATION_CHECKLIST.md       ✅ Commit
 │   ├── TUIST_INTEGRATION_SUMMARY.md       ✅ Commit
 │   ├── PROJECT_STRUCTURE.md               ✅ Commit

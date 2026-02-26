@@ -9,7 +9,7 @@ struct PlayingRateButton: View {
             action: action,
             label: {
                 Text(title)
-                    .foregroundStyle(.laPurpleText)
+                    .foregroundStyle(Color.laPurpleText)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
             }

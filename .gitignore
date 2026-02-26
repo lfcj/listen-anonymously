@@ -20,6 +20,7 @@ xcuserdata/
 
 ## SwiftPM
 xcshareddata/swiftpm
+.swiftpm
 
 ## Obj-C/Swift specific
 *.hmap

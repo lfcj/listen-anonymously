@@ -157,6 +157,7 @@ let project = Project(
             deploymentTargets: .iOS("18.0"),
             infoPlist: .default,
             sources: ["Listen Anonymously SharedTests/**"],
+            resources: ["Listen Anonymously Shared/Resources/TestResources/**"],
             dependencies: [
                 .target(name: "Listen-Anonymously-Shared"),
                 .package(product: "ViewInspector")

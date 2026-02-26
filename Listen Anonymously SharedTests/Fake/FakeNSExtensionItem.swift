@@ -45,7 +45,7 @@ class FakeNSExtensionItem: NSExtensionItem, @unchecked Sendable {
     }
 
     private func withValidURLAndRealAudioFile() -> FakeNSExtensionItem {
-        let realURL = Bundle.main.url(forResource: "AUDIO-2024-02-23-14-21-50", withExtension: "mp3")!
+        let realURL = Bundle(for: Self.self).url(forResource: "AUDIO-2024-02-23-14-21-50", withExtension: "mp3")!
 
         _leAttachments = [
             NSItemProvider(item: realURL as NSURL, typeIdentifier: "com.apple.m4a-audio")

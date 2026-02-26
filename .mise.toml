@@ -1,8 +1,8 @@
 [tools]
-tuist = "latest"
+#tuist = "latest"
 
 # Optional: Pin to specific version if needed
-# tuist = "4.31.0"
+tuist = "4.31.0" #Needed because there is a bug generating RevenueCat
 
 [settings]
 experimental = true

@@ -176,9 +176,16 @@ let project = Project(
             bundleId: "com.reginafallangi.Listen-anonymously-Ext-Tests",
             deploymentTargets: .iOS("18.0"),
             infoPlist: .default,
-            sources: ["Listen anonymously Ext Tests/**"],
+            sources: [
+                "Listen anonymously Ext Tests/**",
+                "Listen anonymously Ext/Sources/**"
+            ],
+            resources: [
+                .glob(pattern: "Listen anonymously Ext/Resources/**", excluding: ["Listen anonymously Ext/Resources/Info.plist"])
+            ],
             dependencies: [
                 .target(name: "Listen-Anonymously-Shared"),
+                .target(name: "Listen-anonymously"),
                 .package(product: "ViewInspector")
             ],
             settings: .settings(

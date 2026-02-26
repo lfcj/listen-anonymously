@@ -53,7 +53,7 @@ import XCTest
 
  }
 
-private final class LocalPostHogSpy: SuperPosthog, @unchecked Sendable {
+final class LocalPostHogSpy: SuperPosthog, @unchecked Sendable {
     private(set) var capturedEvents: [String] = []
     private(set) var capturedProperties: [[String: any Equatable]] = []
     private let lock = NSLock()

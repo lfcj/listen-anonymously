@@ -6,6 +6,11 @@ import Testing
 @MainActor
 struct AudioPlayingManagerTests {
 
+    init() {
+        Task {
+            await InjectionResolver.shared.add(LocalPostHogSpy(), for: SuperPosthog.self)
+        }
+    }
     @Test("Empty extensionContext stops audio search and shows error message")
     func emptyExtensionContext_stopsAudioSearchAndShowsErrorMessage() async throws {
         let manager = AudioPlayingManager(extensionContext: nil)

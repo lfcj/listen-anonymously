@@ -2,9 +2,11 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-## Tuist Generate
+## Tuist
 *.xcodeproj
 *.xcworkspace
+Derived/
+Tuist/.build/
 
 ## Configuration
 Configuration/Secrets.xcconfig

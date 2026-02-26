@@ -2,6 +2,7 @@ import Listen_Anonymously_Shared
 import SwiftUI
 import UIKit
 
+@MainActor
 class ActionViewController: UIViewController {
 
     private(set) lazy var playingManager = AudioPlayingManager(extensionContext: self.extensionContext)
@@ -49,7 +50,9 @@ class ActionViewController: UIViewController {
             // swiftlint:enable todo
             return
         }
-        InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
+        Task {
+            await InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
+        }
     }
 
     override func viewDidLoad() {

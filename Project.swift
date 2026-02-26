@@ -11,7 +11,7 @@ let project = Project(
         // .remote(url: "https://github.com/RevenueCat/purchases-ios.git", requirement: .upToNextMajor(from: "5.59.2")),
         // .remote(url: "https://github.com/PostHog/posthog-ios.git", requirement: .upToNextMajor(from: "3.41.1")),
         // .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .upToNextMajor(from: "0.10.3"))
-        .remote(url: "https://github.com/RevenueCat/purchases-ios.git", requirement: .exact("4.10.0")),
+        .remote(url: "https://github.com/RevenueCat/purchases-ios.git", requirement: .exact("5.59.2")),
         .remote(url: "https://github.com/PostHog/posthog-ios.git", requirement: .exact("3.41.2")),
         .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .exact("0.10.3"))
     ],
@@ -55,9 +55,7 @@ let project = Project(
             settings: .settings(
                 base: [
                     "DEVELOPMENT_TEAM": "$(DEV_TEAM_SECRET)",
-                    "CODE_SIGN_STYLE": "Manual",
-                    "CODE_SIGN_IDENTITY": "Apple Development",
-                    "PROVISIONING_PROFILE_SPECIFIER": "iOS Team Provisioning Profile: *"
+                    "CODE_SIGN_STYLE": "Automatic"
                 ],
                 configurations: [
                     .debug(name: "Debug"),
@@ -95,9 +93,7 @@ let project = Project(
             settings: .settings(
                 base: [
                     "DEVELOPMENT_TEAM": "$(DEV_TEAM_SECRET)",
-                    "CODE_SIGN_STYLE": "Manual",
-                    "CODE_SIGN_IDENTITY": "Apple Development",
-                    "PROVISIONING_PROFILE_SPECIFIER": "iOS Team Provisioning Profile: *"
+                    "CODE_SIGN_STYLE": "Automatic"
                 ],
                 configurations: [
                     .debug(name: "Debug"),
@@ -122,8 +118,7 @@ let project = Project(
             settings: .settings(
                 base: [
                     "DEVELOPMENT_TEAM": "$(DEV_TEAM_SECRET)",
-                    "CODE_SIGN_STYLE": "Manual",
-                    "CODE_SIGN_IDENTITY": "Apple Development",
+                    "CODE_SIGN_STYLE": "Automatic",
                     "DEFINES_MODULE": "YES"
                 ],
                 configurations: [

@@ -13,7 +13,8 @@ let project = Project(
         // .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .upToNextMajor(from: "0.10.3"))
         .remote(url: "https://github.com/RevenueCat/purchases-ios.git", requirement: .exact("5.59.2")),
         .remote(url: "https://github.com/PostHog/posthog-ios.git", requirement: .exact("3.41.2")),
-        .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .exact("0.10.3"))
+        .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .exact("0.10.3")),
+        .remote(url: "https://github.com/element-hq/swift-ogg.git", requirement: .exact("0.0.3"))
     ],
     settings: .settings(
         configurations: [
@@ -113,7 +114,8 @@ let project = Project(
             sources: ["Listen Anonymously Shared/Sources/**"],
             resources: ["Listen Anonymously Shared/Resources/**"],
             dependencies: [
-                .package(product: "PostHog")
+                .package(product: "PostHog"),
+                .package(product: "SwiftOGG")
             ],
             settings: .settings(
                 base: [

@@ -1,6 +1,24 @@
 {
-  "originHash" : "3754e27f228c6d639162bb63fdc75a8c4b0197b8990f47ad13ee62498385b638",
+  "originHash" : "55ff7d91fb9592c98d243eca6284564a575ebbdb5a985359c87603d4f71ba3c8",
   "pins" : [
+    {
+      "identity" : "ogg-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vector-im/ogg-swift.git",
+      "state" : {
+        "revision" : "9d82ed838404f10b607a1a1689f404563e9115c3",
+        "version" : "0.8.3"
+      }
+    },
+    {
+      "identity" : "opus-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vector-im/opus-swift",
+      "state" : {
+        "revision" : "11f1887767cbc87c4b64b789ee830b779cc744cb",
+        "version" : "0.8.4"
+      }
+    },
     {
       "identity" : "posthog-ios",
       "kind" : "remoteSourceControl",
@@ -17,6 +35,15 @@
       "state" : {
         "revision" : "828a464d12ff8fe4f633ef1b0116e76fd2a1e462",
         "version" : "5.59.2"
+      }
+    },
+    {
+      "identity" : "swift-ogg",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/element-hq/swift-ogg.git",
+      "state" : {
+        "revision" : "d60d4dd3eaaa3b07eafed76420ea03b79a516a13",
+        "version" : "0.0.3"
       }
     },
     {

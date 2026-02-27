@@ -11,7 +11,7 @@ struct AudioLoadingViewTests {
         let text = try view.inspect().vStack().text(0)
         let textValue = try text.string()
 
-        #expect(textValue == "Loading...")
+        #expect(textValue == My.localizedString("LOADING"))
     }
 
     @Test func containsProgressView() throws {

@@ -25,7 +25,7 @@ struct InstructionsView: View {
 
             VStack {
                 HStack {
-                    Label("How to use?", systemImage: "list.number")
+                    Label(My.localizedString("HOW_TO_USE_TITLE"), systemImage: "list.number")
                         .font(.system(size: 44, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                         .bold()
@@ -34,7 +34,7 @@ struct InstructionsView: View {
 
                 if viewModel.needsPicker {
                     VStack {
-                        Picker("Supported App", selection: $viewModel.selectedApp) {
+                        Picker(My.localizedString("SUPPORTED_APP"), selection: $viewModel.selectedApp) {
                             ForEach(viewModel.supportedApps) { app in
                                 Text(app.rawValue)
                                     .tag(app)

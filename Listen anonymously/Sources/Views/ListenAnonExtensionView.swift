@@ -4,7 +4,7 @@ import Listen_Anonymously_Shared
 struct ListenAnonExtensionView: View {
     var body: some View {
         Label {
-            Text("Listen anonymously")
+            Text(My.localizedString("LISTEN_ANONYMOUSLY"))
         } icon: {
             Image("anon-icon", bundle: Bundle(for: AudioPlayingManager.self))
                 .renderingMode(.template)

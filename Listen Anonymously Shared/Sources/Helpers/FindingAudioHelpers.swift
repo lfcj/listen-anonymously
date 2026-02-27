@@ -34,11 +34,11 @@ extension FindingAudioError: LocalizedError {
             let fileType = String(typeIdentifier.split(separator: ".").last ?? "").nilIfEmpty
             return "\(My.localizedString("NOT_FOUND_ATTACHMENT_ERROR")). \(My.localizedString("FOUND_TYPEIDENTIFIER")): \(fileType ?? typeIdentifier)"
         case .couldNotConvertLoadedItemToURL:
-            return "Shared item could not be read. Try with another one or ping us so we can research." // Localize-it
+            return My.localizedString("COULD_NOT_READ_SHARED_ITEM")
         case .couldNotLoadItem(let error):
-            return "Unknown error: \(error.localizedDescription)" // Localize-it
+            return "\(My.localizedString("UNKNOWN_ERROR")): \(error.localizedDescription)"
         case .telegramConversionNotPossible:
-            return "Could not convert Telegram audio to a format we can use. Try with another one or ping us so we can research." // Localize-it
+            return My.localizedString("TELEGRAM_CONVERSION_ERROR")
         }
     }
 }

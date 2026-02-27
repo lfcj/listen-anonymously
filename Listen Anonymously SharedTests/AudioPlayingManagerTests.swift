@@ -12,7 +12,7 @@ struct AudioPlayingManagerTests {
 
         await manager.findAudio()
 
-        #expect(manager.errorMessage == "No audio file could be find. Please check you selected only one file.")
+        #expect(manager.errorMessage == My.localizedString("NO_AUDIO_FILE_FOUND"))
 
     }
 

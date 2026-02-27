@@ -78,7 +78,7 @@ class ActionViewController: UIViewController {
             style = .done
         }
         return UIBarButtonItem(
-            title: "Done", // Localize-it
+            title: My.localizedString("DONE"),
             style: style,
             target: self,
             action: #selector(completeRequest)

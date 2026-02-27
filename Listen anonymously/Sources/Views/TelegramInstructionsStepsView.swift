@@ -5,26 +5,26 @@ struct TelegramInstructionsStepsView: View {
     var body: some View {
         VStack {
             TextAndIconLabel(
-                title: "1. Long tap on your voice note on Telegram",
+                title: My.localizedString("TELEGRAM_STEP_1"),
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
 
             TextAndIconLabel(
-                title: "2. Tap on 'Select'",
+                title: My.localizedString("TELEGRAM_STEP_2"),
                 systemNameOrEmoji: "checkmark.circle"
             )
             .fontWeight(.medium)
             .accessibilityIdentifier(AccessibilityIdentifier.Instructions.telegramStep2)
 
             TextAndIconLabel(
-                title: "3. Tap on the 'Share' icon in the middle bottom",
+                title: My.localizedString("TELEGRAM_STEP_3"),
                 systemNameOrEmoji: "square.and.arrow.up"
             )
             .fontWeight(.medium)
 
             TextAndIconLabel(
-                title: "4. Scroll down and tap on:",
+                title: My.localizedString("SCROLL_DOWN_AND_TAP"),
                 systemNameOrEmoji: ""
             )
             .fontWeight(.medium)

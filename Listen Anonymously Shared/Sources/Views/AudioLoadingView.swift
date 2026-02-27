@@ -3,7 +3,7 @@ import SwiftUI
 struct AudioLoadingView: View {
     var body: some View {
         VStack {
-            Text("Loading...")
+            Text(My.localizedString("LOADING"))
             ProgressView()
         }
         .frame(width: 100, height: 100)

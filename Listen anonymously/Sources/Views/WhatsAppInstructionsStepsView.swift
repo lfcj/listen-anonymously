@@ -5,25 +5,25 @@ struct WhatsAppInstructionsStepsView: View {
     var body: some View {
         VStack {
             TextAndIconLabel(
-                title: "1. Long tap on your voice note on WhatsApp",
+                title: My.localizedString("WHATSAPP_STEP_1"),
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
 
             TextAndIconLabel(
-                title: "2. Tap on 'Forward'",
+                title: My.localizedString("WHATSAPP_STEP_2"),
                 systemNameOrEmoji: "arrowshape.turn.up.forward"
             )
             .fontWeight(.medium)
 
             TextAndIconLabel(
-                title: "3. Tap on the 'Share' icon at the bottom right",
+                title: My.localizedString("WHATSAPP_STEP_3"),
                 systemNameOrEmoji: "square.and.arrow.up"
             )
             .fontWeight(.medium)
 
             TextAndIconLabel(
-                title: "4. Scroll down and tap on:",
+                title: My.localizedString("SCROLL_DOWN_AND_TAP"),
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)

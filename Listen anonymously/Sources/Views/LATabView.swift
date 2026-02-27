@@ -19,11 +19,11 @@ struct LATabView: View {
                     }
             } else {
                 TabView(selection: $appState.selectedTab) {
-                    Tab("Home", systemImage: "house", value: TabSelection.home) {
+                    Tab(My.localizedString("TAB_HOME"), systemImage: "house", value: TabSelection.home) {
                         FrontDoorView()
                     }
 
-                    Tab("How to use", systemImage: "questionmark.app", value: TabSelection.howToUse) {
+                    Tab(My.localizedString("TAB_HOW_TO_USE"), systemImage: "questionmark.app", value: TabSelection.howToUse) {
                         InstructionsView()
                     }
                 }

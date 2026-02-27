@@ -4,16 +4,16 @@ import SwiftUI
 struct FrontDoorTitleView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Stay unseen.")
+            Text(My.localizedString("STAY_UNSEEN"))
                 .font(.system(size: 44, weight: .bold, design: .rounded))
                 .lineLimit(2)
                 .accessibilityIdentifier(AccessibilityIdentifier.Titles.stayUnseen)
 
-            Text("Still in the loop.")
+            Text(My.localizedString("STILL_IN_THE_LOOP"))
                 .font(.system(size: 40, weight: .bold, design: .rounded))
                 .accessibilityIdentifier(AccessibilityIdentifier.Titles.stillInTheLoop)
 
-            Text("Listen to your voice messages without anyone knowing you did.")
+            Text(My.localizedString("LISTEN_WITHOUT_KNOWING"))
                 .font(.system(size: 18, weight: .regular, design: .rounded))
                 .padding(.top, 6)
                 .lineLimit(3)

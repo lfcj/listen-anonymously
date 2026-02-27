@@ -19,15 +19,15 @@ struct FrontDoorView: View {
                     .padding(.top, 36)
 
                 ShadowTranslucentCard(
-                    title: "No blue ticks. No pressure.",
-                    subtitle: "Total freedom.",
+                    title: My.localizedString("NO_BLUE_TICKS"),
+                    subtitle: My.localizedString("TOTAL_FREEDOM"),
                     systemName: "checkmark.circle.fill"
                 )
                 .foregroundStyle(.white)
                 .padding(.horizontal, 18)
 
                 Button(action: selectHowToUseTab) {
-                    Text("See how it works")
+                    Text(My.localizedString("SEE_HOW_IT_WORKS"))
                 }
                 .buttonStyle(GradientButtonStyle())
                 .padding(.horizontal, 44)

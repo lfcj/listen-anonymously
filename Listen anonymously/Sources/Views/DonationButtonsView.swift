@@ -8,24 +8,24 @@ struct DonationButtonsView: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            Text("Vibe check 💬")
+            Text(My.localizedString("VIBE_CHECK"))
                 .font(.title2.weight(.semibold))
                 .foregroundColor(.white)
 
-            Text("How much do you love being invisible?")
+            Text(My.localizedString("LOVE_BEING_INVISIBLE"))
                 .font(.subheadline)
                 .foregroundColor(.white.opacity(0.9))
 
             HStack(spacing: 12) {
                 TranslucentIconLabelButton(
-                    title: "Buy us a coffee",
+                    title: My.localizedString("BUY_US_A_COFFEE"),
                     icon: "cup.and.saucer.fill",
                     action: buyUsCoffee
                 )
                 .accessibilityIdentifier(AccessibilityIdentifier.Donations.buyUsCoffeeButton)
 
                 TranslucentIconLabelButton(
-                    title: "Send good vibes",
+                    title: My.localizedString("SEND_GOOD_VIBES"),
                     icon: "heart.fill",
                     action: sendGoodVibes
                 )
@@ -33,7 +33,7 @@ struct DonationButtonsView: View {
             }
 
             TranslucentIconLabelButton(
-                title: "Go ghost mode hero (super kind tip)",
+                title: My.localizedString("GHOST_MODE_HERO"),
                 icon: "sparkles",
                 action: superKindTip
             )

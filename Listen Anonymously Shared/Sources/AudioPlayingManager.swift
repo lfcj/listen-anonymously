@@ -101,7 +101,7 @@ open class AudioPlayingManager: ObservableObject {
         errorMessage = nil
         guard let inputItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             isLoadingAudio = false
-            errorMessage = "No audio file could be find. Please check you selected only one file." // Localize-it
+            errorMessage = My.localizedString("NO_AUDIO_FILE_FOUND")
             log(event: #function, properties: ["message": errorMessage])
             return
         }

@@ -24,7 +24,7 @@ public struct AudioPlayingView: View {
                 Spacer()
                 PlayingAnimationView(isPlaying: $playingManager.isPlaying)
                 Spacer()
-                Text("No one will know you hit play 😉")
+                Text(My.localizedString("NO_ONE_WILL_KNOW"))
                     .font(.title3)
                     .bold()
                     .foregroundStyle(colorScheme == .dark ? .white : .laPurple)

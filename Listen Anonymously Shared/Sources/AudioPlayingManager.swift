@@ -42,6 +42,8 @@ open class AudioPlayingManager: ObservableObject {
     // Use when user uses UI to set a different time and play has not been tapped, hence audioPlayer is nil.
     private var stashedCurrentTime: TimeInterval?
 
+    private let postHog: PostHogProtocol
+
     public init(
         extensionContext: NSExtensionContext?,
         canPlay: Bool = false,
@@ -49,7 +51,8 @@ open class AudioPlayingManager: ObservableObject {
         isLoadingAudio: Bool = false,
         errorMessage: String? = nil,
         duration: Double = 0,
-        url: URL? = nil
+        url: URL? = nil,
+        postHog: PostHogProtocol = PostHog.shared
     ) {
         self.extensionContext = extensionContext
         self.canPlay = canPlay
@@ -58,6 +61,7 @@ open class AudioPlayingManager: ObservableObject {
         self.errorMessage = errorMessage
         self.duration = duration
         self.audioURL = url
+        self.postHog = postHog
     }
 
     open func play(audioSession: AudioSessionProtocol = AVAudioSession.sharedInstance()) {
@@ -174,9 +178,8 @@ open class AudioPlayingManager: ObservableObject {
     }
 
     private func log(event: sending String, properties: sending [String: any Equatable]? = nil) {
-        Task.detached {
-            @Inject var postHog: SuperPosthog
-            postHog.capture(event, properties: properties)
+        Task.detached { [weak postHog] in
+            postHog?.capture(event, properties: properties)
         }
     }
 

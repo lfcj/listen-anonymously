@@ -8,12 +8,6 @@ import XCTest
 
 struct ActionViewControllerTests {
 
-    init() {
-        Task {
-            await InjectionResolver.shared.add(SuperPosthog(), for: SuperPosthog.self)
-        }
-    }
-
     @MainActor
     @Test("Storyboard ActionViewController has full screen presentation style")
     func actionViewController_hasFullScreenPresentationStyle_whenInstatiatedFromStoryboard() async throws {

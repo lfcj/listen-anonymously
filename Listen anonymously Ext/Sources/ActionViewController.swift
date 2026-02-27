@@ -50,9 +50,7 @@ class ActionViewController: UIViewController {
             // swiftlint:enable todo
             return
         }
-        Task {
-            await InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
-        }
+        PostHog.shared.setup(key: posthogKey)
     }
 
     override func viewDidLoad() {

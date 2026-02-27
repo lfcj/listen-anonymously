@@ -8,15 +8,13 @@ struct Listen_anonymouslyApp: App {
     @StateObject private var appState = AppState()
 
     init() {
-        guard let posthogKey = Bundle.main.postHogAPIKey else {
+        guard let postHogKey = Bundle.main.postHogAPIKey else {
             // swiftlint:disable todo
             // TODO: Log error.
             // swiftlint:enable todo
             return
         }
-        Task { @MainActor in
-            await InjectionResolver.shared.add(LAPostHog(key: posthogKey), for: SuperPosthog.self)
-        }
+        PostHog.shared.setup(key: postHogKey)
     }
 
     var body: some Scene {

@@ -1,17 +1,21 @@
 import Foundation
 internal import PostHog
+import SwiftUI
 
-open class SuperPosthog: Injectable, @unchecked Sendable {
-    /// This is an abstract class to allow injection, never initialize it directly
-    public init() {}
+public protocol PostHogProtocol: AnyObject, Sendable {
+    func capture(_ event: String, properties: [String: any Equatable]?)
+}
+
+open class PostHog: @unchecked Sendable, PostHogProtocol {
+
+    public static let shared = PostHog()
+    private init() {}
 
     open func capture(_ event: String, properties: [String: any Equatable]? = nil) {
         PostHogSDK.shared.capture(event, properties: properties)
     }
-}
 
-public final class LAPostHog: SuperPosthog, @unchecked Sendable {
-    public init(key: String) {
+    open func setup(key: String) {
         // swiftlint:disable identifier_name
         let POSTHOG_HOST = "https://eu.i.posthog.com"
 

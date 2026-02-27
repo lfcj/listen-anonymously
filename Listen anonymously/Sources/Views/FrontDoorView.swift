@@ -78,14 +78,7 @@ struct FrontDoorView: View {
 
     func selectHowToUseTab() {
         appState.selectedTab = .howToUse
-        log(event: "tapped-how-to-use")
-    }
-
-    func log(event: String) {
-        Task.detached {
-            @Inject var posthog: SuperPosthog
-            posthog.capture(event)
-        }
+        viewModel.log("tapped-how-to-use")
     }
 
 }

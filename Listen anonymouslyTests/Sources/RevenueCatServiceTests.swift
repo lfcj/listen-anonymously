@@ -31,11 +31,6 @@ final class RevenueCatServiceTests: XCTestCase {
 
     private let postHogSpy = PostHogSpy()
 
-    override func setUp() async throws {
-        try await super.setUp()
-        await InjectionResolver.shared.add(postHogSpy, for: SuperPosthog.self)
-    }
-
     func test_configureRevenueCat_missingAPIKey_logsFailure() async throws {
         let expectation = expectation(description: "No api key error is logged")
         var cancellables: Set<AnyCancellable> = []
@@ -46,7 +41,8 @@ final class RevenueCatServiceTests: XCTestCase {
         // When
         _ = RevenueCatService(
             purchases: mockPurchases,
-            revenueCatConfig: MockRevenueCatConfig.empty
+            revenueCatConfig: MockRevenueCatConfig.empty,
+            postHog: postHogSpy
         )
 
         try await Task.sleep(for: .milliseconds(500))
@@ -75,7 +71,8 @@ final class RevenueCatServiceTests: XCTestCase {
         let mockPurchases = MockPurchasesClient()
         let revenueCatService = RevenueCatService(
             purchases: mockPurchases,
-            revenueCatConfig: MockRevenueCatConfig.empty
+            revenueCatConfig: MockRevenueCatConfig.empty,
+            postHog: postHogSpy
         )
         let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService)
 
@@ -110,7 +107,8 @@ final class RevenueCatServiceTests: XCTestCase {
         let mockPurchases = MockPurchasesClient()
         let revenueCatService = RevenueCatService(
             purchases: mockPurchases,
-            revenueCatConfig: MockRevenueCatConfig.empty
+            revenueCatConfig: MockRevenueCatConfig.empty,
+            postHog: postHogSpy
         )
         let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService)
 
@@ -144,7 +142,8 @@ final class RevenueCatServiceTests: XCTestCase {
         let mockPurchases = MockPurchasesClient()
         let revenueCatService = RevenueCatService(
             purchases: mockPurchases,
-            revenueCatConfig: MockRevenueCatConfig.empty
+            revenueCatConfig: MockRevenueCatConfig.empty,
+            postHog: postHogSpy
         )
         let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService)
 
@@ -172,12 +171,12 @@ final class RevenueCatServiceTests: XCTestCase {
     }
 }
 
-final class PostHogSpy: SuperPosthog, @unchecked Sendable {
+final class PostHogSpy: PostHogProtocol, @unchecked Sendable {
     @Published private(set) var capturedEvents: [String] = []
     @Published private(set) var capturedProperties: [[String: any Equatable]] = []
     private let lock = NSLock()
 
-    override func capture(_ event: String, properties: [String: any Equatable]? = nil) {
+    func capture(_ event: String, properties: [String: any Equatable]? = nil) {
         lock.lock()
         capturedEvents.append(event)
         if let properties {

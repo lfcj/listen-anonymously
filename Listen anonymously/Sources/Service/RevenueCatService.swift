@@ -1,6 +1,7 @@
 import Foundation
 import Listen_Anonymously_Shared
 import RevenueCat
+import SwiftUI
 
 enum DonationType: String {
     case coffee = "donation.coffee"
@@ -11,13 +12,16 @@ enum DonationType: String {
 final class RevenueCatService: Sendable {
     private let purchases: PurchasesClient
     private let revenueCatConfig: RevenueCatConfigProviding
+    private let postHog: PostHogProtocol
 
     init(
         purchases: PurchasesClient = RevenueCatPurchasesClient(),
-        revenueCatConfig: RevenueCatConfigProviding = RevenueCatConfig()
+        revenueCatConfig: RevenueCatConfigProviding = RevenueCatConfig(),
+        postHog: PostHogProtocol = PostHog.shared
     ) {
         self.purchases = purchases
         self.revenueCatConfig = revenueCatConfig
+        self.postHog = postHog
         configureRevenueCatIfNeeded()
     }
 
@@ -83,9 +87,8 @@ final class RevenueCatService: Sendable {
     // MARK: - PostHog
 
     private func log(_ event: String, properties: sending [String: any Equatable]?) {
-        Task.detached(priority: nil) {
-            @Inject var posthog: SuperPosthog
-            posthog.capture(event, properties: properties)
+        Task.detached(priority: nil) { [weak postHog] in
+            postHog?.capture(event, properties: properties)
         }
     }
 

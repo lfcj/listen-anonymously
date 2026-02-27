@@ -10,16 +10,18 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
     let revenueCarService: RevenueCatService
     let events: AsyncStream<PurchaseEvent>
     private let eventContinuation: AsyncStream<PurchaseEvent>.Continuation?
+    private let postHog: PostHogProtocol
 
     // MARK: - Init
 
-    init(revenueCatService: RevenueCatService) {
+    init(revenueCatService: RevenueCatService, postHog: PostHogProtocol = PostHog.shared) {
         self.revenueCarService = revenueCatService
         var cont: AsyncStream<PurchaseEvent>.Continuation?
         self.events = AsyncStream { continuation in
             cont = continuation
         }
         self.eventContinuation = cont
+        self.postHog = postHog
     }
 
     // MARK: - Public API
@@ -54,6 +56,12 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
         }
     }
 
+    func log(_ event: String, properties: sending [String: any Equatable]? = nil) {
+        Task.detached(priority: nil) { [weak postHog] in
+            postHog?.capture(event, properties: properties)
+        }
+    }
+
     // MARK: - Private helpers
 
     @MainActor
@@ -65,12 +73,6 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
         await revenueCarService.purchase(product: type)
     }
 
-    private func log(_ event: String, properties: sending [String: any Equatable]?) {
-        Task.detached(priority: nil) {
-            @Inject var posthog: SuperPosthog
-            posthog.capture(event, properties: properties)
-        }
-    }
 }
 
 actor TippingJar {

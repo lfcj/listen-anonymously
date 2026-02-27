@@ -39,7 +39,6 @@ platform :ios do
   lane :all_coverage do
     run_tests(
       scheme: "Listen-anonymously",
-      testplan: "Listen anonymously Test Plan",
       clean: true,
       code_coverage: true,
       result_bundle: true,

@@ -238,22 +238,11 @@ let project = Project(
             name: "Listen-anonymously",
             shared: true,
             buildAction: .buildAction(targets: ["Listen-anonymously"]),
-            testAction: .targets(
+            testAction: .testPlans(
                 [
-                    "Listen-anonymously-Tests",
-                    "Listen-Anonymously-Shared-Tests",
-                    "Listen-anonymously-Ext-Tests",
-                    "Listen-anonymously-Snapshot-Tests"
+                    "Listen anonymously Test Plan.xctestplan"
                 ],
-                configuration: "Debug",
-                options: .options(
-                    coverage: true,
-                    codeCoverageTargets: [
-                        "Listen-anonymously",
-                        "Listen-Anonymously-Shared",
-                        "Listen-anonymously-Ext"
-                    ]
-                )
+                configuration: "Debug"
             ),
             runAction: .runAction(configuration: "Debug"),
             archiveAction: .archiveAction(configuration: "Release"),

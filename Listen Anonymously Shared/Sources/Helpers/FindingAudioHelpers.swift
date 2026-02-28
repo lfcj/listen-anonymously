@@ -1,4 +1,5 @@
 import Foundation
+import SwiftOGG
 
 struct AudioFileInformation {
     let url: URL
@@ -98,20 +99,17 @@ struct FindingAudioHelpers {
 
     private static func handleTelegram(audioURL: URL) throws -> AudioFileInformation {
         let copyAudioURL = FileManager.createTemporaryFileURL(fileExtension: "ogg")
-        _ /*convertedAudioURL*/ = FileManager.createTemporaryFileURL(fileExtension: "m4a")
+        let convertedAudioURL = FileManager.createTemporaryFileURL(fileExtension: "m4a")
         do {
             try FileManager.default.copyItem(at: audioURL, to: copyAudioURL)
-            // swiftlint:disable todo
-            // TODO: Do Telegram conversion
-            // swiftlint:enable todo
+            try OGGConverter.convertOpusOGGToM4aFile(src: copyAudioURL, dest: convertedAudioURL)
         } catch {
             throw FindingAudioError.telegramConversionNotPossible
         }
-
+        return AudioFileInformation(url: convertedAudioURL, title: audioURL.lastPathComponent.formatAudioFileName())
         // swiftlint:disable todo
-        // TODO: Need OGG converter
+        // TODO: NAME CAN BE DIFFERENT IN TELEGRAM, FORMAT IT FOR IT.
         // swiftlint:enable todo
-        return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent)
     }
 
 }

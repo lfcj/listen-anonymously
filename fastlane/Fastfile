@@ -32,10 +32,8 @@ platform :ios do
       output_directory: "./fastlane/test_output"
     )
   end
-end
 
-platform :ios do
-  desc "Run tests"
+  desc "Run all tests with code coverage"
   lane :all_coverage do
     run_tests(
       scheme: "Listen-anonymously",
@@ -43,6 +41,84 @@ platform :ios do
       code_coverage: true,
       result_bundle: true,
       output_directory: "./fastlane/test_output"
+    )
+  end
+
+  desc "Build the app for App Store"
+  lane :build do
+    Dir.chdir("..") do
+      sh "tuist generate --no-open"
+    end
+
+    build_app(
+      scheme: "Listen-anonymously",
+      export_method: "app-store",
+      output_directory: "./fastlane/build_output",
+      xcargs: "-allowProvisioningUpdates"
+    )
+  end
+
+  desc "Build and upload to App Store Connect"
+  lane :release do
+    Dir.chdir("..") do
+      sh "tuist generate --no-open"
+    end
+
+    build_app(
+      scheme: "Listen-anonymously",
+      export_method: "app-store",
+      output_directory: "./fastlane/build_output",
+      xcargs: "-allowProvisioningUpdates"
+    )
+
+    upload_to_app_store(
+      skip_screenshots: true,
+      skip_metadata: false,
+      force: true,
+      precheck_include_in_app_purchases: false
+    )
+  end
+
+  desc "Capture and frame screenshots"
+  lane :screenshots do
+    capture_screenshots(
+      scheme: "Listen-anonymously-UITests",
+      devices: [
+        "iPhone 16 Pro Max",
+        "iPhone 16 Pro",
+        "iPad Pro 13-inch (M4)"
+      ],
+      languages: [
+        "en-US", "es-ES", "fr-FR", "de-DE", "ja",
+        "ko", "zh-Hans", "pt-BR", "ar-SA", "it",
+        "ru", "tr", "nl-NL", "pl", "sv"
+      ],
+      output_directory: "./fastlane/screenshots",
+      clear_previous_screenshots: true
+    )
+
+    frame_screenshots(
+      path: "./fastlane/screenshots"
+    )
+  end
+
+  desc "Upload screenshots to App Store Connect"
+  lane :upload_screenshots do
+    upload_to_app_store(
+      skip_binary_upload: true,
+      skip_metadata: true,
+      skip_screenshots: false,
+      screenshots_path: "./fastlane/screenshots"
+    )
+  end
+
+  desc "Upload metadata only to App Store Connect"
+  lane :upload_metadata do
+    upload_to_app_store(
+      skip_binary_upload: true,
+      skip_metadata: false,
+      skip_screenshots: true,
+      force: true
     )
   end
 end

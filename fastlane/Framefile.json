@@ -1,0 +1,49 @@
+{
+  "default": {
+    "keyword": {
+      "fonts": [
+        {
+          "font": "SF-Pro-Display-Bold.otf",
+          "supported": ["en-US", "en-GB", "en-AU", "de-DE", "fr-FR", "fr-CA", "es-ES", "es-MX", "it", "pt-BR", "pt-PT", "nl-NL", "pl", "sv", "da", "nb-NO", "fi", "cs", "sk", "hr", "hu", "ro", "tr", "id", "ms", "vi"]
+        }
+      ],
+      "font_size": 72,
+      "color": "#FFFFFF"
+    },
+    "title": {
+      "fonts": [
+        {
+          "font": "SF-Pro-Display-Regular.otf",
+          "supported": ["en-US", "en-GB", "en-AU", "de-DE", "fr-FR", "fr-CA", "es-ES", "es-MX", "it", "pt-BR", "pt-PT", "nl-NL", "pl", "sv", "da", "nb-NO", "fi", "cs", "sk", "hr", "hu", "ro", "tr", "id", "ms", "vi"]
+        }
+      ],
+      "font_size": 36,
+      "color": "#FFFFFF"
+    },
+    "background": "./screenshots/background.png",
+    "padding": 50,
+    "show_complete_frame": true,
+    "stack_title": true,
+    "title_below_image": false
+  },
+  "data": [
+    {
+      "filter": "01_",
+      "keyword": {
+        "color": "#FFFFFF"
+      }
+    },
+    {
+      "filter": "02_",
+      "keyword": {
+        "color": "#FFFFFF"
+      }
+    },
+    {
+      "filter": "03_",
+      "keyword": {
+        "color": "#FFFFFF"
+      }
+    }
+  ]
+}

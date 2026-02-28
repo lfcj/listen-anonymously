@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct TextAndIconLabel: View {
+public struct TranslucentIconAndText: View {
     let title: String
     let systemNameOrEmoji: String
 
@@ -11,11 +11,6 @@ public struct TextAndIconLabel: View {
 
     public var body: some View {
         HStack {
-            Text(title)
-                .font(.title2)
-                .padding([.trailing])
-                .foregroundStyle(.white)
-
             if !systemNameOrEmoji.isEmpty {
                 SafeImage(
                     name: systemNameOrEmoji,
@@ -26,6 +21,10 @@ public struct TextAndIconLabel: View {
                 .modifier(TranslucentCardStyle())
                 .clipShape(Circle())
             }
+            Text(title)
+                .font(.title2)
+                .padding([.trailing])
+                .foregroundStyle(.white)
 
             Spacer()
         }
@@ -42,6 +41,6 @@ public struct TextAndIconLabel: View {
             endPoint: .bottom
         ).ignoresSafeArea()
 
-        TextAndIconLabel(title: "This is a test", systemNameOrEmoji: "house.fill")
+        TranslucentIconAndText(title: "This is a test", systemNameOrEmoji: "house.fill")
     }
 }

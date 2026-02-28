@@ -4,26 +4,26 @@ import SwiftUI
 struct TelegramInstructionsStepsView: View {
     var body: some View {
         VStack {
-            TextAndIconLabel(
+            TranslucentIconAndText(
                 title: My.localizedString("TELEGRAM_STEP_1"),
                 systemNameOrEmoji: "hand.tap.fill"
             )
             .fontWeight(.medium)
 
-            TextAndIconLabel(
+            TranslucentIconAndText(
                 title: My.localizedString("TELEGRAM_STEP_2"),
                 systemNameOrEmoji: "checkmark.circle"
             )
             .fontWeight(.medium)
             .accessibilityIdentifier(AccessibilityIdentifier.Instructions.telegramStep2)
 
-            TextAndIconLabel(
+            TranslucentIconAndText(
                 title: My.localizedString("TELEGRAM_STEP_3"),
                 systemNameOrEmoji: "square.and.arrow.up"
             )
             .fontWeight(.medium)
 
-            TextAndIconLabel(
+            TranslucentIconAndText(
                 title: My.localizedString("SCROLL_DOWN_AND_TAP"),
                 systemNameOrEmoji: ""
             )

@@ -55,12 +55,20 @@ class FakeNSExtensionItem: NSExtensionItem, @unchecked Sendable {
     }
 
     func withValidTelegramURLAndAudioFile() -> FakeNSExtensionItem {
-        // Create a temporary file with a valid URL
+        let realURL = Bundle(for: Self.self).url(forResource: "test-audio", withExtension: "ogg")!
+
+        _leAttachments = [
+            NSItemProvider(item: realURL as NSURL, typeIdentifier: "dyn.age80835h")
+        ]
+
+        return self
+    }
+
+    func withInvalidTelegramOGG() -> FakeNSExtensionItem {
         let tempURL = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString)
             .appendingPathExtension("ogg")
 
-        // Write some fake data to the file
         let fakeData = Data([0x00, 0x01, 0x02, 0x03])
         try? fakeData.write(to: tempURL)
 

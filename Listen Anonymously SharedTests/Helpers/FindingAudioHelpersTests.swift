@@ -59,13 +59,22 @@ struct FindingAudioHelpersTests {
         }
     }
 
-    @Test("load audio finds Telegram audio file information when item is valid")
+    @Test("load audio finds Telegram audio file information when item is valid and converts OGG to M4A")
     func findAudio_findsAudioFileInformationWhenItemIsTelegramURL() async throws {
         let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(
             in: makeFakeExtensionItemWithValidTelegramURL()
         )
 
-        #expect(audioFileInformation.url.absoluteString.hasSuffix("ogg") == true)
+        #expect(audioFileInformation.url.absoluteString.hasSuffix("m4a") == true)
+    }
+
+    @Test("load audio with invalid Telegram OGG throws telegramConversionNotPossible")
+    func findAudio_invalidTelegramOGGThrowsConversionError() async throws {
+        await #expect(throws: FindingAudioError.telegramConversionNotPossible.self) {
+            _ = try await FindingAudioHelpers.loadAudioURL(
+                in: makeFakeExtensionItemWithInvalidTelegramOGG()
+            )
+        }
     }
 
 }
@@ -77,6 +86,11 @@ private extension FindingAudioHelpersTests {
     func makeFakeExtensionItemWithValidTelegramURL() -> FakeNSExtensionItem {
         FakeNSExtensionItem()
             .withValidTelegramURLAndAudioFile()
+    }
+
+    func makeFakeExtensionItemWithInvalidTelegramOGG() -> FakeNSExtensionItem {
+        FakeNSExtensionItem()
+            .withInvalidTelegramOGG()
     }
 
 }

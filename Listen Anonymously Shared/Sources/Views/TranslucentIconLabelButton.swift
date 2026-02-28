@@ -33,18 +33,6 @@ public struct TranslucentIconLabelButton: View {
 
     // MARK: - Subviews
 
-    private var backgroundView: some View {
-        LinearGradient(
-            colors: [
-                .white.opacity(0.4),
-                .white.opacity(0.2)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .background(.ultraThinMaterial)
-    }
-
     private var shadowColor: Color {
         Color.black.opacity(0.1)
     }

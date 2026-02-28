@@ -67,10 +67,22 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
     @MainActor
     private func emit(_ kind: PurchaseEvent.Kind) {
         eventContinuation?.yield(PurchaseEvent(kind: kind))
+        if case let .success(donationType) = kind {
+            addDonationTypeToTippingJar(donationType)
+        }
+    }
+
+    private func addDonationTypeToTippingJar(_ donationType: DonationType) {
+        Task { [weak tippingJar] in
+            await tippingJar?.recordPurchase(donationType)
+        }
     }
 
     private func purchase(product type: DonationType) async {
-        await revenueCarService.purchase(product: type)
+        let purchaseEventKind = await revenueCarService.purchase(product: type)
+        Task { @MainActor [weak self] in
+            self?.emit(purchaseEventKind)
+        }
     }
 
 }

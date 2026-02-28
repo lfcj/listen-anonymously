@@ -9,6 +9,9 @@ struct AudioPlayingViewTests {
     @Test func containsProgressViewWhenManagerIsLoading() throws {
         let manager = AudioPlayingManager(extensionContext: nil, isLoadingAudio: true)
         let view = AudioPlayingView(playingManager: manager)
+            .environment(\.colorScheme, .light)
+        ViewHosting.host(view: view)
+        defer { ViewHosting.expel() }
         #expect(manager.isLoadingAudio == true)
         let loadingView = try view.inspect().zStack(0).view(AudioLoadingView.self, 2)
 
@@ -18,6 +21,9 @@ struct AudioPlayingViewTests {
     @Test func containsPlayingAnimationView() throws {
         let manager = AudioPlayingManager(extensionContext: nil)
         let view = AudioPlayingView(playingManager: manager)
+            .environment(\.colorScheme, .light)
+        ViewHosting.host(view: view)
+        defer { ViewHosting.expel() }
         let playingAnimationView = try view.inspect().zStack(0).vStack(1).view(PlayingAnimationView.self, 1)
 
         #expect(playingAnimationView.isHidden() == false)
@@ -37,6 +43,8 @@ struct AudioPlayingViewTests {
         manager.errorMessage = "Expected error message"
         let view = AudioPlayingView(playingManager: manager)
             .environment(\.colorScheme, .light)
+        ViewHosting.host(view: view)
+        defer { ViewHosting.expel() }
         let errorMessageView = try view.inspect().zStack(0).view(ErrorMessageView.self, 2)
         #expect(errorMessageView.isHidden() == false)
 

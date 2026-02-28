@@ -133,10 +133,6 @@ final class RevenueCatServiceTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { events in
-            guard events.contains("donation_failed"), events.contains("donation_attempt") else {
-                return
-            }
-
             XCTAssertTrue(events.contains("donation_attempt"))
             XCTAssertTrue(events.contains("donation_failed"))
 
@@ -145,6 +141,45 @@ final class RevenueCatServiceTests: XCTestCase {
 
         await fulfillment(of: [expectation], timeout: 2.0)
     }
+
+    func test_NoProductFound_sendsAnError() async throws {
+        let expectation = expectation(description: "Non existing product throws error")
+        var cancellables: Set<AnyCancellable> = []
+
+        // Given
+        let mockPurchases = MockPurchasesClient()
+        let revenueCatService = RevenueCatService(
+            purchases: mockPurchases,
+            revenueCatConfig: MockRevenueCatConfig.empty,
+            postHog: postHogSpy
+        )
+        let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService)
+
+        // When
+        try await viewModel.giveSuperKindTip().value
+
+        // Then
+        postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            guard events.contains("donation_failed") else {
+                return
+            }
+
+            XCTAssertTrue(events.contains("donation_failed"))
+
+            let errorProperties = self.postHogSpy.capturedProperties.first(where: { $0.keys.contains(["error"])})
+            XCTAssertNotNil(errorProperties)
+            let errorAsString = errorProperties!["error"] as? String
+            XCTAssertNotNil(errorAsString)
+            XCTAssertTrue(errorAsString!.contains("Error Domain=FrontDoorViewModel"))
+            XCTAssertTrue(errorAsString!.contains("Code=404"))
+            XCTAssertTrue(errorAsString!.contains("UserInfo={NSLocalizedDescription=Product not found: donation.superkind}"))
+
+            expectation.fulfill()
+        }).store(in: &cancellables)
+
+        await fulfillment(of: [expectation], timeout: 2.0)
+    }
+
 }
 
 final class PostHogSpy: PostHogProtocol, @unchecked Sendable {

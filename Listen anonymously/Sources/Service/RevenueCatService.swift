@@ -25,7 +25,7 @@ final class RevenueCatService: Sendable {
         configureRevenueCatIfNeeded()
     }
 
-    func purchase(product type: DonationType) async {
+    func purchase(product type: DonationType) async -> PurchaseEvent.Kind {
         let productID = type.rawValue
         log("donation_attempt", properties: ["product_id": productID])
         do {
@@ -34,16 +34,18 @@ final class RevenueCatService: Sendable {
 
             if result.userCancelled == true {
                 log("donation_cancelled", properties: ["product_id": productID])
-                return
+                return .cancelled
             }
 
             // Success
             log("donation_success", properties: ["product_id": productID])
+            return .success(type)
         } catch {
             log("donation_failed", properties: [
                 "product_id": productID,
                 "error": String(describing: error)
             ])
+            return .failure(errorDescription: error.localizedDescription)
         }
     }
 

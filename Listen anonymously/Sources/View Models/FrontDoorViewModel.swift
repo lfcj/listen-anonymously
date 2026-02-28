@@ -8,7 +8,7 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
 
     let tippingJar: TippingJar = TippingJar()
     let revenueCarService: RevenueCatService
-    let events: AsyncStream<PurchaseEvent>
+    let purchaseEvents: AsyncStream<PurchaseEvent>
     private let eventContinuation: AsyncStream<PurchaseEvent>.Continuation?
     private let postHog: PostHogProtocol
 
@@ -17,7 +17,7 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
     init(revenueCatService: RevenueCatService, postHog: PostHogProtocol = PostHog.shared) {
         self.revenueCarService = revenueCatService
         var cont: AsyncStream<PurchaseEvent>.Continuation?
-        self.events = AsyncStream { continuation in
+        self.purchaseEvents = AsyncStream { continuation in
             cont = continuation
         }
         self.eventContinuation = cont

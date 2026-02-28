@@ -4,8 +4,12 @@ import SwiftUI
 struct FrontDoorView: View {
 
     @EnvironmentObject var appState: AppState
-    @StateObject private var viewModel = FrontDoorViewModel(revenueCatService: RevenueCatService())
+    @StateObject private var viewModel: FrontDoorViewModel
     @State var isPurchasing = false
+
+    init(viewModel: FrontDoorViewModel = FrontDoorViewModel(revenueCatService: RevenueCatService())) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         ZStack {
@@ -53,7 +57,7 @@ struct FrontDoorView: View {
             }
         }
         .task {
-            for await event in viewModel.events {
+            for await event in viewModel.purchaseEvents {
                 switch event.kind {
                 case .purchasing:
                     isPurchasing = true

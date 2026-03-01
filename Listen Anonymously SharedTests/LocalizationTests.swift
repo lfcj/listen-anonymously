@@ -2,6 +2,7 @@ import Foundation
 @testable import Listen_Anonymously_Shared
 import Testing
 
+@MainActor
 struct LocalizationTests {
 
     static let requiredKeys: [String.LocalizationValue] = [

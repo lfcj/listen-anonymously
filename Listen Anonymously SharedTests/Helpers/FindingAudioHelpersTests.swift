@@ -137,42 +137,53 @@ struct FindingAudioHelpersTests {
     // MARK: - FindingAudioError LocalizedError (lines 31-45)
 
     @Test("noAudioFoundInAttachment errorDescription contains the file type suffix")
-    func errorDescription_noAudioFoundInAttachment_withDottedIdentifier() {
+    func errorDescription_noAudioFoundInAttachment_withDottedIdentifier() async {
         let error = FindingAudioError.noAudioFoundInAttachment(typeIdentifier: "com.apple.m4a-audio")
 
-        let description = error.errorDescription!
+        let description = await Task { @MainActor in
+            error.errorDescription!
+        }.value
+
         #expect(description.contains("m4a-audio"))
     }
 
     @Test("noAudioFoundInAttachment errorDescription uses full identifier when no dot separator")
-    func errorDescription_noAudioFoundInAttachment_noDot() {
+    func errorDescription_noAudioFoundInAttachment_noDot() async {
         let error = FindingAudioError.noAudioFoundInAttachment(typeIdentifier: "")
 
-        let description = error.errorDescription!
+        let description = await Task { @MainActor in
+            error.errorDescription!
+        }.value
         // Empty string split yields empty, nilIfEmpty returns nil, so falls back to typeIdentifier ""
         #expect(description.isEmpty == false)
     }
 
     @Test("couldNotConvertLoadedItemToURL has a non-empty errorDescription")
-    func errorDescription_couldNotConvertLoadedItemToURL() {
-        let description = FindingAudioError.couldNotConvertLoadedItemToURL.errorDescription
+    func errorDescription_couldNotConvertLoadedItemToURL() async {
+        let description = await Task { @MainActor in
+            FindingAudioError.couldNotConvertLoadedItemToURL.errorDescription
+        }.value
 
         #expect(description != nil)
         #expect(description!.isEmpty == false)
     }
 
     @Test("couldNotLoadItem errorDescription includes the underlying error description")
-    func errorDescription_couldNotLoadItem() {
+    func errorDescription_couldNotLoadItem() async {
         let underlying = NSError(domain: "test", code: 42, userInfo: [NSLocalizedDescriptionKey: "something broke"])
-        let description = FindingAudioError.couldNotLoadItem(error: underlying).errorDescription
+        let description = await Task { @MainActor in
+            FindingAudioError.couldNotLoadItem(error: underlying).errorDescription
+        }.value
 
         #expect(description != nil)
         #expect(description!.contains("something broke"))
     }
 
     @Test("telegramConversionNotPossible has a non-empty errorDescription")
-    func errorDescription_telegramConversionNotPossible() {
-        let description = FindingAudioError.telegramConversionNotPossible.errorDescription
+    func errorDescription_telegramConversionNotPossible() async {
+        let description = await Task { @MainActor in
+            FindingAudioError.telegramConversionNotPossible.errorDescription
+        }.value
 
         #expect(description != nil)
         #expect(description!.isEmpty == false)

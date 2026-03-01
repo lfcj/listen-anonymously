@@ -223,7 +223,6 @@ let project = Project(
             deploymentTargets: .iOS("18.0"),
             infoPlist: .default,
             sources: ["Listen anonymously Snapshot Tests/**"],
-            resources: ["Listen anonymously Snapshot Tests/snapshots/**"],
             dependencies: [
                 .target(name: "Listen-anonymously"),
                 .target(name: "Listen-Anonymously-Shared")

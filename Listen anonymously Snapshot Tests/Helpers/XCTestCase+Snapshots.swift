@@ -49,25 +49,8 @@ public extension XCTestCase {
         }
     }
 
-    /// Creates a URL inside of the `snapshots` folder, which is parallel to the calling file.
-    /// - Parameters:
-    ///   - name: The name the file the URL points to should have
-    ///   - file: The file next to which the `snapshots` folder will be created
-    ///     the accessibility value is unchanged.
-    /// - Returns: The URL where a snapshot can be saved with `name`
-    /// Example:
-    ///
-    /// if one calls this method from within `/Some/Path/To/File.swift`, the output URL is
-    /// `/Some/Path/To/snapshots/<name>.png`
-    func makeSnapshotURL(name: String, file: StaticString) -> URL {
-        URL(fileURLWithPath: String(describing: file))
-            .deletingLastPathComponent()
-            .appendingPathComponent("snapshots")
-            .appendingPathComponent("\(name).png", isDirectory: false)
-    }
-
     /// Creates a URL inside `fastlane/screenshots/<locale>/` for frameit.
-    func makeFrameitURL(name: String, locale: String, file: StaticString) -> URL {
+    private func makeFrameitURL(name: String, locale: String, file: StaticString) -> URL {
         projectRootURL(file: file)
             .appendingPathComponent("fastlane/screenshots/\(locale)")
             .appendingPathComponent("\(name).png", isDirectory: false)

@@ -70,6 +70,27 @@ public struct SnapshotConfiguration {
         )
     }
 
+    /// 430x932 points at 3x = 1290x2796 pixels. Matches frameit's supported resolution.
+    static func iPhone14ProMax(style: UIUserInterfaceStyle, contentSize: UIContentSizeCategory = .medium) -> SnapshotConfiguration {
+        SnapshotConfiguration(
+            name: "iPhone 14 Pro Max",
+            size: CGSize(width: 430, height: 932),
+            safeAreaInsets: UIEdgeInsets(top: 59, left: 0, bottom: 34, right: 0),
+            layoutMargins: UIEdgeInsets(top: 59, left: 16, bottom: 34, right: 16),
+            traitCollection: UITraitCollection(mutations: { traits in
+                traits.forceTouchCapability = .unavailable
+                traits.layoutDirection = .leftToRight
+                traits.preferredContentSizeCategory = contentSize
+                traits.userInterfaceIdiom = .phone
+                traits.horizontalSizeClass = .compact
+                traits.verticalSizeClass = .regular
+                traits.displayScale = 3
+                traits.displayGamut = .P3
+                traits.userInterfaceStyle = style
+            })
+        )
+    }
+
     static func iPhone16e(style: UIUserInterfaceStyle = .light, contentSize: UIContentSizeCategory = .medium) -> SnapshotConfiguration {
         SnapshotConfiguration(
             name: "iPhone 16 e",

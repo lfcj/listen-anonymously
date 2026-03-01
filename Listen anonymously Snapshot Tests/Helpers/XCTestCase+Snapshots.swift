@@ -66,4 +66,23 @@ public extension XCTestCase {
             .appendingPathComponent("\(name).png", isDirectory: false)
     }
 
+    /// Creates a URL inside `fastlane/screenshots/<locale>/` for frameit.
+    func makeFrameitURL(name: String, locale: String, file: StaticString) -> URL {
+        projectRootURL(file: file)
+            .appendingPathComponent("fastlane/screenshots/\(locale)")
+            .appendingPathComponent("\(name).png", isDirectory: false)
+    }
+
+    /// Finds the project root by walking up from the test file until we find the `fastlane` directory.
+    private func projectRootURL(file: StaticString) -> URL {
+        var url = URL(fileURLWithPath: String(describing: file))
+        while url.path != "/" {
+            url = url.deletingLastPathComponent()
+            if FileManager.default.fileExists(atPath: url.appendingPathComponent("fastlane").path) {
+                return url
+            }
+        }
+        fatalError("Could not find project root containing 'fastlane' directory")
+    }
+
 }

@@ -237,6 +237,15 @@ let project = Project(
     ],
     schemes: [
         .scheme(
+            name: "Listen-anonymously-Snapshot-Tests",
+            shared: true,
+            buildAction: .buildAction(targets: ["Listen-anonymously", "Listen-anonymously-Snapshot-Tests"]),
+            testAction: .targets(
+                ["Listen-anonymously-Snapshot-Tests"],
+                configuration: "Debug"
+            )
+        ),
+        .scheme(
             name: "Listen-anonymously",
             shared: true,
             buildAction: .buildAction(targets: ["Listen-anonymously"]),

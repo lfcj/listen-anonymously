@@ -4171,19 +4171,19 @@
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zůstaň neviditelný."
+            "value": "Buď neviditelný."
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Forbliv usynlig."
+            "value": "Bliv usynlig."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bleib unsichtbar."
+            "value": "Unerkannt."
           }
         },
         "el": {
@@ -4213,43 +4213,43 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pasa desapercibido."
+            "value": "Sé invisible."
           }
         },
         "es-419": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pasa desapercibido."
+            "value": "Sé invisible."
           }
         },
         "es-MX": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pasa desapercibido."
+            "value": "Sé invisible."
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pysy näkymättömänä."
+            "value": "Pysy piilossa."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reste invisible."
+            "value": "Sois invisible."
           }
         },
         "fr-CA": {
           "stringUnit": {
             "state": "translated",
-            "value": "Restez invisible."
+            "value": "Sois invisible."
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "הישארו בלתי נראים."
+            "value": "היו בלתי נראים."
           }
         },
         "hi": {
@@ -4261,25 +4261,25 @@
         "hr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ostani nevidljiv."
+            "value": "Budi nevidljiv."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maradj láthatatlan."
+            "value": "Légy láthatatlan."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tetap tak terlihat."
+            "value": "Tak terlihat."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Resta invisibile."
+            "value": "Sii invisibile."
           }
         },
         "ja": {
@@ -4297,7 +4297,7 @@
         "ms": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kekal tidak kelihatan."
+            "value": "Kekal ghaib."
           }
         },
         "nb": {
@@ -4309,25 +4309,25 @@
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blijf onzichtbaar."
+            "value": "Blijf onzien."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pozostań niewidoczny."
+            "value": "Bądź niewidoczny."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fique invisível."
+            "value": "Seja invisível."
           }
         },
         "pt-PT": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fica invisível."
+            "value": "Sê invisível."
           }
         },
         "ro": {
@@ -4339,13 +4339,13 @@
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Оставайтесь незамеченным."
+            "value": "Будь незримым."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zostaň neviditeľný."
+            "value": "Buď neviditeľný."
           }
         },
         "sv": {
@@ -4369,7 +4369,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Залишайся непоміченим."
+            "value": "Будь невидимим."
           }
         },
         "vi": {
@@ -4416,7 +4416,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Immer auf dem Laufenden."
+            "value": "Immer informiert."
           }
         },
         "el": {
@@ -4470,13 +4470,13 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toujours au courant."
+            "value": "Toujours informé."
           }
         },
         "fr-CA": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toujours au courant."
+            "value": "Toujours informé."
           }
         },
         "he": {
@@ -4530,7 +4530,7 @@
         "ms": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sentiasa dikemas kini."
+            "value": "Sentiasa terkini."
           }
         },
         "nb": {
@@ -4542,7 +4542,7 @@
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Altijd op de hoogte."
+            "value": "Altijd bijgewerkt."
           }
         },
         "pl": {
@@ -4560,7 +4560,7 @@
         "pt-PT": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sempre a par de tudo."
+            "value": "Sempre informado."
           }
         },
         "ro": {

@@ -2,33 +2,6 @@ import XCTest
 
 public extension XCTestCase {
 
-    /// Creates a PNG image out of the given `snapshot` and saves it in the file directory using the given `name`
-    /// - Parameters:
-    ///   - snapshot: `UIImage` that will be saved to the file system as a PNG
-    ///   - name: Name the snapshot will have inside of the `snapshots` folder
-    ///   - file: File path from which the method is called
-    ///   - line: Line from which the method is called
-    /// - Returns: The `Data` of the snapshot as a PNG image.
-    func record(
-        snapshot: UIImage,
-        named name: String,
-        file: StaticString = #filePath,
-        line: UInt = #line
-    ) {
-        let snapshotData = makeSnapshotData(snapshot: snapshot, file: file, line: line)
-        let snapshotURL = makeSnapshotURL(name: name, file: file)
-
-        do {
-            try FileManager.default.createDirectory(
-                at: snapshotURL.deletingLastPathComponent(),
-                withIntermediateDirectories: true
-            )
-            try snapshotData?.write(to: snapshotURL)
-        } catch {
-            XCTFail("Failed to save image \(name). Error: \(error))", file: file, line: line)
-        }
-    }
-
     /// Generates PNG data from given `snapshot`.
     /// - Parameters:
     ///   - snapshot: `UIImage` that will be converted to PNG data
@@ -46,6 +19,34 @@ public extension XCTestCase {
         }
 
         return snapshotData
+    }
+
+    /// Saves a snapshot to `fastlane/screenshots/<locale>/` for frameit, using the `XX_screenshot` naming convention.
+    /// - Parameters:
+    ///   - snapshot: `UIImage` that will be saved to the file system as a PNG
+    ///   - name: Screenshot name using frameit convention (e.g. "01_screenshot")
+    ///   - locale: Locale folder name matching fastlane convention (e.g. "en-US")
+    ///   - file: File path from which the method is called
+    ///   - line: Line from which the method is called
+    func record(
+        snapshot: UIImage,
+        named name: String,
+        locale: String,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let snapshotData = makeSnapshotData(snapshot: snapshot, file: file, line: line)
+        let snapshotURL = makeFrameitURL(name: name, locale: locale, file: file)
+
+        do {
+            try FileManager.default.createDirectory(
+                at: snapshotURL.deletingLastPathComponent(),
+                withIntermediateDirectories: true
+            )
+            try snapshotData?.write(to: snapshotURL)
+        } catch {
+            XCTFail("Failed to save image \(name) for locale \(locale). Error: \(error))", file: file, line: line)
+        }
     }
 
     /// Creates a URL inside of the `snapshots` folder, which is parallel to the calling file.

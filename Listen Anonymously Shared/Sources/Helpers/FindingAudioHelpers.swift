@@ -29,6 +29,7 @@ enum FindingAudioError: Error, Equatable {
 }
 
 extension FindingAudioError: LocalizedError {
+    @MainActor
     var errorDescription: String? {
         switch self {
         case .noAudioFoundInAttachment(let typeIdentifier):

@@ -59,7 +59,7 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
             // 01 - Front Door
             let frontDoor = FrontDoorView()
             record(
-                snapshot: frontDoor.snapshot(with: .iPhone14ProMax(style: .light)),
+                snapshot: frontDoor.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
                 named: "01_screenshot",
                 locale: locale.folder
             )

@@ -8,35 +8,90 @@ import XCTest
 final class Listen_anonymously_Snapshot_Tests: XCTestCase {
 // swiftlint:enable type_name
 
-    func test_frontDoor() {
-        let frontDoor = FrontDoorView()
+    // MARK: - Localized screenshots for frameit (fastlane/screenshots/<locale>/)
 
-        record(snapshot: frontDoor.snapshot(with: .iPhone17Pro(style: .light)), named: "FRONT_DOOR_light")
-        record(snapshot: frontDoor.snapshot(with: .iPhone17Pro(style: .dark)), named: "FRONT_DOOR_dark")
-    }
+    /// Fastlane locale folder -> Apple language code used in .lproj bundles.
+    /// Covers all App Store Connect locales that the app supports.
+    private let frameitLocales: [(folder: String, language: String)] = [
+        ("ar-SA", "ar"),
+        ("cs", "cs"),
+        ("da", "da"),
+        ("de-DE", "de"),
+        ("el", "el"),
+        ("en-AU", "en-AU"),
+        ("en-GB", "en-GB"),
+        ("en-US", "en"),
+        ("es-ES", "es"),
+        ("es-MX", "es-MX"),
+        ("fi", "fi"),
+        ("fr-CA", "fr-CA"),
+        ("fr-FR", "fr"),
+        ("he", "he"),
+        ("hi", "hi"),
+        ("hr", "hr"),
+        ("hu", "hu"),
+        ("id", "id"),
+        ("it", "it"),
+        ("ja", "ja"),
+        ("ko", "ko"),
+        ("ms", "ms"),
+        ("nl-NL", "nl"),
+        ("no", "nb"),
+        ("pl", "pl"),
+        ("pt-BR", "pt-BR"),
+        ("pt-PT", "pt-PT"),
+        ("ro", "ro"),
+        ("ru", "ru"),
+        ("sk", "sk"),
+        ("sv", "sv"),
+        ("th", "th"),
+        ("tr", "tr"),
+        ("uk", "uk"),
+        ("vi", "vi"),
+        ("zh-Hans", "zh-Hans"),
+        ("zh-Hant", "zh-Hant")
+    ]
 
-    func test_instructions() {
-        let viewModel = InstructionsViewModel()
-        viewModel.supportedApps = [.telegram, .whatsApp]
-        viewModel.selectedApp = .whatsApp
-        let instructionsView = InstructionsView(viewModel: viewModel)
+    func test_frameit_screenshots() {
+        for locale in frameitLocales {
+            My.currentLocalization = locale.language
 
-        record(snapshot: instructionsView.snapshot(with: .iPhone17Pro(style: .light), needsWindow: true), named: "INSTRUCTIONS_light")
-        record(snapshot: instructionsView.snapshot(with: .iPhone17Pro(style: .dark), needsWindow: true), named: "INSTRUCTIONS_dark")
-    }
+            // 01 - Front Door
+            let frontDoor = FrontDoorView()
+            record(
+                snapshot: frontDoor.snapshot(with: .iPhone14ProMax(style: .light)),
+                named: "01_screenshot",
+                locale: locale.folder
+            )
 
-    func test_playingView() {
-        let playingManager = AudioPlayingManager(
-            extensionContext: NSExtensionContext(),
-            canPlay: true,
-            isPlaying: true,
-            duration: 42
-        )
-        let viewModel = PlayerControllerViewModel(playingManager: playingManager, currentTime: 12)
-        let audioPlayingView = AudioPlayingView(playingManager: playingManager, playerControllerViewModel: viewModel)
+            // 02 - Instructions
+            let instructionsViewModel = InstructionsViewModel()
+            instructionsViewModel.supportedApps = [.telegram, .whatsApp]
+            instructionsViewModel.selectedApp = .whatsApp
+            let instructionsView = InstructionsView(viewModel: instructionsViewModel)
+            record(
+                snapshot: instructionsView.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
+                named: "02_screenshot",
+                locale: locale.folder
+            )
 
-        self.record(snapshot: audioPlayingView.snapshot(with: .iPhone17Pro(style: .light), needsWindow: true), named: "PLAYING_VIEW_light")
-        self.record(snapshot: audioPlayingView.snapshot(with: .iPhone17Pro(style: .dark), needsWindow: true), named: "PLAYING_VIEW_dark")
+            // 03 - Playing View
+            let playingManager = AudioPlayingManager(
+                extensionContext: NSExtensionContext(),
+                canPlay: true,
+                isPlaying: true,
+                duration: 42
+            )
+            let playerViewModel = PlayerControllerViewModel(playingManager: playingManager, currentTime: 12)
+            let audioPlayingView = AudioPlayingView(playingManager: playingManager, playerControllerViewModel: playerViewModel)
+            record(
+                snapshot: audioPlayingView.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
+                named: "03_screenshot",
+                locale: locale.folder
+            )
+        }
+
+        My.currentLocalization = nil
     }
 
 }

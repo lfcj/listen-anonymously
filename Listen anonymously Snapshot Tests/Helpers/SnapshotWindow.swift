@@ -10,9 +10,11 @@ public final class SnapshotWindow: UIWindow {
         }
         self.init(windowScene: windowScene)
         self.configuration = configuration
+        self.frame = CGRect(origin: .zero, size: configuration.size)
         self.layoutMargins = configuration.layoutMargins
         self.rootViewController = root
         self.isHidden = false
+        root.view.frame = CGRect(origin: .zero, size: configuration.size)
         root.view.layoutMargins = configuration.layoutMargins
     }
 

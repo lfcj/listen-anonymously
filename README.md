@@ -95,7 +95,7 @@ To run all tests, do:
 bundle exec fastlane ios all_tests
 ```
 
-or execute 
+or execute
 ```
 bundle exec fastlane lanes
 ```

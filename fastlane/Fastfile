@@ -79,22 +79,12 @@ platform :ios do
     )
   end
 
-  desc "Capture and frame screenshots"
+  desc "Run snapshot tests and frame screenshots"
   lane :screenshots do
-    capture_screenshots(
-      scheme: "Listen-anonymously-UITests",
-      devices: [
-        "iPhone 16 Pro Max",
-        "iPhone 16 Pro",
-        "iPad Pro 13-inch (M4)"
-      ],
-      languages: [
-        "en-US", "es-ES", "fr-FR", "de-DE", "ja",
-        "ko", "zh-Hans", "pt-BR", "ar-SA", "it",
-        "ru", "tr", "nl-NL", "pl", "sv"
-      ],
-      output_directory: "./fastlane/screenshots",
-      clear_previous_screenshots: true
+    run_tests(
+      scheme: "Listen-anonymously-Snapshot-Tests",
+      device: "iPhone 17 Pro",
+      result_bundle: false
     )
 
     frame_screenshots(

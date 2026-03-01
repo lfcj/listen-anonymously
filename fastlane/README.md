@@ -48,7 +48,47 @@ Run tests
 [bundle exec] fastlane ios all_coverage
 ```
 
-Run tests
+Run all tests with code coverage
+
+### ios build
+
+```sh
+[bundle exec] fastlane ios build
+```
+
+Build the app for App Store
+
+### ios release
+
+```sh
+[bundle exec] fastlane ios release
+```
+
+Build and upload to App Store Connect
+
+### ios screenshots
+
+```sh
+[bundle exec] fastlane ios screenshots
+```
+
+Run snapshot tests and frame screenshots
+
+### ios upload_screenshots
+
+```sh
+[bundle exec] fastlane ios upload_screenshots
+```
+
+Upload screenshots to App Store Connect
+
+### ios upload_metadata
+
+```sh
+[bundle exec] fastlane ios upload_metadata
+```
+
+Upload metadata only to App Store Connect
 
 ----
 

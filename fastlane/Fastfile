@@ -79,15 +79,10 @@ platform :ios do
     )
   end
 
-  desc "Run snapshot tests and frame screenshots"
-  lane :screenshots do
-    run_tests(
-      scheme: "Listen-anonymously-Snapshot-Tests",
-      device: "iPhone 17 Pro",
-      result_bundle: false
-    )
-
-    frame_screenshots(
+  # Run snapshots tests locally first to avoid having translucent buttons being wrongly rendered
+  desc "Frame already existing screenshots"
+  lane :frame_le_screenshots do
+    frameit(
       path: "./fastlane/screenshots"
     )
   end

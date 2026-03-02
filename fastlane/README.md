@@ -66,13 +66,13 @@ Build the app for App Store
 
 Build and upload to App Store Connect
 
-### ios screenshots
+### ios frame_le_screenshots
 
 ```sh
-[bundle exec] fastlane ios screenshots
+[bundle exec] fastlane ios frame_le_screenshots
 ```
 
-Run snapshot tests and frame screenshots
+Frame already existing screenshots
 
 ### ios upload_screenshots
 

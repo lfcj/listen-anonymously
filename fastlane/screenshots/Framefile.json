@@ -1,0 +1,40 @@
+{
+    "device_frame_version": "latest",
+    "default": {
+        "keyword": {
+            "font": "../SF-Pro-Display-Bold.otf",
+            "font_size": 96,
+            "color": "#FFFFFF"
+        },
+        "title": {
+            "font": "../SF-Pro-Display-Regular.otf",
+            "font_size": 64,
+            "color": "#FFFFDD"
+        },
+        "background": "./background.png",
+        "padding": 36,
+        "show_complete_frame": true,
+        "stack_title": true,
+        "title_below_image": false
+    },
+    "data": [
+        {
+            "filter": "01_screenshot",
+            "keyword": {
+                "color": "#FFFFFF"
+            }
+        },
+        {
+            "filter": "02_screenshot",
+            "keyword": {
+                "color": "#FFFFFF"
+            }
+        },
+        {
+            "filter": "03_screenshot",
+            "keyword": {
+                "color": "#FFFFFF"
+            }
+        }
+    ]
+}

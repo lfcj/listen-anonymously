@@ -46,15 +46,15 @@ This project uses **Tuist** for project generation, removing the need to commit 
 #### Using Bash
 
 ```bash
-chmod +x setup-tuist.sh
-./setup-tuist.sh
+chmod +x scripts/setup-tuist.sh
+./scripts/setup-tuist.sh
 ```
 
 #### Using Fish Shell + mise (Recommended)
 
 ```fish
-chmod +x setup-tuist.fish
-./setup-tuist.fish
+chmod +x scripts/setup-tuist.fish
+./scripts/setup-tuist.fish
 ```
 
 Then open the workspace:
@@ -80,9 +80,28 @@ Github Actions is used to make sure all tests pass and the code coverage remains
 
 🚧 Trigger upload to ASC
 
-## ASC Screenshots + automatic framing 
-🚧 Goal is to be able to create screenshots for all localizations via command line, as well as frame them with iPhone/iPad bezels.
-    
+## ASC Screenshots + automatic framing
+
+Screenshots are captured for all supported localizations using the `Listen-anonymously-Snapshot-Tests` unit test target and framed with `frameit`. The framing configuration lives in `fastlane/Framefile.json`, and each locale has its own `keyword.strings` and `title.strings` in `fastlane/screenshots/<locale>/`.
+
+### Capture and frame screenshots for all localizations
+
+```
+bundle exec fastlane ios screenshots
+```
+
+This runs the `Listen-anonymously-Snapshot-Tests` target, which programmatically renders each view using `SnapshotConfiguration` for all 37 App Store Connect locales: ar-SA, cs, da, de-DE, el, en-AU, en-GB, en-US, es-ES, es-MX, fi, fr-CA, fr-FR, he, hi, hr, hu, id, it, ja, ko, ms, nl-NL, no, pl, pt-BR, pt-PT, ro, ru, sk, sv, th, tr, uk, vi, zh-Hans, zh-Hant.
+
+Screenshots are saved to `fastlane/screenshots/<locale>/` locally and then framed with device bezels via `frameit`.
+
+### Upload screenshots to App Store Connect
+
+```
+bundle exec fastlane ios upload_screenshots
+```
+
+This uploads the framed screenshots from `./fastlane/screenshots/` to ASC without touching the binary or metadata.
+
 ## `fastlane`
 
 ### Running fastfile locally
@@ -102,13 +121,41 @@ bundle exec fastlane lanes
 
 to see all available lanes.
 
-🚧 Goal is to be able to submit an app for review via command line.
+### Build for App Store
+
+```
+bundle exec fastlane ios build
+```
+
+This generates the Tuist project and builds the app with `app-store` export method. The `.ipa` is saved to `./fastlane/build_output/`.
+
+### Build and upload to App Store Connect
+
+```
+bundle exec fastlane ios release
+```
+
+This builds the app and uploads it to ASC (skipping screenshots, including metadata).
+
+### Build and release with screenshots
+
+To create a full release with freshly captured screenshots:
+
+```
+bundle exec fastlane ios screenshots
+bundle exec fastlane ios release
+bundle exec fastlane ios upload_screenshots
+```
+
+### Upload metadata only
+
+```
+bundle exec fastlane ios upload_metadata
+```
 
 ## Design system
 🚧 Goal is to have a framework with design specs in JSON that gets mapped into Swift code. Names are semantic. The goal is to be able to export it to a package and be able to import it to every new private app. This allows homogeneity and consistent branding.
 
 ## Q&A
 
-### 1. Why is `AppState` an `EnvironmentObject` and not a `StateObject`.
-
-`AppState` is ideal to pass models that need to reach very deep in the view hierarchy. That allows avoiding each view to pass it along and would make sure that any view can change the `selectedTab`.
+Reach out to hello@mqslimited.co for any questions or ideas.

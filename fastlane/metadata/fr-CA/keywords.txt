@@ -1,1 +1,1 @@
-message vocal,écouter anonyme,whatsapp,telegram,pas de coche bleue,confidentialité,audio,note vocale
+message vocal,écouter anonyme,whatsapp,telegram,pas de coche bleue,confidentialité,audio

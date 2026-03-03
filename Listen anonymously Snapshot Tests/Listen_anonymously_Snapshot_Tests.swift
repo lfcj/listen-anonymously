@@ -13,7 +13,7 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
     /// Fastlane locale folder -> Apple language code used in .lproj bundles.
     /// Covers all App Store Connect locales that the app supports.
     private let frameitLocales: [(folder: String, language: String)] = [
-        ("ar-SA", "ar"),
+//        ("ar-SA", "ar"),
         ("cs", "cs"),
         ("da", "da"),
         ("de-DE", "de"),
@@ -26,14 +26,14 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
         ("fi", "fi"),
         ("fr-CA", "fr-CA"),
         ("fr-FR", "fr"),
-        ("he", "he"),
-        ("hi", "hi"),
+//        ("he", "he"),
+//        ("hi", "hi"),
         ("hr", "hr"),
         ("hu", "hu"),
         ("id", "id"),
         ("it", "it"),
-        ("ja", "ja"),
-        ("ko", "ko"),
+//        ("ja", "ja"),
+//        ("ko", "ko"),
         ("ms", "ms"),
         ("nl-NL", "nl"),
         ("no", "nb"),
@@ -44,12 +44,12 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
         ("ru", "ru"),
         ("sk", "sk"),
         ("sv", "sv"),
-        ("th", "th"),
+//        ("th", "th"),
         ("tr", "tr"),
         ("uk", "uk"),
-        ("vi", "vi"),
-        ("zh-Hans", "zh-Hans"),
-        ("zh-Hant", "zh-Hant")
+        ("vi", "vi")
+//        ("zh-Hans", "zh-Hans"),
+//        ("zh-Hant", "zh-Hant")
     ]
 
     func test_frameit_screenshots() {

@@ -90,3 +90,5 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 MyLocalConfig.xcconfig
 vendor
+*.p8
+AuthKey_*.p8

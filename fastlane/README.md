@@ -90,6 +90,14 @@ Upload screenshots to App Store Connect
 
 Upload metadata only to App Store Connect
 
+### ios verify_metadata
+
+```sh
+[bundle exec] fastlane ios verify_metadata
+```
+
+Verify metadata without uploading
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

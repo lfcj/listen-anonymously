@@ -15,6 +15,20 @@
 
 default_platform(:ios)
 
+# Read ASC credentials from Secrets.xcconfig
+secrets = {}
+File.readlines("../Configuration/Secrets.xcconfig").each do |line|
+  next if line.strip.start_with?("//") || line.strip.empty?
+  key, value = line.split("=", 2).map(&:strip)
+  secrets[key] = value if key && value
+end
+
+api_key = app_store_connect_api_key(
+  key_id: secrets["ASC_KEY_ID"],
+  issuer_id: secrets["ASC_ISSUER_ID"],
+  key_filepath: "fastlane/AuthKey_#{secrets['ASC_KEY_ID']}.p8"
+)
+
 lane :tests do
   run_tests(
     scheme: "Listen anonymously Ext"
@@ -72,6 +86,7 @@ platform :ios do
     )
 
     upload_to_app_store(
+      api_key: api_key,
       skip_screenshots: true,
       skip_metadata: false,
       force: true,
@@ -90,6 +105,7 @@ platform :ios do
   desc "Upload screenshots to App Store Connect"
   lane :upload_screenshots do
     upload_to_app_store(
+      api_key: api_key,
       skip_binary_upload: true,
       skip_metadata: true,
       skip_screenshots: false,
@@ -100,10 +116,20 @@ platform :ios do
   desc "Upload metadata only to App Store Connect"
   lane :upload_metadata do
     upload_to_app_store(
+      api_key: api_key,
       skip_binary_upload: true,
       skip_metadata: false,
       skip_screenshots: true,
-      force: true
+      force: true,
+      verbose: true
+    )
+  end
+
+  desc "Verify metadata without uploading"
+  lane :verify_metadata do
+    precheck(
+      api_key: api_key,
+      include_in_app_purchases: false
     )
   end
 end

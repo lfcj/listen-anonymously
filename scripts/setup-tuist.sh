@@ -44,6 +44,8 @@ if [ ! -f "Secrets.xcconfig" ]; then
         echo -e "${YELLOW}  - DEV_TEAM_SECRET (Apple Developer Team ID)${NC}"
         echo -e "${YELLOW}  - POSTHOG_API_KEY${NC}"
         echo -e "${YELLOW}  - REVENUE_CAT_KEY${NC}"
+        echo -e "${YELLOW}  - ASC_KEY_ID (App Store Connect API Key ID)${NC}"
+        echo -e "${YELLOW}  - ASC_ISSUER_ID (App Store Connect Issuer ID)${NC}"
         echo ""
         echo -e "${RED}Press Enter after updating Secrets.xcconfig to continue...${NC}"
         read -r
@@ -54,6 +56,8 @@ if [ ! -f "Secrets.xcconfig" ]; then
         echo "DEV_TEAM_SECRET = YOUR_TEAM_ID"
         echo "POSTHOG_API_KEY = your_api_key"
         echo "REVENUE_CAT_KEY = your_api_key"
+        echo "ASC_KEY_ID = your_key_id"
+        echo "ASC_ISSUER_ID = your_issuer_id"
         echo ""
         exit 1
     fi
@@ -72,7 +76,9 @@ fi
 
 if grep -q "DEV_TEAM_SECRET" Secrets.xcconfig && \
    grep -q "POSTHOG_API_KEY" Secrets.xcconfig && \
-   grep -q "REVENUE_CAT_KEY" Secrets.xcconfig; then
+   grep -q "REVENUE_CAT_KEY" Secrets.xcconfig && \
+   grep -q "ASC_KEY_ID" Secrets.xcconfig && \
+   grep -q "ASC_ISSUER_ID" Secrets.xcconfig; then
     echo -e "${GREEN}✓ Secrets.xcconfig is properly configured${NC}"
     echo ""
 else

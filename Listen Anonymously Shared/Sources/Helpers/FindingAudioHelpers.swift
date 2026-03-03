@@ -1,5 +1,4 @@
 import Foundation
-import SwiftOGG
 
 struct AudioFileInformation {
     let url: URL
@@ -52,7 +51,11 @@ struct FindingAudioHelpers {
     static let audioTypeIdentifiers = ["com.apple.m4a-audio", "public.mp3", "com.apple.coreaudio-format", "public.wav", "public.m4a"]
     static let typeIdentifiers = telegramTypeIdentifiers + audioTypeIdentifiers
 
-    static func loadAudioURL(in item: NSExtensionItem, isSecondAttempt: Bool = false) async throws -> AudioFileInformation {
+    static func loadAudioURL(
+        in item: NSExtensionItem,
+        isSecondAttempt: Bool = false,
+        telegramConverter: @Sendable (URL, URL) throws -> Void = { _, _ in }
+    ) async throws -> AudioFileInformation {
         guard let (audioAttachment, audioTypeIdentifier) = findAudioAttachment(in: item.attachments, isSecondAttempt: isSecondAttempt) else {
             throw FindingAudioError.noAudioFoundInAttachment(
                 typeIdentifier: item.attachments?.flatMap { $0.registeredTypeIdentifiers }.joined(separator: ",") ?? ""
@@ -60,7 +63,7 @@ struct FindingAudioHelpers {
         }
 
         try Task.checkCancellation()
-        return try await loadAudioItemType(identifier: audioTypeIdentifier, from: audioAttachment)
+        return try await loadAudioItemType(identifier: audioTypeIdentifier, from: audioAttachment, telegramConverter: telegramConverter)
     }
 
     private static func findAudioAttachment(in attachments: [NSItemProvider]?, isSecondAttempt: Bool = false) -> (NSItemProvider, String)? {
@@ -75,7 +78,11 @@ struct FindingAudioHelpers {
         return result
     }
 
-    private static func loadAudioItemType(identifier: String, from audioAttachment: NSItemProvider) async throws -> AudioFileInformation {
+    private static func loadAudioItemType(
+        identifier: String,
+        from audioAttachment: NSItemProvider,
+        telegramConverter: @Sendable (URL, URL) throws -> Void
+    ) async throws -> AudioFileInformation {
         try Task.checkCancellation()
         do {
             let loadedItem = try await audioAttachment.loadItem(forTypeIdentifier: identifier, options: nil)
@@ -85,7 +92,7 @@ struct FindingAudioHelpers {
             }
 
             if Self.telegramTypeIdentifiers.contains(identifier) {
-                return try handleTelegram(audioURL: audioURL)
+                return try handleTelegram(audioURL: audioURL, telegramConverter: telegramConverter)
             } else {
                 return AudioFileInformation(url: audioURL, title: audioURL.lastPathComponent.formatAudioFileName())
             }
@@ -98,12 +105,12 @@ struct FindingAudioHelpers {
         }
     }
 
-    private static func handleTelegram(audioURL: URL) throws -> AudioFileInformation {
+    private static func handleTelegram(audioURL: URL, telegramConverter: @Sendable (URL, URL) throws -> Void) throws -> AudioFileInformation {
         let copyAudioURL = FileManager.createTemporaryFileURL(fileExtension: "ogg")
         let convertedAudioURL = FileManager.createTemporaryFileURL(fileExtension: "m4a")
         do {
             try FileManager.default.copyItem(at: audioURL, to: copyAudioURL)
-            try OGGConverter.convertOpusOGGToM4aFile(src: copyAudioURL, dest: convertedAudioURL)
+            try telegramConverter(copyAudioURL, convertedAudioURL)
         } catch {
             throw FindingAudioError.telegramConversionNotPossible
         }

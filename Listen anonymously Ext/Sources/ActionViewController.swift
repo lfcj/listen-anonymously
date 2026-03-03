@@ -1,11 +1,17 @@
 import Listen_Anonymously_Shared
+import SwiftOGG
 import SwiftUI
 import UIKit
 
 @MainActor
 class ActionViewController: UIViewController {
 
-    private(set) lazy var playingManager = AudioPlayingManager(extensionContext: self.extensionContext)
+    private(set) lazy var playingManager = AudioPlayingManager(
+        extensionContext: self.extensionContext,
+        telegramConverter: { src, dest in
+            try OGGConverter.convertOpusOGGToM4aFile(src: src, dest: dest)
+        }
+    )
 
     private var injectedExtensionContext: NSExtensionContext?
     private var isIOS26Available = false

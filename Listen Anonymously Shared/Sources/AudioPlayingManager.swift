@@ -43,6 +43,7 @@ open class AudioPlayingManager: ObservableObject {
     private var stashedCurrentTime: TimeInterval?
 
     private let postHog: PostHogProtocol
+    private let telegramConverter: @Sendable (URL, URL) throws -> Void
 
     public init(
         extensionContext: NSExtensionContext?,
@@ -52,7 +53,8 @@ open class AudioPlayingManager: ObservableObject {
         errorMessage: String? = nil,
         duration: Double = 0,
         url: URL? = nil,
-        postHog: PostHogProtocol = PostHog.shared
+        postHog: PostHogProtocol = PostHog.shared,
+        telegramConverter: @escaping @Sendable (URL, URL) throws -> Void = { _, _ in }
     ) {
         self.extensionContext = extensionContext
         self.canPlay = canPlay
@@ -62,6 +64,7 @@ open class AudioPlayingManager: ObservableObject {
         self.duration = duration
         self.audioURL = url
         self.postHog = postHog
+        self.telegramConverter = telegramConverter
     }
 
     open func play(audioSession: AudioSessionProtocol = AVAudioSession.sharedInstance()) {
@@ -107,11 +110,16 @@ open class AudioPlayingManager: ObservableObject {
         }
 
         typealias Result = (audio: AudioFileInformation?, error: String?)
+        let converter = self.telegramConverter
         let result: Result = await withTaskGroup(of: Result.self, returning: Result.self) { group in
             for item in inputItems {
                 group.addTask { @Sendable in
                     do {
-                        let fileInformation = try await FindingAudioHelpers.loadAudioURL(in: item, isSecondAttempt: isSecondAttempt)
+                        let fileInformation = try await FindingAudioHelpers.loadAudioURL(
+                            in: item,
+                            isSecondAttempt: isSecondAttempt,
+                            telegramConverter: converter
+                        )
                         return (audio: fileInformation, error: nil)
                     } catch {
                         return (audio: nil, error: error.localizedDescription)

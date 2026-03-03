@@ -1,8 +1,13 @@
 import Foundation
+import SwiftOGG
 import Testing
 @testable import Listen_Anonymously_Shared
 
 struct FindingAudioHelpersTests {
+
+    private let oggConverter: @Sendable (URL, URL) throws -> Void = { src, dest in
+        try OGGConverter.convertOpusOGGToM4aFile(src: src, dest: dest)
+    }
 
     @Test("Loading audio URL from empty extension providers returns nil")
     func findAudio_inEmptyExtensionProvider() async throws {
@@ -62,7 +67,8 @@ struct FindingAudioHelpersTests {
     @Test("load audio finds Telegram audio file information when item is valid and converts OGG to M4A")
     func findAudio_findsAudioFileInformationWhenItemIsTelegramURL() async throws {
         let audioFileInformation = try await FindingAudioHelpers.loadAudioURL(
-            in: makeFakeExtensionItemWithValidTelegramURL()
+            in: makeFakeExtensionItemWithValidTelegramURL(),
+            telegramConverter: oggConverter
         )
 
         #expect(audioFileInformation.url.absoluteString.hasSuffix("m4a") == true)
@@ -72,7 +78,8 @@ struct FindingAudioHelpersTests {
     func findAudio_invalidTelegramOGGThrowsConversionError() async throws {
         await #expect(throws: FindingAudioError.telegramConversionNotPossible.self) {
             _ = try await FindingAudioHelpers.loadAudioURL(
-                in: makeFakeExtensionItemWithInvalidTelegramOGG()
+                in: makeFakeExtensionItemWithInvalidTelegramOGG(),
+                telegramConverter: oggConverter
             )
         }
     }

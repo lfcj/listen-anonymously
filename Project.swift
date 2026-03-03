@@ -43,7 +43,8 @@ let project = Project(
             resources: ["Listen anonymously/Resources/**"],
             dependencies: [
                 .target(name: "Listen-Anonymously-Shared"),
-                .package(product: "RevenueCat")
+                .package(product: "RevenueCat"),
+                .package(product: "SwiftOGG")
             ],
             settings: .settings(
                 base: [
@@ -81,7 +82,8 @@ let project = Project(
             sources: ["Listen anonymously Ext/Sources/**"],
             resources: ["Listen anonymously Ext/Resources/**"],
             dependencies: [
-                .target(name: "Listen-Anonymously-Shared")
+                .target(name: "Listen-Anonymously-Shared"),
+                .package(product: "SwiftOGG")
             ],
             settings: .settings(
                 base: [
@@ -106,8 +108,7 @@ let project = Project(
             sources: ["Listen Anonymously Shared/Sources/**"],
             resources: ["Listen Anonymously Shared/Resources/**"],
             dependencies: [
-                .package(product: "PostHog"),
-                .package(product: "SwiftOGG")
+                .package(product: "PostHog")
             ],
             settings: .settings(
                 base: [
@@ -154,7 +155,8 @@ let project = Project(
             resources: ["Listen Anonymously Shared/Resources/TestResources/**"],
             dependencies: [
                 .target(name: "Listen-Anonymously-Shared"),
-                .package(product: "ViewInspector")
+                .package(product: "ViewInspector"),
+                .package(product: "SwiftOGG")
             ],
             settings: .settings(
                 base: [

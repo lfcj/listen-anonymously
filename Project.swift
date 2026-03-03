@@ -37,15 +37,7 @@ let project = Project(
                 ],
                 "CFBundleDisplayName": "Listen anonymously",
                 "PostHogAPIKey": "$(POSTHOG_API_KEY)",
-                "RevenueCatAPIKey": "$(REVENUE_CAT_KEY)",
-                "NSExtension": [
-                    "NSExtensionAttributes": [
-                        "NSExtensionActivationRule": [
-                            "NSExtensionActivationSupportsFileWithMaxCount": 1,
-                            "NSExtensionActivationSupportsText": false
-                        ]
-                    ]
-                ]
+                "RevenueCatAPIKey": "$(REVENUE_CAT_KEY)"
             ]),
             sources: ["Listen anonymously/Sources/**"],
             resources: ["Listen anonymously/Resources/**"],

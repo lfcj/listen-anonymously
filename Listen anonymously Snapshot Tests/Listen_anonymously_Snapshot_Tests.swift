@@ -60,7 +60,7 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
             let frontDoor = FrontDoorView()
             record(
                 snapshot: frontDoor.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
-                named: "01_screenshot",
+                named: "03_screenshot",
                 locale: locale.folder
             )
 
@@ -86,7 +86,7 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
             let audioPlayingView = AudioPlayingView(playingManager: playingManager, playerControllerViewModel: playerViewModel)
             record(
                 snapshot: audioPlayingView.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
-                named: "03_screenshot",
+                named: "01_screenshot",
                 locale: locale.folder
             )
         }

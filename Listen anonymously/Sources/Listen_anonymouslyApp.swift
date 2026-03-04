@@ -9,9 +9,6 @@ struct Listen_anonymouslyApp: App {
 
     init() {
         guard let postHogKey = Bundle.main.postHogAPIKey else {
-            // swiftlint:disable todo
-            // TODO: Log error.
-            // swiftlint:enable todo
             return
         }
         PostHog.shared.setup(key: postHogKey)

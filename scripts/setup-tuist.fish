@@ -64,16 +64,16 @@ if not command -v tuist &> /dev/null
 end
 
 echo "$GREEN✓ Tuist is available$NC"
-tuist --version
+tuist version
 echo ""
 
 # Check if Secrets.xcconfig exists
-if not test -f Secrets.xcconfig
+if not test -f Configuration/Secrets.xcconfig
     echo "$YELLOW⚠ Secrets.xcconfig not found$NC"
     echo "$YELLOW Creating from example...$NC"
     
-    if test -f Secrets.xcconfig.example
-        cp Secrets.xcconfig.example Secrets.xcconfig
+    if test -f Configuration/Secrets.xcconfig.example
+        cp Configuration/Secrets.xcconfig.example Configuration/Secrets.xcconfig
         echo "$YELLOW⚠ Please edit Secrets.xcconfig with your credentials:$NC"
         echo "$YELLOW  - DEV_TEAM_SECRET (Apple Developer Team ID)$NC"
         echo "$YELLOW  - POSTHOG_API_KEY$NC"
@@ -102,17 +102,17 @@ end
 
 # Verify Secrets.xcconfig has required keys
 echo "$BLUE Verifying Secrets.xcconfig...$NC"
-if grep -q "YOUR_TEAM_ID_HERE" Secrets.xcconfig; or grep -q "your_.*_key_here" Secrets.xcconfig
+if grep -q "YOUR_TEAM_ID_HERE" Configuration/Secrets.xcconfig; or grep -q "your_.*_key_here" Configuration/Secrets.xcconfig
     echo "$RED✗ Secrets.xcconfig contains placeholder values$NC"
     echo "$RED Please update it with your actual credentials before continuing$NC"
     exit 1
 end
 
-if grep -q "DEV_TEAM_SECRET" Secrets.xcconfig; and \
-   grep -q "POSTHOG_API_KEY" Secrets.xcconfig; and \
-   grep -q "REVENUE_CAT_KEY" Secrets.xcconfig; and \
-   grep -q "ASC_KEY_ID" Secrets.xcconfig; and \
-   grep -q "ASC_ISSUER_ID" Secrets.xcconfig
+if grep -q "DEV_TEAM_SECRET" Configuration/Secrets.xcconfig; and \
+   grep -q "POSTHOG_API_KEY" Configuration/Secrets.xcconfig; and \
+   grep -q "REVENUE_CAT_KEY" Configuration/Secrets.xcconfig; and \
+   grep -q "ASC_KEY_ID" Configuration/Secrets.xcconfig; and \
+   grep -q "ASC_ISSUER_ID" Configuration/Secrets.xcconfig
     echo "$GREEN✓ Secrets.xcconfig is properly configured$NC"
     echo ""
 else

@@ -43,6 +43,7 @@ let project = Project(
             resources: ["Listen anonymously/Resources/**"],
             dependencies: [
                 .target(name: "Listen-Anonymously-Shared"),
+                .target(name: "Listen-anonymously-Ext"),
                 .package(product: "RevenueCat"),
                 .package(product: "SwiftOGG")
             ],
@@ -65,7 +66,30 @@ let project = Project(
             product: .appExtension,
             bundleId: "com.reginafallangi.Listen-anonymously.Listen-anonymously-Ext",
             deploymentTargets: .iOS("18.0"),
-            infoPlist: .file(path: "Listen anonymously Ext/Resources/Info.plist"),
+            infoPlist: .extendingDefault(with: [
+                "CFBundleDisplayName": "Listen anonymously",
+                "LSHasLocalizedDisplayName": true,
+                "NSExtension": [
+                    "NSExtensionAttributes": [
+                        "NSExtensionActivationRule": [
+                            "NSExtensionActivationSupportsAttachmentsWithMinCount": 1,
+                            "NSExtensionActivationSupportsAttachmentsWithMaxCount": 1,
+                            "NSExtensionActivationSupportsImageWithMaxCount": 0,
+                            "NSExtensionActivationSupportsMovieWithMaxCount": 0,
+                            "NSExtensionActivationSupportsFileWithMaxCount": 1
+                        ],
+                        "NSExtensionServiceAllowsFinderPreviewItem": true,
+                        "NSExtensionServiceAllowsTouchBarItem": true,
+                        "NSExtensionServiceFinderPreviewIconName": "NSActionTemplate",
+                        "NSExtensionServiceTouchBarBezelColorName": "TouchBarBezel",
+                        "NSExtensionServiceTouchBarIconName": "NSActionTemplate"
+                    ],
+                    "NSExtensionMainStoryboard": "MainInterface",
+                    "NSExtensionPointIdentifier": "com.apple.ui-services"
+                ],
+                "PostHogAPIKey": "$(POSTHOG_API_KEY)",
+                "RevenueCatAPIKey": "$(REVENUE_CAT_KEY)"
+            ]),
             sources: ["Listen anonymously Ext/Sources/**"],
             resources: [
                 .glob(pattern: "Listen anonymously Ext/Resources/**", excluding: ["Listen anonymously Ext/Resources/Info.plist"])

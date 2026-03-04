@@ -12,9 +12,7 @@
     "codeCoverage" : {
       "pathExclusions" : [
         "**\/TuistAssets+*.swift",
-        "**\/TuistBundle+*.swift",
-        "**\/TuistStrings+*.swift",
-        "**\/TuistFonts+*.swift"
+        "**\/TuistBundle+*.swift"
       ],
       "targets" : [
         {

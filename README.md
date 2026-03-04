@@ -31,7 +31,6 @@ The project follows **MVVM (Model-View-ViewModel)** with reactive state manageme
 - **Swift 6 concurrency**: `async`/`await`, `Sendable` types, `@MainActor` annotations, `TaskGroup` for concurrent audio-file detection, and `AsyncStream` for event propagation.
 - **Combine** for reactive data flow in view models (`@Published`, timer streams, async streams for purchases).
 - **Heavily modularized**: the `Listen Anonymously Shared` framework contains all reusable logic and could be extracted into an independent Swift package.
-- **Custom dependency injection** using an `actor`-based `InjectionResolver` with a type-safe `@Inject` property wrapper, plus constructor injection throughout.
 - **Strong SOLID development:**
     -   **Single Responsibility Principle:** The main app and the extension each have a single purpose: show the front door/instructions, and play audio, respectively. All reusable logic lives in `Listen Anonymously Shared`. A natural next step would be splitting this framework into a UI layer and a core-logic layer.
     -   **Open/Closed Principle:** Most reusable models in the framework are marked `open`, allowing tests and snapshot configurations to inject new behavior without modifying production code.

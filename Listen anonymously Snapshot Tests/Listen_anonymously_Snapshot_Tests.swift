@@ -56,39 +56,46 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
         for locale in frameitLocales {
             My.currentLocalization = locale.language
 
-            // 01 - Front Door
-            let frontDoor = FrontDoorView()
-            record(
-                snapshot: frontDoor.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
-                named: "03_screenshot",
-                locale: locale.folder
-            )
+            let configs: [(config: SnapshotConfiguration, suffix: String)] = [
+                (.iPhone14ProMax(style: .light), ""),
+                (.iPadPro13(style: .light), "_ipad")
+            ]
 
-            // 02 - Instructions
-            let instructionsViewModel = InstructionsViewModel()
-            instructionsViewModel.supportedApps = [.telegram, .whatsApp]
-            instructionsViewModel.selectedApp = .whatsApp
-            let instructionsView = InstructionsView(viewModel: instructionsViewModel)
-            record(
-                snapshot: instructionsView.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
-                named: "02_screenshot",
-                locale: locale.folder
-            )
+            for (config, suffix) in configs {
+                // 01 - Front Door
+                let frontDoor = FrontDoorView()
+                record(
+                    snapshot: frontDoor.snapshot(with: config, needsWindow: true),
+                    named: "03_screenshot\(suffix)",
+                    locale: locale.folder
+                )
 
-            // 03 - Playing View
-            let playingManager = AudioPlayingManager(
-                extensionContext: NSExtensionContext(),
-                canPlay: true,
-                isPlaying: true,
-                duration: 42
-            )
-            let playerViewModel = PlayerControllerViewModel(playingManager: playingManager, currentTime: 12)
-            let audioPlayingView = AudioPlayingView(playingManager: playingManager, playerControllerViewModel: playerViewModel)
-            record(
-                snapshot: audioPlayingView.snapshot(with: .iPhone14ProMax(style: .light), needsWindow: true),
-                named: "01_screenshot",
-                locale: locale.folder
-            )
+                // 02 - Instructions
+                let instructionsViewModel = InstructionsViewModel()
+                instructionsViewModel.supportedApps = [.telegram, .whatsApp]
+                instructionsViewModel.selectedApp = .whatsApp
+                let instructionsView = InstructionsView(viewModel: instructionsViewModel)
+                record(
+                    snapshot: instructionsView.snapshot(with: config, needsWindow: true),
+                    named: "02_screenshot\(suffix)",
+                    locale: locale.folder
+                )
+
+                // 03 - Playing View
+                let playingManager = AudioPlayingManager(
+                    extensionContext: NSExtensionContext(),
+                    canPlay: true,
+                    isPlaying: true,
+                    duration: 42
+                )
+                let playerViewModel = PlayerControllerViewModel(playingManager: playingManager, currentTime: 12)
+                let audioPlayingView = AudioPlayingView(playingManager: playingManager, playerControllerViewModel: playerViewModel)
+                record(
+                    snapshot: audioPlayingView.snapshot(with: config, needsWindow: true),
+                    named: "01_screenshot\(suffix)",
+                    locale: locale.folder
+                )
+            }
         }
 
         My.currentLocalization = nil

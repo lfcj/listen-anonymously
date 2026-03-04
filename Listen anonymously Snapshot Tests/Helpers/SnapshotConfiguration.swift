@@ -171,6 +171,27 @@ public struct SnapshotConfiguration {
         )
     }
 
+    /// 1024x1366 points at 2x = 2048x2732 pixels. Matches App Store Connect's 13-inch iPad display requirement.
+    static func iPadPro13(style: UIUserInterfaceStyle, contentSize: UIContentSizeCategory = .medium) -> SnapshotConfiguration {
+        SnapshotConfiguration(
+            name: "iPad Pro 13",
+            size: CGSize(width: 1024, height: 1366),
+            safeAreaInsets: UIEdgeInsets(top: 24, left: 0, bottom: 20, right: 0),
+            layoutMargins: UIEdgeInsets(top: 24, left: 20, bottom: 20, right: 20),
+            traitCollection: UITraitCollection(mutations: { traits in
+                traits.forceTouchCapability = .unavailable
+                traits.layoutDirection = .leftToRight
+                traits.preferredContentSizeCategory = contentSize
+                traits.userInterfaceIdiom = .pad
+                traits.horizontalSizeClass = .regular
+                traits.verticalSizeClass = .regular
+                traits.displayScale = 2
+                traits.displayGamut = .P3
+                traits.userInterfaceStyle = style
+            })
+        )
+    }
+
     static func iPad10Landscape(style: UIUserInterfaceStyle, contentSize: UIContentSizeCategory = .medium) -> SnapshotConfiguration {
         SnapshotConfiguration(
             name: "iPad 10 Landscape",

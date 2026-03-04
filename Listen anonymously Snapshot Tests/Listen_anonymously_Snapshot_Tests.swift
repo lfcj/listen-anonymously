@@ -8,11 +8,15 @@ import XCTest
 final class Listen_anonymously_Snapshot_Tests: XCTestCase {
 // swiftlint:enable type_name
 
+    // MARK: - Nested Types
+
+    typealias FramingLocale = (folder: String, language: String)
+
     // MARK: - Localized screenshots for frameit (fastlane/screenshots/<locale>/)
 
     /// Fastlane locale folder -> Apple language code used in .lproj bundles.
     /// Covers all App Store Connect locales that the app supports.
-    private let frameitLocales: [(folder: String, language: String)] = [
+    private let frameitLocales: [FramingLocale] = [
 //        ("ar-SA", "ar"),
         ("cs", "cs"),
         ("da", "da"),
@@ -52,14 +56,26 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
 //        ("zh-Hant", "zh-Hant")
     ]
 
+    let ciLocales: [FramingLocale] = [
+        ("de-DE", "de"),
+        ("en-US", "en"),
+        ("es-ES", "es"),
+        ("fr-FR", "fr")
+    ]
+
     func test_frameit_screenshots() {
-        for locale in frameitLocales {
+        let isCI = ProcessInfo.processInfo.environment["CI"] != nil
+        let localesToTest = isCI ? ciLocales : frameitLocales
+        for locale in localesToTest {
             My.currentLocalization = locale.language
 
-            let configs: [(config: SnapshotConfiguration, suffix: String)] = [
-                (.iPhone14ProMax(style: .light), ""),
-                (.iPadPro13(style: .light), "_ipad")
+            var configs: [(config: SnapshotConfiguration, suffix: String)] = [
+                (.iPhone14ProMax(style: .light), "")
             ]
+
+            if !isCI {
+                configs.append((.iPadPro13(style: .light), "_ipad"))
+            }
 
             for (config, suffix) in configs {
                 // 01 - Front Door

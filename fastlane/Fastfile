@@ -111,6 +111,7 @@ platform :ios do
       skip_binary_upload: true,
       skip_metadata: true,
       skip_screenshots: false,
+      overwrite_screenshots: true,
       screenshots_path: "./fastlane/screenshots",
       precheck_include_in_app_purchases: false
     )

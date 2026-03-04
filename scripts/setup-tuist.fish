@@ -138,12 +138,6 @@ tuist generate
 echo "$GREEN✓ Project generated successfully$NC"
 echo ""
 
-# Update test plan identifiers
-echo "$BLUE Updating test plan identifiers...$NC"
-bash (status dirname)/update-testplan-identifiers.sh
-echo "$GREEN✓ Test plan identifiers updated$NC"
-echo ""
-
 echo "$GREEN========================================$NC"
 echo "$GREEN  Setup Complete!$NC"
 echo "$GREEN========================================$NC"

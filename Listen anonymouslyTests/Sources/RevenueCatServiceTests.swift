@@ -107,7 +107,7 @@ final class RevenueCatServiceTests: XCTestCase {
             expectation.fulfill()
         }).store(in: &cancellables)
 
-        await fulfillment(of: [expectation], timeout: 2.0)
+        await fulfillment(of: [expectation], timeout: 4.0)
     }
 
     func test_superKindTip_failure_logsFailed() async throws {

@@ -87,6 +87,9 @@ Carthage/Build/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
+!fastlane/screenshots/en-US/01_screenshot_framed.png
+!fastlane/screenshots/en-US/02_screenshot_framed.png
+!fastlane/screenshots/en-US/03_screenshot_framed.png
 fastlane/test_output
 MyLocalConfig.xcconfig
 vendor

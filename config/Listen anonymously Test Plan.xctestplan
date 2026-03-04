@@ -10,6 +10,12 @@
   ],
   "defaultOptions" : {
     "codeCoverage" : {
+      "pathExclusions" : [
+        "**/TuistAssets+*.swift",
+        "**/TuistBundle+*.swift",
+        "**/TuistStrings+*.swift",
+        "**/TuistFonts+*.swift"
+      ],
       "targets" : [
         {
           "containerPath" : "container:Listen-anonymously.xcodeproj",

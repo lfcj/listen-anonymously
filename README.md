@@ -14,6 +14,8 @@ Here is what the app does and how it looks:
 
 ## Screenshots
 
+Screenshots are captured for all supported localizations using the `Listen-anonymously-Snapshot-Tests` unit test target and framed with `frameit`. The framing configuration     lives in `fastlane/Framefile.json`, and each locale has its own `keyword.strings` and `title.strings` in `fastlane/screenshots/<locale>/`.
+
 | Front Door | Instructions | Now Playing |
 |:-:|:-:|:-:|
 | ![Front Door](fastlane/screenshots/en-US/03_screenshot_framed.png) | ![Instructions](fastlane/screenshots/en-US/02_screenshot_framed.png) | ![Now Playing](fastlane/screenshots/en-US/01_screenshot_framed.png) |
@@ -83,10 +85,6 @@ Github Actions is used to make sure all tests pass and the code coverage remains
 [code-coverage.yml](https://github.com/lfcj/listen-anonymously/blob/main/.github/workflows/code-coverage.yml) forces usage of Xcode-26, runs tests and uploads code coverage results to CODECOV.
 
 🚧 Trigger upload to ASC
-
-## ASC Screenshots + automatic framing
-
-Screenshots are captured for all supported localizations using the `Listen-anonymously-Snapshot-Tests` unit test target and framed with `frameit`. The framing configuration lives in `fastlane/Framefile.json`, and each locale has its own `keyword.strings` and `title.strings` in `fastlane/screenshots/<locale>/`.
 
 ### Capture and frame screenshots for all localizations
 

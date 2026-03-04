@@ -65,22 +65,11 @@ let project = Project(
             product: .appExtension,
             bundleId: "com.reginafallangi.Listen-anonymously.Listen-anonymously-Ext",
             deploymentTargets: .iOS("18.0"),
-            infoPlist: .extendingDefault(with: [
-                "NSExtension": [
-                    "NSExtensionMainStoryboard": "MainInterface",
-                    "NSExtensionPointIdentifier": "com.apple.ui-services",
-                    "NSExtensionAttributes": [
-                        "NSExtensionActivationRule": [
-                            "NSExtensionActivationSupportsFileWithMaxCount": 1,
-                            "NSExtensionActivationSupportsText": false
-                        ]
-                    ]
-                ],
-                "PostHogAPIKey": "$(POSTHOG_API_KEY)",
-                "RevenueCatAPIKey": "$(REVENUE_CAT_KEY)"
-            ]),
+            infoPlist: .file(path: "Listen anonymously Ext/Resources/Info.plist"),
             sources: ["Listen anonymously Ext/Sources/**"],
-            resources: ["Listen anonymously Ext/Resources/**"],
+            resources: [
+                .glob(pattern: "Listen anonymously Ext/Resources/**", excluding: ["Listen anonymously Ext/Resources/Info.plist"])
+            ],
             dependencies: [
                 .target(name: "Listen-Anonymously-Shared"),
                 .package(product: "SwiftOGG")
@@ -256,6 +245,27 @@ let project = Project(
                     codeCoverageTargets: [
                         "Listen-anonymously",
                         "Listen-Anonymously-Shared",
+                        "Listen-anonymously-Ext"
+                    ]
+                )
+            ),
+            runAction: .runAction(configuration: "Debug"),
+            archiveAction: .archiveAction(configuration: "Release"),
+            profileAction: .profileAction(configuration: "Release"),
+            analyzeAction: .analyzeAction(configuration: "Debug")
+        ),
+        .scheme(
+            name: "Listen-anonymously-Ext",
+            shared: true,
+            buildAction: .buildAction(targets: ["Listen-anonymously-Ext"]),
+            testAction: .targets(
+                [
+                    "Listen-anonymously-Ext-Tests"
+                ],
+                configuration: "Debug",
+                options: .options(
+                    coverage: true,
+                    codeCoverageTargets: [
                         "Listen-anonymously-Ext"
                     ]
                 )

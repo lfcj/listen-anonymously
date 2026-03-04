@@ -57,10 +57,7 @@ final class Listen_anonymously_Snapshot_Tests: XCTestCase {
     ]
 
     let ciLocales: [FramingLocale] = [
-        ("de-DE", "de"),
-        ("en-US", "en"),
-        ("es-ES", "es"),
-        ("fr-FR", "fr")
+        ("en-US", "en")
     ]
 
     func test_frameit_screenshots() {

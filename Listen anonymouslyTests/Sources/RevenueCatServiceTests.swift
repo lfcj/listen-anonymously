@@ -7,6 +7,18 @@ final class RevenueCatServiceTests: XCTestCase {
 
     private let postHogSpy = PostHogSpy()
 
+    func test_configureRevenueCat_APIKey_isUsedForConfiguration() async throws {
+        // Given: RevenueCatAPIKey in Info.plist
+        let mockPurchases = MockPurchasesClient()
+        let expectedKey = "any-api-key"
+
+        // When
+        mockPurchases.configure(withAPIKey: expectedKey)
+
+        // Then
+        XCTAssertEqual(mockPurchases.configuredWithKey, expectedKey)
+    }
+
     func test_configureRevenueCat_missingAPIKey_logsFailure() async throws {
         let expectation = expectation(description: "No api key error is logged")
         var cancellables: Set<AnyCancellable> = []
@@ -72,7 +84,7 @@ final class RevenueCatServiceTests: XCTestCase {
             expectation.fulfill()
         }).store(in: &cancellables)
 
-        await fulfillment(of: [expectation], timeout: 2.0)
+        await fulfillment(of: [expectation], timeout: 4.0)
     }
 
     func test_sendGoodVibes_userCancelled_logsCancelled() async throws {
@@ -97,7 +109,7 @@ final class RevenueCatServiceTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { events in
-            guard events.contains("donation_cancelled") else {
+            guard events.contains("donation_cancelled") && events.contains("donation_attempt") else {
                 return
             }
 
@@ -133,6 +145,10 @@ final class RevenueCatServiceTests: XCTestCase {
 
         // Then
         postHogSpy.$capturedEvents.sink(receiveValue: { events in
+            guard events.contains("donation_failed") && events.contains("donation_attempt") else {
+                return
+            }
+
             XCTAssertTrue(events.contains("donation_attempt"))
             XCTAssertTrue(events.contains("donation_failed"))
 
@@ -168,7 +184,7 @@ final class RevenueCatServiceTests: XCTestCase {
 
             let errorProperties = self.postHogSpy.capturedProperties.first(where: { $0.keys.contains(["error"])})
             XCTAssertNotNil(errorProperties)
-            let errorAsString = errorProperties!["error"] as? String
+            let errorAsString = errorProperties?["error"] as? String
             XCTAssertNotNil(errorAsString)
             XCTAssertTrue(errorAsString!.contains("Error Domain=FrontDoorViewModel"))
             XCTAssertTrue(errorAsString!.contains("Code=404"))

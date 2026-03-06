@@ -29,6 +29,8 @@ struct InstructionsView: View {
                         .font(.system(size: 44, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                         .bold()
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                 }
                 .padding([.top, .bottom])
 

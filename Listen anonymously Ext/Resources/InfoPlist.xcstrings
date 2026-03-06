@@ -37,25 +37,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Listen anonymously"
+            "value" : "Listen Incognito"
           }
         },
         "en-AU" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Listen anonymously"
+            "value" : "Listen Incognito"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Listen anonymously"
+            "value" : "Listen Incognito"
           }
         },
         "en-IN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Listen anonymously"
+            "value" : "Listen Incognito"
           }
         },
         "es" : {

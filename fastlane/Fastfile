@@ -82,6 +82,7 @@ platform :ios do
 
     build_app(
       scheme: "Listen-anonymously",
+      clean: true,
       export_method: "app-store",
       output_directory: "./fastlane/build_output",
       xcargs: "-allowProvisioningUpdates"

@@ -141,6 +141,75 @@ struct FrontDoorViewModelTests {
 
     // MARK: - Event emission tests
 
+    @Test("successful purchase emits .purchasing, .success, .finished in order")
+    func eventStream_emitsSuccessInOrder() async throws {
+        let dependencies = Self.makeDependencies()
+        Self.configureForPurchase(dependencies, donationType: .coffee)
+
+        let collectTask = Task {
+            var kinds: [PurchaseEvent.Kind] = []
+            for await event in dependencies.viewModel.purchaseEvents {
+                kinds.append(event.kind)
+                if event.kind == .finished { break }
+            }
+            return kinds
+        }
+
+        try await dependencies.viewModel.buyUsCoffee().value
+        let kinds = await collectTask.value
+
+        #expect(kinds == [.purchasing, .success(.coffee), .finished])
+    }
+
+    @Test("cancelled purchase emits .purchasing, .cancelled, .finished")
+    func eventStream_emitsCancelledInOrder() async throws {
+        let dependencies = Self.makeDependencies()
+        let productID = DonationType.goodVibes.rawValue
+        dependencies.purchaseClient.productsByID[productID] = DummyStoreProduct(productIdentifier: productID)
+        dependencies.purchaseClient.purchaseResult = ProductPurchaseResult(
+            transaction: nil, customerInfo: DummyCustomerInfo(), userCancelled: true
+        )
+
+        let collectTask = Task {
+            var kinds: [PurchaseEvent.Kind] = []
+            for await event in dependencies.viewModel.purchaseEvents {
+                kinds.append(event.kind)
+                if event.kind == .finished { break }
+            }
+            return kinds
+        }
+
+        try await dependencies.viewModel.sendGoodVibes().value
+        let kinds = await collectTask.value
+
+        #expect(kinds == [.purchasing, .cancelled, .finished])
+    }
+
+    @Test("failed purchase emits .purchasing, .failure, .finished")
+    func eventStream_emitsFailureInOrder() async throws {
+        let dependencies = Self.makeDependencies()
+        let productID = DonationType.superKindTip.rawValue
+        dependencies.purchaseClient.productsByID[productID] = DummyStoreProduct(productIdentifier: productID)
+        struct TestError: LocalizedError {
+            var errorDescription: String? { "test error" }
+        }
+        dependencies.purchaseClient.purchaseError = TestError()
+
+        let collectTask = Task {
+            var kinds: [PurchaseEvent.Kind] = []
+            for await event in dependencies.viewModel.purchaseEvents {
+                kinds.append(event.kind)
+                if event.kind == .finished { break }
+            }
+            return kinds
+        }
+
+        try await dependencies.viewModel.giveSuperKindTip().value
+        let kinds = await collectTask.value
+
+        #expect(kinds == [.purchasing, .failure(errorDescription: "test error"), .finished])
+    }
+
     @Test("tipping jar records each successful donation")
     func tippingJar_recordsAllDonations() async throws {
         let dependencies = Self.makeDependencies()

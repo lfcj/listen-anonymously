@@ -9,6 +9,7 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
     let revenueCarService: RevenueCatService
     let purchaseEvents: AsyncStream<PurchaseEvent>
     let tippingJar: TippingJar
+    private let eventContinuation: AsyncStream<PurchaseEvent>.Continuation
     private let postHog: PostHogProtocol
 
     // MARK: - Init
@@ -16,6 +17,9 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
     init(revenueCatService: RevenueCatService, postHog: PostHogProtocol = PostHog.shared, tippingJar: TippingJar = TippingJar()) {
         self.revenueCarService = revenueCatService
         self.tippingJar = tippingJar
+        let (stream, continuation) = AsyncStream.makeStream(of: PurchaseEvent.self)
+        self.purchaseEvents = stream
+        self.eventContinuation = continuation
         self.postHog = postHog
     }
 
@@ -61,7 +65,7 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
 
     @MainActor
     private func emit(_ kind: PurchaseEvent.Kind) {
-        eventContinuation?.yield(PurchaseEvent(kind: kind))
+        eventContinuation.yield(PurchaseEvent(kind: kind))
         if case let .success(donationType) = kind {
             addDonationTypeToTippingJar(donationType)
         }
@@ -75,7 +79,7 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
 
     private func purchase(product type: DonationType) async {
         let purchaseEventKind = await revenueCarService.purchase(product: type)
-        Task { @MainActor [weak self] in
+        await MainActor.run { [weak self] in
             self?.emit(purchaseEventKind)
         }
     }

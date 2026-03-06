@@ -6,6 +6,7 @@ public enum AccessibilityIdentifier {
     }
     public enum FrontDoor {
         public static let seeInstructions = "seeInstructions"
+        public static let thankYouButton = "thankYouButton"
     }
     public enum Instructions {
         public static let picker = "instructionsPicker"

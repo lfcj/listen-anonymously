@@ -39,7 +39,8 @@ let targets: [Target] = [
         settings: .settings(
             base: [
                 "DEVELOPMENT_TEAM": "$(DEV_TEAM_SECRET)",
-                "CODE_SIGN_STYLE": "Automatic"
+                "CODE_SIGN_STYLE": "Automatic",
+                "STRING_CATALOG_GENERATE_SYMBOLS": "YES"
             ],
             configurations: [
                 .debug(name: "Debug"),
@@ -91,7 +92,8 @@ let targets: [Target] = [
             base: [
                 "DEVELOPMENT_TEAM": "$(DEV_TEAM_SECRET)",
                 "CODE_SIGN_STYLE": "Automatic",
-                "ASSETCATALOG_COMPILER_APPICON_NAME": "ExtAppIcon"
+                "ASSETCATALOG_COMPILER_APPICON_NAME": "ExtAppIcon",
+                "STRING_CATALOG_GENERATE_SYMBOLS": "YES"
             ],
             configurations: [
                 .debug(name: "Debug"),
@@ -117,7 +119,9 @@ let targets: [Target] = [
             base: [
                 "DEVELOPMENT_TEAM": "$(DEV_TEAM_SECRET)",
                 "CODE_SIGN_STYLE": "Automatic",
-                "DEFINES_MODULE": "YES"
+                "DEFINES_MODULE": "YES",
+                "ENABLE_MODULE_VERIFIER": "YES",
+                "MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS": "gnu11 gnu++14"
             ],
             configurations: [
                 .debug(name: "Debug"),
@@ -304,6 +308,9 @@ let project = Project(
     ),
     packages: packages,
     settings: .settings(
+        base: [
+            "ENABLE_USER_SCRIPT_SANDBOXING": "YES"
+        ],
         configurations: [
             .debug(name: "Debug", xcconfig: "Configuration/Debug.xcconfig"),
             .release(name: "Release", xcconfig: "Configuration/Release.xcconfig")

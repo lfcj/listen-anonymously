@@ -96,7 +96,11 @@ struct FrontDoorView: View {
 
 #Preview {
     Group {
-        FrontDoorView()
+        FrontDoorView(
+            viewModel: FrontDoorViewModel(
+                revenueCatService: RevenueCatService(),
+                tippingJar: TippingJar(defaults: UserDefaults(suiteName: "Preview\(UUID())") ?? UserDefaults.standard))
+        )
     }
 }
 

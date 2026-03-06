@@ -3,13 +3,9 @@ import ProjectDescription
 // MARK: - Packages
 
 let packages: [Package] = [
-    // TODO: Update to latest versions once tuist generate works
-    // .remote(url: "https://github.com/RevenueCat/purchases-ios.git", requirement: .upToNextMajor(from: "5.59.2")),
-    // .remote(url: "https://github.com/PostHog/posthog-ios.git", requirement: .upToNextMajor(from: "3.41.1")),
-    // .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .upToNextMajor(from: "0.10.3"))
-    .remote(url: "https://github.com/RevenueCat/purchases-ios.git", requirement: .exact("5.59.2")),
-    .remote(url: "https://github.com/PostHog/posthog-ios.git", requirement: .exact("3.41.2")),
-    .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .exact("0.10.3")),
+     .remote(url: "https://github.com/RevenueCat/purchases-ios.git", requirement: .upToNextMajor(from: "5.59.2")),
+     .remote(url: "https://github.com/PostHog/posthog-ios.git", requirement: .upToNextMajor(from: "3.41.1")),
+     .remote(url: "https://github.com/nalexn/ViewInspector.git", requirement: .upToNextMajor(from: "0.10.3")),
     .remote(url: "https://github.com/element-hq/swift-ogg.git", requirement: .exact("0.0.3"))
 ]
 

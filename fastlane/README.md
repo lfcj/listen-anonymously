@@ -29,6 +29,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
+### localize_iaps
+
+```sh
+[bundle exec] fastlane localize_iaps
+```
+
+Localize IAP display names and descriptions on App Store Connect
+
 ----
 
 

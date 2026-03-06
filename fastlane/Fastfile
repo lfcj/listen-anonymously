@@ -144,3 +144,8 @@ lane :lint do
     sh "swiftlint lint --strict"
   end
 end
+
+desc "Localize IAP display names and descriptions on App Store Connect"
+lane :localize_iaps do
+  sh "python3 #{File.join(__dir__, 'localize_iaps.py')}"
+end

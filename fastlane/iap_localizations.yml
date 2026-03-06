@@ -1,0 +1,116 @@
+donation.coffee:
+  en-US: { name: "Buy us a coffee", description: "How much do you love being invisible?" }
+  en-AU: { name: "Buy us a coffee", description: "How much do you love being invisible?" }
+  en-GB: { name: "Buy us a coffee", description: "How much do you love being invisible?" }
+  ar-SA: { name: "اشترِ لنا قهوة", description: "كم تحب أن تكون غير مرئي؟" }
+  cs: { name: "Kup nám kávu", description: "Jak moc miluješ být neviditelný?" }
+  da: { name: "Køb os en kaffe", description: "Hvor meget elsker du at være usynlig?" }
+  de-DE: { name: "Spendier uns einen Kaffee", description: "Wie sehr liebst du es, unsichtbar zu sein?" }
+  el: { name: "Κέρασέ μας έναν καφέ", description: "Πόσο σου αρέσει να είσαι αόρατος;" }
+  es-ES: { name: "Invítanos a un café", description: "¿Cuánto te gusta ser invisible?" }
+  es-MX: { name: "Invítanos un café", description: "¿Qué tanto te gusta ser invisible?" }
+  fi: { name: "Tarjoa meille kahvi", description: "Kuinka paljon rakastat olla näkymätön?" }
+  fr-FR: { name: "Offre-nous un café", description: "Tu aimes être invisible ?" }
+  fr-CA: { name: "Offrez-nous un café", description: "Combien aimez-vous être invisible?" }
+  he: { name: "קנו לנו קפה", description: "כמה אתם אוהבים להיות בלתי נראים?" }
+  hi: { name: "हमें एक कॉफ़ी पिलाएँ", description: "अदृश्य होना आपको कितना पसंद है?" }
+  hr: { name: "Počasti nas kavom", description: "Koliko voliš biti nevidljiv?" }
+  hu: { name: "Fizess nekünk egy kávét", description: "Mennyire szereted, ha láthatatlan vagy?" }
+  id: { name: "Belikan kami kopi", description: "Seberapa suka kamu menjadi tak terlihat?" }
+  it: { name: "Offrici un caffè", description: "Quanto ti piace essere invisibile?" }
+  ja: { name: "コーヒーをおごってください", description: "透明人間でいるのはどのくらい好き？" }
+  ko: { name: "커피 한 잔 사주세요", description: "투명인간이 되는 게 얼마나 좋으세요?" }
+  ms: { name: "Belanja kami kopi", description: "Sejauh mana anda suka menjadi tidak kelihatan?" }
+  no: { name: "Kjøp oss en kaffe", description: "Hvor mye elsker du å være usynlig?" }
+  nl-NL: { name: "Trakteer ons op een koffie", description: "Hoe graag ben je onzichtbaar?" }
+  pl: { name: "Postaw nam kawę", description: "Jak bardzo lubisz być niewidzialny?" }
+  pt-BR: { name: "Pague-nos um café", description: "O quanto você ama ser invisível?" }
+  pt-PT: { name: "Oferece-nos um café", description: "Quanto gostas de ser invisível?" }
+  ro: { name: "Oferă-ne o cafea", description: "Cât de mult îți place să fii invizibil?" }
+  ru: { name: "Угостите нас кофе", description: "Как сильно вам нравится быть невидимым?" }
+  sk: { name: "Kúp nám kávu", description: "Ako veľmi miluješ byť neviditeľný?" }
+  sv: { name: "Bjud oss på en kaffe", description: "Hur mycket älskar du att vara osynlig?" }
+  th: { name: "เลี้ยงกาแฟเราสักแก้ว", description: "คุณชอบการเป็นคนล่องหนแค่ไหน?" }
+  tr: { name: "Bize bir kahve ısmarla", description: "Görünmez olmayı ne kadar seviyorsun?" }
+  uk: { name: "Пригости нас кавою", description: "Як сильно тобі подобається бути невидимим?" }
+  vi: { name: "Mua cho chúng tôi một ly cà phê", description: "Bạn yêu thích việc vô hình đến mức nào?" }
+  zh-Hans: { name: "请我们喝杯咖啡", description: "你有多喜欢隐身？" }
+  zh-Hant: { name: "請我們喝杯咖啡", description: "你有多喜歡隱身？" }
+
+donation.goodvibes:
+  en-US: { name: "Send good vibes", description: "How much do you love being invisible?" }
+  en-AU: { name: "Send good vibes", description: "How much do you love being invisible?" }
+  en-GB: { name: "Send good vibes", description: "How much do you love being invisible?" }
+  ar-SA: { name: "أرسل طاقة إيجابية", description: "كم تحب أن تكون غير مرئي؟" }
+  cs: { name: "Pošli dobré vibrace", description: "Jak moc miluješ být neviditelný?" }
+  da: { name: "Send gode vibrationer", description: "Hvor meget elsker du at være usynlig?" }
+  de-DE: { name: "Gute Vibes senden", description: "Wie sehr liebst du es, unsichtbar zu sein?" }
+  el: { name: "Στείλε καλή ενέργεια", description: "Πόσο σου αρέσει να είσαι αόρατος;" }
+  es-ES: { name: "Enviar buena vibra", description: "¿Cuánto te gusta ser invisible?" }
+  es-MX: { name: "Enviar buena vibra", description: "¿Qué tanto te gusta ser invisible?" }
+  fi: { name: "Lähetä hyviä viboja", description: "Kuinka paljon rakastat olla näkymätön?" }
+  fr-FR: { name: "Envoyer de bonnes ondes", description: "Tu aimes être invisible ?" }
+  fr-CA: { name: "Envoyer de bonnes ondes", description: "Combien aimez-vous être invisible?" }
+  he: { name: "שלחו אנרגיה טובה", description: "כמה אתם אוהבים להיות בלתי נראים?" }
+  hi: { name: "अच्छी वाइब्स भेजें", description: "अदृश्य होना आपको कितना पसंद है?" }
+  hr: { name: "Pošalji dobre vibracije", description: "Koliko voliš biti nevidljiv?" }
+  hu: { name: "Küldj jó hangulatot", description: "Mennyire szereted, ha láthatatlan vagy?" }
+  id: { name: "Kirim vibes positif", description: "Seberapa suka kamu menjadi tak terlihat?" }
+  it: { name: "Invia buone vibrazioni", description: "Quanto ti piace essere invisibile?" }
+  ja: { name: "グッドバイブスを送る", description: "透明人間でいるのはどのくらい好き？" }
+  ko: { name: "좋은 기운 보내기", description: "투명인간이 되는 게 얼마나 좋으세요?" }
+  ms: { name: "Hantar vibes positif", description: "Sejauh mana anda suka menjadi tidak kelihatan?" }
+  no: { name: "Send gode vibber", description: "Hvor mye elsker du å være usynlig?" }
+  nl-NL: { name: "Stuur goede vibes", description: "Hoe graag ben je onzichtbaar?" }
+  pl: { name: "Wyślij dobre wibracje", description: "Jak bardzo lubisz być niewidzialny?" }
+  pt-BR: { name: "Enviar boas vibrações", description: "O quanto você ama ser invisível?" }
+  pt-PT: { name: "Enviar boas vibrações", description: "Quanto gostas de ser invisível?" }
+  ro: { name: "Trimite vibrații pozitive", description: "Cât de mult îți place să fii invizibil?" }
+  ru: { name: "Отправить хорошие вибрации", description: "Как сильно вам нравится быть невидимым?" }
+  sk: { name: "Pošli dobré vibrácie", description: "Ako veľmi miluješ byť neviditeľný?" }
+  sv: { name: "Skicka bra vibbar", description: "Hur mycket älskar du att vara osynlig?" }
+  th: { name: "ส่งพลังบวก", description: "คุณชอบการเป็นคนล่องหนแค่ไหน?" }
+  tr: { name: "İyi enerji gönder", description: "Görünmez olmayı ne kadar seviyorsun?" }
+  uk: { name: "Надіслати гарні вібрації", description: "Як сильно тобі подобається бути невидимим?" }
+  vi: { name: "Gửi năng lượng tích cực", description: "Bạn yêu thích việc vô hình đến mức nào?" }
+  zh-Hans: { name: "发送好心情", description: "你有多喜欢隐身？" }
+  zh-Hant: { name: "傳送好心情", description: "你有多喜歡隱身？" }
+
+donation.superkind:
+  en-US: { name: "The ultimate invisible supporter", description: "How much do you love being invisible?" }
+  en-AU: { name: "The ultimate invisible supporter", description: "How much do you love being invisible?" }
+  en-GB: { name: "The ultimate invisible supporter", description: "How much do you love being invisible?" }
+  ar-SA: { name: "الداعم الخفي المطلق", description: "كم تحب أن تكون غير مرئي؟" }
+  cs: { name: "Ultimátní neviditelný podporovatel", description: "Jak moc miluješ být neviditelný?" }
+  da: { name: "Den ultimative usynlige supporter", description: "Hvor meget elsker du at være usynlig?" }
+  de-DE: { name: "Ultimativer unsichtbarer Helfer", description: "Wie sehr liebst du es, unsichtbar zu sein?" }
+  el: { name: "Ο απόλυτος αόρατος υποστηρικτής", description: "Πόσο σου αρέσει να είσαι αόρατος;" }
+  es-ES: { name: "El máximo apoyo invisible", description: "¿Cuánto te gusta ser invisible?" }
+  es-MX: { name: "El máximo apoyo invisible", description: "¿Qué tanto te gusta ser invisible?" }
+  fi: { name: "Paras näkymätön tukija", description: "Kuinka paljon rakastat olla näkymätön?" }
+  fr-FR: { name: "Le supporter invisible ultime", description: "Tu aimes être invisible ?" }
+  fr-CA: { name: "Le supporter invisible ultime", description: "Combien aimez-vous être invisible?" }
+  he: { name: "התומך הבלתי נראה המושלם", description: "כמה אתם אוהבים להיות בלתי נראים?" }
+  hi: { name: "परम अदृश्य समर्थक", description: "अदृश्य होना आपको कितना पसंद है?" }
+  hr: { name: "Ultimativni nevidljivi podržavatelj", description: "Koliko voliš biti nevidljiv?" }
+  hu: { name: "A tökéletes láthatatlan támogató", description: "Mennyire szereted, ha láthatatlan vagy?" }
+  id: { name: "Pendukung tak terlihat terhebat", description: "Seberapa suka kamu menjadi tak terlihat?" }
+  it: { name: "Il sostenitore invisibile supremo", description: "Quanto ti piace essere invisibile?" }
+  ja: { name: "究極の見えないサポーター", description: "透明人間でいるのはどのくらい好き？" }
+  ko: { name: "최고의 보이지 않는 서포터", description: "투명인간이 되는 게 얼마나 좋으세요?" }
+  ms: { name: "Penyokong ghaib yang terunggul", description: "Sejauh mana anda suka menjadi tidak kelihatan?" }
+  no: { name: "Den ultimate usynlige støtten", description: "Hvor mye elsker du å være usynlig?" }
+  nl-NL: { name: "De ultieme onzichtbare supporter", description: "Hoe graag ben je onzichtbaar?" }
+  pl: { name: "Najlepszy niewidzialny wspierający", description: "Jak bardzo lubisz być niewidzialny?" }
+  pt-BR: { name: "O apoiador invisível definitivo", description: "O quanto você ama ser invisível?" }
+  pt-PT: { name: "O apoiante invisível por excelência", description: "Quanto gostas de ser invisível?" }
+  ro: { name: "Suporterul invizibil suprem", description: "Cât de mult îți place să fii invizibil?" }
+  ru: { name: "Лучший невидимый сторонник", description: "Как сильно вам нравится быть невидимым?" }
+  sk: { name: "Najlepší neviditeľný podporovateľ", description: "Ako veľmi miluješ byť neviditeľný?" }
+  sv: { name: "Den ultimata osynliga supportern", description: "Hur mycket älskar du att vara osynlig?" }
+  th: { name: "ผู้สนับสนุนที่มองไม่เห็นที่สุดยอด", description: "คุณชอบการเป็นคนล่องหนแค่ไหน?" }
+  tr: { name: "En büyük görünmez destekçi", description: "Görünmez olmayı ne kadar seviyorsun?" }
+  uk: { name: "Найкращий невидимий прихильник", description: "Як сильно тобі подобається бути невидимим?" }
+  vi: { name: "Người ủng hộ vô hình tuyệt đỉnh", description: "Bạn yêu thích việc vô hình đến mức nào?" }
+  zh-Hans: { name: "终极隐形支持者", description: "你有多喜欢隐身？" }
+  zh-Hant: { name: "終極隱形支持者", description: "你有多喜歡隱身？" }

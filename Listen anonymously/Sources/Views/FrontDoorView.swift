@@ -6,6 +6,7 @@ struct FrontDoorView: View {
     @EnvironmentObject var appState: AppState
     @StateObject private var viewModel: FrontDoorViewModel
     @State var isPurchasing = false
+    @State private var tipCounts: [DonationType: Int] = [:]
 
     init(viewModel: FrontDoorViewModel = FrontDoorViewModel(revenueCatService: RevenueCatService())) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -57,10 +58,14 @@ struct FrontDoorView: View {
             }
         }
         .task {
+            tipCounts = await viewModel.tippingJar.tipCounts
             for await event in viewModel.purchaseEvents {
                 switch event.kind {
                 case .purchasing:
                     isPurchasing = true
+                case .success:
+                    isPurchasing = false
+                    tipCounts = await viewModel.tippingJar.tipCounts
                 default:
                     isPurchasing = false
                 }

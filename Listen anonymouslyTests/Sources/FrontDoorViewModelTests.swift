@@ -30,7 +30,9 @@ struct FrontDoorViewModelTests {
             revenueCatConfig: MockRevenueCatConfig.empty,
             postHog: postHogSpy
         )
-        let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService, postHog: postHogSpy)
+        let testDefaults = UserDefaults(suiteName: "test.\(UUID().uuidString)")!
+        let tippingJar = TippingJar(defaults: testDefaults)
+        let viewModel = FrontDoorViewModel(revenueCatService: revenueCatService, postHog: postHogSpy, tippingJar: tippingJar)
         return Dependencies(viewModel, mockPurchases, postHogSpy)
     }
 
@@ -135,6 +137,67 @@ struct FrontDoorViewModelTests {
         // default (including .finished) -> isPurchasing = false
         #expect(kinds.first == .purchasing)
         #expect(kinds.last == .finished)
+    }
+
+    // MARK: - Event emission tests
+
+    @Test("tipping jar records each successful donation")
+    func tippingJar_recordsAllDonations() async throws {
+        let dependencies = Self.makeDependencies()
+
+        for donationType in [DonationType.coffee, .goodVibes, .superKindTip] {
+            Self.configureForPurchase(dependencies, donationType: donationType)
+        }
+
+        try await dependencies.viewModel.buyUsCoffee().value
+        try await dependencies.viewModel.sendGoodVibes().value
+        try await dependencies.viewModel.giveSuperKindTip().value
+
+        // Give time for the fire-and-forget Task in addDonationTypeToTippingJar
+        try await Task.sleep(for: .milliseconds(100))
+
+        let purchased = await dependencies.viewModel.tippingJar.donationsPurchased
+        #expect(purchased.contains(.coffee))
+        #expect(purchased.contains(.goodVibes))
+        #expect(purchased.contains(.superKindTip))
+    }
+
+    @Test("tipping jar count increments with repeated purchases")
+    func tippingJar_countsRepeatedPurchases() async throws {
+        let dependencies = Self.makeDependencies()
+        Self.configureForPurchase(dependencies, donationType: .coffee)
+
+        try await dependencies.viewModel.buyUsCoffee().value
+        try await dependencies.viewModel.buyUsCoffee().value
+        try await dependencies.viewModel.buyUsCoffee().value
+
+        try await Task.sleep(for: .milliseconds(100))
+
+        let purchased = await dependencies.viewModel.tippingJar.donationsPurchased
+        #expect(purchased.filter { $0 == .coffee }.count == 3)
+        #expect(await dependencies.viewModel.tippingJar.totalTipCount == 3)
+    }
+
+    @Test("tipping jar tracks per-type counts across mixed donations")
+    func tippingJar_tracksPerTypeCounts() async throws {
+        let dependencies = Self.makeDependencies()
+        for donationType in [DonationType.coffee, .goodVibes, .superKindTip] {
+            Self.configureForPurchase(dependencies, donationType: donationType)
+        }
+
+        try await dependencies.viewModel.buyUsCoffee().value
+        try await dependencies.viewModel.buyUsCoffee().value
+        try await dependencies.viewModel.buyUsCoffee().value
+        try await dependencies.viewModel.sendGoodVibes().value
+        try await dependencies.viewModel.giveSuperKindTip().value
+
+        try await Task.sleep(for: .milliseconds(100))
+
+        let counts = await dependencies.viewModel.tippingJar.tipCounts
+        #expect(counts[.coffee] == 3)
+        #expect(counts[.goodVibes] == 1)
+        #expect(counts[.superKindTip] == 1)
+        #expect(await dependencies.viewModel.tippingJar.totalTipCount == 5)
     }
 
     // MARK: - selectHowToUseTab

@@ -6,21 +6,16 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
 
     // MARK: - Properties
 
-    let tippingJar: TippingJar = TippingJar()
     let revenueCarService: RevenueCatService
     let purchaseEvents: AsyncStream<PurchaseEvent>
-    private let eventContinuation: AsyncStream<PurchaseEvent>.Continuation?
+    let tippingJar: TippingJar
     private let postHog: PostHogProtocol
 
     // MARK: - Init
 
-    init(revenueCatService: RevenueCatService, postHog: PostHogProtocol = PostHog.shared) {
+    init(revenueCatService: RevenueCatService, postHog: PostHogProtocol = PostHog.shared, tippingJar: TippingJar = TippingJar()) {
         self.revenueCarService = revenueCatService
-        var cont: AsyncStream<PurchaseEvent>.Continuation?
-        self.purchaseEvents = AsyncStream { continuation in
-            cont = continuation
-        }
-        self.eventContinuation = cont
+        self.tippingJar = tippingJar
         self.postHog = postHog
     }
 
@@ -89,8 +84,35 @@ final class FrontDoorViewModel: ObservableObject, Sendable {
 
 actor TippingJar {
     @Published private(set) var donationsPurchased: [DonationType] = []
+    private let defaults: UserDefaults
+
+    private static func key(for type: DonationType) -> String {
+        "tippingJar.count.\(type.rawValue)"
+    }
+
+    var totalTipCount: Int {
+        tipCounts.values.reduce(0, +)
+    }
+
+    var tipCounts: [DonationType: Int] {
+        var result: [DonationType: Int] = [:]
+        for type in [DonationType.coffee, .goodVibes, .superKindTip] {
+            let count = defaults.integer(forKey: Self.key(for: type))
+            if count > 0 {
+                result[type] = count
+            }
+        }
+        return result
+    }
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+    }
 
     func recordPurchase(_ donationType: DonationType) {
         donationsPurchased.append(donationType)
+        let key = Self.key(for: donationType)
+        let newCount = defaults.integer(forKey: key) + 1
+        defaults.set(newCount, forKey: key)
     }
 }

@@ -28,7 +28,7 @@ let targets: [Target] = [
                 "UIColorName": "",
                 "UIImageName": ""
             ],
-            "CFBundleDisplayName": "Listen anonymously",
+            "CFBundleDisplayName": "Listen Incognito",
             "PostHogAPIKey": "$(POSTHOG_API_KEY)",
             "RevenueCatAPIKey": "$(REVENUE_CAT_KEY)"
         ]),
@@ -60,7 +60,7 @@ let targets: [Target] = [
         bundleId: "com.reginafallangi.Listen-anonymously.Listen-anonymously-Ext",
         deploymentTargets: .iOS("18.0"),
         infoPlist: .extendingDefault(with: [
-            "CFBundleDisplayName": "Listen anonymously",
+            "CFBundleDisplayName": "Listen Incognito",
             "LSHasLocalizedDisplayName": true,
             "NSExtension": [
                 "NSExtensionAttributes": [
@@ -94,7 +94,8 @@ let targets: [Target] = [
         settings: .settings(
             base: [
                 "DEVELOPMENT_TEAM": "$(DEV_TEAM_SECRET)",
-                "CODE_SIGN_STYLE": "Automatic"
+                "CODE_SIGN_STYLE": "Automatic",
+                "ASSETCATALOG_COMPILER_APPICON_NAME": "ExtAppIcon"
             ],
             configurations: [
                 .debug(name: "Debug"),
